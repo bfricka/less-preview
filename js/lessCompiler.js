@@ -6,7 +6,7 @@ $(function() {
 
 	var elements = {
 		lessVersion: $('#lessVersion')
-		,lessCode: $('#lessInput')
+		,lessInput: $('#lessInput')
 		,cssCode: $('#cssOutput')
 	};
 
@@ -31,11 +31,12 @@ $(function() {
 			$.getScript(script).then(compileLess)
 		});
 
-		var previousLessCode = elements.lessCode.val();
-		elements.lessCode.bind('change, keyup, input, paste, cut, copy', function() {
-			var lessCode = elements.lessCode.val();
+		var previousLessCode = elements.lessInput.val();
+		elements.lessInput.on('change keyup input paste cut copy', function() {
+			var lessCode = elements.lessInput.val();
 			if (previousLessCode === lessCode)
 				return;
+
 			previousLessCode = lessCode;
 
 			compileLess();
@@ -44,7 +45,7 @@ $(function() {
 
 
 	function compileLess() {
-		var lessCode = elements.lessCode.val();
+		var lessCode = elements.lessInput.val();
 
 		var compiledCSS = "TEMP: " + lessCode;
 
