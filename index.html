@@ -21,6 +21,7 @@
     <!-- Prod -->   <!--<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.0-rc.3/lodash.min.js"></script>-->
     <!-- Backup --> <script>window._ || document.write('<script src="js/libs/lodash.min.js"<\/script>')</script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -70,32 +71,23 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>LESS Live Preview</h1>
-        <p>
-
-	        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-        </p>
+        <h1>Hello!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
       </div>
 
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span6">
-          <h2>LESS Code</h2>
-	      <label>
-		      Choose a LESS version:
-		      <select id="lessVersion">
-		      </select>
+        <div class="span4">
+	      <label>Choose a LESS version:
+		      <select id="lessVersion"></select>
 	      </label>
-	      <textarea id="lessInput" class="lessCode">
-		      LESS Code
-	      </textarea>
+          <textarea id="lessInput" placeholder="Input your LESS here"></textarea>
         </div>
-        <div class="span6">
-          <h2>CSS Output</h2>
-          <section id="cssOutput" class="cssCode">
-	          CSS Output
-          </section>
+        <div class="span8">
+          <article>
+            <pre id="cssOutput"></pre>
+          </article>
         </div>
       </div>
 
