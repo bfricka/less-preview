@@ -8848,12 +8848,21 @@ a.badge:hover {
 }
 
 #lessInput {
-  width: 375px;
-  height: 400px;
-  max-width: 375px;
+  width: 100%;
+  height: 410px;
+  max-width: 100%;
 }
 
 #cssOutput {
   height: 400px;
   overflow: auto;
+}
+
+@media (max-width: 767px) {
+  [class*="span"],
+  .row-fluid [class*="span"] {
+    float: left;
+    width: 31.491712707182323%;
+    margin-left: 2.7624309392265194%;
+  }
 }

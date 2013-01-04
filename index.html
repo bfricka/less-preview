@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
@@ -75,13 +75,16 @@
         <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
       </div>
-
-      <!-- Example row of columns -->
-      <div class="row">
+      <div class="row-fluid">
         <div class="span4">
-	      <label>Choose a LESS version:
-		      <select id="lessVersion"></select>
-	      </label>
+          <label for="lessVersion">Choose a LESS version:</label>
+          <select id="lessVersion" class="span12"></select>
+        </div>
+        <h2 class="span8">Output CSS</h2>
+      </div>
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+        <div class="span4">
           <textarea id="lessInput" placeholder="Input your LESS here"></textarea>
         </div>
         <div class="span8">
