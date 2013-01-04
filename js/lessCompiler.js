@@ -28,11 +28,16 @@ $(function() {
 	function setupEvents() {
 		elements.lessVersion.bind('change', function(){
 			var version = elements.lessVersion.val();
-			var script = options.lessCDN.replace('{version}', version);
+			var scriptUrl = options.lessCDN.replace('{version}', version);
 
 			elements.lessInput.attr('disabled', true);
 
-			$.getScript(script).then(function(){
+			// Load the new version of LESS:
+			$.ajax({
+				dataType: 'script'
+				, cache: true
+				, url: scriptUrl
+			}).then(function(){
 				elements.lessInput.attr('disabled', false);
 				compileLess();
 			});
