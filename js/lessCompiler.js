@@ -45,6 +45,7 @@ LessCompiler.prototype.loadLess = function() {
   var self = this;
   var els = this.elements;
 
+  els.loadingGif.fadeIn();
   this.editor.options.readOnly = true;
 
   var version = els.lessVersion.val();
@@ -61,6 +62,7 @@ LessCompiler.prototype.loadLess = function() {
       self.parser = new less.Parser({});
       self.editor.options.readOnly = false;
       self.compileLess();
+      els.loadingGif.fadeOut();
     });
 };
 
@@ -70,9 +72,10 @@ LessCompiler.prototype.compileLess = function() {
 
   try {
     var compiledCSS = this.parseLess(lessCode);
+    var highlightedCSS = hljs.highlight('css', compiledCSS).value;
     els.cssCode
       .css('color', '')
-      .text(compiledCSS);
+      .html(highlightedCSS);
   } catch (lessEx) {
     var errorText = lessEx.type
       + " error: "
@@ -100,9 +103,10 @@ LessCompiler.prototype.parseLess = function(lessCode) {
 jQuery(function($) {
 
   var elements = {
-    lessVersion : $('#lessVersion')
-    , lessInput : $('#lessInput')
-    , cssCode   : $('#cssOutput')
+    lessVersion  : $('#lessVersion')
+    , loadingGif : $('#loadingGif')
+    , lessInput  : $('#lessInput')
+    , cssCode    : $('#cssOutput')
   };
 
   window.compiler = new LessCompiler(elements);
