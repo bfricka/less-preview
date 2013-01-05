@@ -3,11 +3,18 @@ window.LessCompiler = (function() {
   function LessCompiler(elements, options) {
     if (!elements) return;
     this.elements = elements;
+    this.editor = CodeMirror.fromTextArea(elements.lessInput[0], {
+      theme         : "lesser-dark",
+      lineNumbers   : true,
+      matchBrackets : true,
+      tabSize       : 2
+    });
 
     if (options == null)
       options = { lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js" };
 
     this.options = options;
+
   }
   return LessCompiler;
 }());
@@ -15,18 +22,20 @@ window.LessCompiler = (function() {
 LessCompiler.prototype.setupEvents = function() {
   var self = this;
   var els = this.elements;
-  var previousLessCode = els.lessInput.val();
+  var editor = this.editor;
+
+  this.previousLessCode = editor.getValue();
 
   els.lessVersion.on('change', function(){
     self.loadLess();
   });
 
-  els.lessInput.on('change keyup input paste cut copy', function() {
-    var lessCode = els.lessInput.val();
-    if (previousLessCode === lessCode)
+  editor.on('change', function(){
+    var lessCode = self.editor.getValue();
+    if (self.previousLessCode === lessCode)
       return;
 
-    previousLessCode = lessCode;
+    self.previousLessCode = lessCode;
 
     self.compileLess();
   });
@@ -36,7 +45,7 @@ LessCompiler.prototype.loadLess = function() {
   var self = this;
   var els = this.elements;
 
-  els.lessInput.attr('disabled', true);
+  this.editor.options.readOnly = true;
 
   var version = els.lessVersion.val();
   var scriptUrl = this.options.lessCDN.replace('{version}', version);
@@ -50,14 +59,14 @@ LessCompiler.prototype.loadLess = function() {
   })
     .then(function(){
       self.parser = new less.Parser({});
-      els.lessInput.attr('disabled', false);
+      self.editor.options.readOnly = false;
       self.compileLess();
     });
 };
 
 LessCompiler.prototype.compileLess = function() {
   var els = this.elements;
-  var lessCode = els.lessInput.val();
+  var lessCode = this.editor.getValue();
 
   try {
     var compiledCSS = this.parseLess(lessCode);
@@ -66,7 +75,7 @@ LessCompiler.prototype.compileLess = function() {
       .text(compiledCSS);
   } catch (lessEx) {
     var errorText = lessEx.type
-      +" error: "
+      + " error: "
       + lessEx.message
       + "\n"
       + (lessEx.extract && lessEx.extract.join(''));
@@ -96,7 +105,7 @@ jQuery(function($) {
     , cssCode   : $('#cssOutput')
   };
 
-  var compiler = new LessCompiler(elements);
+  window.compiler = new LessCompiler(elements);
 
   compiler.setupEvents();
   compiler.loadLess();

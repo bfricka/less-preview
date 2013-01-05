@@ -9,6 +9,9 @@
     <title>LESS Live Preview</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="cm/lib/codemirror.css">
+    <link rel="stylesheet" href="cm/theme/lesser-dark.css">
     <link rel="stylesheet" href="css/style.css" media="all">
 
     <script src="js/libs/modernizr.js"></script>
@@ -20,6 +23,12 @@
     <!-- Dev -->    <!-- <script src="js/libs/lodash.js"></script> -->
     <!-- Prod -->   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.0-rc.3/lodash.min.js"></script>
     <!-- Backup --> <script>window._ || document.write('<script src="js/libs/lodash.min.js"<\/script>')</script>
+
+
+    <script src="cm/lib/codemirror.min.js"></script>
+    <script src="cm/lib/util/matchbrackets.min.js"></script>
+    <script src="cm/mode/less/less.js"></script>
+
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -31,8 +40,8 @@
         <div class="container-fluid">
           <div class="row-fluid">
             <ul class="nav">
-              <li class="span4"><label for="lessVersion">Choose a LESS version:</label></li>
-              <li class="span4">
+              <li><label for="lessVersion">Choose a LESS version:</label></li>
+              <li>
                 <select class="lessVersion" id="lessVersion">
                   <option>1.3.3</option>
                   <option>1.3.1</option>
@@ -48,13 +57,14 @@
     <div class="container-fluid">
 
       <div class="row-fluid">
-        <h2 class="span4">LESS Input</h2>
-        <h2 class="span8">Output CSS</h2>
+        <h2 class="span6">LESS Input</h2>
+        <h2 class="span6">Output CSS</h2>
       </div>
       <!-- Example row of columns -->
       <div class="row-fluid">
-        <div class="span4">
-          <textarea class="lessInput" id="lessInput" placeholder="Input your LESS here">
+        <div class="span6">
+          <div class="codeWrap">
+            <textarea class="lessInput" id="lessInput" placeholder="Input your LESS here">
 .transition(@transition) {
   -webkit-transition: @transition;
      -moz-transition: @transition;
@@ -72,9 +82,15 @@ a {
     .opacity(70);
   }
 }
-          </textarea>
+
+@theGoodThings: ~".food, .beer, .ladies, .sleep, .javascript";
+
+@{theGoodThings} {
+  font-weight: bold;
+}</textarea>
+          </div>
         </div>
-        <div class="span8">
+        <div class="span6">
           <article>
             <pre class="cssOutput" id="cssOutput"></pre>
           </article>
@@ -88,6 +104,6 @@ a {
       </footer>
 
     </div> <!-- /container -->
-    <script src="js/lessCompiler.js"></script>
+    <script src="js/lessCompiler.min.js"></script>
   </body>
 </html>
