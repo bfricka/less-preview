@@ -1,7 +1,6 @@
 $(function() {
 	var options = {
-		lessVersions: [ '1.3.3', '1.3.1', '1.3.0' ]
-		,lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
+		lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
 		//,lessCDN: "//cdnjs.cloudflare.com/ajax/libs/less.js/{version}/less.min.js"
 	};
 
@@ -13,35 +12,13 @@ $(function() {
 
 
 
-	populateLessVersions();
 	setupEvents();
 
+	loadLess();
 
-
-
-	function populateLessVersions() {
-		$.each(options.lessVersions, function(i, ver) {
-			elements.lessVersion.append($('<option />').text(ver));
-		});
-	}
 
 	function setupEvents() {
-		elements.lessVersion.bind('change', function(){
-			var version = elements.lessVersion.val();
-			var scriptUrl = options.lessCDN.replace('{version}', version);
-
-			elements.lessInput.attr('disabled', true);
-
-			// Load the new version of LESS:
-			$.ajax({
-				dataType: 'script'
-				, cache: true
-				, url: scriptUrl
-			}).then(function(){
-				elements.lessInput.attr('disabled', false);
-				compileLess();
-			});
-		});
+		elements.lessVersion.bind('change', loadLess);
 
 		var previousLessCode = elements.lessInput.val();
 		elements.lessInput.on('change keyup input paste cut copy', function() {
@@ -55,6 +32,23 @@ $(function() {
 		});
 	}
 
+
+	function loadLess() {
+		elements.lessInput.attr('disabled', true);
+
+		var version = elements.lessVersion.val();
+		var scriptUrl = options.lessCDN.replace('{version}', version);
+		window.less = undefined;
+		$.ajax({
+			dataType: 'script'
+			, cache: true
+			, url: scriptUrl
+		}).then(function(){
+			elements.lessInput.attr('disabled', false);
+			compileLess();
+		});
+
+	}
 
 	function compileLess() {
 		var lessCode = elements.lessInput.val();

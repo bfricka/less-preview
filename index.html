@@ -21,7 +21,6 @@
     <!-- Prod -->   <!--<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.0-rc.3/lodash.min.js"></script>-->
     <!-- Backup --> <script>window._ || document.write('<script src="js/libs/lodash.min.js"<\/script>')</script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -78,7 +77,11 @@
       <div class="row-fluid">
         <div class="span4">
           <label for="lessVersion">Choose a LESS version:</label>
-          <select id="lessVersion" class="span12"></select>
+          <select id="lessVersion" class="span12">
+	          <option>1.3.3</option>
+	          <option>1.3.1</option>
+	          <option>1.3.0</option>
+          </select>
         </div>
         <h2 class="span8">Output CSS</h2>
       </div>
