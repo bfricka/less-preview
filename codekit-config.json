@@ -28,7 +28,7 @@
     },
     "\/less\/bootstrap\/pagination.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/pagination.less",
@@ -54,7 +54,7 @@
     },
     "\/less\/bootstrap\/hero-unit.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/hero-unit.less",
@@ -99,7 +99,7 @@
       "inputAbbreviatedPath" : "\/js\/libs\/lodash.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/lodash-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/lodash-ck.js",
       "fileType" : 64
     },
     "\/js\/app.js" : {
@@ -110,7 +110,7 @@
       "inputAbbreviatedPath" : "\/js\/app.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/app-min.js",
+      "outputAbbreviatedPath" : "\/js\/app-ck.js",
       "fileType" : 64
     },
     "\/less\/bootstrap\/button-groups.less" : {
@@ -128,7 +128,7 @@
     },
     "\/less\/bootstrap\/pager.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/pager.less",
@@ -145,12 +145,12 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/index.html",
-      "outputAbbreviatedPath" : "\/No Output Path",
+      "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
     "\/less\/bootstrap\/modals.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/modals.less",
@@ -245,7 +245,7 @@
       "inputAbbreviatedPath" : "\/js\/libs\/angular.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/angular-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/angular-ck.js",
       "fileType" : 64
     },
     "\/less\/bootstrap\/scaffolding.less" : {
@@ -289,7 +289,7 @@
     },
     "\/less\/bootstrap\/component-animations.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/component-animations.less",
@@ -313,22 +313,22 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/less\/bootstrap\/grid.less" : {
+    "\/less\/style.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/grid.less",
+      "inputAbbreviatedPath" : "\/less\/style.less",
       "outputStyle" : 1,
       "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/grid.css",
+      "outputAbbreviatedPath" : "\/css\/style.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
     },
     "\/less\/bootstrap\/labels-badges.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/labels-badges.less",
@@ -350,19 +350,6 @@
       "initialSize" : 8777,
       "fileType" : 8192
     },
-    "\/less\/style.less" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/style.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/css\/style.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
-    },
     "\/less\/bootstrap\/type.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -376,15 +363,41 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/less\/bootstrap\/thumbnails.less" : {
+    "\/less\/bootstrap\/grid.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/grid.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/grid.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
+    "\/less\/bootstrap\/thumbnails.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/thumbnails.less",
       "outputStyle" : 1,
       "shouldRunBless" : 1,
       "outputAbbreviatedPath" : "\/less\/css\/thumbnails.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
+    "\/less\/bootstrap\/tables.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/tables.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/tables.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
@@ -410,21 +423,8 @@
       "inputAbbreviatedPath" : "\/js\/libs\/lodash.min.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/lodash.min-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/lodash.min-ck.js",
       "fileType" : 64
-    },
-    "\/less\/bootstrap\/tables.less" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/tables.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/tables.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
     },
     "\/less\/bootstrap\/responsive-1200px-min.less" : {
       "ignoreWasSetByUser" : 0,
@@ -441,7 +441,7 @@
     },
     "\/less\/bootstrap\/breadcrumbs.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/breadcrumbs.less",
@@ -480,7 +480,7 @@
     },
     "\/less\/bootstrap\/popovers.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/popovers.less",
@@ -499,7 +499,7 @@
       "inputAbbreviatedPath" : "\/js\/libs\/jquery.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/jquery-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/jquery-ck.js",
       "fileType" : 64
     },
     "\/js\/libs\/jquery.min.js" : {
@@ -510,12 +510,12 @@
       "inputAbbreviatedPath" : "\/js\/libs\/jquery.min.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/jquery.min-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/jquery.min-ck.js",
       "fileType" : 64
     },
     "\/less\/bootstrap\/sprites.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/sprites.less",
@@ -547,7 +547,7 @@
       "inputAbbreviatedPath" : "\/js\/libs\/modernizr.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/modernizr-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/modernizr-ck.js",
       "fileType" : 64
     },
     "\/less\/app\/main.less" : {
@@ -565,7 +565,7 @@
     },
     "\/less\/bootstrap\/tooltip.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/tooltip.less",
@@ -597,7 +597,7 @@
       "inputAbbreviatedPath" : "\/js\/libs\/angular.min.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/angular.min-min.js",
+      "outputAbbreviatedPath" : "\/js\/libs\/angular.min-ck.js",
       "fileType" : 64
     },
     "\/js\/lessCompiler.js" : {
@@ -608,7 +608,7 @@
       "inputAbbreviatedPath" : "\/js\/lessCompiler.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/lessCompiler-min.js",
+      "outputAbbreviatedPath" : "\/js\/lessCompiler-ck.js",
       "fileType" : 64
     },
     "\/less\/bootstrap\/close.less" : {
@@ -626,7 +626,7 @@
     },
     "\/less\/bootstrap\/accordion.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/accordion.less",
@@ -639,7 +639,7 @@
     },
     "\/less\/bootstrap\/carousel.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/carousel.less",
@@ -674,7 +674,7 @@
     },
     "\/less\/bootstrap\/progress-bars.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/progress-bars.less",
@@ -711,7 +711,7 @@
     },
     "\/less\/bootstrap\/media.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/less\/bootstrap\/media.less",
@@ -751,7 +751,7 @@
     "jadeAutoOutputPathReplace1" : "",
     "lessAutoOutputPathRelativePath" : "..\/css",
     "hamlAutoOutputPathRelativePath" : "",
-    "jsCheckerReservedNamesString" : "$,jQuery,angular,_,less",
+    "jsCheckerReservedNamesString" : "$,jQuery,angular,_,less,LessCompiler",
     "javascriptOutputStyle" : 1,
     "stylusDebugStyle" : 0,
     "hamlUseCDATA" : 0,

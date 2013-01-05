@@ -1,6 +1,6 @@
 # LESS Previewer
 
-[LESS](http://lesscss.org/) is a popular CSS pre-processor. Used on the [Twitter Bootstrap](https://twitter.gitub.com/bootstrap/) project and on many others, LESS makes CSS more powerful by giving designers and developers access to variables, mixins, string interpolation, imports, and many other features.
+[LESS](http://lesscss.org/) is a popular CSS pre-processor. Used on the [Twitter Bootstrap](https://twitter.gitub.com/bootstrap/) project and on many others, LESS makes CSS more powerful by giving designers and developers access to [variables](http://lesscss.org/#-variables), [mixins](http://lesscss.org/#-mixins), [functions](http://lesscss.org/#-functions), [string interpolation](http://lesscss.org/#-string-interpolation), [imports](http://lesscss.org/#-importing), and many other features.
 
 ## Debugging
 
@@ -17,3 +17,6 @@ For example selector interpolation like this only works in 1.3.1+
   display: block;
 }
 ```
+
+---
+Please feel free to contribute or suggest features and improvements.
