@@ -1,26 +1,19 @@
-## ng-Bootstrap
+# LESS Previewer
 
-### Overview
+[LESS](http://lesscss.org/) is a popular CSS pre-processor. Used on the [Twitter Bootstrap](https://twitter.gitub.com/bootstrap/) project and on many others, LESS makes CSS more powerful by giving designers and developers access to variables, mixins, string interpolation, imports, and many other features.
 
-This is just my boilerplate amalgamation for creating responsive single page apps.  It's a beautiful way to start things out right!
+## Debugging
 
-### What's Inside?
+LESS Previewer was cooked us as a way to visualize LESS output quickly by running it directly through the LESS processor. This allows you to test various version of LESS and their support (or lack thereof) of the syntax you are using.
 
-* Base template: [Twitter Bootstrap](http://twitter.github.com/bootstrap/) with [LESS](http://lesscss.org/)
-* MVC / Horsepower: [AngularJS](http://angularjs.org/)
-* Library Support:
-    * [jQuery](http://jquery.com/)
-    * [Lodash](http://lodash.com/)
-    * [Amplify.store](http://amplifyjs.com)
-* Feature detects: A stripped down version of [Modernizr](http://modernizr.com/download/#-fontface-backgroundsize-borderradius-boxshadow-opacity-rgba-textshadow-cssanimations-generatedcontent-cssgradients-csstransforms-csstransforms3d-csstransitions-hashchange-history-input-inputtypes-localstorage-sessionstorage-shiv-mq-cssclasses-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-css_backgroundsizecover-css_boxsizing-css_lastchild-json-load)
-* Angular App structure for [CoffeeScript](http://coffeescript.org/)
-* [CodeKit](http://incident57.com/codekit/) project settings for those who use that awesome program :)
+Because LESS has very different levels of support for certain syntax depending on the version, it's often nice to be able to test this directly.
 
-### Current Versions
+For example selector interpolation like this only works in 1.3.1+
 
-* Bootstrap 2.2.2
-* AngularJS 1.0.3
-* jQuery 1.8.3
-* Lodash 1.0.0-rc3
-* Amplify.store 1.1.0
-* Modernizr 2.6.2
+```less
+@mySelector: home-base;
+
+.@{mySelector} {
+  display: block;
+}
+```

@@ -13,18 +13,6 @@
       "outputAbbreviatedPath" : "\/js\/libs\/amplify.store.min-min.js",
       "fileType" : 64
     },
-    "\/coffee\/app\/services.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/coffee\/app\/services.coffee",
-      "checkOutputStyle" : 1,
-      "minifyOutput" : 0,
-      "outputAbbreviatedPath" : "\/coffee\/app\/services.js",
-      "outputStyle" : 0,
-      "fileType" : 32
-    },
     "\/less\/bootstrap\/alerts.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -114,14 +102,16 @@
       "outputAbbreviatedPath" : "\/js\/libs\/lodash-min.js",
       "fileType" : 64
     },
-    "\/index.html" : {
+    "\/js\/app.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/js\/app.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/app-min.js",
+      "fileType" : 64
     },
     "\/less\/bootstrap\/button-groups.less" : {
       "ignoreWasSetByUser" : 0,
@@ -149,28 +139,14 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/js\/app.js" : {
+    "\/index.html" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/js\/app.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/app-min.js",
-      "fileType" : 64
-    },
-    "\/coffee\/app\/directives.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/coffee\/app\/directives.coffee",
-      "checkOutputStyle" : 1,
-      "minifyOutput" : 0,
-      "outputAbbreviatedPath" : "\/coffee\/app\/directives.js",
-      "outputStyle" : 0,
-      "fileType" : 32
+      "inputAbbreviatedPath" : "\/index.html",
+      "outputAbbreviatedPath" : "\/No Output Path",
+      "fileType" : 2048
     },
     "\/less\/bootstrap\/modals.less" : {
       "ignoreWasSetByUser" : 0,
@@ -247,18 +223,6 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/coffee\/app\/app.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 1,
-      "inputAbbreviatedPath" : "\/coffee\/app\/app.coffee",
-      "checkOutputStyle" : 1,
-      "minifyOutput" : 0,
-      "outputAbbreviatedPath" : "\/js\/app.js",
-      "outputStyle" : 1,
-      "fileType" : 32
     },
     "\/less\/bootstrap\/forms.less" : {
       "ignoreWasSetByUser" : 0,
@@ -362,15 +326,15 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/less\/style.less" : {
+    "\/less\/bootstrap\/labels-badges.less" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/style.less",
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/labels-badges.less",
       "outputStyle" : 1,
       "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/css\/style.css",
+      "outputAbbreviatedPath" : "\/less\/css\/labels-badges.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
@@ -386,6 +350,19 @@
       "initialSize" : 8777,
       "fileType" : 8192
     },
+    "\/less\/style.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/style.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/css\/style.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
     "\/less\/bootstrap\/type.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -399,19 +376,6 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/less\/bootstrap\/labels-badges.less" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/labels-badges.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/labels-badges.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
-    },
     "\/less\/bootstrap\/thumbnails.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -421,6 +385,19 @@
       "outputStyle" : 1,
       "shouldRunBless" : 1,
       "outputAbbreviatedPath" : "\/less\/css\/thumbnails.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
+    "\/less\/bootstrap\/navbar.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/navbar.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/navbar.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
@@ -449,19 +426,6 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/less\/bootstrap\/navbar.less" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/navbar.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/navbar.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
-    },
     "\/less\/bootstrap\/responsive-1200px-min.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -471,32 +435,6 @@
       "outputStyle" : 1,
       "shouldRunBless" : 1,
       "outputAbbreviatedPath" : "\/less\/css\/responsive-1200px-min.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
-    },
-    "\/less\/bootstrap\/variables.less" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/variables.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/variables.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
-    },
-    "\/less\/bootstrap\/popovers.less" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/popovers.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/popovers.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
@@ -514,6 +452,19 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/less\/bootstrap\/variables.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/variables.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/variables.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
     "\/less\/bootstrap\/wells.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -523,6 +474,19 @@
       "outputStyle" : 1,
       "shouldRunBless" : 1,
       "outputAbbreviatedPath" : "\/less\/css\/wells.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
+    "\/less\/bootstrap\/popovers.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/popovers.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/popovers.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
@@ -537,18 +501,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/libs\/jquery-min.js",
       "fileType" : 64
-    },
-    "\/coffee\/plugins.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/coffee\/plugins.coffee",
-      "checkOutputStyle" : 1,
-      "minifyOutput" : 0,
-      "outputAbbreviatedPath" : "\/coffee\/plugins.js",
-      "outputStyle" : 0,
-      "fileType" : 32
     },
     "\/js\/libs\/jquery.min.js" : {
       "ignoreWasSetByUser" : 1,
@@ -586,18 +538,6 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/coffee\/app\/filters.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/coffee\/app\/filters.coffee",
-      "checkOutputStyle" : 1,
-      "minifyOutput" : 0,
-      "outputAbbreviatedPath" : "\/coffee\/app\/filters.js",
-      "outputStyle" : 0,
-      "fileType" : 32
     },
     "\/js\/libs\/modernizr.js" : {
       "ignoreWasSetByUser" : 1,
@@ -660,6 +600,17 @@
       "outputAbbreviatedPath" : "\/js\/libs\/angular.min-min.js",
       "fileType" : 64
     },
+    "\/js\/lessCompiler.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/lessCompiler.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/lessCompiler-min.js",
+      "fileType" : 64
+    },
     "\/less\/bootstrap\/close.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -685,18 +636,6 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/coffee\/app\/controllers.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/coffee\/app\/controllers.coffee",
-      "checkOutputStyle" : 1,
-      "minifyOutput" : 0,
-      "outputAbbreviatedPath" : "\/coffee\/app\/controllers.js",
-      "outputStyle" : 0,
-      "fileType" : 32
     },
     "\/less\/bootstrap\/carousel.less" : {
       "ignoreWasSetByUser" : 0,
@@ -790,7 +729,7 @@
   "projectSettings" : {
     "hamlNoEscapeInAttributes" : 0,
     "kitAutoOutputPathStyle" : 0,
-    "lessOutputStyle" : 1,
+    "lessOutputStyle" : 0,
     "hamlAutoOutputPathReplace2" : "",
     "draggedImportConcatenationStyle" : 1,
     "jadeAutoOutputPathStyle" : 0,
@@ -802,9 +741,9 @@
     "sassAutoOutputPathStyle" : 2,
     "stylusAutoOutputPathReplace2" : "css",
     "lessAutoOutputPathStyle" : 2,
-    "genericWebpageFileExtensionsString" : "html, xhtml, htm, shtml, shtm, php, jsp, asp, aspx, erb, ctp",
-    "coffeeMinifyOutput" : 0,
-    "javascriptOutputSuffix" : "-min",
+    "genericWebpageFileExtensionsString" : "html, htm, shtml, shtm, xhtml, php, jsp, asp, aspx, erb, ctp",
+    "coffeeMinifyOutput" : 1,
+    "javascriptOutputSuffix" : "-ck",
     "jadeOutputStyle" : 0,
     "coffeeAutoOutputPathStyle" : 0,
     "autoSyncProjectSettingsFile" : 1,
@@ -812,7 +751,7 @@
     "jadeAutoOutputPathReplace1" : "",
     "lessAutoOutputPathRelativePath" : "..\/css",
     "hamlAutoOutputPathRelativePath" : "",
-    "jsCheckerReservedNamesString" : "angular, $:write, jQuery, google,_,amplify",
+    "jsCheckerReservedNamesString" : "$,jQuery,angular,_,less",
     "javascriptOutputStyle" : 1,
     "stylusDebugStyle" : 0,
     "hamlUseCDATA" : 0,
@@ -824,9 +763,9 @@
     "kitAutoOutputPathRelativePath" : "",
     "lessAutoOutputPathReplace2" : "css",
     "jadeAutoOutputPathReplace2" : "",
-    "shouldRunBless" : 1,
+    "shouldRunBless" : 0,
     "stylusAutoOutputPathStyle" : 2,
-    "coffeeCheckOutputStyle" : 1,
+    "coffeeCheckOutputStyle" : 0,
     "slimOutputStyle" : 1,
     "javascriptSyntaxCheckerStyle" : 1,
     "sassAutoOutputPathReplace1" : "sass",
@@ -863,17 +802,17 @@
       "boss" : 0,
       "funcscope" : 0,
       "regexdash" : 0,
-      "jquery" : 0,
+      "jquery" : 1,
       "esnext" : 0,
       "camelcase" : 0,
       "es5" : 0,
       "dojo" : 0,
       "strict" : 0,
-      "devel" : 1,
+      "devel" : 0,
       "onecase" : 0,
       "wsh" : 0,
       "nonstandard" : 0,
-      "asi" : 1,
+      "asi" : 0,
       "smarttabs" : 0,
       "rhino" : 0,
       "noempty" : 0,
@@ -891,21 +830,21 @@
       "noarg" : 1,
       "supernew" : 0,
       "node" : 0,
-      "unused" : 0,
+      "unused" : 1,
       "debug" : 0,
       "bitwise" : 1,
       "white" : 0,
       "worker" : 0,
       "browser" : 1,
-      "laxcomma" : 0,
+      "laxcomma" : 1,
       "multistr" : 0,
-      "shadow" : 1,
+      "shadow" : 0,
       "sub" : 0,
-      "regexp" : 0,
+      "regexp" : 1,
       "scripturl" : 0,
-      "forin" : 1,
+      "forin" : 0,
       "loopfunc" : 0,
-      "laxbreak" : 0,
+      "laxbreak" : 1,
       "plusplus" : 0
     },
     "jsLintFlags" : {
@@ -940,7 +879,7 @@
       "css" : 0
     },
     "uglifyFlags" : {
-      "no-mangle-functions" : 1,
+      "no-mangle-functions" : 0,
       "no-mangle" : 0,
       "no-copyright" : 0,
       "no-dead-code" : 0,
@@ -951,7 +890,7 @@
       "no-seqs" : 1,
       "beautify" : 0,
       "lift-vars" : 1,
-      "consolidate-primitive-values" : 0,
+      "consolidate-primitive-values" : 1,
       "no-squeeze" : 0
     },
     "sassAutoOutputPathReplace2" : "css",
@@ -965,8 +904,8 @@
   },
   "projectAttributes" : {
     "bourbonEnabled" : 0,
-    "displayValue" : "ng-Bootstrap",
-    "displayValueWasSetByUser" : 0,
+    "displayValue" : "less-preview",
+    "displayValueWasSetByUser" : 1,
     "compassEnabled" : 0
   }
 }

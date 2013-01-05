@@ -1,80 +1,103 @@
-$(function() {
-	var options = {
-		lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
-		//,lessCDN: "//cdnjs.cloudflare.com/ajax/libs/less.js/{version}/less.min.js"
-	};
+window.LessCompiler = (function() {
+  LessCompiler.name = "LessCompiler";
+  function LessCompiler(elements, options) {
+    if (!elements) return;
+    this.elements = elements;
 
-	var elements = {
-		lessVersion: $('#lessVersion')
-		,lessInput: $('#lessInput')
-		,cssCode: $('#cssOutput')
-	};
+    if (options == null)
+      options = { lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js" };
 
+    this.options = options;
+  }
+  return LessCompiler;
+}());
 
+LessCompiler.prototype.setupEvents = function() {
+  var self = this;
+  var els = this.elements;
+  var previousLessCode = els.lessInput.val();
 
-	setupEvents();
+  els.lessVersion.on('change', function(){
+    self.loadLess();
+  });
 
-	loadLess();
+  els.lessInput.on('change keyup input paste cut copy', function() {
+    var lessCode = els.lessInput.val();
+    if (previousLessCode === lessCode)
+      return;
 
+    previousLessCode = lessCode;
 
-	function setupEvents() {
-		elements.lessVersion.bind('change', loadLess);
+    self.compileLess();
+  });
+};
 
-		var previousLessCode = elements.lessInput.val();
-		elements.lessInput.on('change keyup input paste cut copy', function() {
-			var lessCode = elements.lessInput.val();
-			if (previousLessCode === lessCode)
-				return;
+LessCompiler.prototype.loadLess = function() {
+  var self = this;
+  var els = this.elements;
 
-			previousLessCode = lessCode;
+  els.lessInput.attr('disabled', true);
 
-			compileLess();
-		});
-	}
+  var version = els.lessVersion.val();
+  var scriptUrl = this.options.lessCDN.replace('{version}', version);
 
+  window.less = undefined;
 
-	function loadLess() {
-		elements.lessInput.attr('disabled', true);
+  $.ajax({
+    dataType : 'script'
+    , cache  : true
+    , url    : scriptUrl
+  })
+    .then(function(){
+      self.parser = new less.Parser({});
+      els.lessInput.attr('disabled', false);
+      self.compileLess();
+    });
+};
 
-		var version = elements.lessVersion.val();
-		var scriptUrl = options.lessCDN.replace('{version}', version);
-		window.less = undefined;
-		$.ajax({
-			dataType: 'script'
-			, cache: true
-			, url: scriptUrl
-		}).then(function(){
-			elements.lessInput.attr('disabled', false);
-			compileLess();
-		});
+LessCompiler.prototype.compileLess = function() {
+  var els = this.elements;
+  var lessCode = els.lessInput.val();
 
-	}
+  try {
+    var compiledCSS = this.parseLess(lessCode);
+    els.cssCode
+      .css('color', '')
+      .text(compiledCSS);
+  } catch (lessEx) {
+    var errorText = lessEx.type
+      +" error: "
+      + lessEx.message
+      + "\n"
+      + (lessEx.extract && lessEx.extract.join(''));
 
-	function compileLess() {
-		var lessCode = elements.lessInput.val();
+    els.cssCode
+      .css('color','red')
+      .text(errorText);
+  }
+};
 
-		try {
-			var compiledCSS = parseLess(lessCode);
-			elements.cssCode.css('color', '').text(compiledCSS);
-		} catch (lessEx) {
-			var errorText = lessEx.type + " error: " + lessEx.message + "\n" + (lessEx.extract && lessEx.extract.join(''));
-			elements.cssCode.css('color','red').text(errorText);
-		}
+LessCompiler.prototype.parseLess = function(lessCode) {
+  var resultCss = "";
 
-	}
+  this.parser.parse(lessCode, function(lessEx, result) {
+    if (lessEx) throw lessEx;
+    resultCss = result.toCSS();
+  });
 
+  return resultCss;
+};
 
-	function parseLess(lessCode) {
+jQuery(function($) {
 
-		var parser = new less.Parser({});
+  var elements = {
+    lessVersion : $('#lessVersion')
+    , lessInput : $('#lessInput')
+    , cssCode   : $('#cssOutput')
+  };
 
-		var resultCss = "";
-		parser.parse(lessCode, function(lessEx, result) {
-			if (lessEx) throw lessEx;
-			resultCss = result.toCSS();
-		});
+  var compiler = new LessCompiler(elements);
 
-		return resultCss;
-	}
-
+  compiler.setupEvents();
+  compiler.loadLess();
 });
