@@ -1,4 +1,4 @@
-# LESS Previewer
+# LESS2CSS | Live LESS Preview
 
 [LESS](http://lesscss.org/) is a popular CSS pre-processor. Used on the [Twitter Bootstrap](https://twitter.gitub.com/bootstrap/) project and on many others, LESS makes CSS more powerful by giving designers and developers access to [variables](http://lesscss.org/#-variables), [mixins](http://lesscss.org/#-mixins), [functions](http://lesscss.org/#-functions), [string interpolation](http://lesscss.org/#-string-interpolation), [imports](http://lesscss.org/#-importing), and many other features.
 
