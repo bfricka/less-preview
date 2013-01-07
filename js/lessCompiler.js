@@ -48,6 +48,7 @@ Stor = (function() {
 
 LessCompiler = (function() {
 
+  /* Constructor */
   function LessCompiler(elements, options) {
     if (!elements) return;
     this.elements = elements;
@@ -58,24 +59,31 @@ LessCompiler = (function() {
       tabSize       : 2
     });
 
-    if (options == null)
-      options = {
-        lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
-        , cdnFallback: "js/less/less-{version}.js"
-      };
+    var defaults = {
+      lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
+      , cdnFallback: "js/less/less-{version}.js"
+      , useFallback: false
+      , saveLess: true
+    };
 
-    this.useFallback = false;
-
-    this.options = options;
-
+    this.options = $.extend(defaults, options);
+    this.storage = new Stor("lessCode");
   }
 
   LessCompiler.prototype.setupEvents = function() {
     var self = this;
     var els = this.elements;
     var editor = this.editor;
+    var cachedLess = this.storage.get();
 
-    this.previousLessCode = editor.getValue();
+    // If we have cached LESS, set it. Otherwise, set previous
+    // to current value of editor (from textarea default)
+    if (cachedLess) {
+      editor.setValue(cachedLess);
+      this.previousLessCode = cachedLess;
+    } else {
+      this.previousLessCode = editor.getValue();
+    }
 
     els.lessVersion.on('change', function(){
       self.loadLess();
@@ -95,8 +103,9 @@ LessCompiler = (function() {
   LessCompiler.prototype.loadLess = function() {
     var self = this;
     var els = this.elements;
+    var opts = this.options;
     // Check for fallback to choose correct path
-    var path = this.useFallback ? this.options.cdnFallback : this.options.lessCDN;
+    var path = opts.useFallback ? opts.cdnFallback : opts.lessCDN;
 
     els.loadingGif.fadeIn();
     this.editor.options.readOnly = true;
@@ -122,7 +131,7 @@ LessCompiler = (function() {
         // Create a counter to prevent infinite loop on multiple errors
         self.tryCount = self.tryCount ? self.tryCount++ : 1;
         // Switch on fallback URL
-        self.useFallback = true;
+        self.options.useFallback = true;
 
         if (self.tryCount <= 3)
           self.loadLess();
@@ -140,6 +149,10 @@ LessCompiler = (function() {
   LessCompiler.prototype.compileLess = function() {
     var els = this.elements;
     var lessCode = this.editor.getValue();
+
+    // Cache input less
+    if (this.options.saveLess)
+      this.storage.set(lessCode);
 
     try {
       var compiledCSS = this.parseLess(lessCode);
@@ -183,7 +196,7 @@ jQuery(function($) {
     , cssCode    : $('#cssOutput')
   };
 
-  var compiler = new LessCompiler(elements);
+  var compiler = window.comp = new LessCompiler(elements);
 
   compiler.setupEvents();
   compiler.loadLess();
