@@ -1,0 +1,31 @@
+{
+  "name": "less2css",
+  "description": "Converts LESS to CSS and does other awesome stuff",
+  "version": "0.0.2",
+  "author": "Brian Frichette",
+  "homepage": "http://less2css.org/",
+  "contributors": [
+    "Brian Frichette <brian.frichette@gmail.com> (https://github.com/brian-frichette)",
+    "Scott Rippey (https://github.com/scottrippey)"
+  ],
+  "bugs": { "url": "https://github.com/brian-frichette/less-preview/issues" },
+  "dependencies": {
+    "express": ">=3.0",
+    "lodash": ">=0.9"
+  },
+  "devDependencies": {
+    "grunt": ">=0.3",
+    "gruntacular": "*",
+    "grunt-contrib-concat": "~0.1",
+    "grunt-frontend": "~1.0.0",
+    "grunt-coffee": "~0.0.3"
+  },
+  "keywords": ["less", "lesscss"],
+  "repository": "git://github.com/brian-frichette/less-preview.git",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ]
+}

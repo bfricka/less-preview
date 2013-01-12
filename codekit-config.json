@@ -1,24 +1,22 @@
 {
   "CodeKitInfo" : "This is a CodeKit project configuration file. It is designed to sync project settings across multiple machines. Modifying the contents of this file can be a poor life decision if you don't know what you're doing. This file is not useful unless accompanied by the project that created it in CodeKit. For more information, see: http:\/\/incident57.com\/codekit",
-  "creatorBuild" : "8241",
+  "creatorBuild" : "8248",
   "files" : {
-    "\/cm\/mode\/verilog\/verilog.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/verilog\/verilog.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/verilog\/verilog.min.js",
-      "fileType" : 64
-    },
     "\/cm\/mode\/vb\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/cm\/mode\/vb\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/cm\/mode\/ocaml\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/ocaml\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -33,14 +31,16 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/go\/go.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/ocaml\/index.html" : {
+    "\/cm\/mode\/verilog\/verilog.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/ocaml\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/cm\/mode\/verilog\/verilog.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/verilog\/verilog.min.js",
+      "fileType" : 64
     },
     "\/cm\/demo\/visibletabs.html" : {
       "ignoreWasSetByUser" : 0,
@@ -102,21 +102,21 @@
       "outputAbbreviatedPath" : "\/cm\/test\/lint\/parse-js.min.js",
       "fileType" : 64
     },
-    "\/cm\/demo\/matchhighlighter.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/demo\/matchhighlighter.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/cm\/doc\/realworld.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/cm\/doc\/realworld.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/cm\/demo\/matchhighlighter.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/demo\/matchhighlighter.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -151,12 +151,12 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/ntriples\/ntriples.min.js",
       "fileType" : 64
     },
-    "\/cm\/theme\/xq-dark.css" : {
+    "\/cm\/theme\/blackboard.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/theme\/xq-dark.css",
+      "inputAbbreviatedPath" : "\/cm\/theme\/blackboard.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
@@ -173,12 +173,21 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/cm\/theme\/blackboard.css" : {
+    "\/cm\/theme\/xq-dark.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/theme\/blackboard.css",
+      "inputAbbreviatedPath" : "\/cm\/theme\/xq-dark.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/css\/styles\/solarized_light.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/css\/styles\/solarized_light.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
@@ -194,15 +203,6 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/css\/styles\/solarized_light.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/solarized_light.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/cm\/mode\/css\/css.js" : {
       "ignoreWasSetByUser" : 0,
@@ -228,14 +228,14 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/css\/styles\/tomorrow-night.css" : {
+    "\/cm\/doc\/manual.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/tomorrow-night.css",
+      "inputAbbreviatedPath" : "\/cm\/doc\/manual.html",
       "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "fileType" : 2048
     },
     "\/cm\/test\/mode_test.css" : {
       "ignoreWasSetByUser" : 0,
@@ -246,14 +246,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/cm\/doc\/manual.html" : {
+    "\/css\/styles\/tomorrow-night.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/doc\/manual.html",
+      "inputAbbreviatedPath" : "\/css\/styles\/tomorrow-night.css",
       "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "fileType" : 16
     },
     "\/cm\/mode\/rpm\/spec\/spec.css" : {
       "ignoreWasSetByUser" : 0,
@@ -372,15 +372,6 @@
       "outputAbbreviatedPath" : "\/cm\/lib\/util\/multiplex.min.js",
       "fileType" : 64
     },
-    "\/cm\/demo\/vim.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/demo\/vim.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/css\/styles\/tomorrow.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -390,6 +381,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
+    "\/cm\/demo\/vim.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/demo\/vim.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/cm\/doc\/docs.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -398,6 +398,17 @@
       "inputAbbreviatedPath" : "\/cm\/doc\/docs.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
+    },
+    "\/js\/less\/less-1.3.3.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.3.3.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.3.3.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/gfm\/gfm.js" : {
       "ignoreWasSetByUser" : 0,
@@ -418,6 +429,17 @@
       "inputAbbreviatedPath" : "\/css\/styles\/school_book.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
+    },
+    "\/js\/less\/less-1.1.3.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.3.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.3.min.js",
+      "fileType" : 64
     },
     "\/cm\/demo\/folding.html" : {
       "ignoreWasSetByUser" : 0,
@@ -592,16 +614,14 @@
       "outputAbbreviatedPath" : "\/cm\/lib\/util\/continuelist.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/clike\/clike.js" : {
+    "\/cm\/lib\/util\/simple-hint.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/clike\/clike.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/clike\/clike.min.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/cm\/lib\/util\/simple-hint.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/cm\/mode\/clike\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -643,14 +663,16 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/stex\/stex.min.js",
       "fileType" : 64
     },
-    "\/cm\/lib\/util\/simple-hint.css" : {
+    "\/cm\/mode\/clike\/clike.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/lib\/util\/simple-hint.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/cm\/mode\/clike\/clike.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/clike\/clike.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/tiki\/tiki.css" : {
       "ignoreWasSetByUser" : 0,
@@ -711,6 +733,17 @@
       "inputAbbreviatedPath" : "\/cm\/mode\/vbscript\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/js\/less\/less-1.2.1.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.2.1.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.2.1.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/ntriples\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -785,6 +818,17 @@
       "outputAbbreviatedPath" : "\/cm\/lib\/util\/javascript-hint.min.js",
       "fileType" : 64
     },
+    "\/js\/less\/less-1.1.6.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.6.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.6.min.js",
+      "fileType" : 64
+    },
     "\/cm\/demo\/marker.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -805,53 +849,6 @@
       "outputAbbreviatedPath" : "\/cm\/test\/lint\/lint.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/css\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/css\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/cm\/mode\/css\/test.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/css\/test.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/css\/test.min.js",
-      "fileType" : 64
-    },
-    "\/cm\/theme\/lesser-dark.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/theme\/lesser-dark.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
-    "\/cm\/mode\/tiddlywiki\/tiddlywiki.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/tiddlywiki\/tiddlywiki.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
-    "\/cm\/theme\/cobalt.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/theme\/cobalt.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/less\/bootstrap\/grid.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -865,6 +862,53 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/cm\/mode\/css\/test.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/css\/test.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/css\/test.min.js",
+      "fileType" : 64
+    },
+    "\/cm\/mode\/tiddlywiki\/tiddlywiki.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/tiddlywiki\/tiddlywiki.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/cm\/mode\/css\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/css\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/cm\/theme\/cobalt.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/theme\/cobalt.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/cm\/theme\/lesser-dark.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/theme\/lesser-dark.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/cm\/mode\/jinja2\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -874,30 +918,21 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/cm\/mode\/plsql\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/plsql\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/cm\/mode\/lua\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/lua\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/cm\/demo\/btree.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/cm\/demo\/btree.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/cm\/mode\/plsql\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/plsql\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -911,6 +946,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/cm\/mode\/pascal\/pascal.min.js",
       "fileType" : 64
+    },
+    "\/cm\/mode\/lua\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/lua\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/img\/glyphicons-halflings.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1128,17 +1172,6 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/sparql\/sparql.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/haskell\/haskell.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/haskell\/haskell.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/haskell\/haskell.min.js",
-      "fileType" : 64
-    },
     "\/cm\/mode\/groovy\/groovy.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1149,15 +1182,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/cm\/mode\/groovy\/groovy.min.js",
       "fileType" : 64
-    },
-    "\/css\/styles\/idea.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/idea.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/cm\/mode\/rpm\/changes\/changes.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1170,18 +1194,25 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/rpm\/changes\/changes.min.js",
       "fileType" : 64
     },
-    "\/less\/bootstrap\/pagination.less" : {
+    "\/css\/styles\/idea.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/pagination.less",
+      "inputAbbreviatedPath" : "\/css\/styles\/idea.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/cm\/mode\/haskell\/haskell.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/haskell\/haskell.js",
       "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/pagination.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/haskell\/haskell.min.js",
+      "fileType" : 64
     },
     "\/less\/style.less" : {
       "ignoreWasSetByUser" : 0,
@@ -1196,21 +1227,25 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/less\/bootstrap\/pagination.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/pagination.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/pagination.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
     "\/cm\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/cm\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/cm\/mode\/diff\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/diff\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -1226,6 +1261,15 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/cm\/mode\/diff\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/diff\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/cm\/mode\/properties\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -1265,6 +1309,17 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/js\/less\/less-1.3.2.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.3.2.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.3.2.min.js",
+      "fileType" : 64
+    },
     "\/cm\/test\/vim_test.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -1285,15 +1340,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/cm\/mode\/xquery\/test.js" : {
+    "\/js\/less\/less-1.1.2.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/xquery\/test.js",
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.2.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/xquery\/test.min.js",
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.2.min.js",
       "fileType" : 64
     },
     "\/cm\/mode\/diff\/diff.js" : {
@@ -1316,6 +1371,17 @@
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/cm\/mode\/mysql\/mysql.min.js",
+      "fileType" : 64
+    },
+    "\/cm\/mode\/xquery\/test.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/xquery\/test.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/xquery\/test.min.js",
       "fileType" : 64
     },
     "\/cm\/mode\/plsql\/plsql.js" : {
@@ -1519,15 +1585,6 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/d\/d.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/xml\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/xml\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/less\/bootstrap\/layouts.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1537,6 +1594,19 @@
       "outputStyle" : 1,
       "shouldRunBless" : 1,
       "outputAbbreviatedPath" : "\/less\/css\/layouts.css",
+      "strictImports" : 0,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
+    "\/less\/bootstrap\/code.less" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/less\/bootstrap\/code.less",
+      "outputStyle" : 1,
+      "shouldRunBless" : 1,
+      "outputAbbreviatedPath" : "\/less\/css\/code.css",
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
@@ -1567,18 +1637,14 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/less\/bootstrap\/code.less" : {
+    "\/cm\/mode\/xml\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/less\/bootstrap\/code.less",
-      "outputStyle" : 1,
-      "shouldRunBless" : 1,
-      "outputAbbreviatedPath" : "\/less\/css\/code.css",
-      "strictImports" : 0,
-      "fileType" : 1,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/cm\/mode\/xml\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/cm\/test\/lint\/walk.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1622,14 +1688,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/cm\/demo\/variableheight.html" : {
+    "\/cm\/mode\/markdown\/test.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/demo\/variableheight.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/cm\/mode\/markdown\/test.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/markdown\/test.min.js",
+      "fileType" : 64
     },
     "\/css\/styles\/tomorrow-night-eighties.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1649,23 +1717,12 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/js\/libs\/amplify.store.min.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/js\/libs\/amplify.store.min.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/js\/libs\/amplify.store.min-min.js",
-      "fileType" : 64
-    },
-    "\/cm\/mode\/clike\/scala.html" : {
+    "\/cm\/demo\/variableheight.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/clike\/scala.html",
+      "inputAbbreviatedPath" : "\/cm\/demo\/variableheight.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -1681,6 +1738,17 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/js\/libs\/amplify.store.min.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/libs\/amplify.store.min.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/libs\/amplify.store.min-min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/pascal\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -1715,17 +1783,6 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/cm\/mode\/haxe\/haxe.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/haxe\/haxe.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/haxe\/haxe.min.js",
-      "fileType" : 64
-    },
     "\/cm\/mode\/smarty\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1735,16 +1792,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/cm\/mode\/markdown\/test.js" : {
+    "\/cm\/mode\/rpm\/spec\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/markdown\/test.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/markdown\/test.min.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/cm\/mode\/rpm\/spec\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/less\/bootstrap\/button-groups.less" : {
       "ignoreWasSetByUser" : 0,
@@ -1759,34 +1814,36 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/cm\/mode\/rpm\/spec\/index.html" : {
+    "\/js\/less\/less-1.2.0.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/rpm\/spec\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/cm\/mode\/shell\/shell.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/shell\/shell.js",
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.2.0.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/shell\/shell.min.js",
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.2.0.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/r\/index.html" : {
+    "\/cm\/mode\/clike\/scala.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/r\/index.html",
+      "inputAbbreviatedPath" : "\/cm\/mode\/clike\/scala.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/cm\/mode\/haxe\/haxe.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/haxe\/haxe.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/haxe\/haxe.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/rst\/rst.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1799,6 +1856,15 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/rst\/rst.min.js",
       "fileType" : 64
     },
+    "\/cm\/mode\/r\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/r\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/cm\/mode\/xquery\/xquery.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1810,6 +1876,17 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/xquery\/xquery.min.js",
       "fileType" : 64
     },
+    "\/cm\/mode\/shell\/shell.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/shell\/shell.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/shell\/shell.min.js",
+      "fileType" : 64
+    },
     "\/cm\/mode\/tiki\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1818,6 +1895,17 @@
       "inputAbbreviatedPath" : "\/cm\/mode\/tiki\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/js\/less\/less-1.1.5.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.5.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.5.min.js",
+      "fileType" : 64
     },
     "\/less\/bootstrap\/tooltip.less" : {
       "ignoreWasSetByUser" : 0,
@@ -1899,6 +1987,15 @@
       "outputAbbreviatedPath" : "\/cm\/keymap\/emacs.min.js",
       "fileType" : 64
     },
+    "\/cm\/mode\/yaml\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/yaml\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/less\/bootstrap\/component-animations.less" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1912,15 +2009,6 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/cm\/mode\/yaml\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/yaml\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/cm\/mode\/ocaml\/ocaml.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1932,6 +2020,15 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/ocaml\/ocaml.min.js",
       "fileType" : 64
     },
+    "\/cm\/mode\/rst\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/rst\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/js\/libs\/jquery.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -1942,15 +2039,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/libs\/jquery.min.js",
       "fileType" : 64
-    },
-    "\/cm\/mode\/rst\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/rst\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/cm\/mode\/haxe\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -2100,6 +2188,26 @@
       "outputAbbreviatedPath" : "\/cm\/lib\/util\/searchcursor.min.js",
       "fileType" : 64
     },
+    "\/cm\/demo\/xmlcomplete.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/demo\/xmlcomplete.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/cm\/mode\/rpm\/spec\/spec.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/rpm\/spec\/spec.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/cm\/mode\/rpm\/spec\/spec.min.js",
+      "fileType" : 64
+    },
     "\/cm\/test\/lint\/acorn.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2122,25 +2230,14 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/pig\/pig.min.js",
       "fileType" : 64
     },
-    "\/cm\/demo\/xmlcomplete.html" : {
+    "\/css\/styles\/sunburst.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/demo\/xmlcomplete.html",
+      "inputAbbreviatedPath" : "\/css\/styles\/sunburst.css",
       "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/cm\/mode\/rpm\/spec\/spec.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/rpm\/spec\/spec.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/cm\/mode\/rpm\/spec\/spec.min.js",
-      "fileType" : 64
+      "fileType" : 16
     },
     "\/cm\/mode\/markdown\/markdown.js" : {
       "ignoreWasSetByUser" : 0,
@@ -2152,15 +2249,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/cm\/mode\/markdown\/markdown.min.js",
       "fileType" : 64
-    },
-    "\/css\/styles\/sunburst.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/sunburst.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/less\/bootstrap\/sprites.less" : {
       "ignoreWasSetByUser" : 0,
@@ -2174,6 +2262,17 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/js\/less\/less-1.3.1.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.3.1.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.3.1.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/tiki\/tiki.js" : {
       "ignoreWasSetByUser" : 0,
@@ -2197,6 +2296,17 @@
       "outputAbbreviatedPath" : "\/js\/libs\/lodash.min.js",
       "fileType" : 64
     },
+    "\/js\/less\/less-1.1.1.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.1.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.1.min.js",
+      "fileType" : 64
+    },
     "\/cm\/lib\/util\/search.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2208,6 +2318,15 @@
       "outputAbbreviatedPath" : "\/cm\/lib\/util\/search.min.js",
       "fileType" : 64
     },
+    "\/css\/styles\/solarized_dark.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/css\/styles\/solarized_dark.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/cm\/theme\/erlang-dark.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2217,12 +2336,12 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/css\/styles\/solarized_dark.css" : {
+    "\/css\/styles\/github.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/solarized_dark.css",
+      "inputAbbreviatedPath" : "\/css\/styles\/github.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
@@ -2247,15 +2366,6 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/css\/styles\/github.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/github.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/less\/bootstrap\/responsive-768px-979px.less" : {
       "ignoreWasSetByUser" : 0,
@@ -2441,15 +2551,6 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/xml\/xml.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/d\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/d\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/cm\/mode\/sass\/sass.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2460,6 +2561,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/cm\/mode\/sass\/sass.min.js",
       "fileType" : 64
+    },
+    "\/cm\/mode\/d\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/d\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/css\/styles\/xcode.css" : {
       "ignoreWasSetByUser" : 0,
@@ -2530,6 +2640,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/css\/styles\/googlecode.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/css\/styles\/googlecode.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/cm\/lib\/util\/dialog.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2541,15 +2660,6 @@
       "outputAbbreviatedPath" : "\/cm\/lib\/util\/dialog.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/rust\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/rust\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/cm\/lib\/codemirror.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2559,14 +2669,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/css\/styles\/googlecode.css" : {
+    "\/cm\/mode\/rust\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/googlecode.css",
+      "inputAbbreviatedPath" : "\/cm\/mode\/rust\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "fileType" : 2048
     },
     "\/less\/bootstrap\/scaffolding.less" : {
       "ignoreWasSetByUser" : 0,
@@ -2704,6 +2814,17 @@
       "strictImports" : 0,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/js\/less\/less-1.1.4.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.4.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.4.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/ecl\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -2947,15 +3068,6 @@
       "outputAbbreviatedPath" : "\/cm\/keymap\/vim.min.js",
       "fileType" : 64
     },
-    "\/cm\/mode\/gfm\/index.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/cm\/mode\/gfm\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/js\/lessCompiler.min.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -2966,6 +3078,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/lessCompiler.min.min.js",
       "fileType" : 64
+    },
+    "\/cm\/mode\/gfm\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/cm\/mode\/gfm\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/cm\/demo\/closetag.html" : {
       "ignoreWasSetByUser" : 0,
@@ -3029,6 +3150,15 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/ecl\/ecl.min.js",
       "fileType" : 64
     },
+    "\/css\/styles\/tomorrow-night-bright.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/css\/styles\/tomorrow-night-bright.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/cm\/mode\/rust\/rust.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -3040,14 +3170,27 @@
       "outputAbbreviatedPath" : "\/cm\/mode\/rust\/rust.min.js",
       "fileType" : 64
     },
-    "\/css\/styles\/tomorrow-night-bright.css" : {
+    "\/js\/less\/less-1.2.2.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/css\/styles\/tomorrow-night-bright.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.2.2.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.2.2.min.js",
+      "fileType" : 64
+    },
+    "\/js\/less\/less-1.3.0.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.3.0.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.3.0.min.js",
+      "fileType" : 64
     },
     "\/cm\/mode\/sieve\/index.html" : {
       "ignoreWasSetByUser" : 0,
@@ -3066,6 +3209,17 @@
       "inputAbbreviatedPath" : "\/cm\/mode\/verilog\/index.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/js\/less\/less-1.1.0.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/js\/less\/less-1.1.0.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/js\/less\/less-1.1.0.min.js",
+      "fileType" : 64
     },
     "\/less\/bootstrap\/responsive.less" : {
       "ignoreWasSetByUser" : 0,
@@ -3169,7 +3323,7 @@
     "jadeAutoOutputPathReplace1" : "",
     "lessAutoOutputPathRelativePath" : "..\/css",
     "hamlAutoOutputPathRelativePath" : "",
-    "jsCheckerReservedNamesString" : "$,jQuery,angular,_,less,LessCompiler,CodeMirror,hljs",
+    "jsCheckerReservedNamesString" : "$,jQuery,angular,_,less,LessCompiler,CodeMirror,hljs,amplify",
     "javascriptOutputStyle" : 1,
     "stylusDebugStyle" : 0,
     "hamlUseCDATA" : 0,
@@ -3226,7 +3380,7 @@
       "es5" : 0,
       "dojo" : 0,
       "strict" : 0,
-      "devel" : 0,
+      "devel" : 1,
       "onecase" : 0,
       "wsh" : 0,
       "nonstandard" : 0,
@@ -3247,7 +3401,7 @@
       "prototypejs" : 0,
       "noarg" : 1,
       "supernew" : 0,
-      "node" : 0,
+      "node" : 1,
       "unused" : 1,
       "debug" : 0,
       "bitwise" : 1,
