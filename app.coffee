@@ -1,6 +1,5 @@
 express  = require 'express'
 mongoose = require 'mongoose'
-routes   = require './routes'
 http     = require 'http'
 # path   = require 'path'
 less     = require 'less-middleware'
@@ -23,7 +22,16 @@ app.configure ->
 
   # Fall-through 404
   app.use (req, res) ->
-    res.send 404, "Four - Oh - Four"
+    res.status(404)
+
+    if req.accepts('html')
+      res.render "404", { title: 'LESS2CSS | 404' }
+
+    else if req.accepts('json')
+      res.send { error: 'Not Found' }
+
+    else
+      res.type('txt').send '404 Not Found'
 
 # mongoose.connect "mongodb://localhost/less2css"
 
