@@ -7,6 +7,8 @@ less     = require 'less-middleware'
 
 app = express()
 
+app.locals.lessVersions = require('./lessVersions')['lessVersions']
+
 app.configure ->
   app.set 'port', process.env.PORT or 3000
   app.set 'views', "#{__dirname}/views"

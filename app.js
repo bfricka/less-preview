@@ -13,6 +13,8 @@ less = require('less-middleware');
 
 app = express();
 
+app.locals.lessVersions = require('./lessVersions')['lessVersions'];
+
 app.configure(function() {
   app.set('port', process.env.PORT || 3000);
   app.set('views', "" + __dirname + "/views");

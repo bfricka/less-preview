@@ -25,7 +25,8 @@ html.no-js(lang='en')
 
     script(src='/javascripts/vendor/modernizr.js')
 
-    script(src='/javascripts/vendor/jquery.js')
+    //- script(src='/javascripts/vendor/jquery.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
     script(src='/javascripts/vendor/amplify.store.min.js')
   body
     //if lt IE7
@@ -43,6 +44,7 @@ html.no-js(lang='en')
         alt="Fork me on GitHub"
       )
 
+    // Main header wrapper
     div.navbar.navbar-fixed-top
       div.navbar-inner
         div.container-fluid
@@ -50,7 +52,7 @@ html.no-js(lang='en')
             ul.nav
               block header
 
-    // Main Container
+    // Main container
     div.container-fluid
       block content
       block footer
@@ -71,29 +73,24 @@ html.no-js(lang='en')
             a(href="http://softwaremaniacs.org/soft/highlight/en/", target="_blank")  Highlight.js
             |.
 
+    block bottomScripts
+      script(src="/javascripts/vendor/cm/codemirror.min.js")
+      script(src="/javascripts/vendor/cm/util/matchbrackets.min.js")
+      script(src="/javascripts/vendor/cm/mode/less/less.min.js")
+      script(src="/javascripts/vendor/highlight.pack.js")
+      script(src="/javascripts/lessCompiler.min.js")
+
+      //- script
+      //-   var _gaq = _gaq || [];
+      //-   _gaq.push(['_setAccount', 'UA-37443347-1']);
+      //-   _gaq.push(['_trackPageview']);
+
+      //-   (function() {
+      //-     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      //-     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      //-     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      //-   })();
+
 //-     <!-- Dev -->    <!-- <script src="js/libs/jquery.js"></script> -->
 //-     <!-- Prod -->   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 //-     <!-- Backup --> <script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
-
-
-//-     </div> <!-- /container -->
-//-     <script src="cm/lib/codemirror.min.js"></script>
-//-     <script src="cm/lib/util/matchbrackets.min.js"></script>
-//-     <script src="cm/mode/less/less.min.js"></script>
-//-     <script src="js/libs/highlight.pack.js"></script>
-//-     <script src="js/lessCompiler.min.js"></script>
-//-     <script type="text/javascript">
-
-//-       var _gaq = _gaq || [];
-//-       _gaq.push(['_setAccount', 'UA-37443347-1']);
-//-       _gaq.push(['_trackPageview']);
-
-//-       (function() {
-//-         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-//-         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-//-         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-//-       })();
-
-//-     </script>
-//-   </body>
-//- </html>
