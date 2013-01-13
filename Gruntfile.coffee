@@ -25,12 +25,16 @@ module.exports = (grunt) ->
         options:
           bare: true
         files:
-          "public/javascripts/less2css.js": "coffee/less2css.coffee"
-          "lessVersions.js": "lessVersions.coffee"
+          "public/javascripts/less2css.js": "public/coffee/less2css.coffee"
+          "public/javascripts/lessVersions.js": "public/coffee/lessVersions.coffee"
+          "app.js": "app.coffee"
 
     watch:
       coffee:
-        files: ["coffee/**/*.coffee", "lessVersions.coffee"]
+        files: [
+          "public/coffee/**/*.coffee"
+          "app.coffee"
+        ]
         tasks: ["coffee"]
 
       js:
