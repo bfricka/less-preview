@@ -10,12 +10,12 @@ block header
         if version.type === 'current'
           option(
             selected='selected'
-            value='#{version.number}') #{version.number} (Current)
+            value='#{version.number}') #{version.number} (current)
 
         else if version.type === 'pre'
           option(
             data-prerelease="true"
-            value='#{version.number}') #{version.number} (Pre-release)
+            value='#{version.number}') #{version.number} (pre-release)
 
         else
           option(value='#{version.number}') #{version.number}
