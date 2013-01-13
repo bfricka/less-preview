@@ -2,6 +2,7 @@
   "name": "less2css",
   "description": "Converts LESS to CSS and does other awesome stuff",
   "version": "0.0.2",
+  "private": true,
   "author": "Brian Frichette",
   "homepage": "http://less2css.org/",
   "contributors": [
@@ -9,16 +10,23 @@
     "Scott Rippey (https://github.com/scottrippey)"
   ],
   "bugs": { "url": "https://github.com/brian-frichette/less-preview/issues" },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
     "express": ">=3.0",
-    "lodash": ">=0.9"
+    "jade": "*",
+    "less-middleware": "*",
+    "lodash": ">=0.9",
+    "mongoose": "*"
   },
   "devDependencies": {
     "grunt": ">=0.3",
     "gruntacular": "*",
     "grunt-contrib-concat": "~0.1",
     "grunt-frontend": "~1.0.0",
-    "grunt-coffee": "~0.0.3"
+    "grunt-coffee": "~0.0.3",
+    "nodemon": "*"
   },
   "keywords": ["less", "lesscss"],
   "repository": "git://github.com/brian-frichette/less-preview.git",
