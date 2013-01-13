@@ -1,8 +1,9 @@
-express = require 'express'
-routes  = require './routes'
-http    = require 'http'
-# path    = require 'path'
-less    = require 'less-middleware'
+express  = require 'express'
+mongoose = require 'mongoose'
+routes   = require './routes'
+http     = require 'http'
+# path   = require 'path'
+less     = require 'less-middleware'
 
 app = express()
 
@@ -20,11 +21,12 @@ app.configure ->
 
   # Fall-through 404
   app.use (req, res) ->
-    res.
+    res.send 404, "Four - Oh - Four"
 
-# app.locals
-#   title: "LESS2CSS"
+# mongoose.connect "mongodb://localhost/less2css"
 
+app.get '/', (req, res) ->
+  res.render 'less2css', {title: 'LESS2CSS | LESS Live Preview'}
 
 http
 .createServer(app)
