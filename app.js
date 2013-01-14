@@ -12,6 +12,8 @@ app = express();
 
 app.locals.lessVersions = require('./public/javascripts/lessVersions')['lessVersions'];
 
+app.locals.env = app.get('env');
+
 app.use(function(req, res, next) {
   var host;
   host = req.headers.host;
@@ -23,6 +25,11 @@ app.use(function(req, res, next) {
     return next();
   }
 });
+
+/*
+Begin config
+*/
+
 
 app.configure(function() {
   app.set('port', process.env.PORT || 3000);
@@ -54,16 +61,22 @@ app.configure(function() {
   });
 });
 
+/*
+Begin Routes
+*/
+
+
 app.get('/', function(req, res) {
   return res.render('less2css', {
     title: 'LESS2CSS | LESS Live Preview'
   });
 });
 
-app.get('/test', function(req, res) {
-  return res.send(req.headers.host + req.url);
-});
+/*
+Init
+*/
+
 
 http.createServer(app).listen(app.get('port'), function() {
-  return console.log("Server started on port " + (app.get('port')));
+  return console.log("Server started on port " + (app.get('port')) + " in " + (app.get('env')) + " mode.");
 });

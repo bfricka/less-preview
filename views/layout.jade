@@ -25,8 +25,11 @@ html.no-js(lang='en')
 
     script(src='/javascripts/vendor/modernizr.js')
 
-    //- script(src='/javascripts/vendor/jquery.js')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    if env == 'production'
+      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    else
+      script(src='/javascripts/vendor/jquery.js')
+
     script(src='/javascripts/vendor/amplify.store.min.js')
   body
     //if lt IE7
@@ -74,24 +77,25 @@ html.no-js(lang='en')
             |.
 
     block bottomScripts
-      script(src="/javascripts/vendor/cm/codemirror.min.js")
-      script(src="/javascripts/vendor/cm/util/matchbrackets.min.js")
-      script(src="/javascripts/vendor/cm/mode/less/less.min.js")
-      script(src="/javascripts/vendor/highlight.pack.js")
-      //- script(src="/javascripts/less2css.js")
-      script(src="/javascripts/less2css.min.js")
+      if env == 'production'
+        script(src="/javascripts/vendor/cm/codemirror.min.js")
+        script(src="/javascripts/vendor/cm/util/matchbrackets.min.js")
+        script(src="/javascripts/vendor/cm/mode/less/less.min.js")
+        script(src="/javascripts/vendor/highlight.pack.js")
+        script(src="/javascripts/less2css.min.js")
+        script
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-37443347-1']);
+          _gaq.push(['_trackPageview']);
 
-      script
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-37443347-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-//-     <!-- Dev -->    <!-- <script src="js/libs/jquery.js"></script> -->
-//-     <!-- Prod -->   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-//-     <!-- Backup --> <script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+      else
+        script(src="/javascripts/vendor/cm/codemirror.js")
+        script(src="/javascripts/vendor/cm/util/matchbrackets.js")
+        script(src="/javascripts/vendor/cm/mode/less/less.js")
+        script(src="/javascripts/vendor/highlight.pack.js")
+        script(src="/javascripts/less2css.js")
