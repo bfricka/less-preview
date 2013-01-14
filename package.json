@@ -11,9 +11,11 @@
   ],
   "bugs": { "url": "https://github.com/brian-frichette/less-preview/issues" },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prod": "forever start app.js -l"
   },
   "dependencies": {
+    "forever": "*",
     "express": ">=3.0",
     "jade": "*",
     "less-middleware": "*",
