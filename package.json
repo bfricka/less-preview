@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "grunt": ">=0.4.x",
-    "testacular": "0.4.x",
+    "testacular": "0.5.x",
     "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git",
     "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
     "grunt-contrib-watch": "git://github.com/gruntjs/grunt-contrib-watch.git",

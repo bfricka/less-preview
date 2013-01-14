@@ -17,14 +17,14 @@ files = [
 ];
 
 // list of files to exclude
-exclude = [
-  'adapter/require.src.js'
-];
+// exclude = [
+//   'adapter/require.src.js'
+// ];
 
 // use dots reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit'
 // CLI --reporters progress
-// reporters = ['progress', 'junit'];
+// reporters = ['growl'];
 
 // junitReporter = {
 //   // will be resolved to basePath (in the same way as files/exclude patterns)
