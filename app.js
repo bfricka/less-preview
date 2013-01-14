@@ -29,13 +29,14 @@ app.configure(function() {
   app.set('views', "" + __dirname + "/views");
   app.set('view engine', 'jade');
   app.use(express.compress());
-  app.use(express.favicon());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(less({
-    src: "" + __dirname + "/public"
+    src: "" + __dirname + "/public",
+    compress: true
   }));
+  app.use(express.staticCache());
   app.use(express["static"]("" + __dirname + "/public"));
   app.use(function(req, res) {
     res.status(404);

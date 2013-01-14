@@ -25,12 +25,19 @@ app.configure ->
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
 
+  # Enable Gzip
   app.use express.compress()
-  app.use express.favicon()
+  # Enable utility middleware
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
-  app.use less({ src: "#{__dirname}/public"})
+
+  app.use less
+    src: "#{__dirname}/public"
+    compress: true
+
+  # Use static cache for now until I find something better
+  app.use express.staticCache()
   app.use express.static("#{__dirname}/public")
 
   # Fall-through 404

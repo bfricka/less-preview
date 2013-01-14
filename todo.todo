@@ -1,0 +1,19 @@
+Routes:
+
+  ☐ Hook up all routing
+  ☐ Move route definitions to routes folder
+
+General:
+
+  ☐ Add dev / prod hooks for conditional rendering
+
+Snippets:
+
+  ☐ Define module and associated Mongoose schema
+  ☐ Investigate utility of redis cache layer
+
+Gists:
+
+  ☐ Hook up oAuth layer
+  ☐ Create "sign in"
+  ☐ Connect to gist api
