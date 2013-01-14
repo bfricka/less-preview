@@ -8,6 +8,18 @@ app = express()
 
 app.locals.lessVersions = require('./public/javascripts/lessVersions')['lessVersions']
 
+# Perform canonicalization
+app.use (req, res, next) ->
+  host = req.headers.host
+  if host is "less2css.org"
+    next()
+  else if host is "www.less2css.com" or
+  host is "www.less2css.org" or
+  host is "less2css.com"
+    res.redirect 301, "http://less2css.org#{req.url}"
+  else # For localhost
+    next()
+
 app.configure ->
   app.set 'port', process.env.PORT or 3000
   app.set 'views', "#{__dirname}/views"
@@ -34,10 +46,15 @@ app.configure ->
     else
       res.type('txt').send '404 Not Found'
 
+  return
+
 # mongoose.connect "mongodb://localhost/less2css"
 
 app.get '/', (req, res) ->
   res.render 'less2css', {title: 'LESS2CSS | LESS Live Preview'}
+
+app.get '/test', (req, res) ->
+  res.send req.headers.host + req.url
 
 http
 .createServer(app)

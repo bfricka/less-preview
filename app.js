@@ -12,6 +12,18 @@ app = express();
 
 app.locals.lessVersions = require('./public/javascripts/lessVersions')['lessVersions'];
 
+app.use(function(req, res, next) {
+  var host;
+  host = req.headers.host;
+  if (host === "less2css.org") {
+    return next();
+  } else if (host === "www.less2css.com" || host === "www.less2css.org" || host === "less2css.com") {
+    return res.redirect(301, "http://less2css.org" + req.url);
+  } else {
+    return next();
+  }
+});
+
 app.configure(function() {
   app.set('port', process.env.PORT || 3000);
   app.set('views', "" + __dirname + "/views");
@@ -25,7 +37,7 @@ app.configure(function() {
     src: "" + __dirname + "/public"
   }));
   app.use(express["static"]("" + __dirname + "/public"));
-  return app.use(function(req, res) {
+  app.use(function(req, res) {
     res.status(404);
     if (req.accepts('html')) {
       return res.render("404", {
@@ -45,6 +57,10 @@ app.get('/', function(req, res) {
   return res.render('less2css', {
     title: 'LESS2CSS | LESS Live Preview'
   });
+});
+
+app.get('/test', function(req, res) {
+  return res.send(req.headers.host + req.url);
 });
 
 http.createServer(app).listen(app.get('port'), function() {
