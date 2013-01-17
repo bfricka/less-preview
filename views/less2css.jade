@@ -1,5 +1,46 @@
 extends layout
 
+block optionsDrawer
+  section#optionsDrawer.optionsDrawer
+    div.optionsDrawerWrap
+      div.row-fluid
+        h3 Options
+      div.row-fluid
+        div.span4
+          label(for='lessVersion') LESS Version
+          select#lessVersion.lessVersion
+            for version in lessVersions
+              if version.type === 'current'
+                option(
+                  selected='selected'
+                  value='#{version.number}') #{version.number} (current)
+
+              else if version.type === 'pre'
+                option(
+                  data-prerelease="true"
+                  value='#{version.number}') #{version.number} (pre-release)
+
+              else
+                option(value='#{version.number}') #{version.number}
+        div.span8
+          label.checkbox dumpLineNumbers
+            i.icon-info-sign
+            input(type="checkbox")
+
+          select
+            option(value="comments") Comments
+            option(value="mediaQuery") Media Query
+            option(value="all") All
+
+          label.checkbox relativeUrls
+            i.icon-info-sign
+            input(type='checkbox')
+
+          label.checkbox rootpath
+            i.icon-info-sign
+            input(type='checkbox')
+          input(type='text')
+
 block header
   li.brand: a(href='/') LESS2CSS
   li.divider-vertical
@@ -9,23 +50,6 @@ block header
       hr
       hr
   li.divider-vertical
-  li: label(for='lessVersion') LESS Version:
-  li
-    select#lessVersion.lessVersion
-      for version in lessVersions
-        if version.type === 'current'
-          option(
-            selected='selected'
-            value='#{version.number}') #{version.number} (current)
-
-        else if version.type === 'pre'
-          option(
-            data-prerelease="true"
-            value='#{version.number}') #{version.number} (pre-release)
-
-        else
-          option(value='#{version.number}') #{version.number}
-
   li: img#loadingGif.loadingGif(src='/images/loading.gif', alt='Loading...')
 
 block content

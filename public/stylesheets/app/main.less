@@ -13,8 +13,30 @@ body {
   }
 }
 
-// Restyle navbar components
+.optionsDrawer {
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  #gradient > .vertical(@white, #eee);
+  .box-shadow(0 10px 14px rgba(0, 0, 0, 0.15));
 
+  [class^="icon-"],
+  [class*=" icon-"] {
+    .transition(all 0.4s);
+    .opacity(40);
+    margin-left: 3px;
+    &:hover { .opacity(80); }
+  }
+}
+
+.optionsDrawerWrap {
+  position: relative;
+  padding: 20px;
+}
+
+// Options nav item
 .lessOptions {
   position: relative;
   .optionsButton {
