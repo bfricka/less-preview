@@ -24,7 +24,7 @@ app.use (req, res, next) ->
 Begin config
 ###
 app.configure ->
-  app.set 'port', process.env.PORT or 3000
+  app.set 'port', 3000
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
 

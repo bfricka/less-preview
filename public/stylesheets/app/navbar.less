@@ -1,0 +1,124 @@
+/*
+Stripped-down refactor of bootstrap navs
+ */
+
+@navBg : #efefef;
+@navLink : #777;
+@navLinkHover : #333;
+@navBgHighlight : #fff;
+
+// Base class and wrapper
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  min-height: 40px;
+  border: 1px solid @navbarBorder;
+  .clearfix();
+  .box-shadow(0 1px 4px rgba(0,0,0,.065));
+  #gradient > .vertical(@navBgHighlight, @navBg);
+
+  // Set width to auto for default container
+  // We then reset it for fixed navbars in the #gridSystem mixin
+  .container { #grid > .core > .span(@gridColumns); }
+
+  .brand {
+    float: left;
+    display: block;
+    // Vertically center the text given @navbarHeight
+    padding: 10px 20px 10px;
+    margin-left: -20px; // negative indent to left-align the text down the page
+    font-size: 20px;
+    font-weight: 200;
+    color: @navbarBrandColor;
+    text-shadow: 0 1px 0 @navBgHighlight;
+
+    &:hover { text-decoration: none }
+  }
+
+  .divider-vertical {
+    height: @navbarHeight;
+    margin: 0 9px;
+    border-left: 1px solid @navBg;
+    border-right: 1px solid @navBgHighlight;
+  }
+
+  .nav {
+    position: relative;
+    left: 0;
+    display: block;
+    float: left;
+    margin: 0 10px 0 0;
+    list-style: none;
+  }
+
+  // Navbar items
+  .nav > li {
+    float: left;
+    padding: 0 9px;
+    &.brand { padding: 10px 20px 10px }
+    &.divider-vertical { margin: 0; padding: 0; }
+    > label,
+    > span {
+      color: #777;
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 0;
+      text-shadow: 0 1px 0 @white;
+      &:hover { color: #333;}
+    }
+  }
+
+  // Links
+  .nav > li > a {
+    display: block;
+    float: none;
+    // Vertically center the text given @navbarHeight
+    padding: ((@navbarHeight - @baseLineHeight) / 2) 15px ((@navbarHeight - @baseLineHeight) / 2);
+    color: @navbarLinkColor;
+    text-decoration: none;
+    text-shadow: 0 1px 0 @navBgHighlight;
+    &:hover {
+      text-decoration: none;
+      background-color: @grayLighter;
+    }
+    img {
+      max-width: none;
+    }
+  }
+
+  // Hover
+  .nav > li > a:focus,
+  .nav > li > a:hover {
+    background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover from .active
+    color: @navbarLinkColorHover;
+    text-decoration: none;
+  }
+
+  // Active nav items
+  .nav > .active > a,
+  .nav > .active > a:hover,
+  .nav > .active > a:focus {
+    color: @navbarLinkColorActive;
+    text-decoration: none;
+    background-color: @navbarLinkBackgroundActive;
+    .box-shadow(inset 0 3px 8px rgba(0,0,0,.125));
+  }
+
+  // Override for brand
+  .nav > li.brand > a { padding: 0 }
+}
+
+.navbar-inner {
+  border-width: 0 0 1px;
+  padding-left:  0;
+  padding-right: 0;
+  .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+}
+
+.navbar .nav.pull-right {
+  float: right; // redeclare due to specificity
+  margin-right: 0; // remove margin on float right nav
+}
