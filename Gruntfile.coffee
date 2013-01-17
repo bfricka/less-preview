@@ -60,17 +60,17 @@ module.exports = (grunt) ->
 
     jshint:
       options:
-        "curly"    : true
-        "eqeqeq"   : true
-        "immed"    : true
-        "latedef"  : true
-        "newcap"   : true
-        "noarg"    : true
         "sub"      : true
-        "undef"    : true
         "boss"     : true
+        "curly"    : true
+        "immed"    : true
+        "noarg"    : true
+        "undef"    : true
+        "newcap"   : true
         "eqnull"   : true
+        "eqeqeq"   : true
         "browser"  : true
+        "latedef"  : true
         "laxcomma" : true
         "laxbreak" : true
 

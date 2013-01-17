@@ -1,3 +1,748 @@
+//
+// Navbars (Redux)
+// --------------------------------------------------
+
+
+// COMMON STYLES
+// -------------
+
+// Base class and wrapper
+.navbar {
+  min-height: @navbarHeight;
+  padding-left:  20px;
+  padding-right: 20px;
+  border: 1px solid @navbarBorder;
+  .border-radius(@baseBorderRadius);
+  .box-shadow(0 1px 4px rgba(0,0,0,.065));
+  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+  .clearfix();
+}
+
+// Set width to auto for default container
+// We then reset it for fixed navbars in the #gridSystem mixin
+.navbar .container {
+  width: auto;
+}
+
+
+// Brand: website or project name
+// -------------------------
+.navbar .brand {
+  float: left;
+  display: block;
+  // Vertically center the text given @navbarHeight
+  padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
+  margin-left: -20px; // negative indent to left-align the text down the page
+  font-size: 20px;
+  font-weight: 200;
+  color: @navbarBrandColor;
+  text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Dividers in navbar
+// -------------------------
+.navbar .divider-vertical {
+  height: @navbarHeight;
+  margin: 0 9px;
+  border-left: 1px solid @navbarBackground;
+  border-right: 1px solid @navbarBackgroundHighlight;
+}
+
+
+// Navbar search
+// -------------------------
+.navbar-search {
+  position: relative;
+  float: left;
+  .navbarVerticalAlign(30px); // Vertically center in navbar
+  margin-bottom: 0;
+  .search-query {
+    margin-bottom: 0;
+    padding: 4px 14px;
+    #font > .sans-serif(13px, normal, 1);
+    .border-radius(15px); // redeclare because of specificity of the type attribute
+  }
+}
+
+// Fixed navbar
+// -------------------------
+
+// Shared (top/bottom) styles
+.navbar-fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: @zindexFixedNavbar;
+  margin-bottom: 0; // remove 18px margin for default navbar
+}
+.navbar-fixed-top .navbar-inner {
+  border-width: 0 0 1px;
+}
+
+.navbar-fixed-top .navbar-inner {
+  padding-left:  0;
+  padding-right: 0;
+  .border-radius(0);
+}
+
+// Reset container width
+// Required here as we reset the width earlier on and the grid mixins don't override early enough
+.navbar-fixed-top .container {
+  #grid > .core > .span(@gridColumns);
+}
+
+// Fixed to top
+.navbar-fixed-top {
+  top: 0;
+}
+.navbar-fixed-top {
+  .navbar-inner {
+    .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+  }
+}
+
+
+
+// NAVIGATION
+// ----------
+
+.navbar .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+.navbar .nav.pull-right {
+  float: right; // redeclare due to specificity
+  margin-right: 0; // remove margin on float right nav
+}
+.navbar .nav > li {
+  float: left;
+}
+
+// Links
+.navbar .nav > li > a {
+  float: none;
+  // Vertically center the text given @navbarHeight
+  padding: ((@navbarHeight - @baseLineHeight) / 2) 15px ((@navbarHeight - @baseLineHeight) / 2);
+  color: @navbarLinkColor;
+  text-decoration: none;
+  text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+}
+
+// Hover
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover from .active
+  color: @navbarLinkColorHover;
+  text-decoration: none;
+}
+
+// Active nav items
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+  color: @navbarLinkColorActive;
+  text-decoration: none;
+  background-color: @navbarLinkBackgroundActive;
+  .box-shadow(inset 0 3px 8px rgba(0,0,0,.125));
+}
+
+// Dropdown menus
+// --------------
+
+// Menu position and menu carets
+.navbar .nav > li > .dropdown-menu {
+  &:before {
+    content: '';
+    display: inline-block;
+    border-left:   7px solid transparent;
+    border-right:  7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-bottom-color: @dropdownBorder;
+    position: absolute;
+    top: -7px;
+    left: 9px;
+  }
+  &:after {
+    content: '';
+    display: inline-block;
+    border-left:   6px solid transparent;
+    border-right:  6px solid transparent;
+    border-bottom: 6px solid @dropdownBackground;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+  }
+}
+// Menu position and menu caret support for dropups via extra dropup class
+.navbar-fixed-bottom .nav > li > .dropdown-menu {
+  &:before {
+    border-top: 7px solid #ccc;
+    border-top-color: @dropdownBorder;
+    border-bottom: 0;
+    bottom: -7px;
+    top: auto;
+  }
+  &:after {
+    border-top: 6px solid @dropdownBackground;
+    border-bottom: 0;
+    bottom: -6px;
+    top: auto;
+  }
+}
+
+// Caret should match text color on hover
+.navbar .nav li.dropdown > a:hover .caret {
+  border-top-color: @navbarLinkColorActive;
+  border-bottom-color: @navbarLinkColorActive;
+}
+
+// Remove background color from open dropdown
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: @navbarLinkBackgroundActive;
+  color: @navbarLinkColorActive;
+}
+.navbar .nav li.dropdown > .dropdown-toggle .caret {
+  border-top-color: @navbarLinkColor;
+  border-bottom-color: @navbarLinkColor;
+}
+.navbar .nav li.dropdown.open > .dropdown-toggle .caret,
+.navbar .nav li.dropdown.active > .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle .caret {
+  border-top-color: @navbarLinkColorActive;
+  border-bottom-color: @navbarLinkColorActive;
+}
+
+// Right aligned menus need alt position
+.navbar .pull-right > li > .dropdown-menu,
+.navbar .nav > li > .dropdown-menu.pull-right {
+  left: auto;
+  right: 0;
+  &:before {
+    left: auto;
+    right: 12px;
+  }
+  &:after {
+    left: auto;
+    right: 13px;
+  }
+  .dropdown-menu {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: -1px;
+    .border-radius(6px 0 6px 6px);
+  }
+}
+
+
+// Inverted navbar
+// -------------------------
+
+.navbar-inverse {
+
+  .navbar-inner {
+    #gradient > .vertical(@navbarInverseBackgroundHighlight, @navbarInverseBackground);
+    border-color: @navbarInverseBorder;
+  }
+
+  .brand,
+  .nav > li > a {
+    color: @navbarInverseLinkColor;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    &:hover {
+      color: @navbarInverseLinkColorHover;
+    }
+  }
+
+  .brand {
+    color: @navbarInverseBrandColor;
+  }
+
+  .navbar-text {
+    color: @navbarInverseText;
+  }
+
+  .nav > li > a:focus,
+  .nav > li > a:hover {
+    background-color: @navbarInverseLinkBackgroundHover;
+    color: @navbarInverseLinkColorHover;
+  }
+
+  .nav .active > a,
+  .nav .active > a:hover,
+  .nav .active > a:focus {
+    color: @navbarInverseLinkColorActive;
+    background-color: @navbarInverseLinkBackgroundActive;
+  }
+
+  // Inline text links
+  .navbar-link {
+    color: @navbarInverseLinkColor;
+    &:hover {
+      color: @navbarInverseLinkColorHover;
+    }
+  }
+
+  // Dividers in navbar
+  .divider-vertical {
+    border-left-color: @navbarInverseBackground;
+    border-right-color: @navbarInverseBackgroundHighlight;
+  }
+
+  // Dropdowns
+  .nav li.dropdown.open > .dropdown-toggle,
+  .nav li.dropdown.active > .dropdown-toggle,
+  .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: @navbarInverseLinkBackgroundActive;
+    color: @navbarInverseLinkColorActive;
+  }
+  .nav li.dropdown > a:hover .caret {
+    border-top-color: @navbarInverseLinkColorActive;
+    border-bottom-color: @navbarInverseLinkColorActive;
+  }
+  .nav li.dropdown > .dropdown-toggle .caret {
+    border-top-color: @navbarInverseLinkColor;
+    border-bottom-color: @navbarInverseLinkColor;
+  }
+  .nav li.dropdown.open > .dropdown-toggle .caret,
+  .nav li.dropdown.active > .dropdown-toggle .caret,
+  .nav li.dropdown.open.active > .dropdown-toggle .caret {
+    border-top-color: @navbarInverseLinkColorActive;
+    border-bottom-color: @navbarInverseLinkColorActive;
+  }
+
+  // Navbar search
+  .navbar-search {
+    .search-query {
+      color: @white;
+      background-color: @navbarInverseSearchBackground;
+      border-color: @navbarInverseSearchBorder;
+      .box-shadow(~"inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15)");
+      .transition(none);
+      .placeholder(@navbarInverseSearchPlaceholderColor);
+
+      // Focus states (we use .focused since IE7-8 and down doesn't support :focus)
+      &:focus,
+      &.focused {
+        padding: 5px 15px;
+        color: @grayDark;
+        text-shadow: 0 1px 0 @white;
+        background-color: @navbarInverseSearchBackgroundFocus;
+        border: 0;
+        .box-shadow(0 0 3px rgba(0,0,0,.15));
+        outline: 0;
+      }
+    }
+  }
+
+  // Navbar collapse button
+  .btn-navbar {
+    .buttonBackground(darken(@navbarInverseBackgroundHighlight, 5%), darken(@navbarInverseBackground, 5%));
+  }
+
+}
+
+//
+// Navs
+// --------------------------------------------------
+
+
+// BASE CLASS
+// ----------
+
+.nav {
+  margin-left: 0;
+  margin-bottom: @baseLineHeight;
+  list-style: none;
+}
+
+// Make links block level
+.nav > li > a {
+  display: block;
+}
+.nav > li > a:hover {
+  text-decoration: none;
+  background-color: @grayLighter;
+}
+
+// Prevent IE8 from misplacing imgs
+// See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
+.nav > li > a > img {
+  max-width: none;
+}
+
+// Redeclare pull classes because of specifity
+.nav > .pull-right {
+  float: right;
+}
+
+// Nav headers (for dropdowns and lists)
+.nav-header {
+  display: block;
+  padding: 3px 15px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: @baseLineHeight;
+  color: @grayLight;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  text-transform: uppercase;
+}
+// Space them out when they follow another list item (link)
+.nav li + .nav-header {
+  margin-top: 9px;
+}
+
+
+
+// NAV LIST
+// --------
+
+.nav-list {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 0;
+}
+.nav-list > li > a,
+.nav-list .nav-header {
+  margin-left:  -15px;
+  margin-right: -15px;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.nav-list > li > a {
+  padding: 3px 15px;
+}
+.nav-list > .active > a,
+.nav-list > .active > a:hover {
+  color: @white;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+  background-color: @linkColor;
+}
+.nav-list [class^="icon-"],
+.nav-list [class*=" icon-"] {
+  margin-right: 2px;
+}
+// Dividers (basically an hr) within the dropdown
+.nav-list .divider {
+  .nav-divider();
+}
+
+
+
+// TABS AND PILLS
+// -------------
+
+// Common styles
+.nav-tabs,
+.nav-pills {
+  .clearfix();
+}
+.nav-tabs > li,
+.nav-pills > li {
+  float: left;
+}
+.nav-tabs > li > a,
+.nav-pills > li > a {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: 2px;
+  line-height: 14px; // keeps the overall height an even number
+}
+
+// TABS
+// ----
+
+// Give the tabs something to sit on
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+// Make the list-items overlay the bottom border
+.nav-tabs > li {
+  margin-bottom: -1px;
+}
+// Actual tabs (as links)
+.nav-tabs > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: @baseLineHeight;
+  border: 1px solid transparent;
+  .border-radius(4px 4px 0 0);
+  &:hover {
+    border-color: @grayLighter @grayLighter #ddd;
+  }
+}
+// Active state, and it's :hover to override normal :hover
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover {
+  color: @gray;
+  background-color: @bodyBackground;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+  cursor: default;
+}
+
+
+// PILLS
+// -----
+
+// Links rendered as pills
+.nav-pills > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  .border-radius(5px);
+}
+
+// Active state
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover {
+  color: @white;
+  background-color: @linkColor;
+}
+
+
+
+// STACKED NAV
+// -----------
+
+// Stacked tabs and pills
+.nav-stacked > li {
+  float: none;
+}
+.nav-stacked > li > a {
+  margin-right: 0; // no need for the gap between nav items
+}
+
+// Tabs
+.nav-tabs.nav-stacked {
+  border-bottom: 0;
+}
+.nav-tabs.nav-stacked > li > a {
+  border: 1px solid #ddd;
+  .border-radius(0);
+}
+.nav-tabs.nav-stacked > li:first-child > a {
+  .border-top-radius(4px);
+}
+.nav-tabs.nav-stacked > li:last-child > a {
+  .border-bottom-radius(4px);
+}
+.nav-tabs.nav-stacked > li > a:hover {
+  border-color: #ddd;
+  z-index: 2;
+}
+
+// Pills
+.nav-pills.nav-stacked > li > a {
+  margin-bottom: 3px;
+}
+.nav-pills.nav-stacked > li:last-child > a {
+  margin-bottom: 1px; // decrease margin to match sizing of stacked tabs
+}
+
+
+
+// DROPDOWNS
+// ---------
+
+.nav-tabs .dropdown-menu {
+  .border-radius(0 0 6px 6px); // remove the top rounded corners here since there is a hard edge above the menu
+}
+.nav-pills .dropdown-menu {
+  .border-radius(6px); // make rounded corners match the pills
+}
+
+// Default dropdown links
+// -------------------------
+// Make carets use linkColor to start
+.nav .dropdown-toggle .caret {
+  border-top-color: @linkColor;
+  border-bottom-color: @linkColor;
+  margin-top: 6px;
+}
+.nav .dropdown-toggle:hover .caret {
+  border-top-color: @linkColorHover;
+  border-bottom-color: @linkColorHover;
+}
+/* move down carets for tabs */
+.nav-tabs .dropdown-toggle .caret {
+  margin-top: 8px;
+}
+
+// Active dropdown links
+// -------------------------
+.nav .active .dropdown-toggle .caret {
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+}
+.nav-tabs .active .dropdown-toggle .caret {
+  border-top-color: @gray;
+  border-bottom-color: @gray;
+}
+
+// Active:hover dropdown links
+// -------------------------
+.nav > .dropdown.active > a:hover {
+  cursor: pointer;
+}
+
+// Open dropdowns
+// -------------------------
+.nav-tabs .open .dropdown-toggle,
+.nav-pills .open .dropdown-toggle,
+.nav > li.dropdown.open.active > a:hover {
+  color: @white;
+  background-color: @grayLight;
+  border-color: @grayLight;
+}
+.nav li.dropdown.open .caret,
+.nav li.dropdown.open.active .caret,
+.nav li.dropdown.open a:hover .caret {
+  border-top-color: @white;
+  border-bottom-color: @white;
+  .opacity(100);
+}
+
+// Dropdowns in stacked tabs
+.tabs-stacked .open > a:hover {
+  border-color: @grayLight;
+}
+
+
+
+// TABBABLE
+// --------
+
+
+// COMMON STYLES
+// -------------
+
+// Clear any floats
+.tabbable {
+  .clearfix();
+}
+.tab-content {
+  overflow: auto; // prevent content from running below tabs
+}
+
+// Remove border on bottom, left, right
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+// Show/hide tabbable areas
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+
+// BOTTOM
+// ------
+
+.tabs-below > .nav-tabs {
+  border-top: 1px solid #ddd;
+}
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+.tabs-below > .nav-tabs > li > a {
+  .border-radius(0 0 4px 4px);
+  &:hover {
+    border-bottom-color: transparent;
+    border-top-color: #ddd;
+  }
+}
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover {
+  border-color: transparent #ddd #ddd #ddd;
+}
+
+// LEFT & RIGHT
+// ------------
+
+// Common styles
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+// Tabs on the left
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+  .border-radius(4px 0 0 4px);
+}
+.tabs-left > .nav-tabs > li > a:hover {
+  border-color: @grayLighter #ddd @grayLighter @grayLighter;
+}
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: @white;
+}
+
+// Tabs on the right
+.tabs-right > .nav-tabs {
+  float: right;
+  margin-left: 19px;
+  border-left: 1px solid #ddd;
+}
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+  .border-radius(0 4px 4px 0);
+}
+.tabs-right > .nav-tabs > li > a:hover {
+  border-color: @grayLighter @grayLighter @grayLighter #ddd;
+}
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover {
+  border-color: #ddd #ddd #ddd transparent;
+  *border-left-color: @white;
+}
+
+
+
+// DISABLED STATES
+// ---------------
+
+// Gray out text
+.nav > .disabled > a {
+  color: @grayLight;
+}
+// Nuke hover effects
+.nav > .disabled > a:hover {
+  text-decoration: none;
+  background-color: transparent;
+  cursor: default;
+}
+
+
 @media (min-width: 980px) {
   body {
     padding-top    : 60px;
@@ -15,7 +760,67 @@
   }
 }
 
-.navbar .nav > li.brand > a { padding: 0; }
+// Restyle navbar components
+.navbar {
+  .nav > li.brand > a { padding: 0 }
+  .nav > li {
+    padding: 0 9px;
+    &.brand { padding: 10px 20px 10px }
+    &.divider-vertical { margin: 0; padding: 0; }
+    > label,
+    > span {
+      color: #777;
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 0;
+      text-shadow: 0 1px 0 @white;
+      &:hover { color: #333;}
+    }
+    > label {
+      margin: 0 5px 0 0;
+    }
+  }
+}
+
+.lessOptions {
+  position: relative;
+  .optionsButton {
+    position: absolute;
+    bottom: -13px;
+    left: 0;
+    z-index: -1;
+    padding: 2px 0;
+    width: 100%;
+    height: 12px;
+    border: 1px solid @lightGray;
+    border-top: none;
+    background: @lighterGray;
+    .box-shadow(0 1px 4px rgba(0,0,0,0.1));
+    .border-radius(0 0 2px 2px);
+    .transition(all 0.2s);
+    .opacity(60);
+    &:hover { .opacity(100); }
+  }
+  hr {
+    margin: 0;
+    border-top-color: #ddd;
+    &:first-child { margin: 2px 0 }
+  }
+}
+
+.lessVersion {
+  width: 100%;
+  margin: 5px 0 0 0;
+}
+
+.loadingGif {
+  display: none;
+  margin: 10px 0 0 10px;
+}
+
+.navbar .nav {
+  width: 100%;
+}
 
 .preWrap {
   padding: 8px;
@@ -37,24 +842,6 @@
   padding: 8px;
   height: 586px;
   .border-radius(4px);
-}
-
-.lessVersion {
-  width: 100%;
-  margin: 4px 0 0 0;
-}
-
-label[for=lessVersion] {
-  margin: 10px 10px 0 0;
-}
-
-.loadingGif {
-  display: none;
-  margin: 10px 0 0 10px;
-}
-
-.navbar .nav {
-  width: 100%;
 }
 
 .codeWrap {
