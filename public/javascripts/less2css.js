@@ -185,13 +185,46 @@ LessCompiler = (function() {
 })();
 
 jQuery(function($) {
-  var compiler, elements;
+  var compiler, drawer, elements;
   elements = {
     lessVersion: $("#lessVersion"),
     loadingGif: $("#loadingGif"),
     lessInput: $("#lessInput"),
     cssCode: $("#cssOutput")
   };
+  drawer = {
+    els: {
+      optsWrap: $("#optionsDrawerWrap").addClass('closed'),
+      optsBtn: $("#optionsButton"),
+      optsLnk: $("#optionsLink")
+    },
+    init: function() {
+      this.els.toggleBtns = this.els.optsWrap.find('.toggleBtn');
+      this.els.toggleChks = this.els.optsWrap.find('.toggleChk');
+      this.setupEvents();
+      return this.detach();
+    },
+    setupEvents: function() {},
+    onOpen: function() {},
+    getBtnLeft: function() {
+      var btn;
+      btn = this.els.optsBtn[0];
+      return btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft;
+    },
+    detach: function() {
+      var els, left, optsBtn, wid;
+      els = this.els;
+      optsBtn = els.optsBtn;
+      wid = optsBtn.width();
+      left = this.getBtnLeft();
+      els.optsBtn.css({
+        'left': left,
+        'width': wid
+      }).addClass('active');
+      return this.els.optsBtn.appendTo(this.els.optsWrap);
+    }
+  };
+  drawer.init();
   compiler = window.comp = new LessCompiler(elements);
   return compiler.setupEvents().loadLess();
 });

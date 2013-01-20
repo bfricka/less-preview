@@ -170,6 +170,42 @@ jQuery ($) ->
     lessInput   : $("#lessInput")
     cssCode     : $("#cssOutput")
 
+  drawer =
+    els:
+      optsWrap : $("#optionsDrawerWrap").addClass('closed')
+      optsBtn  : $("#optionsButton")
+      optsLnk  : $("#optionsLink")
+
+    init: ->
+      @els.toggleBtns = @els.optsWrap.find('.toggleBtn')
+      @els.toggleChks = @els.optsWrap.find('.toggleChk')
+
+      @setupEvents()
+      @detach()
+
+    setupEvents: ->
+
+    onOpen: ->
+
+    getBtnLeft: ->
+      btn = @els.optsBtn[0]
+      btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft
+
+    detach: ->
+      els = @els
+      optsBtn = els.optsBtn
+      wid = optsBtn.width()
+      left = @getBtnLeft()
+
+      els.optsBtn.css
+        'left': left
+        'width': wid
+      .addClass 'active'
+
+      @els.optsBtn.appendTo @els.optsWrap
+
+  drawer.init()
+
   compiler = window.comp = new LessCompiler(elements)
 
   compiler

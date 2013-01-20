@@ -1,12 +1,10 @@
 extends layout
 
 block optionsDrawer
-  section#optionsDrawer.optionsDrawer
-    div.optionsDrawerWrap
+  section.optionsDrawer
+    div#optionsDrawerWrap.optionsDrawerWrap
       div.row-fluid
-        h3 Options
-      div.row-fluid
-        div.span4
+        div.span3
           label(for='lessVersion') LESS Version
           select#lessVersion.lessVersion
             for version in lessVersions
@@ -22,31 +20,37 @@ block optionsDrawer
 
               else
                 option(value='#{version.number}') #{version.number}
-        div.span8
-          label.checkbox dumpLineNumbers
-            i.icon-info-sign
-            input(type="checkbox")
+        div.span3
+          code dumpLineNumbers
+          i.icon-info-sign
+          button.btn.toggleBtn Disabled
+          input.hidden.toggleChk(type="checkbox")
 
-          select
+          select.hide(disabled='disabled')
             option(value="comments") Comments
             option(value="mediaQuery") Media Query
             option(value="all") All
 
-          label.checkbox relativeUrls
-            i.icon-info-sign
-            input(type='checkbox')
+        div.span3
+          code relativeUrls
+          i.icon-info-sign
+          button.btn.toggleBtn Disabled
+          input.hidden.toggleChk(type='checkbox')
 
-          label.checkbox rootpath
-            i.icon-info-sign
-            input(type='checkbox')
-          input(type='text')
+        div.span3
+          code rootpath
+          i.icon-info-sign
+          input.hidden(type='checkbox')
+          button.btn.toggleBtn Disabled
+
+          input.hidden.toggleChk(type='text', placeholder='Enter rootpath')
 
 block header
   li.brand: a(href='/') LESS2CSS
   li.divider-vertical
   li#lessOptions.lessOptions
-    a(href="#") Options
-    button.optionsButton
+    a#optionsLink(href="#") Options
+    button#optionsButton.optionsButton
       hr
       hr
   li.divider-vertical
