@@ -172,24 +172,99 @@ jQuery ($) ->
 
   drawer =
     els:
-      optsWrap : $("#optionsDrawerWrap").addClass('closed')
-      optsBtn  : $("#optionsButton")
-      optsLnk  : $("#optionsLink")
+      optsDrawer : $("#optionsDrawer")
+      optsWrap   : $("#optionsDrawerWrap")
+      optsBtn    : $("#optionsButton")
+      optsLnk    : $("#optionsLink")
+      nav        : $("#nav")
+
+    fx:
+      'duration': 500
+
+    text:
+      'optsOpen'    : 'Close'
+      'optsDefault' : 'Options'
+
+    isOpen: false
 
     init: ->
       @els.toggleBtns = @els.optsWrap.find('.toggleBtn')
       @els.toggleChks = @els.optsWrap.find('.toggleChk')
 
+      @closeDrawer(true)
       @setupEvents()
-      @detach()
+      # @detach()
 
     setupEvents: ->
+      self = @
+      @els.optsBtn.on 'click', (e) ->
+        e.preventDefault()
+
+        if self.isOpen
+          self.closeDrawer.call(self)
+        else
+          self.openDrawer.call(self, e)
+
+    openDrawer: (e) ->
+      props =
+        'top'   : @els.nav.height()
+        'opacity'  : 1
+
+      opts =
+        'duration' : @fx.duration
+
+      @detach()
+      @animateDrawer('open', props, opts)
+
+    closeDrawer: (start) ->
+      self = @
+      props =
+        'top'   : -(@getDrawerHt())
+        'opacity'  : 0
+
+      opts =
+        'duration' : if start then 0 else @fx.duration
+
+      opts.complete = if start then -> self.els.optsDrawer.fadeIn() else `undefined`
+
+      @animateDrawer('close', props, opts)
+
+    animateDrawer: (action, props, opts) ->
+      self = @
+      optsDrawer = @els.optsDrawer
+      defer = new $.Deferred()
+      cb = opts.complete or ->
+
+      opts.complete = ->
+        defer.resolve()
+        cb.apply(self, arguments)
+
+      optsDrawer.animate props, opts
+
+      defer.done ->
+        if action is 'close'
+          self.onClose.call(self)
+        else
+          self.onOpen.call(self)
 
     onOpen: ->
+      @isOpen = true
+
+    onClose: ->
+      @attach()
+      @isOpen = false
+
+    getDrawerHt: ->
+      @els.optsDrawer.outerHeight() - @els.nav.height()
 
     getBtnLeft: ->
       btn = @els.optsBtn[0]
       btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft
+
+    attach: ->
+      @els.optsBtn.insertAfter @els.optsLnk
+      @els.optsBtn.removeClass('active')[0].style.cssText = ""
+
 
     detach: ->
       els = @els

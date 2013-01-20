@@ -194,22 +194,102 @@ jQuery(function($) {
   };
   drawer = {
     els: {
-      optsWrap: $("#optionsDrawerWrap").addClass('closed'),
+      optsDrawer: $("#optionsDrawer"),
+      optsWrap: $("#optionsDrawerWrap"),
       optsBtn: $("#optionsButton"),
-      optsLnk: $("#optionsLink")
+      optsLnk: $("#optionsLink"),
+      nav: $("#nav")
     },
+    fx: {
+      'duration': 500
+    },
+    text: {
+      'optsOpen': 'Close',
+      'optsDefault': 'Options'
+    },
+    isOpen: false,
     init: function() {
       this.els.toggleBtns = this.els.optsWrap.find('.toggleBtn');
       this.els.toggleChks = this.els.optsWrap.find('.toggleChk');
-      this.setupEvents();
-      return this.detach();
+      this.closeDrawer(true);
+      return this.setupEvents();
     },
-    setupEvents: function() {},
-    onOpen: function() {},
+    setupEvents: function() {
+      var self;
+      self = this;
+      return this.els.optsBtn.on('click', function(e) {
+        e.preventDefault();
+        if (self.isOpen) {
+          return self.closeDrawer.call(self);
+        } else {
+          return self.openDrawer.call(self, e);
+        }
+      });
+    },
+    openDrawer: function(e) {
+      var opts, props;
+      props = {
+        'top': this.els.nav.height(),
+        'opacity': 1
+      };
+      opts = {
+        'duration': this.fx.duration
+      };
+      this.detach();
+      return this.animateDrawer('open', props, opts);
+    },
+    closeDrawer: function(start) {
+      var opts, props, self;
+      self = this;
+      props = {
+        'top': -(this.getDrawerHt()),
+        'opacity': 0
+      };
+      opts = {
+        'duration': start ? 0 : this.fx.duration
+      };
+      opts.complete = start ? function() {
+        return self.els.optsDrawer.fadeIn();
+      } : undefined;
+      return this.animateDrawer('close', props, opts);
+    },
+    animateDrawer: function(action, props, opts) {
+      var cb, defer, optsDrawer, self;
+      self = this;
+      optsDrawer = this.els.optsDrawer;
+      defer = new $.Deferred();
+      cb = opts.complete || function() {};
+      opts.complete = function() {
+        defer.resolve();
+        return cb.apply(self, arguments);
+      };
+      optsDrawer.animate(props, opts);
+      return defer.done(function() {
+        if (action === 'close') {
+          return self.onClose.call(self);
+        } else {
+          return self.onOpen.call(self);
+        }
+      });
+    },
+    onOpen: function() {
+      return this.isOpen = true;
+    },
+    onClose: function() {
+      this.attach();
+      return this.isOpen = false;
+    },
+    getDrawerHt: function() {
+      return this.els.optsDrawer.outerHeight() - this.els.nav.height();
+    },
     getBtnLeft: function() {
       var btn;
       btn = this.els.optsBtn[0];
       return btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft;
+    },
+    attach: function() {
+      this.els.optsBtn.insertAfter(this.els.optsLnk);
+      return this.els.optsBtn.removeClass('active')[0].style.cssText = "";
     },
     detach: function() {
       var els, left, optsBtn, wid;
