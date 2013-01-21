@@ -96,8 +96,11 @@ body {
 
 // Hack b/c IE9 still sucks and I don't feel like
 // dealing with it.
-.no-cssanimations .optionsButton {
-  display: none;
+.no-cssanimations {
+  .github-fork-ribbon,
+  .optionsButton {
+    display: none;
+  }
 }
 
 .lessVersion {
@@ -141,6 +144,10 @@ body {
   background: @lighterGray;
   border: 1px solid @lightGray;
   .border-radius(4px);
+}
+
+@media (max-width: 767px) {
+  .navbar-inner .container-fluid { padding: 0 20px }
 }
 
 .CodeMirror {
