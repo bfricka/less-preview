@@ -402,6 +402,7 @@ Initialize a new `EventEmitter`.
           filename: 'less2css.org.less'
         }
       };
+      this.defaults = _.cloneDeep(defaults);
       this.options = $.extend(defaults, options);
       this.storage = new Stor("lessCode");
       this.setupDrawer();
@@ -484,7 +485,7 @@ Initialize a new `EventEmitter`.
           self.loadLess(preRelease);
         } else {
           self.updateOptions(model);
-          self.loadLess();
+          self.loadComplete.call(self);
         }
         return console.log(model);
       });

@@ -22,7 +22,7 @@ class LessCompiler
         rootpath        : false
         filename        : 'less2css.org.less'
 
-
+    @defaults = _.cloneDeep defaults
     @options = $.extend defaults, options
     @storage = new Stor "lessCode"
     # Create behavior beyond the scope of optionsDrawer impl
@@ -135,7 +135,7 @@ class LessCompiler
 
       else
         self.updateOptions model
-        self.loadLess()
+        self.loadComplete.call self
 
       console.log model
 

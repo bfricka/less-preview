@@ -114,6 +114,7 @@ module.exports = (grunt) ->
               "hljs"
               "less"
               "$"
+              "_"
             ]
 
         files:
@@ -147,6 +148,7 @@ module.exports = (grunt) ->
           "hljs"       : true
           "less"       : true
           "$"          : true
+          "_"          : true
 
       all: ["<%= paths.js %>less2css.js"]
 
