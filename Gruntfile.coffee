@@ -3,12 +3,6 @@ testacular = require 'testacular'
 
 module.exports = (grunt) ->
 
-  banner = "/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - "
-  + "<%= grunt.template.today(\"yyyy-mm-dd\") %>\n"
-  + "<%= pkg.homepage ? \"* \" + pkg.homepage + \"\n\" : \"\" %>"
-  + "* Copyright (c) <%= grunt.template.today(\"yyyy\") %> <%= pkg.author.name %>;"
-  + " Licensed <%= _.pluck(pkg.licenses, \"type\").join(\", \") %> */"
-
   grunt.loadNpmTasks "grunt-contrib-uglify"
   # grunt.loadNpmTasks "grunt-contrib-concat"
   grunt.loadNpmTasks "grunt-contrib-watch"
@@ -18,33 +12,43 @@ module.exports = (grunt) ->
   # Project configuration.
   grunt.initConfig
     pkg: "<json:package.json>"
+
     meta:
-      banner: banner
+      banner: "/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> -
+      <%= grunt.template.today(\"yyyy-mm-dd\") %>\n
+      <%= pkg.homepage ? \"* \" + pkg.homepage + \"\n\" : \"\" %>
+      * Copyright (c) <%= grunt.template.today(\"yyyy\") %> <%= pkg.author.name %>;
+      Licensed <%= _.pluck(pkg.licenses, \"type\").join(\", \") %> */"
+
+    paths:
+      coffee: "./public/coffee/"
+      js: "./public/javascripts/"
 
     coffee:
       compile:
         options:
           bare: true
         files:
-          "public/javascripts/less2css.js": [
-            "public/coffee/EventEmitter.coffee"
-            "public/coffee/OptionsDrawer.coffee"
-            "public/coffee/less2css.coffee"
+          "<%= paths.js %>less2css.js": [
+            "<%= paths.coffee %>EventEmitter.coffee"
+            "<%= paths.coffee %>OptionsDrawer.coffee"
+            "<%= paths.coffee %>Stor.coffee"
+            "<%= paths.coffee %>less2css.coffee"
           ]
-          "public/javascripts/lessVersions.js": "public/coffee/lessVersions.coffee"
+          "<%= paths.js %>lessVersions.js": "<%= paths.coffee %>lessVersions.coffee"
           "app.js": "app.coffee"
 
     watch:
       coffee:
         files: [
-          "public/coffee/**/*.coffee"
+          "<%= paths.coffee %>**/*.coffee"
           "app.coffee"
         ]
         tasks: ["coffee"]
 
       js:
         files: [
-          "./public/javascripts/less2css.js"
+          "<%= paths.js %>less2css.js"
         ]
         tasks: ["jshint", "uglify", "test"]
 
@@ -60,7 +64,10 @@ module.exports = (grunt) ->
           mangle: false
 
         files:
-          "public/javascripts/less2css.min.js": ["<banner:meta.banner>", "public/javascripts/less2css.js"]
+          "<%= paths.js %>less2css.min.js": [
+            "<banner:meta.banner>"
+            "<%= paths.js %>less2css.js"
+          ]
 
     jshint:
       options:
@@ -87,7 +94,7 @@ module.exports = (grunt) ->
           "less"       : true
           "$"          : true
 
-      all: ["public/javascripts/less2css.js"]
+      all: ["<%= paths.js %>less2css.js"]
 
   # Default task.
 

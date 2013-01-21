@@ -17,3 +17,8 @@ Gists:
   ☐ Hook up oAuth layer
   ☐ Create "sign in"
   ☐ Connect to gist api
+
+Build:
+
+  ☐ Fix banners (use concat)
+  ☐ Fix coffee build using manual task and concat

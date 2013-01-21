@@ -46,8 +46,6 @@ jQuery ($) ->
       self = @
       els = self.els
 
-      self.setupEmitter()
-
       els.optsBtn.on 'click', (e) ->
         e.preventDefault()
 
@@ -68,10 +66,6 @@ jQuery ($) ->
 
       return
 
-    setupEmitter: ->
-      @evts = {}
-
-
     updateModel: ->
       prev = @model or {}
       values = @els.optsForm.serialize()
@@ -85,6 +79,8 @@ jQuery ($) ->
           curr[split[0]] = split[1] or ""
 
         curr
+
+      @emit 'change', prev, curr
 
       @model = curr
 

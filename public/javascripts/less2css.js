@@ -193,7 +193,6 @@ jQuery(function($) {
       var els, self;
       self = this;
       els = self.els;
-      self.setupEmitter();
       els.optsBtn.on('click', function(e) {
         e.preventDefault();
         if (self.isOpen) {
@@ -214,10 +213,6 @@ jQuery(function($) {
       });
     };
 
-    OptionsDrawer.prototype.setupEmitter = function() {
-      return this.evts = {};
-    };
-
     OptionsDrawer.prototype.updateModel = function() {
       var curr, prev, values;
       prev = this.model || {};
@@ -233,6 +228,7 @@ jQuery(function($) {
         }
         return curr;
       })();
+      this.emit('change', prev, curr);
       return this.model = curr;
     };
 
@@ -328,7 +324,7 @@ jQuery(function($) {
   return $.fn.OptionsDrawer = OptionsDrawer;
 });
 
-var LessCompiler, Stor;
+var Stor;
 
 Stor = (function() {
 
@@ -374,6 +370,8 @@ Stor = (function() {
   return Stor;
 
 })();
+
+var LessCompiler;
 
 LessCompiler = (function() {
 
@@ -523,6 +521,6 @@ jQuery(function($) {
     lessInput: $("#lessInput"),
     cssCode: $("#cssOutput")
   };
-  compiler = new LessCompiler(elements);
+  compiler = window.comp = new LessCompiler(elements);
   return compiler.setupEvents().loadLess();
 });
