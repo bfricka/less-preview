@@ -148,6 +148,7 @@ Initialize a new `EventEmitter`.
         OptionsDrawer.__super__.constructor.call(this);
         defaults = {
           selectors: {
+            lessOptions: "#lessOptions",
             optsDrawer: "#optionsDrawer",
             toggleBtns: ".toggleBtn",
             toggleChks: ".toggleChk",
@@ -157,7 +158,7 @@ Initialize a new `EventEmitter`.
             nav: "#nav"
           },
           fx: {
-            'duration': 500
+            'duration': 300
           },
           text: {
             'optsOpen': 'Close',
@@ -241,6 +242,7 @@ Initialize a new `EventEmitter`.
 
       OptionsDrawer.prototype.openDrawer = function(e) {
         var opts, props;
+        this.els.lessOptions.addClass('open');
         props = {
           'top': this.els.nav.height(),
           'opacity': 1
@@ -255,6 +257,7 @@ Initialize a new `EventEmitter`.
       OptionsDrawer.prototype.closeDrawer = function(start) {
         var opts, props, self;
         self = this;
+        this.els.lessOptions.removeClass('open');
         props = {
           'top': -(this.getDrawerTop()),
           'opacity': 0

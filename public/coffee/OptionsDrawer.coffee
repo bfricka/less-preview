@@ -8,16 +8,17 @@ jQuery ($) ->
 
       defaults =
         selectors:
-          optsDrawer : "#optionsDrawer"
-          toggleBtns : ".toggleBtn"
-          toggleChks : ".toggleChk"
-          optsForm   : "form#optionsDrawerWrap"
-          optsBtn    : "#optionsButton"
-          optsLnk    : "#optionsLink"
-          nav        : "#nav"
+          lessOptions : "#lessOptions"
+          optsDrawer  : "#optionsDrawer"
+          toggleBtns  : ".toggleBtn"
+          toggleChks  : ".toggleChk"
+          optsForm    : "form#optionsDrawerWrap"
+          optsBtn     : "#optionsButton"
+          optsLnk     : "#optionsLink"
+          nav         : "#nav"
 
         fx:
-          'duration': 500
+          'duration': 300
 
         text:
           'optsOpen'    : 'Close'
@@ -94,6 +95,7 @@ jQuery ($) ->
       @model = curr
 
     openDrawer: (e) ->
+      @els.lessOptions.addClass 'open'
       props =
         'top'     : @els.nav.height()
         'opacity' : 1
@@ -107,6 +109,7 @@ jQuery ($) ->
 
     closeDrawer: (start) ->
       self = @
+      @els.lessOptions.removeClass 'open'
       props =
         'top'     : -(@getDrawerTop())
         'opacity' : 0
