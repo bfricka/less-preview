@@ -16,11 +16,47 @@ class LessCompiler
       useFallback : false
       saveLess    : true
       lessCDN     : "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
+      lessOptions :
+        dumpLineNumbers : false
+        relativeUrls    : false
+        rootpath        : false
 
-    @drawer  = new $.fn.OptionsDrawer()
+    # Create behavior beyond the scope of optionsDrawer impl
     @options = $.extend defaults, options
     @storage = new Stor "lessCode"
+
+    @setupDrawer()
     return
+
+  updateOptions: (model) ->
+    opts = @options.lessOptions
+
+    # if model.toggleDumpLines
+
+  setupDrawer: ->
+    drawer = new $.fn.OptionsDrawer()
+    els = drawer.els
+
+    els.toggleBtns.on 'click', (e) ->
+      idx = els.toggleBtns.index(@)
+      chk = els.toggleChks.eq(idx)
+
+      # Trigger click event so change event fires
+      chk.trigger 'click'
+
+      checked = chk.is ':checked'
+
+      if checked
+        $(@).addClass('active')
+      else
+        $(@).removeClass('active')
+
+      console.log chk.val()
+
+      return
+
+    @drawer = drawer
+    @
 
   setupEvents: ->
     self = this
@@ -37,11 +73,23 @@ class LessCompiler
     else
       @previousLessCode = editor.getValue()
 
-    els.lessVersion.on "change", ->
-      preRelease = if versionOpts
-        .filter(':selected')
-        .is('[data-prerelease=true]') then true else false
-      self.loadLess(preRelease)
+    # Wait for drawer options to change
+    @drawer.on 'change', (e, model) ->
+      field = $(e.target)
+
+      fieldName = field.attr 'name'
+
+      if fieldName is 'lessVersion'
+        preRelease = if field.find('option')
+          .filter(':selected')
+          .is('[data-prerelease=true]') then true else false
+        self.loadLess(preRelease)
+
+      else
+        self.updateOptions model
+        self.loadLess()
+
+      console.log model
 
     editor.on "change", ->
       lessCode = self.editor.getValue()
@@ -92,7 +140,7 @@ class LessCompiler
     @
 
   loadComplete: ->
-    @parser = new less.Parser({})
+    @parser = new less.Parser(@options.lessOptions)
     @editor.options.readOnly = false
 
     @compileLess()

@@ -5,7 +5,7 @@ Initialize a new `EventEmitter`.
 ###
 class EventEmitter
 
-  constructor: (obj) ->
+  constructor: ->
     @_callbacks = {}
 
   ###

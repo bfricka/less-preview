@@ -2,6 +2,10 @@ jQuery ($) ->
   class OptionsDrawer extends EventEmitter
 
     constructor: (options) ->
+      # Call super to get instance variables of EE constructor
+      # i.e. _callbacks object
+      super()
+
       defaults =
         selectors:
           optsDrawer : "#optionsDrawer"
@@ -59,14 +63,14 @@ jQuery ($) ->
         self.els.optsBtn.trigger 'click'
 
       els.optsForm.on 'change', (e) ->
-        self.updateModel.call(self)
+        self.updateModel.call(self, e)
 
       els.optsForm.on 'submit', (e) ->
         e.preventDefault()
 
       return
 
-    updateModel: ->
+    updateModel: (e = {}) ->
       prev = @model or {}
       values = @els.optsForm.serialize()
 
@@ -80,7 +84,7 @@ jQuery ($) ->
 
         curr
 
-      @emit 'change', prev, curr
+      @emit 'change', e, curr, prev
 
       @model = curr
 

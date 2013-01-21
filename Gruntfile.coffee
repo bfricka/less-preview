@@ -126,6 +126,7 @@ module.exports = (grunt) ->
       options:
         "sub"      : true
         "boss"     : true
+        "devel"    : true
         "curly"    : false
         "immed"    : true
         "noarg"    : true

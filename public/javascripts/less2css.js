@@ -1,6 +1,3 @@
-/* less2css - v0.0.3 - http://less2css.org/
-* Copyright (c) 2013 Brian Frichette. All rights reserved.
-* Licensed MIT http://opensource.org/licenses/MIT */
 
 /*
 Initialize a new `EventEmitter`.
@@ -17,7 +14,7 @@ Initialize a new `EventEmitter`.
 
   EventEmitter = (function() {
 
-    function EventEmitter(obj) {
+    function EventEmitter() {
       this._callbacks = {};
     }
 
@@ -148,6 +145,7 @@ Initialize a new `EventEmitter`.
 
       function OptionsDrawer(options) {
         var defaults;
+        OptionsDrawer.__super__.constructor.call(this);
         defaults = {
           selectors: {
             optsDrawer: "#optionsDrawer",
@@ -211,15 +209,18 @@ Initialize a new `EventEmitter`.
           return self.els.optsBtn.trigger('click');
         });
         els.optsForm.on('change', function(e) {
-          return self.updateModel.call(self);
+          return self.updateModel.call(self, e);
         });
         els.optsForm.on('submit', function(e) {
           return e.preventDefault();
         });
       };
 
-      OptionsDrawer.prototype.updateModel = function() {
+      OptionsDrawer.prototype.updateModel = function(e) {
         var curr, prev, values;
+        if (e == null) {
+          e = {};
+        }
         prev = this.model || {};
         values = this.els.optsForm.serialize();
         curr = (function() {
@@ -233,7 +234,7 @@ Initialize a new `EventEmitter`.
           }
           return curr;
         })();
-        this.emit('change', prev, curr);
+        this.emit('change', e, curr, prev);
         return this.model = curr;
       };
 
@@ -392,13 +393,44 @@ Initialize a new `EventEmitter`.
         cdnFallback: "js/less/less-{version}.js",
         useFallback: false,
         saveLess: true,
-        lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
+        lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js",
+        lessOptions: {
+          dumpLineNumbers: false,
+          relativeUrls: false,
+          rootpath: false
+        }
       };
-      this.drawer = new $.fn.OptionsDrawer();
       this.options = $.extend(defaults, options);
       this.storage = new Stor("lessCode");
+      this.setupDrawer();
       return;
     }
+
+    LessCompiler.prototype.updateOptions = function(model) {
+      var opts;
+      return opts = this.options.lessOptions;
+    };
+
+    LessCompiler.prototype.setupDrawer = function() {
+      var drawer, els;
+      drawer = new $.fn.OptionsDrawer();
+      els = drawer.els;
+      els.toggleBtns.on('click', function(e) {
+        var checked, chk, idx;
+        idx = els.toggleBtns.index(this);
+        chk = els.toggleChks.eq(idx);
+        chk.trigger('click');
+        checked = chk.is(':checked');
+        if (checked) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+        console.log(chk.val());
+      });
+      this.drawer = drawer;
+      return this;
+    };
 
     LessCompiler.prototype.setupEvents = function() {
       var cachedLess, editor, els, self, versionOpts;
@@ -413,10 +445,18 @@ Initialize a new `EventEmitter`.
       } else {
         this.previousLessCode = editor.getValue();
       }
-      els.lessVersion.on("change", function() {
-        var preRelease;
-        preRelease = versionOpts.filter(':selected').is('[data-prerelease=true]') ? true : false;
-        return self.loadLess(preRelease);
+      this.drawer.on('change', function(e, model) {
+        var field, fieldName, preRelease;
+        field = $(e.target);
+        fieldName = field.attr('name');
+        if (fieldName === 'lessVersion') {
+          preRelease = field.find('option').filter(':selected').is('[data-prerelease=true]') ? true : false;
+          self.loadLess(preRelease);
+        } else {
+          self.updateOptions(model);
+          self.loadLess();
+        }
+        return console.log(model);
       });
       editor.on("change", function() {
         var lessCode;
@@ -462,7 +502,7 @@ Initialize a new `EventEmitter`.
     };
 
     LessCompiler.prototype.loadComplete = function() {
-      this.parser = new less.Parser({});
+      this.parser = new less.Parser(this.options.lessOptions);
       this.editor.options.readOnly = false;
       this.compileLess();
       this.elements.loadingGif.fadeOut();
