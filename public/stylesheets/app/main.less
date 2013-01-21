@@ -59,30 +59,36 @@ body {
 // Options nav item
 .lessOptions {
   position: relative;
+  z-index: 1;
 }
 
 .optionsButton {
   position: absolute;
   bottom: -13px;
   left: 0;
-  z-index: -1;
+  z-index: 9999;
+  cursor: pointer;
   padding: 2px 0;
   width: 100%;
   height: 12px;
   border: 1px solid @lightGray;
   border-top: none;
-  background: @lighterGray;
+  background: url('/images/options-btn.png');
+
   .box-shadow(0 1px 4px rgba(0,0,0,0.1));
   .border-radius(0 0 2px 2px);
+  .background-size(cover);
+  .box-sizing(border-box);
   .transition(all 0.2s);
   .opacity(60);
   &.active,
   &:hover { .opacity(100); }
-  hr {
-    margin: 0;
-    border-top-color: #ddd;
-    &:first-child { margin: 2px 0 }
-  }
+}
+
+// Hack b/c IE9 still sucks and I don't feel like
+// dealing with it.
+.no-cssanimations .optionsButton {
+  display: none;
 }
 
 .lessVersion {

@@ -391,10 +391,9 @@ Initialize a new `EventEmitter`.
         tabSize: 2
       });
       defaults = {
-        cdnFallback: "js/less/less-{version}.js",
         useFallback: false,
         saveLess: true,
-        lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js",
+        lessPath: "/javascripts/less/less-{version}.js",
         lessOptions: {
           dumpLineNumbers: false,
           relativeUrls: false,
@@ -502,32 +501,23 @@ Initialize a new `EventEmitter`.
     };
 
     LessCompiler.prototype.loadLess = function(preRelease) {
-      var els, getScript, opts, path, scriptUrl, self, version;
+      var els, getScript, opts, scriptUrl, self, version;
       self = this;
       opts = this.options;
       els = this.elements;
-      path = opts.useFallback ? opts.cdnFallback : opts.lessCDN;
       els.loadingGif.fadeIn();
       this.editor.options.readOnly = true;
       version = els.lessVersion.val();
       version = preRelease ? "" + version + "-alpha" : version;
-      scriptUrl = path.replace("{version}", version);
+      scriptUrl = opts.lessPath.replace("{version}", version);
       window.less = undefined;
       getScript = $.ajax({
         dataType: "script",
         cache: true,
         url: scriptUrl
       });
-      getScript.then(function() {
-        if (window.less) {
-          self.loadComplete.call(self);
-        } else {
-          self.tryCount = self.tryCount ? self.tryCount++ : 1;
-          self.options.useFallback = true;
-          if (self.tryCount <= 3) {
-            self.loadLess();
-          }
-        }
+      getScript.done(function() {
+        self.loadComplete.call(self);
       });
       return this;
     };

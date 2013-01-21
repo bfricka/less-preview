@@ -12,10 +12,9 @@ class LessCompiler
     )
 
     defaults =
-      cdnFallback : "js/less/less-{version}.js"
       useFallback : false
       saveLess    : true
-      lessCDN     : "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
+      lessPath    : "/javascripts/less/less-{version}.js"
       lessOptions :
         dumpLineNumbers : false
         relativeUrls    : false
@@ -155,7 +154,7 @@ class LessCompiler
     els  = @elements
 
     # Check for fallback to choose correct path
-    path = if opts.useFallback then opts.cdnFallback else opts.lessCDN
+    # path = if opts.useFallback then opts.cdnFallback else opts.lessCDN
 
     els.loadingGif.fadeIn()
 
@@ -163,7 +162,7 @@ class LessCompiler
 
     version     = els.lessVersion.val()
     version     = if preRelease then "#{version}-alpha" else version
-    scriptUrl   = path.replace "{version}", version
+    scriptUrl   = opts.lessPath.replace "{version}", version
     window.less = `undefined`
 
     getScript = $.ajax
@@ -171,19 +170,20 @@ class LessCompiler
       cache    : true
       url      : scriptUrl
 
-    getScript.then ->
-      # Make sure we have access to less global if we don't try the fallback
-      # Uses same-origin hosted files, and prevents mime-type error on IE9+
-      # which occurs b/c raw.github serves text/plain
-      if window.less
-        self.loadComplete.call self
-      else
-        # Create a counter to prevent infinite loop on multiple errors
-        self.tryCount = if self.tryCount then self.tryCount++ else 1
+    getScript.done ->
+      self.loadComplete.call self
+      # # Make sure we have access to less global if we don't try the fallback
+      # # Uses same-origin hosted files, and prevents mime-type error on IE9+
+      # # which occurs b/c raw.github serves text/plain
+      # if window.less
+      #   self.loadComplete.call self
+      # else
+      #   # Create a counter to prevent infinite loop on multiple errors
+      #   self.tryCount = if self.tryCount then self.tryCount++ else 1
 
-        # Switch on fallback URL
-        self.options.useFallback = true
-        self.loadLess() if self.tryCount <= 3
+      #   # Switch on fallback URL
+      #   self.options.useFallback = true
+      #   return self.loadLess() if self.tryCount <= 3
       return
     @
 
