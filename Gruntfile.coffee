@@ -26,7 +26,11 @@ module.exports = (grunt) ->
         options:
           bare: true
         files:
-          "public/javascripts/less2css.js": "public/coffee/less2css.coffee"
+          "public/javascripts/less2css.js": [
+            "public/coffee/EventEmitter.coffee"
+            "public/coffee/OptionsDrawer.coffee"
+            "public/coffee/less2css.coffee"
+          ]
           "public/javascripts/lessVersions.js": "public/coffee/lessVersions.coffee"
           "app.js": "app.coffee"
 
@@ -62,11 +66,12 @@ module.exports = (grunt) ->
       options:
         "sub"      : true
         "boss"     : true
-        "curly"    : true
+        "curly"    : false
         "immed"    : true
         "noarg"    : true
         "undef"    : true
-        "newcap"   : true
+        "shadow"   : true
+        "newcap"   : false
         "eqnull"   : true
         "eqeqeq"   : true
         "browser"  : true

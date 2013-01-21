@@ -41,6 +41,7 @@ class LessCompiler
       saveLess    : true
       lessCDN     : "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
 
+    @drawer  = new $.fn.OptionsDrawer()
     @options = $.extend defaults, options
     @storage = new Stor "lessCode"
     return
@@ -170,118 +171,7 @@ jQuery ($) ->
     lessInput   : $("#lessInput")
     cssCode     : $("#cssOutput")
 
-  drawer =
-    els:
-      optsDrawer : $("#optionsDrawer")
-      optsWrap   : $("#optionsDrawerWrap")
-      optsBtn    : $("#optionsButton")
-      optsLnk    : $("#optionsLink")
-      nav        : $("#nav")
-
-    fx:
-      'duration': 500
-
-    text:
-      'optsOpen'    : 'Close'
-      'optsDefault' : 'Options'
-
-    isOpen: false
-
-    init: ->
-      @els.toggleBtns = @els.optsWrap.find('.toggleBtn')
-      @els.toggleChks = @els.optsWrap.find('.toggleChk')
-
-      @closeDrawer(true)
-      @setupEvents()
-      # @detach()
-
-    setupEvents: ->
-      self = @
-      @els.optsBtn.on 'click', (e) ->
-        e.preventDefault()
-
-        if self.isOpen
-          self.closeDrawer.call(self)
-        else
-          self.openDrawer.call(self, e)
-
-    openDrawer: (e) ->
-      props =
-        'top'   : @els.nav.height()
-        'opacity'  : 1
-
-      opts =
-        'duration' : @fx.duration
-
-      @detach()
-      @animateDrawer('open', props, opts)
-
-    closeDrawer: (start) ->
-      self = @
-      props =
-        'top'   : -(@getDrawerHt())
-        'opacity'  : 0
-
-      opts =
-        'duration' : if start then 0 else @fx.duration
-
-      opts.complete = if start then -> self.els.optsDrawer.fadeIn() else `undefined`
-
-      @animateDrawer('close', props, opts)
-
-    animateDrawer: (action, props, opts) ->
-      self = @
-      optsDrawer = @els.optsDrawer
-      defer = new $.Deferred()
-      cb = opts.complete or ->
-
-      opts.complete = ->
-        defer.resolve()
-        cb.apply(self, arguments)
-
-      optsDrawer.animate props, opts
-
-      defer.done ->
-        if action is 'close'
-          self.onClose.call(self)
-        else
-          self.onOpen.call(self)
-
-    onOpen: ->
-      @isOpen = true
-
-    onClose: ->
-      @attach()
-      @isOpen = false
-
-    getDrawerHt: ->
-      @els.optsDrawer.outerHeight() - @els.nav.height()
-
-    getBtnLeft: ->
-      btn = @els.optsBtn[0]
-      btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft
-
-    attach: ->
-      @els.optsBtn.insertAfter @els.optsLnk
-      @els.optsBtn.removeClass('active')[0].style.cssText = ""
-
-
-    detach: ->
-      els = @els
-      optsBtn = els.optsBtn
-      wid = optsBtn.width()
-      left = @getBtnLeft()
-
-      els.optsBtn.css
-        'left': left
-        'width': wid
-      .addClass 'active'
-
-      @els.optsBtn.appendTo @els.optsWrap
-
-  drawer.init()
-
-  compiler = window.comp = new LessCompiler(elements)
+  compiler = new LessCompiler(elements)
 
   compiler
   .setupEvents()

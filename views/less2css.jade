@@ -2,11 +2,11 @@ extends layout
 
 block optionsDrawer
   section#optionsDrawer.optionsDrawer
-    div#optionsDrawerWrap.optionsDrawerWrap
+    form#optionsDrawerWrap.optionsDrawerWrap
       div.row-fluid
         div.span3
           label(for='lessVersion') LESS Version
-          select#lessVersion.lessVersion
+          select#lessVersion.lessVersion(name='lessVersion')
             for version in lessVersions
               if version.type === 'current'
                 option(
@@ -24,9 +24,9 @@ block optionsDrawer
           code dumpLineNumbers
           i.icon-info-sign
           button.btn.toggleBtn Disabled
-          input.hidden.toggleChk(type="checkbox")
+          input.hidden.toggleChk(type="checkbox", name='toggleDumpLines')
 
-          select.hide(disabled='disabled')
+          select.hide(disabled='disabled', name='dumpLineNumbers')
             option(value="comments") Comments
             option(value="mediaQuery") Media Query
             option(value="all") All
@@ -35,15 +35,15 @@ block optionsDrawer
           code relativeUrls
           i.icon-info-sign
           button.btn.toggleBtn Disabled
-          input.hidden.toggleChk(type='checkbox')
+          input.hidden.toggleChk(type='checkbox', name='relativeUrls')
 
         div.span3
           code rootpath
           i.icon-info-sign
-          input.hidden(type='checkbox')
           button.btn.toggleBtn Disabled
+          input.hidden.toggleChk(type='checkbox', name='toggleRootpath')
 
-          input.hidden.toggleChk(type='text', placeholder='Enter rootpath')
+          input.hidden(type='text', placeholder='Enter rootpath', name='rootpath')
 
 block header
   li.brand: a(href='/') LESS2CSS

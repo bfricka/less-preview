@@ -1,3 +1,333 @@
+/*
+Initialize a new `EventEmitter`.
+
+@api public
+*/
+
+var EventEmitter,
+  __slice = [].slice;
+
+EventEmitter = (function() {
+
+  function EventEmitter(obj) {
+    this._callbacks = {};
+  }
+
+  /*
+    Listen on the given `event` with `fn`.
+  
+    @param {String} event
+    @param {Function} fn
+    @return {Emitter}
+    @api public
+  */
+
+
+  EventEmitter.prototype.on = function(event, fn) {
+    var _base;
+    ((_base = this._callbacks)[event] || (_base[event] = [])).push(fn);
+    return this;
+  };
+
+  /*
+    Adds an `event` listener that will be invoked a single
+    time then automatically removed.
+  
+    @param {String} event
+    @param {Function} fn
+    @return {Emitter}
+    @api public
+  */
+
+
+  EventEmitter.prototype.once = function(event, fn) {
+    var once,
+      _this = this;
+    once = function() {
+      _this.off(event, once);
+      return fn.apply(_this, arguments);
+    };
+    fn._off = once;
+    return this.on(event, once);
+  };
+
+  /*
+    Remove the given callback for `event` or all
+    registered callbacks.
+  
+    @param {String} event
+    @param {Function} fn
+    @return {Emitter}
+    @api public
+  */
+
+
+  EventEmitter.prototype.off = function(event, fn) {
+    var callbacks, i;
+    callbacks = this._callbacks[event];
+    if (!callbacks) {
+      return this;
+    }
+    if (1 === arguments.length) {
+      delete this._callbacks[event];
+      return this;
+    }
+    i = callbacks.indexOf(fn._off || fn);
+    if (~i) {
+      callbacks.splice(i, 1);
+    }
+    return this;
+  };
+
+  /*
+    Emit `event` with the given args.
+  
+    @param {String} event
+    @param {Mixed} ...
+    @return {Emitter}
+  */
+
+
+  EventEmitter.prototype.emit = function() {
+    var args, callback, callbacks, event, _i, _len, _ref;
+    event = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    callbacks = this._callbacks[event];
+    if (callbacks) {
+      _ref = callbacks.slice(0);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        callback = _ref[_i];
+        callback.apply(this, args);
+      }
+    }
+    return this;
+  };
+
+  /*
+    Return array of callbacks for `event`.
+  
+    @param {String} event
+    @return {Array}
+    @api public
+  */
+
+
+  EventEmitter.prototype.listeners = function(event) {
+    return this._callbacks[event] || [];
+  };
+
+  /*
+    Check if this emitter has `event` handlers.
+  
+    @param {String} event
+    @return {Boolean}
+    @api public
+  */
+
+
+  EventEmitter.prototype.hasListeners = function(event) {
+    return !!this.listeners(event).length;
+  };
+
+  return EventEmitter;
+
+})();
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+jQuery(function($) {
+  var OptionsDrawer;
+  OptionsDrawer = (function(_super) {
+
+    __extends(OptionsDrawer, _super);
+
+    function OptionsDrawer(options) {
+      var defaults;
+      defaults = {
+        selectors: {
+          optsDrawer: "#optionsDrawer",
+          toggleBtns: ".toggleBtn",
+          toggleChks: ".toggleChk",
+          optsForm: "form#optionsDrawerWrap",
+          optsBtn: "#optionsButton",
+          optsLnk: "#optionsLink",
+          nav: "#nav"
+        },
+        fx: {
+          'duration': 500
+        },
+        text: {
+          'optsOpen': 'Close',
+          'optsDefault': 'Options'
+        }
+      };
+      this.opts = $.extend(defaults, options);
+      this.isOpen = false;
+      this.setupEls();
+      this.closeDrawer(true);
+      this.setupEvents();
+      this.updateModel();
+      return;
+    }
+
+    OptionsDrawer.prototype.setupEls = function() {
+      var classes, name, selector, _ref;
+      classes = {};
+      this.els = {};
+      _ref = this.opts.selectors;
+      for (name in _ref) {
+        selector = _ref[name];
+        if (/^\.\w/i.test(selector)) {
+          classes[name] = selector;
+        } else {
+          this.els[name] = $(selector);
+        }
+      }
+      for (name in classes) {
+        selector = classes[name];
+        this.els[name] = this.els.optsDrawer.find(selector);
+      }
+    };
+
+    OptionsDrawer.prototype.setupEvents = function() {
+      var els, self;
+      self = this;
+      els = self.els;
+      self.setupEmitter();
+      els.optsBtn.on('click', function(e) {
+        e.preventDefault();
+        if (self.isOpen) {
+          return self.closeDrawer.call(self);
+        } else {
+          return self.openDrawer.call(self, e);
+        }
+      });
+      els.optsLnk.on('click', function(e) {
+        e.preventDefault();
+        return self.els.optsBtn.trigger('click');
+      });
+      els.optsForm.on('change', function(e) {
+        return self.updateModel.call(self);
+      });
+      els.optsForm.on('submit', function(e) {
+        return e.preventDefault();
+      });
+    };
+
+    OptionsDrawer.prototype.setupEmitter = function() {
+      return this.evts = {};
+    };
+
+    OptionsDrawer.prototype.updateModel = function() {
+      var curr, prev, values;
+      prev = this.model || {};
+      values = this.els.optsForm.serialize();
+      curr = (function() {
+        var field, fields, split, _i, _len;
+        curr = {};
+        fields = values.split('&');
+        for (_i = 0, _len = fields.length; _i < _len; _i++) {
+          field = fields[_i];
+          split = field.split('=');
+          curr[split[0]] = split[1] || "";
+        }
+        return curr;
+      })();
+      return this.model = curr;
+    };
+
+    OptionsDrawer.prototype.openDrawer = function(e) {
+      var opts, props;
+      props = {
+        'top': this.els.nav.height(),
+        'opacity': 1
+      };
+      opts = {
+        'duration': this.opts.fx.duration
+      };
+      this.detach();
+      this.animateDrawer('open', props, opts);
+    };
+
+    OptionsDrawer.prototype.closeDrawer = function(start) {
+      var opts, props, self;
+      self = this;
+      props = {
+        'top': -(this.getDrawerTop()),
+        'opacity': 0
+      };
+      opts = {
+        'duration': start ? 0 : this.opts.fx.duration
+      };
+      opts.complete = start ? function() {
+        return self.els.optsDrawer.fadeIn();
+      } : undefined;
+      this.animateDrawer('close', props, opts);
+    };
+
+    OptionsDrawer.prototype.animateDrawer = function(action, props, opts) {
+      var cb, defer, optsDrawer, self;
+      self = this;
+      optsDrawer = this.els.optsDrawer;
+      defer = new $.Deferred();
+      cb = opts.complete || function() {};
+      opts.complete = function() {
+        defer.resolve();
+        return cb.apply(self, arguments);
+      };
+      optsDrawer.animate(props, opts);
+      defer.done(function() {
+        if (action === 'close') {
+          return self.onClose.call(self);
+        } else {
+          return self.onOpen.call(self);
+        }
+      });
+    };
+
+    OptionsDrawer.prototype.onOpen = function() {
+      this.isOpen = true;
+    };
+
+    OptionsDrawer.prototype.onClose = function() {
+      this.attach();
+      this.isOpen = false;
+    };
+
+    OptionsDrawer.prototype.getDrawerTop = function() {
+      return this.els.optsDrawer.outerHeight() - this.els.nav.height();
+    };
+
+    OptionsDrawer.prototype.getBtnLeft = function() {
+      var btn;
+      btn = this.els.optsBtn[0];
+      return btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft;
+    };
+
+    OptionsDrawer.prototype.attach = function() {
+      this.els.optsBtn.insertAfter(this.els.optsLnk);
+      this.els.optsBtn.removeClass('active')[0].style.cssText = "";
+    };
+
+    OptionsDrawer.prototype.detach = function() {
+      var els, left, optsBtn, wid;
+      els = this.els;
+      optsBtn = els.optsBtn;
+      wid = optsBtn.width();
+      left = this.getBtnLeft();
+      els.optsBtn.css({
+        'left': left,
+        'width': wid
+      }).addClass('active');
+      this.els.optsBtn.appendTo(this.els.optsForm);
+    };
+
+    return OptionsDrawer;
+
+  })(EventEmitter);
+  return $.fn.OptionsDrawer = OptionsDrawer;
+});
+
 var LessCompiler, Stor;
 
 Stor = (function() {
@@ -65,6 +395,7 @@ LessCompiler = (function() {
       saveLess: true,
       lessCDN: "//raw.github.com/cloudhead/less.js/master/dist/less-{version}.js"
     };
+    this.drawer = new $.fn.OptionsDrawer();
     this.options = $.extend(defaults, options);
     this.storage = new Stor("lessCode");
     return;
@@ -185,126 +516,13 @@ LessCompiler = (function() {
 })();
 
 jQuery(function($) {
-  var compiler, drawer, elements;
+  var compiler, elements;
   elements = {
     lessVersion: $("#lessVersion"),
     loadingGif: $("#loadingGif"),
     lessInput: $("#lessInput"),
     cssCode: $("#cssOutput")
   };
-  drawer = {
-    els: {
-      optsDrawer: $("#optionsDrawer"),
-      optsWrap: $("#optionsDrawerWrap"),
-      optsBtn: $("#optionsButton"),
-      optsLnk: $("#optionsLink"),
-      nav: $("#nav")
-    },
-    fx: {
-      'duration': 500
-    },
-    text: {
-      'optsOpen': 'Close',
-      'optsDefault': 'Options'
-    },
-    isOpen: false,
-    init: function() {
-      this.els.toggleBtns = this.els.optsWrap.find('.toggleBtn');
-      this.els.toggleChks = this.els.optsWrap.find('.toggleChk');
-      this.closeDrawer(true);
-      return this.setupEvents();
-    },
-    setupEvents: function() {
-      var self;
-      self = this;
-      return this.els.optsBtn.on('click', function(e) {
-        e.preventDefault();
-        if (self.isOpen) {
-          return self.closeDrawer.call(self);
-        } else {
-          return self.openDrawer.call(self, e);
-        }
-      });
-    },
-    openDrawer: function(e) {
-      var opts, props;
-      props = {
-        'top': this.els.nav.height(),
-        'opacity': 1
-      };
-      opts = {
-        'duration': this.fx.duration
-      };
-      this.detach();
-      return this.animateDrawer('open', props, opts);
-    },
-    closeDrawer: function(start) {
-      var opts, props, self;
-      self = this;
-      props = {
-        'top': -(this.getDrawerHt()),
-        'opacity': 0
-      };
-      opts = {
-        'duration': start ? 0 : this.fx.duration
-      };
-      opts.complete = start ? function() {
-        return self.els.optsDrawer.fadeIn();
-      } : undefined;
-      return this.animateDrawer('close', props, opts);
-    },
-    animateDrawer: function(action, props, opts) {
-      var cb, defer, optsDrawer, self;
-      self = this;
-      optsDrawer = this.els.optsDrawer;
-      defer = new $.Deferred();
-      cb = opts.complete || function() {};
-      opts.complete = function() {
-        defer.resolve();
-        return cb.apply(self, arguments);
-      };
-      optsDrawer.animate(props, opts);
-      return defer.done(function() {
-        if (action === 'close') {
-          return self.onClose.call(self);
-        } else {
-          return self.onOpen.call(self);
-        }
-      });
-    },
-    onOpen: function() {
-      return this.isOpen = true;
-    },
-    onClose: function() {
-      this.attach();
-      return this.isOpen = false;
-    },
-    getDrawerHt: function() {
-      return this.els.optsDrawer.outerHeight() - this.els.nav.height();
-    },
-    getBtnLeft: function() {
-      var btn;
-      btn = this.els.optsBtn[0];
-      return btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft;
-    },
-    attach: function() {
-      this.els.optsBtn.insertAfter(this.els.optsLnk);
-      return this.els.optsBtn.removeClass('active')[0].style.cssText = "";
-    },
-    detach: function() {
-      var els, left, optsBtn, wid;
-      els = this.els;
-      optsBtn = els.optsBtn;
-      wid = optsBtn.width();
-      left = this.getBtnLeft();
-      els.optsBtn.css({
-        'left': left,
-        'width': wid
-      }).addClass('active');
-      return this.els.optsBtn.appendTo(this.els.optsWrap);
-    }
-  };
-  drawer.init();
-  compiler = window.comp = new LessCompiler(elements);
+  compiler = new LessCompiler(elements);
   return compiler.setupEvents().loadLess();
 });
