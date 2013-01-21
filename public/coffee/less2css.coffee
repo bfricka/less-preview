@@ -40,6 +40,7 @@ class LessCompiler
     els.toggleBtns.on 'click', (e) ->
       idx = els.toggleBtns.index(@)
       chk = els.toggleChks.eq(idx)
+      btn = $(@)
 
       # Trigger click event so change event fires
       chk.trigger 'click'
@@ -47,11 +48,23 @@ class LessCompiler
       checked = chk.is ':checked'
 
       if checked
-        $(@).addClass('active')
-      else
-        $(@).removeClass('active')
+        btn
+          .addClass('btn-primary')
+          .text('Enabled')
+          .siblings(':disabled')
+          .addClass('enabled')
+          .fadeIn()
+          .attr('disabled', false)
+          .trigger('change')
 
-      console.log chk.val()
+      else
+        btn
+          .removeClass('btn-primary')
+          .text('Disabled')
+          .siblings('.enabled')
+          .fadeOut()
+          .attr('disabled', true)
+          .trigger('change')
 
       return
 

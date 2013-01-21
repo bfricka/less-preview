@@ -190,6 +190,7 @@ Initialize a new `EventEmitter`.
           selector = classes[name];
           this.els[name] = this.els.optsDrawer.find(selector);
         }
+        this.els.optsDrawer.find('.hide').hide().removeClass('hide');
       };
 
       OptionsDrawer.prototype.setupEvents = function() {
@@ -416,17 +417,17 @@ Initialize a new `EventEmitter`.
       drawer = new $.fn.OptionsDrawer();
       els = drawer.els;
       els.toggleBtns.on('click', function(e) {
-        var checked, chk, idx;
+        var btn, checked, chk, idx;
         idx = els.toggleBtns.index(this);
         chk = els.toggleChks.eq(idx);
+        btn = $(this);
         chk.trigger('click');
         checked = chk.is(':checked');
         if (checked) {
-          $(this).addClass('active');
+          btn.addClass('btn-primary').text('Enabled').siblings(':disabled').addClass('enabled').fadeIn().attr('disabled', false).trigger('change');
         } else {
-          $(this).removeClass('active');
+          btn.removeClass('btn-primary').text('Disabled').siblings('.enabled').fadeOut().attr('disabled', true).trigger('change');
         }
-        console.log(chk.val());
       });
       this.drawer = drawer;
       return this;

@@ -39,10 +39,15 @@ body {
     width: 100%;
   }
 
-  // h3 { margin-top: 0 }
-  input[type=text] { margin: 10px 0 0 }
+
+  input[type=text],
+  select {
+    .box-sizing(border-box);
+    margin: 10px 0 0;
+    height: 30px;
+    width: 100%;
+  }
   label { margin-bottom: 0 }
-  select { margin-top: 10px }
 }
 
 .optionsDrawerWrap {

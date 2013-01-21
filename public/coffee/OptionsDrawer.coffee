@@ -44,6 +44,11 @@ jQuery ($) ->
       for name, selector of classes
         @els[name] = @els.optsDrawer.find(selector)
 
+      @els.optsDrawer
+        .find('.hide')
+        .hide()
+        .removeClass('hide')
+
       return
 
     setupEvents: ->
