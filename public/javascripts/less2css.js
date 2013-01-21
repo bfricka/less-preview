@@ -413,24 +413,48 @@ Initialize a new `EventEmitter`.
     };
 
     LessCompiler.prototype.setupDrawer = function() {
-      var drawer, els;
+      var drawer, els, self;
+      self = this;
       drawer = new $.fn.OptionsDrawer();
       els = drawer.els;
       els.toggleBtns.on('click', function(e) {
-        var btn, checked, chk, idx;
+        var btn, chk, idx;
+        e.stopImmediatePropagation();
         idx = els.toggleBtns.index(this);
         chk = els.toggleChks.eq(idx);
         btn = $(this);
-        chk.trigger('click');
-        checked = chk.is(':checked');
-        if (checked) {
-          btn.addClass('btn-primary').text('Enabled').siblings(':disabled').addClass('enabled').fadeIn().attr('disabled', false).trigger('change');
+        if (!chk.is(':checked')) {
+          self.drawerBtnToggleOn(btn, chk);
         } else {
-          btn.removeClass('btn-primary').text('Disabled').siblings('.enabled').fadeOut().attr('disabled', true).trigger('change');
+          self.drawerBtnToggleOff(btn, chk);
         }
       });
       this.drawer = drawer;
       return this;
+    };
+
+    LessCompiler.prototype.drawerBtnToggleOn = function(btn, chk) {
+      var disabled;
+      chk.prop('checked', true);
+      btn.addClass('btn-primary').text('Enabled');
+      disabled = btn.siblings(':disabled');
+      if (disabled.length) {
+        disabled.addClass('enabled').fadeIn().prop('disabled', false).trigger('change');
+      } else {
+        chk.trigger('change');
+      }
+    };
+
+    LessCompiler.prototype.drawerBtnToggleOff = function(btn, chk) {
+      var enabled;
+      chk.prop('checked', false);
+      btn.removeClass('btn-primary').text('Disabled');
+      enabled = btn.siblings('.enabled');
+      if (enabled.length) {
+        enabled.fadeOut().prop('disabled', true).trigger('change');
+      } else {
+        chk.trigger('change');
+      }
     };
 
     LessCompiler.prototype.setupEvents = function() {
