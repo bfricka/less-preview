@@ -1,7 +1,7 @@
 {
   "name": "less2css",
   "description": "Converts LESS to CSS and does other awesome stuff",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "author": "Brian Frichette",
   "homepage": "http://less2css.org/",
@@ -23,12 +23,12 @@
     "mongoose": "*"
   },
   "devDependencies": {
-    "grunt": ">=0.4.x",
+    "grunt": ">=0.4.0rc6",
     "testacular": "0.5.x",
-    "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git",
-    "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
-    "grunt-contrib-watch": "git://github.com/gruntjs/grunt-contrib-watch.git",
-    "grunt-contrib-jshint": "git://github.com/gruntjs/grunt-contrib-jshint.git",
+    "grunt-contrib-uglify": ">=0.1.1rc6",
+    "grunt-contrib-concat": ">=0.1.2rc6",
+    "grunt-contrib-watch": ">=0.2.0rc5",
+    "grunt-contrib-jshint": ">=0.1.1rc6",
     "grunt-contrib-coffee": "git://github.com/gruntjs/grunt-contrib-coffee.git",
     "async": "0.1.x",
     "nodemon": "*"

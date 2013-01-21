@@ -4,37 +4,60 @@ testacular = require 'testacular'
 module.exports = (grunt) ->
 
   grunt.loadNpmTasks "grunt-contrib-uglify"
-  # grunt.loadNpmTasks "grunt-contrib-concat"
+  grunt.loadNpmTasks "grunt-contrib-concat"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-jshint"
   grunt.loadNpmTasks "grunt-contrib-coffee"
 
   # Project configuration.
   grunt.initConfig
-    pkg: "<json:package.json>"
+    pkg: grunt.file.readJSON('package.json')
 
     meta:
-      banner: "/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> -
-      <%= grunt.template.today(\"yyyy-mm-dd\") %>\n
-      <%= pkg.homepage ? \"* \" + pkg.homepage + \"\n\" : \"\" %>
-      * Copyright (c) <%= grunt.template.today(\"yyyy\") %> <%= pkg.author.name %>;
-      Licensed <%= _.pluck(pkg.licenses, \"type\").join(\", \") %> */"
+      # Build the JS banner based on pkg file data
+      banner: do ->
+        banner = "/* <%= pkg.name %> - v<%= pkg.version %> - <%= pkg.homepage %>"
+        banner += "\n"
+        banner += "* Copyright (c) <%= grunt.template.today('yyyy') %> <%= pkg.author %>. All rights reserved."
+        banner += "\n"
+        banner += "* Licensed <%= _.pluck(pkg.licenses, 'type')[0] %> - <%= _.pluck(pkg.licenses, 'url')[0] %> */"
+        banner += "\n"
+        banner
 
     paths:
-      coffee: "./public/coffee/"
-      js: "./public/javascripts/"
+      # Ref common paths so we can use built-in lodash templating.
+      coffee : "./public/coffee/"
+      tmp    : "./tmp/"
+      js     : "./public/javascripts/"
+
+    concat:
+      # Concat less2css into temp dir. So it can be wrapped in a single
+      # SEAF, since coffee-contrib doesn't have this option.
+      less2css:
+        src: [
+          "<%= paths.coffee %>EventEmitter.coffee"
+          "<%= paths.coffee %>OptionsDrawer.coffee"
+          "<%= paths.coffee %>Stor.coffee"
+          "<%= paths.coffee %>less2css.coffee"
+        ]
+        dest: "<%= paths.tmp %>less2css.coffee"
+
+      # Build to add banners to JS
+      build:
+        options:
+          banner: "<%= meta.banner %>"
+        files:
+          "<%= paths.js %>less2css.js": ["<%= paths.js %>less2css.js"]
+          "<%= paths.js %>less2css.min.js": ["<%= paths.js %>less2css.min.js"]
 
     coffee:
+      # Note: concat needs to be run in order to gen tmp directory and file
+      # for less2css.
       compile:
         options:
-          bare: true
+          bare: false
         files:
-          "<%= paths.js %>less2css.js": [
-            "<%= paths.coffee %>EventEmitter.coffee"
-            "<%= paths.coffee %>OptionsDrawer.coffee"
-            "<%= paths.coffee %>Stor.coffee"
-            "<%= paths.coffee %>less2css.coffee"
-          ]
+          "<%= paths.js %>less2css.js": "<%= paths.tmp %>less2css.coffee"
           "<%= paths.js %>lessVersions.js": "<%= paths.coffee %>lessVersions.coffee"
           "app.js": "app.coffee"
 
@@ -44,7 +67,7 @@ module.exports = (grunt) ->
           "<%= paths.coffee %>**/*.coffee"
           "app.coffee"
         ]
-        tasks: ["coffee"]
+        tasks: ["concat:less2css", "coffee"]
 
       js:
         files: [
@@ -61,12 +84,42 @@ module.exports = (grunt) ->
     uglify:
       less2css:
         options:
-          mangle: false
+          # Default compress options. Listed for reference.
+          compress:
+            conditionals : true
+            comparisons  : true
+            properties   : true
+            hoist_funs   : true
+            hoist_vars   : false
+            sequences    : true
+            if_return    : true
+            join_vars    : true
+            dead_code    : true
+            evaluate     : true
+            booleans     : true
+            warnings     : true
+            cascade      : true
+            unsafe       : true
+            unused       : true
+            loops        : true
+
+          mangle:
+            except: [
+              "OptionsDrawer"
+              "EventEmitter"
+              "CodeMirror"
+              "amplify"
+              "jQuery"
+              "Stor"
+              "hljs"
+              "less"
+              "$"
+            ]
 
         files:
           "<%= paths.js %>less2css.min.js": [
-            "<banner:meta.banner>"
             "<%= paths.js %>less2css.js"
+            "<banner:meta.banner>"
           ]
 
     jshint:
@@ -98,13 +151,21 @@ module.exports = (grunt) ->
 
   # Default task.
 
-  grunt.registerTask "default", ["coffee", "jshint", "uglify", "test"]
+  grunt.registerTask "default", [
+    "concat:less2css"
+    "coffee"
+    "jshint"
+    "uglify"
+    "concat:build"
+    "test"
+  ]
 
   grunt.registerTask "testserver", "start testacular server", ->
     #Mark the task as async but never call done, so the server stays up
     done = @async()
     testacular.server.start configFile: "test/testacular.conf.js"
 
+  # Invoke tests on testacular server.
   grunt.registerTask "test", "run tests (make sure server task is run first)", ->
     done = @async()
 

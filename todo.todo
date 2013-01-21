@@ -22,3 +22,5 @@ Build:
 
   ☐ Fix banners (use concat)
   ☐ Fix coffee build using manual task and concat
+  ☐ Add daily build for pre-release (fetch dist and project and build)
+  ☐ Move away from using github for LESS dist .js
