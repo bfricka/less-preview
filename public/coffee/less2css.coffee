@@ -20,18 +20,22 @@ class LessCompiler
         dumpLineNumbers : false
         relativeUrls    : false
         rootpath        : false
+        filename        : 'less2css.org.less'
 
-    # Create behavior beyond the scope of optionsDrawer impl
+
     @options = $.extend defaults, options
     @storage = new Stor "lessCode"
-
+    # Create behavior beyond the scope of optionsDrawer impl
     @setupDrawer()
     return
 
   updateOptions: (model) ->
     opts = @options.lessOptions
 
-    # if model.toggleDumpLines
+    for prop, val of opts
+      opts[prop] = if model.hasOwnProperty(prop) then model[prop] else @defaults.lessOptions[prop]
+
+    return
 
   setupDrawer: ->
     self = @
@@ -52,7 +56,6 @@ class LessCompiler
         self.drawerBtnToggleOn(btn, chk)
       else
         self.drawerBtnToggleOff(btn, chk)
-
 
       return
 

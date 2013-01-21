@@ -398,7 +398,8 @@ Initialize a new `EventEmitter`.
         lessOptions: {
           dumpLineNumbers: false,
           relativeUrls: false,
-          rootpath: false
+          rootpath: false,
+          filename: 'less2css.org.less'
         }
       };
       this.options = $.extend(defaults, options);
@@ -408,8 +409,12 @@ Initialize a new `EventEmitter`.
     }
 
     LessCompiler.prototype.updateOptions = function(model) {
-      var opts;
-      return opts = this.options.lessOptions;
+      var opts, prop, val;
+      opts = this.options.lessOptions;
+      for (prop in opts) {
+        val = opts[prop];
+        opts[prop] = model.hasOwnProperty(prop) ? model[prop] : this.defaults.lessOptions[prop];
+      }
     };
 
     LessCompiler.prototype.setupDrawer = function() {

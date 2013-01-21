@@ -79,6 +79,7 @@ html.no-js(lang='en')
 
     block bottomScripts
       if env == 'production'
+        script(src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.0-rc.3/lodash.min.js")
         script(src="/javascripts/vendor/cm/codemirror.min.js")
         script(src="/javascripts/vendor/cm/util/matchbrackets.min.js")
         script(src="/javascripts/vendor/cm/mode/less/less.min.js")
@@ -95,6 +96,7 @@ html.no-js(lang='en')
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
           })();
       else
+        script(src="/javascripts/vendor/lodash.js")
         script(src="/javascripts/vendor/cm/codemirror.js")
         script(src="/javascripts/vendor/cm/util/matchbrackets.js")
         script(src="/javascripts/vendor/cm/mode/less/less.js")
