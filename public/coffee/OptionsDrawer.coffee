@@ -68,7 +68,7 @@ jQuery ($) ->
         e.preventDefault()
         self.els.optsBtn.trigger 'click'
 
-      els.optsForm.on 'change', (e) ->
+      els.optsForm.on 'change paste keydown keyup', (e) ->
         self.updateModel.call(self, e)
 
       els.optsForm.on 'submit', (e) ->
@@ -79,20 +79,30 @@ jQuery ($) ->
     updateModel: (e = {}) ->
       prev = @model or {}
       values = @els.optsForm.serialize()
+      curr = @toModel @els.optsForm[0].elements
 
-      curr = do ->
-        curr = {}
-        fields = values.split '&'
-
-        for field in fields
-          split = field.split '='
-          curr[split[0]] = split[1] or ""
-
-        curr
-
-      @emit 'change', e, curr, prev
+      @emit('change', e, curr, prev) unless _.isEqual prev, curr
 
       @model = curr
+
+    # Creates a model object for all name/value pairs
+    # Normalizes radio/checkboxes to booleans
+    toModel: (els) ->
+      model = {}
+
+      for el in els
+        name = el.name
+        val = el.value
+
+        # Skip unnamed or disabled elements
+        continue if not name or el.disabled
+
+        type = el.type
+        # Cast checkboxes as booleans instead of "on/off"
+        val = if type is "radio" or type is "checkbox" then el.checked else val
+        model[name] = val
+
+      model
 
     openDrawer: (e) ->
       @els.lessOptions.addClass 'open'

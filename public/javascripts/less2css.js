@@ -210,7 +210,7 @@ Initialize a new `EventEmitter`.
           e.preventDefault();
           return self.els.optsBtn.trigger('click');
         });
-        els.optsForm.on('change', function(e) {
+        els.optsForm.on('change paste keydown keyup', function(e) {
           return self.updateModel.call(self, e);
         });
         els.optsForm.on('submit', function(e) {
@@ -225,19 +225,28 @@ Initialize a new `EventEmitter`.
         }
         prev = this.model || {};
         values = this.els.optsForm.serialize();
-        curr = (function() {
-          var field, fields, split, _i, _len;
-          curr = {};
-          fields = values.split('&');
-          for (_i = 0, _len = fields.length; _i < _len; _i++) {
-            field = fields[_i];
-            split = field.split('=');
-            curr[split[0]] = split[1] || "";
-          }
-          return curr;
-        })();
-        this.emit('change', e, curr, prev);
+        curr = this.toModel(this.els.optsForm[0].elements);
+        if (!_.isEqual(prev, curr)) {
+          this.emit('change', e, curr, prev);
+        }
         return this.model = curr;
+      };
+
+      OptionsDrawer.prototype.toModel = function(els) {
+        var el, model, name, type, val, _i, _len;
+        model = {};
+        for (_i = 0, _len = els.length; _i < _len; _i++) {
+          el = els[_i];
+          name = el.name;
+          val = el.value;
+          if (!name || el.disabled) {
+            continue;
+          }
+          type = el.type;
+          val = type === "radio" || type === "checkbox" ? el.checked : val;
+          model[name] = val;
+        }
+        return model;
       };
 
       OptionsDrawer.prototype.openDrawer = function(e) {
@@ -445,9 +454,11 @@ Initialize a new `EventEmitter`.
       var disabled;
       chk.prop('checked', true);
       btn.addClass('btn-primary').text('Enabled');
-      disabled = btn.siblings(':disabled');
+      disabled = _.filter(btn.siblings(), function(el) {
+        return el.disabled;
+      });
       if (disabled.length) {
-        disabled.addClass('enabled').fadeIn().prop('disabled', false).trigger('change');
+        $(disabled).addClass('enabled').fadeIn().prop('disabled', false).trigger('change');
       } else {
         chk.trigger('change');
       }

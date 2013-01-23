@@ -72,12 +72,13 @@ class LessCompiler
 
     # Check for any hidden disabled elements that are
     # siblings (elements dependent on a check being true/false)
-    disabled = btn.siblings(':disabled')
+    # About a 10% perf increase bypassing sizzle (':disabled')
+    disabled = _.filter btn.siblings(), (el) -> el.disabled
 
     # If we have a hidden disabled element, enable it, etc.
     # Resolve all by triggering change event
     if disabled.length
-      disabled
+      $(disabled)
         .addClass('enabled')
         .fadeIn()
         .prop('disabled', false)
