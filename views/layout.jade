@@ -27,8 +27,10 @@ html.no-js(lang='en')
 
     if env == 'production'
       script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js')
+      script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js")
     else
       script(src='/javascripts/vendor/jquery.js')
+      script(src='/javascripts/vendor/angular.js')
 
     script(src='/javascripts/vendor/amplify.store.min.js')
   body
@@ -44,35 +46,37 @@ html.no-js(lang='en')
       .github-fork-ribbon
         a(href="https://github.com/brian-frichette/less-preview/") Fork me on GitHub
 
-    // Main header wrapper
-    block optionsDrawer
-    div.navbar.navbar-fixed-top
-      div.navbar-inner
-        div.container-fluid
-          div.row-fluid
-            ul#nav.nav
-              block header
+    div(ng-app='#{app}', ng-controller='#{app + "Ctrl"}')
 
-    // Main container
-    div.container-fluid
-      block content
-      block footer
-        hr
-        footer
-          p
-            | &copy; 2013 Brian Frichette &amp; Contributors. License
-            a(href="http://opensource.org/licenses/MIT", target="_blank")  MIT
-            |.
-          p
-            | Special thanks for
-            a(href="http://lesscss.org/", target="_blank")  LESS
-            |,
-            a(href="http://twitter.github.com/bootstrap/", target="_blank")  Twitter Bootstrap
-            |,
-            a(href="http://codemirror.net/", target="_blank")  CodeMirror
-            |, and
-            a(href="http://softwaremaniacs.org/soft/highlight/en/", target="_blank")  Highlight.js
-            |.
+      // Main header wrapper
+      block optionsDrawer
+      div.navbar.navbar-fixed-top
+        div.navbar-inner
+          div.container-fluid
+            div.row-fluid
+              ul#nav.nav
+                block header
+
+      // Main container
+      div.container-fluid
+        block content
+        block footer
+          hr
+          footer
+            p
+              | &copy; 2013 Brian Frichette &amp; Contributors. License
+              a(href="http://opensource.org/licenses/MIT", target="_blank")  MIT
+              |.
+            p
+              | Special thanks for
+              a(href="http://lesscss.org/", target="_blank")  LESS
+              |,
+              a(href="http://twitter.github.com/bootstrap/", target="_blank")  Twitter Bootstrap
+              |,
+              a(href="http://codemirror.net/", target="_blank")  CodeMirror
+              |, and
+              a(href="http://softwaremaniacs.org/soft/highlight/en/", target="_blank")  Highlight.js
+              |.
 
     block bottomScripts
       if env == 'production'

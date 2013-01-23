@@ -63,7 +63,11 @@ Begin Routes
 ###
 
 app.get '/', (req, res) ->
-  res.render 'less2css', {title: 'LESS2CSS | LESS Live Preview'}
+  opts =
+    title: 'LESS2CSS | LESS Live Preview'
+    app: 'Less2Css'
+
+  res.render 'less2css', opts
 
 ###
 Init

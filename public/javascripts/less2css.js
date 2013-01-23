@@ -1,16 +1,35 @@
-
-/*
-Initialize a new `EventEmitter`.
-
-@api public
-*/
-
-
 (function() {
-  var EventEmitter, LessCompiler, Stor,
+  var EventEmitter, LessCompiler, Stor, l2c,
     __slice = [].slice,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  l2c = angular.module('Less2Css', []);
+
+  l2c.controller('Less2CssCtrl', [
+    '$scope', function($scope) {
+      $scope.lineNumberOpts = {
+        'comments': "Comments",
+        'mediaquery': "Media Query",
+        'all': "All"
+      };
+      $scope.toggleTxt = function(model) {
+        if ($scope[model]) {
+          return "Enabled";
+        } else {
+          return "Disabled";
+        }
+      };
+      return $scope.dumpLineNumbers = "comments";
+    }
+  ]);
+
+  /*
+  Initialize a new `EventEmitter`.
+  
+  @api public
+  */
+
 
   EventEmitter = (function() {
 
@@ -434,46 +453,8 @@ Initialize a new `EventEmitter`.
       self = this;
       drawer = new $.fn.OptionsDrawer();
       els = drawer.els;
-      els.toggleBtns.on('click', function(e) {
-        var btn, chk, idx;
-        e.stopImmediatePropagation();
-        idx = els.toggleBtns.index(this);
-        chk = els.toggleChks.eq(idx);
-        btn = $(this);
-        if (!chk.is(':checked')) {
-          self.drawerBtnToggleOn(btn, chk);
-        } else {
-          self.drawerBtnToggleOff(btn, chk);
-        }
-      });
       this.drawer = drawer;
       return this;
-    };
-
-    LessCompiler.prototype.drawerBtnToggleOn = function(btn, chk) {
-      var disabled;
-      chk.prop('checked', true);
-      btn.addClass('btn-primary').text('Enabled');
-      disabled = _.filter(btn.siblings(), function(el) {
-        return el.disabled;
-      });
-      if (disabled.length) {
-        $(disabled).addClass('enabled').fadeIn().prop('disabled', false).trigger('change');
-      } else {
-        chk.trigger('change');
-      }
-    };
-
-    LessCompiler.prototype.drawerBtnToggleOff = function(btn, chk) {
-      var enabled;
-      chk.prop('checked', false);
-      btn.removeClass('btn-primary').text('Disabled');
-      enabled = btn.siblings('.enabled');
-      if (enabled.length) {
-        enabled.fadeOut().prop('disabled', true).trigger('change');
-      } else {
-        chk.trigger('change');
-      }
     };
 
     LessCompiler.prototype.setupEvents = function() {

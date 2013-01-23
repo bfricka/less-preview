@@ -20,30 +20,48 @@ block optionsDrawer
 
               else
                 option(value='#{version.number}') #{version.number}
+
         div.span3
           code dumpLineNumbers
           //- i.icon-info-sign
-          button.btn.toggleBtn Disabled
-          input.hidden.toggleChk(type="checkbox", name='toggleDumpLines')
+          button.btn.toggleBtn(
+            ng-class="{'btn-primary': toggleLineNumbers == true}"
+            ng-click="toggleLineNumbers = !toggleLineNumbers"
+            ng-bind="toggleTxt('toggleLineNumbers')"
+          ) Disabled
 
-          select.hide(disabled='disabled', name='dumpLineNumbers')
-            option(value="comments") Comments
-            option(value="mediaquery") Media Query
-            option(value="all") All
+          select.ng-cloak(
+            ng-show="toggleLineNumbers == true"
+            ng-disabled="toggleLineNumbers == false"
+            ng-model="dumpLineNumbers"
+            ng-options="key as value for (key , value) in lineNumberOpts"
+          )
 
         div.span3
           code relativeUrls
           //- i.icon-info-sign
-          button.btn.toggleBtn Disabled
-          input.hidden.toggleChk(type='checkbox', name='relativeUrls')
+          button.btn.toggleBtn(
+            ng-class="{'btn-primary': relativeUrls == true}"
+            ng-click="relativeUrls = !relativeUrls"
+            ng-bind="toggleTxt('relativeUrls')"
+          ) Disabled
 
         div.span3
           code rootpath
           //- i.icon-info-sign
-          button.btn.toggleBtn Disabled
-          input.hidden.toggleChk(type='checkbox', name='toggleRootpath')
+          button.btn.toggleBtn(
+            ng-class="{'btn-primary': toggleRootpath == true}"
+            ng-click="toggleRootpath = !toggleRootpath"
+            ng-bind="toggleTxt('toggleRootpath')"
+          ) Disabled
 
-          input.hide(disabled='disabled', type='text', placeholder='Enter rootpath', name='rootpath')
+          input.ng-cloak(
+            ng-show='toggleRootpath == true'
+            ng-disabled='toggleRootpath == false'
+            ng-model='rootpath'
+            placeholder='Enter rootpath'
+            type='text'
+          )
 
 block header
   li.brand: a(href='/') LESS2CSS
