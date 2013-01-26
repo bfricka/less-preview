@@ -35,13 +35,11 @@ module.exports = (grunt) ->
       # SEAF, since coffee-contrib doesn't have this option.
       less2css:
         src: [
+          "<%= paths.coffee %>Stor.coffee"
           "<%= paths.coffee %>app.coffee"
           "<%= paths.coffee %>less2css/directives.coffee"
           "<%= paths.coffee %>less2css/services.coffee"
           "<%= paths.coffee %>less2css/controllers.coffee"
-          "<%= paths.coffee %>EventEmitter.coffee"
-          "<%= paths.coffee %>OptionsDrawer.coffee"
-          "<%= paths.coffee %>Stor.coffee"
           "<%= paths.coffee %>less2css.coffee"
         ]
         dest: "<%= paths.tmp %>less2css.coffee"

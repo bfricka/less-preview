@@ -1,251 +1,251 @@
-class LessCompiler
+# class LessCompiler
 
-  constructor: (elements, options) ->
-    return unless elements
+#   constructor: (elements, options) ->
+#     return unless elements
 
-    @elements = elements
-    @editor = CodeMirror.fromTextArea(elements.lessInput[0],
-      theme: "lesser-dark"
-      lineNumbers: true
-      matchBrackets: true
-      tabSize: 2
-    )
+#     @elements = elements
+#     @editor = CodeMirror.fromTextArea(elements.lessInput[0],
+#       theme: "lesser-dark"
+#       lineNumbers: true
+#       matchBrackets: true
+#       tabSize: 2
+#     )
 
-    defaults =
-      useFallback : false
-      saveLess    : true
-      lessPath    : "/javascripts/less/less-{version}.js"
-      lessOptions :
-        dumpLineNumbers : false
-        relativeUrls    : false
-        rootpath        : false
-        filename        : 'less2css.org.less'
+#     defaults =
+#       useFallback : false
+#       saveLess    : true
+#       lessPath    : "/javascripts/less/less-{version}.js"
+#       lessOptions :
+#         dumpLineNumbers : false
+#         relativeUrls    : false
+#         rootpath        : false
+#         filename        : 'less2css.org.less'
 
-    @defaults = _.cloneDeep defaults
-    @options = $.extend defaults, options
-    @storage = new Stor "lessCode"
-    # Create behavior beyond the scope of optionsDrawer impl
-    @setupDrawer()
-    return
+#     @defaults = _.cloneDeep defaults
+#     @options = $.extend defaults, options
+#     @storage = new Stor "lessCode"
+#     # Create behavior beyond the scope of optionsDrawer impl
+#     @setupDrawer()
+#     return
 
-  updateOptions: (model) ->
-    opts = @options.lessOptions
+#   updateOptions: (model) ->
+#     opts = @options.lessOptions
 
-    for prop, val of opts
-      opts[prop] = if model.hasOwnProperty(prop) then model[prop] else @defaults.lessOptions[prop]
+#     for prop, val of opts
+#       opts[prop] = if model.hasOwnProperty(prop) then model[prop] else @defaults.lessOptions[prop]
 
-    return
+#     return
 
-  setupDrawer: ->
-    self = @
-    drawer = new $.fn.OptionsDrawer()
-    els = drawer.els
+#   setupDrawer: ->
+#     self = @
+#     drawer = new $.fn.OptionsDrawer()
+#     els = drawer.els
 
-    # Toggle buttons aka pseudo-checkbox
-    # els.toggleBtns.on 'click', (e) ->
-    #   e.stopImmediatePropagation() # May not be required
+#     # Toggle buttons aka pseudo-checkbox
+#     # els.toggleBtns.on 'click', (e) ->
+#     #   e.stopImmediatePropagation() # May not be required
 
-    #   # Every toggleBtn has a hidden check so we can use index
-    #   # to sync the two
-    #   idx = els.toggleBtns.index(@)
-    #   chk = els.toggleChks.eq(idx)
-    #   btn = $(@)
+#     #   # Every toggleBtn has a hidden check so we can use index
+#     #   # to sync the two
+#     #   idx = els.toggleBtns.index(@)
+#     #   chk = els.toggleChks.eq(idx)
+#     #   btn = $(@)
 
-    #   if not chk.is ':checked'
-    #     self.drawerBtnToggleOn(btn, chk)
-    #   else
-    #     self.drawerBtnToggleOff(btn, chk)
+#     #   if not chk.is ':checked'
+#     #     self.drawerBtnToggleOn(btn, chk)
+#     #   else
+#     #     self.drawerBtnToggleOff(btn, chk)
 
-    #   return
+#     #   return
 
-    @drawer = drawer
-    @
+#     @drawer = drawer
+#     @
 
-  # drawerBtnToggleOn: (btn, chk) ->
-  #   # Check the real checkbox
-  #   chk.prop 'checked', true
+#   # drawerBtnToggleOn: (btn, chk) ->
+#   #   # Check the real checkbox
+#   #   chk.prop 'checked', true
 
-  #   # Add UI stuff for checked state
-  #   btn
-  #     .addClass('btn-primary')
-  #     .text('Enabled')
+#   #   # Add UI stuff for checked state
+#   #   btn
+#   #     .addClass('btn-primary')
+#   #     .text('Enabled')
 
-  #   # Check for any hidden disabled elements that are
-  #   # siblings (elements dependent on a check being true/false)
-  #   # About a 10% perf increase bypassing sizzle (':disabled')
-  #   disabled = _.filter btn.siblings(), (el) -> el.disabled
+#   #   # Check for any hidden disabled elements that are
+#   #   # siblings (elements dependent on a check being true/false)
+#   #   # About a 10% perf increase bypassing sizzle (':disabled')
+#   #   disabled = _.filter btn.siblings(), (el) -> el.disabled
 
-  #   # If we have a hidden disabled element, enable it, etc.
-  #   # Resolve all by triggering change event
-  #   if disabled.length
-  #     $(disabled)
-  #       .addClass('enabled')
-  #       .fadeIn()
-  #       .prop('disabled', false)
-  #       .trigger('change')
-  #   else
-  #     chk.trigger 'change'
+#   #   # If we have a hidden disabled element, enable it, etc.
+#   #   # Resolve all by triggering change event
+#   #   if disabled.length
+#   #     $(disabled)
+#   #       .addClass('enabled')
+#   #       .fadeIn()
+#   #       .prop('disabled', false)
+#   #       .trigger('change')
+#   #   else
+#   #     chk.trigger 'change'
 
-  #   return
+#   #   return
 
-  # drawerBtnToggleOff: (btn, chk) ->
-  #   chk.prop 'checked', false
-  #   btn
-  #     .removeClass('btn-primary')
-  #     .text('Disabled')
+#   # drawerBtnToggleOff: (btn, chk) ->
+#   #   chk.prop 'checked', false
+#   #   btn
+#   #     .removeClass('btn-primary')
+#   #     .text('Disabled')
 
-  #   enabled = btn.siblings('.enabled')
+#   #   enabled = btn.siblings('.enabled')
 
-  #   if enabled.length
-  #     enabled
-  #       .fadeOut()
-  #       .prop('disabled', true)
-  #       .trigger('change')
-  #   else
-  #     chk.trigger 'change'
+#   #   if enabled.length
+#   #     enabled
+#   #       .fadeOut()
+#   #       .prop('disabled', true)
+#   #       .trigger('change')
+#   #   else
+#   #     chk.trigger 'change'
 
-  #   return
+#   #   return
 
-  setupEvents: ->
-    self = this
-    els = @elements
-    editor = @editor
-    cachedLess = @storage.get()
-    versionOpts = els.lessVersion.find('option')
+#   setupEvents: ->
+#     self = this
+#     els = @elements
+#     editor = @editor
+#     cachedLess = @storage.get()
+#     versionOpts = els.lessVersion.find('option')
 
-    # If we have cached LESS, set it. Otherwise, set previous
-    # to current value of editor (from textarea default)
-    if cachedLess
-      editor.setValue cachedLess
-      @previousLessCode = cachedLess
-    else
-      @previousLessCode = editor.getValue()
+#     # If we have cached LESS, set it. Otherwise, set previous
+#     # to current value of editor (from textarea default)
+#     if cachedLess
+#       editor.setValue cachedLess
+#       @previousLessCode = cachedLess
+#     else
+#       @previousLessCode = editor.getValue()
 
-    # Wait for drawer options to change
-    @drawer.on 'change', (e, model) ->
-      field = $(e.target)
+#     # Wait for drawer options to change
+#     @drawer.on 'change', (e, model) ->
+#       field = $(e.target)
 
-      fieldName = field.attr 'name'
+#       fieldName = field.attr 'name'
 
-      if fieldName is 'lessVersion'
-        preRelease = if field.find('option')
-          .filter(':selected')
-          .is('[data-prerelease=true]') then true else false
-        self.loadLess(preRelease)
+#       if fieldName is 'lessVersion'
+#         preRelease = if field.find('option')
+#           .filter(':selected')
+#           .is('[data-prerelease=true]') then true else false
+#         self.loadLess(preRelease)
 
-      else
-        self.updateOptions model
-        self.loadComplete.call self
+#       else
+#         self.updateOptions model
+#         self.loadComplete.call self
 
-      console.log model
+#       console.log model
 
-    editor.on "change", ->
-      lessCode = self.editor.getValue()
+#     editor.on "change", ->
+#       lessCode = self.editor.getValue()
 
-      return if self.previousLessCode is lessCode
+#       return if self.previousLessCode is lessCode
 
-      self.previousLessCode = lessCode
-      self.compileLess()
-      return
-    @
+#       self.previousLessCode = lessCode
+#       self.compileLess()
+#       return
+#     @
 
-  loadLess: (preRelease) ->
-    self = this
-    opts = @options
-    els  = @elements
+#   loadLess: (preRelease) ->
+#     self = this
+#     opts = @options
+#     els  = @elements
 
-    # Check for fallback to choose correct path
-    # path = if opts.useFallback then opts.cdnFallback else opts.lessCDN
+#     # Check for fallback to choose correct path
+#     # path = if opts.useFallback then opts.cdnFallback else opts.lessCDN
 
-    els.loadingGif.fadeIn()
+#     els.loadingGif.fadeIn()
 
-    @editor.options.readOnly = true
+#     @editor.options.readOnly = true
 
-    version     = els.lessVersion.val()
-    version     = if preRelease then "#{version}-alpha" else version
-    scriptUrl   = opts.lessPath.replace "{version}", version
-    window.less = `undefined`
+#     version     = els.lessVersion.val()
+#     version     = if preRelease then "#{version}-alpha" else version
+#     scriptUrl   = opts.lessPath.replace "{version}", version
+#     window.less = `undefined`
 
-    getScript = $.ajax
-      dataType : "script"
-      cache    : true
-      url      : scriptUrl
+#     getScript = $.ajax
+#       dataType : "script"
+#       cache    : true
+#       url      : scriptUrl
 
-    getScript.done ->
-      self.loadComplete.call self
-      # # Make sure we have access to less global if we don't try the fallback
-      # # Uses same-origin hosted files, and prevents mime-type error on IE9+
-      # # which occurs b/c raw.github serves text/plain
-      # if window.less
-      #   self.loadComplete.call self
-      # else
-      #   # Create a counter to prevent infinite loop on multiple errors
-      #   self.tryCount = if self.tryCount then self.tryCount++ else 1
+#     getScript.done ->
+#       self.loadComplete.call self
+#       # # Make sure we have access to less global if we don't try the fallback
+#       # # Uses same-origin hosted files, and prevents mime-type error on IE9+
+#       # # which occurs b/c raw.github serves text/plain
+#       # if window.less
+#       #   self.loadComplete.call self
+#       # else
+#       #   # Create a counter to prevent infinite loop on multiple errors
+#       #   self.tryCount = if self.tryCount then self.tryCount++ else 1
 
-      #   # Switch on fallback URL
-      #   self.options.useFallback = true
-      #   return self.loadLess() if self.tryCount <= 3
-      return
-    @
+#       #   # Switch on fallback URL
+#       #   self.options.useFallback = true
+#       #   return self.loadLess() if self.tryCount <= 3
+#       return
+#     @
 
-  loadComplete: ->
-    @parser = new less.Parser(@options.lessOptions)
-    @editor.options.readOnly = false
+#   loadComplete: ->
+#     @parser = new less.Parser(@options.lessOptions)
+#     @editor.options.readOnly = false
 
-    @compileLess()
-    @elements.loadingGif.fadeOut()
+#     @compileLess()
+#     @elements.loadingGif.fadeOut()
 
-    @
+#     @
 
-  compileLess: ->
-    lessCode = @editor.getValue()
+#   compileLess: ->
+#     lessCode = @editor.getValue()
 
-    # Cache input less
-    @storage.set(lessCode) if @options.saveLess
+#     # Cache input less
+#     @storage.set(lessCode) if @options.saveLess
 
-    try
-      compiledCSS = @parseLess(lessCode)
-      @updateCSS compiledCSS
-    catch lessEx
-      @updateError lessEx
+#     try
+#       compiledCSS = @parseLess(lessCode)
+#       @updateCSS compiledCSS
+#     catch lessEx
+#       @updateError lessEx
 
-    @
+#     @
 
-  updateCSS: (compiledCSS) ->
-    highlightedCSS = hljs.highlight("css", compiledCSS).value
-    @elements.cssCode.css("color", "").html highlightedCSS
+#   updateCSS: (compiledCSS) ->
+#     highlightedCSS = hljs.highlight("css", compiledCSS).value
+#     @elements.cssCode.css("color", "").html highlightedCSS
 
-    @
+#     @
 
-  updateError: (lessEx) ->
-    errorText =
-    "#{lessEx.type} error: #{lessEx.message}" +
-    "\n" +
-    (lessEx.extract and lessEx.extract.join and lessEx.extract.join(""))
+#   updateError: (lessEx) ->
+#     errorText =
+#     "#{lessEx.type} error: #{lessEx.message}" +
+#     "\n" +
+#     (lessEx.extract and lessEx.extract.join and lessEx.extract.join(""))
 
-    @elements.cssCode.css("color", "red").text errorText
+#     @elements.cssCode.css("color", "red").text errorText
 
-    @
+#     @
 
-  parseLess: (lessCode) ->
-    resultCss = ""
+#   parseLess: (lessCode) ->
+#     resultCss = ""
 
-    @parser.parse lessCode, (lessEx, result) ->
-      throw lessEx if lessEx
+#     @parser.parse lessCode, (lessEx, result) ->
+#       throw lessEx if lessEx
 
-      resultCss = result.toCSS()
+#       resultCss = result.toCSS()
 
-    resultCss
+#     resultCss
 
-jQuery ($) ->
-  elements =
-    lessVersion : $("#lessVersion")
-    loadingGif  : $("#loadingGif")
-    lessInput   : $("#lessInput")
-    cssCode     : $("#cssOutput")
+# jQuery ($) ->
+#   elements =
+#     lessVersion : $("#lessVersion")
+#     loadingGif  : $("#loadingGif")
+#     lessInput   : $("#lessInput")
+#     cssCode     : $("#cssOutput")
 
-  compiler = window.comp =  new LessCompiler(elements)
+#   compiler = window.comp =  new LessCompiler(elements)
 
-  compiler
-  .setupEvents()
-  .loadLess()
+#   compiler
+#   .setupEvents()
+#   .loadLess()

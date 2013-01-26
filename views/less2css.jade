@@ -78,7 +78,7 @@ block content
     div.span6
       h2 LESS Input
       div.codeWrap
-        textarea#lessInput.lessInput(placeholder="Input your LESS here.").
+        textarea#lessInput.lessInput(placeholder="Input your LESS here.", less-editor, ng-model="lessInput").
           .transition(@transition) {
             -webkit-transition: @transition;
                -moz-transition: @transition;
