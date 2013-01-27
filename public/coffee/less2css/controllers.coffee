@@ -3,11 +3,16 @@ l2c.controller 'Less2CssCtrl', [
   ($scope) ->
     stor = new Stor "lessCode"
     # Setup code mirror opts
-    $scope.cmOpts =
+    $scope.lessEditorOpts =
       theme         : "lesser-dark"
       tabSize       : 2
       lineNumbers   : true
       matchBrackets : true
+
+    $scope.cssEditorOpts = do ->
+      opts = angular.copy $scope.lessEditorOpts
+      opts.readOnly = true
+      opts
 
     $scope.cssOutput = 'a.cool { display: none; }'
 
@@ -21,6 +26,9 @@ l2c.controller 'Less2CssCtrl', [
         "Enabled"
       else
         "Disabled"
+
+    # Set initial model based on textarea
+    $scope.lessInput = document.getElementById('lessInput').value
 
     $scope.dumpLineNumbers = "comments"
 ]

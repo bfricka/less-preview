@@ -6,7 +6,7 @@ l2c.directive 'lessEditor', [
       restrict: 'A'
       require: 'ngModel'
       link: (scope, elem, attrs, ngModel) ->
-        opts = scope.cmOpts or {}
+        opts = scope[attrs.opts] or {}
 
         onChange = ->
           (instance, changeObj) ->
@@ -28,24 +28,6 @@ l2c.directive 'lessEditor', [
             return
 
           return
-
-        $timeout deferCodeMirror
-    }
-]
-
-l2c.directive 'cssOutput', [
-  '$timeout'
-  ($timeout) ->
-    {
-      restrict: 'A'
-      require: 'ngModel'
-
-      link: (scope, elem, attrs, ngModel) ->
-        opts = scope.cmOpts or {}
-        opts.value = ngModel.$viewValue
-
-        deferCodeMirror = ->
-          codeMirror = CodeMirror.fromTextArea elem[0], opts
 
         $timeout deferCodeMirror
     }

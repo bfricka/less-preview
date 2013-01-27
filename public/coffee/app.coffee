@@ -12,7 +12,4 @@ l2c.run [
       else
         $scope.$apply fn
       return
-
-    # Set initial model based on textarea
-    $rootScope.lessInput = document.getElementById('lessInput').value
 ]

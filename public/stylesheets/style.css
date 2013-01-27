@@ -617,7 +617,7 @@ pre .tag,pre .class,.cm-s-lesser-dark span.cm-tag{color:#669199;}
 .cm-s-lesser-dark{}.cm-s-lesser-dark div.CodeMirror-selected{background:#45443B !important;}
 .cm-s-lesser-dark pre{padding:0 8px;}
 .cm-s-lesser-dark .CodeMirror-cursor{border-left:1px solid white !important;}
-.cm-s-lesser-dark .CodeMirror-gutters{background:#262626;border-right:1px solid #aaa;}
+.cm-s-lesser-dark .CodeMirror-gutters{background:#262626;border-right:1px solid #333;padding-right:1px;}
 .cm-s-lesser-dark .CodeMirror-linenumber{color:#777;}
 .cm-s-lesser-dark span.cm-atom{color:#c2b470;}
 .cm-s-lesser-dark span.cm-def{color:#ffffff;}

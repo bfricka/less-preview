@@ -1,3 +1,1 @@
-# l2c.factory 'LessCompiler', [
-
-# ]
+l2c.factory 'LessCompiler', (options) ->

@@ -187,7 +187,7 @@
 
   l2c.run([
     '$rootScope', function($rootScope) {
-      $rootScope.$safeApply = function($scope, fn) {
+      return $rootScope.$safeApply = function($scope, fn) {
         $scope = $scope || $rootScope;
         fn = fn || function() {};
         if ($scope.$$phase) {
@@ -196,7 +196,6 @@
           $scope.$apply(fn);
         }
       };
-      return $rootScope.lessInput = document.getElementById('lessInput').value;
     }
   ]);
 
@@ -207,7 +206,7 @@
         require: 'ngModel',
         link: function(scope, elem, attrs, ngModel) {
           var deferCodeMirror, onChange, opts;
-          opts = scope.cmOpts || {};
+          opts = scope[attrs.opts] || {};
           onChange = function() {
             return function(instance, changeObj) {
               var newValue;
@@ -232,35 +231,24 @@
     }
   ]);
 
-  l2c.directive('cssOutput', [
-    '$timeout', function($timeout) {
-      return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function(scope, elem, attrs, ngModel) {
-          var deferCodeMirror, opts;
-          opts = scope.cmOpts || {};
-          opts.value = ngModel.$viewValue;
-          deferCodeMirror = function() {
-            var codeMirror;
-            return codeMirror = CodeMirror.fromTextArea(elem[0], opts);
-          };
-          return $timeout(deferCodeMirror);
-        }
-      };
-    }
-  ]);
+  l2c.factory('LessCompiler', function(options) {});
 
   l2c.controller('Less2CssCtrl', [
     '$scope', function($scope) {
       var stor;
       stor = new Stor("lessCode");
-      $scope.cmOpts = {
+      $scope.lessEditorOpts = {
         theme: "lesser-dark",
         tabSize: 2,
         lineNumbers: true,
         matchBrackets: true
       };
+      $scope.cssEditorOpts = (function() {
+        var opts;
+        opts = angular.copy($scope.lessEditorOpts);
+        opts.readOnly = true;
+        return opts;
+      })();
       $scope.cssOutput = 'a.cool { display: none; }';
       $scope.lineNumberOpts = {
         'comments': "Comments",
@@ -274,6 +262,7 @@
           return "Disabled";
         }
       };
+      $scope.lessInput = document.getElementById('lessInput').value;
       return $scope.dumpLineNumbers = "comments";
     }
   ]);
