@@ -154,5 +154,4 @@ l2c.factory 'LessCompiler', ->
     .setupEvents()
     .loadLess()
 
-
   new LessCompiler()

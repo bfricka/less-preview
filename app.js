@@ -1,5 +1,5 @@
 (function() {
-  var app, express, http, less, lessVersions, mongoose;
+  var app, express, http, less, lessOpts, mongoose;
 
   express = require('express');
 
@@ -11,7 +11,7 @@
 
   app = express();
 
-  lessVersions = require('./public/javascripts/lessVersions')['lessVersions'];
+  lessOpts = require('./public/javascripts/less-options')['lessOpts'];
 
   app.locals.env = app.get('env');
 
@@ -50,7 +50,8 @@
       res.status(404);
       if (req.accepts('html')) {
         return res.render("404", {
-          title: 'LESS2CSS | 404'
+          title: 'LESS2CSS | 404',
+          app: ''
         });
       } else if (req.accepts('json')) {
         return res.send({
@@ -76,8 +77,8 @@
     return res.render('less2css', opts);
   });
 
-  app.get('/less-versions', function(req, res) {
-    return res.json(lessVersions);
+  app.get('/less-options', function(req, res) {
+    return res.json(lessOpts);
   });
 
   /*

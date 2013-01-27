@@ -200,13 +200,12 @@
   ]);
 
   l2c.directive('lessEditor', [
-    '$timeout', function($timeout) {
+    function() {
       return {
         restrict: 'A',
         require: 'ngModel',
         link: function(scope, elem, attrs, ngModel) {
-          var deferCodeMirror, onChange, opts;
-          opts = scope[attrs.opts] || {};
+          var deferCodeMirror, onChange;
           onChange = function() {
             return function(instance, changeObj) {
               var newValue;
@@ -218,14 +217,15 @@
             };
           };
           deferCodeMirror = function() {
-            var codeMirror;
+            var codeMirror, opts;
+            opts = scope[attrs.opts];
             codeMirror = CodeMirror.fromTextArea(elem[0], opts);
             codeMirror.on('change', onChange(opts.onChange));
             ngModel.$render = function() {
               codeMirror.setValue(ngModel.$viewValue);
             };
           };
-          return $timeout(deferCodeMirror);
+          return scope.$on('optionsLoaded', deferCodeMirror);
         }
       };
     }
@@ -388,50 +388,17 @@
 
   l2c.controller('Less2CssCtrl', [
     '$scope', '$http', function($scope, $http) {
-      var stor;
+      var setOptions, stor;
       stor = new Stor("lessCode");
-      $scope.lessOptions = {
-        dumpLineNumbers: false,
-        relativeUrls: false,
-        rootpath: false,
-        filename: 'less2css.org.less'
-      };
-      $scope.updateModel = function() {
+      $scope.updateOptions = function() {
         return console.log(this);
       };
-      $scope.$watch('lessOptions', function() {
-        return $scope.updateModel(this);
-      });
-      $scope.lessEditorOpts = {
-        theme: "lesser-dark",
-        tabSize: 2,
-        lineNumbers: true,
-        matchBrackets: true
-      };
-      $scope.cssEditorOpts = (function() {
-        var opts;
-        opts = angular.copy($scope.lessEditorOpts);
-        opts.readOnly = true;
-        return opts;
-      })();
-      $http.get('/less-versions').success(function(versions) {
-        var getLabel;
-        getLabel = function(type, num) {
-          var text;
-          text = type === 'current' ? "" + num + " (current)" : type === 'pre' ? "" + num + " (pre-release)" : num;
-          return text;
-        };
-        $scope.lessVersions = (function() {
-          var version, _i, _len;
-          for (_i = 0, _len = versions.length; _i < _len; _i++) {
-            version = versions[_i];
-            version.label = getLabel(version.type, version.number);
-          }
-          return versions;
-        })();
-        return $scope.lessOptions.lessVersion = (function() {
+      $http.get('/less-options').success(function(options) {
+        setOptions(options);
+        $scope.$emit('optionsLoaded');
+        $scope.lessOptions.lessVersion = (function() {
           var ver;
-          ver = _.find(versions, function(version) {
+          ver = _.find($scope.lessVersions, function(version) {
             return version.type === 'current';
           });
           return ver.number;
@@ -452,7 +419,13 @@
         }
       };
       $scope.lessInput = document.getElementById('lessInput').value;
-      return $scope.dumpLineNumbers = "comments";
+      return setOptions = function(opts) {
+        var k, v;
+        for (k in opts) {
+          v = opts[k];
+          $scope[k] = v;
+        }
+      };
     }
   ]);
 

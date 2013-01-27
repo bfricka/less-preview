@@ -5,7 +5,7 @@ http     = require 'http'
 less     = require 'less-middleware'
 
 app = express()
-lessVersions = require('./public/javascripts/lessVersions')['lessVersions']
+lessOpts = require('./public/javascripts/less-options')['lessOpts']
 app.locals.env = app.get('env')
 
 # Perform canonicalization
@@ -48,7 +48,7 @@ app.configure ->
     res.status(404)
 
     if req.accepts('html')
-      res.render "404", { title: 'LESS2CSS | 404' }
+      res.render "404", { title: 'LESS2CSS | 404', app: '' }
     else if req.accepts('json')
       res.send { error: 'Not Found' }
     else
@@ -69,8 +69,8 @@ app.get '/', (req, res) ->
 
   res.render 'less2css', opts
 
-app.get '/less-versions', (req, res) ->
-  res.json lessVersions
+app.get '/less-options', (req, res) ->
+  res.json lessOpts
 
 ###
 Init

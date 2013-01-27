@@ -60,7 +60,7 @@ module.exports = (grunt) ->
           bare: false
         files:
           "<%= paths.js %>less2css.js": "<%= paths.tmp %>less2css.coffee"
-          "<%= paths.js %>lessVersions.js": "<%= paths.coffee %>lessVersions.coffee"
+          "<%= paths.js %>less-options.js": "<%= paths.coffee %>less-options.coffee"
           "app.js": "app.coffee"
 
     watch:

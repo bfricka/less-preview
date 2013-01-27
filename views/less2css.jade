@@ -9,6 +9,7 @@ block optionsDrawer
           select#lessVersion.lessVersion(
             ng-model='lessOptions.lessVersion'
             ng-options='version.number as version.label for version in lessVersions'
+            ng-change='updateOptions()'
           )
 
         div.span3
@@ -23,8 +24,9 @@ block optionsDrawer
           select.ng-cloak(
             ng-show="toggleLineNumbers == true"
             ng-disabled="toggleLineNumbers == false"
-            ng-model="dumpLineNumbers"
+            ng-model="lessOptions.dumpLineNumbers"
             ng-options="key as value for (key , value) in lineNumberOpts"
+            ng-change='updateOptions()'
           )
 
         div.span3
@@ -32,7 +34,7 @@ block optionsDrawer
           //- i.icon-info-sign
           button.btn.toggleBtn(
             ng-class="{'btn-primary': relativeUrls == true}"
-            ng-click="relativeUrls = !relativeUrls"
+            ng-click="relativeUrls = !relativeUrls; updateOptions()"
             ng-bind="toggleTxt('relativeUrls')"
           ) Disabled
 
@@ -48,6 +50,7 @@ block optionsDrawer
           input.ng-cloak(
             ng-show='toggleRootpath == true'
             ng-disabled='toggleRootpath == false'
+            ng-change='updateOptions()'
             ng-model='rootpath'
             placeholder='Enter rootpath'
             type='text'
@@ -68,7 +71,7 @@ block content
     div.span6
       h2 LESS Input
       div.codeWrap
-        textarea#lessInput.lessInput(placeholder="Input your LESS here.", less-editor, opts='lessEditorOpts', ng-model="lessInput").
+        textarea#lessInput.lessInput(placeholder="Input your LESS here.", less-editor, opts='lessEditorOptions', ng-model="lessInput").
           .transition(@transition) {
             -webkit-transition: @transition;
                -moz-transition: @transition;
@@ -96,4 +99,4 @@ block content
     div.span6
       h2 CSS Output
       div.codeWrap
-        textarea.cssOutput.css(less-editor, ng-model="cssOutput", opts='cssEditorOpts')
+        textarea.cssOutput.css(less-editor, ng-model="cssOutput", opts='cssEditorOptions')

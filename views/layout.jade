@@ -23,16 +23,17 @@ html.no-js(lang='en')
     link(rel='stylesheet', href='/stylesheets/codemirror.css')
     link(rel='stylesheet', href="/stylesheets/style.css")
 
-    script(src='/javascripts/vendor/modernizr.js')
+    block topScripts
+      script(src='/javascripts/vendor/modernizr.js')
 
-    if env == 'production'
-      script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js')
-      script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js")
-    else
-      script(src='/javascripts/vendor/jquery.js')
-      script(src='/javascripts/vendor/angular.js')
+      if env == 'production'
+        script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js')
+        script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js")
+      else
+        script(src='/javascripts/vendor/jquery.js')
+        script(src='/javascripts/vendor/angular.js')
 
-    script(src='/javascripts/vendor/amplify.store.min.js')
+      script(src='/javascripts/vendor/amplify.store.min.js')
   body
     //if lt IE 7
       p.chromeframe
@@ -46,7 +47,7 @@ html.no-js(lang='en')
       .github-fork-ribbon
         a(href="https://github.com/brian-frichette/less-preview/") Fork me on GitHub
 
-    div(ng-app='#{app}', ng-controller='#{app + "Ctrl"}')
+  div(ng-app='#{app}', ng-controller='#{app + "Ctrl"}')
 
       // Main header wrapper
       block optionsDrawer
