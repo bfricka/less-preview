@@ -46,11 +46,148 @@
 
   })();
 
+  jQuery(function($) {
+    var OptionsDrawer, optsDrawer;
+    OptionsDrawer = (function() {
+
+      function OptionsDrawer() {
+        this.els = {
+          lessOptions: $('#lessOptions'),
+          optsDrawer: $('#optionsDrawer'),
+          optsWrap: $('#optionsDrawerWrap'),
+          optsBtn: $('#optionsButton'),
+          optsLnk: $('#optionsLink'),
+          nav: $('#nav')
+        };
+        this.fx = {
+          'duration': 300
+        };
+        this.text = {
+          'optsOpen': 'Close',
+          'optsDefault': 'Options'
+        };
+        this.isOpen = false;
+        this.closeDrawer(true);
+        this.setupEvents();
+      }
+
+      OptionsDrawer.prototype.setupEvents = function() {
+        var els, self;
+        self = this;
+        els = self.els;
+        els.optsBtn.on('click', function(e) {
+          e.preventDefault();
+          if (self.isOpen) {
+            self.closeDrawer.call(self);
+          } else {
+            self.openDrawer.call(self);
+          }
+        });
+        els.optsLnk.on('click', function(e) {
+          e.preventDefault();
+          els.optsBtn.trigger('click');
+        });
+      };
+
+      OptionsDrawer.prototype.openDrawer = function() {
+        var opts, props;
+        this.els.lessOptions.addClass('open');
+        props = {
+          'top': this.els.nav.height(),
+          'opacity': 1
+        };
+        opts = {
+          'duration': this.fx.duration
+        };
+        this.detach();
+        this.animateDrawer('open', props, opts);
+      };
+
+      OptionsDrawer.prototype.closeDrawer = function(start) {
+        var els, opts, props;
+        els = this.els;
+        els.lessOptions.removeClass('open');
+        props = {
+          'top': -(this.getDrawerTop()),
+          'opacity': 0
+        };
+        opts = {
+          'duration': start ? 0 : this.fx.duration
+        };
+        opts.complete = start ? function() {
+          return els.optsDrawer.fadeIn();
+        } : undefined;
+        this.animateDrawer('close', props, opts);
+      };
+
+      OptionsDrawer.prototype.animateDrawer = function(action, props, opts) {
+        var cb, defer, optsDrawer, self;
+        self = this;
+        optsDrawer = this.els.optsDrawer;
+        defer = new $.Deferred();
+        cb = opts.complete || function() {};
+        opts.complete = function() {
+          defer.resolve();
+          return cb.apply(self, arguments);
+        };
+        optsDrawer.animate(props, opts);
+        defer.done(function() {
+          if (action === 'close') {
+            return self.onClose.call(self);
+          } else {
+            return self.onOpen.call(self);
+          }
+        });
+      };
+
+      OptionsDrawer.prototype.onOpen = function() {
+        this.isOpen = true;
+      };
+
+      OptionsDrawer.prototype.onClose = function() {
+        this.attach();
+        this.isOpen = false;
+      };
+
+      OptionsDrawer.prototype.getDrawerTop = function() {
+        return this.els.optsDrawer.outerHeight() - this.els.nav.height();
+      };
+
+      OptionsDrawer.prototype.getBtnLeft = function() {
+        var btn;
+        btn = this.els.optsBtn[0];
+        return btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft;
+      };
+
+      OptionsDrawer.prototype.attach = function() {
+        this.els.optsBtn.insertAfter(this.els.optsLnk);
+        this.els.optsBtn.removeClass('active')[0].style.cssText = "";
+      };
+
+      OptionsDrawer.prototype.detach = function() {
+        var els, left, optsBtn, wid;
+        els = this.els;
+        optsBtn = els.optsBtn;
+        wid = optsBtn.width();
+        left = this.getBtnLeft();
+        els.optsBtn.css({
+          'left': left,
+          'width': wid
+        }).addClass('active');
+        this.els.optsBtn.appendTo(this.els.optsWrap);
+      };
+
+      return OptionsDrawer;
+
+    })();
+    return optsDrawer = new OptionsDrawer();
+  });
+
   l2c = angular.module('Less2Css', []);
 
   l2c.run([
     '$rootScope', function($rootScope) {
-      return $rootScope.$safeApply = function($scope, fn) {
+      $rootScope.$safeApply = function($scope, fn) {
         $scope = $scope || $rootScope;
         fn = fn || function() {};
         if ($scope.$$phase) {
@@ -59,24 +196,19 @@
           $scope.$apply(fn);
         }
       };
+      return $rootScope.lessInput = document.getElementById('lessInput').value;
     }
   ]);
 
   l2c.directive('lessEditor', [
     '$timeout', function($timeout) {
-      var events;
-      events = ["cursorActivity", "viewportChange", "gutterClick", "focus", "blur", "scroll", "update"];
       return {
+        restrict: 'A',
         require: 'ngModel',
         link: function(scope, elem, attrs, ngModel) {
           var deferCodeMirror, onChange, opts;
-          opts = {
-            theme: "lesser-dark",
-            lineNumbers: true,
-            matchBrackets: true,
-            tabSize: 2
-          };
-          onChange = function(evt) {
+          opts = scope.cmOpts || {};
+          onChange = function() {
             return function(instance, changeObj) {
               var newValue;
               newValue = instance.getValue();
@@ -84,42 +216,34 @@
                 ngModel.$setViewValue(newValue);
                 scope.$apply();
               }
-              if (typeof evt === "function") {
-                evt(instance, changeObj);
-              }
             };
           };
           deferCodeMirror = function() {
-            var codeMirror, evt, i, n;
+            var codeMirror;
             codeMirror = CodeMirror.fromTextArea(elem[0], opts);
-            codeMirror.on("change", onChange(opts.onChange));
-            i = 0;
-            n = events.length;
-            evt = void 0;
-            while (i < n) {
-              evt = opts["on" + events[i].charAt(0).toUpperCase() + events[i].slice(1)];
-              if (evt === void 0) {
-                continue;
-              }
-              if (typeof evt !== "function") {
-                continue;
-              }
-              codeMirror.on(events[i], evt);
-              ++i;
-            }
-            ngModel.$formatters.push(function(value) {
-              if (angular.isUndefined(value) || value === null) {
-                return "";
-              } else {
-                if (angular.isObject(value) || angular.isArray(value)) {
-                  throw new Error("ui-codemirror cannot use an object or an array as a model");
-                }
-              }
-              return value;
-            });
-            return ngModel.$render = function() {
-              return codeMirror.setValue(ngModel.$viewValue);
+            codeMirror.on('change', onChange(opts.onChange));
+            ngModel.$render = function() {
+              codeMirror.setValue(ngModel.$viewValue);
             };
+          };
+          return $timeout(deferCodeMirror);
+        }
+      };
+    }
+  ]);
+
+  l2c.directive('cssOutput', [
+    '$timeout', function($timeout) {
+      return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, elem, attrs, ngModel) {
+          var deferCodeMirror, opts;
+          opts = scope.cmOpts || {};
+          opts.value = ngModel.$viewValue;
+          deferCodeMirror = function() {
+            var codeMirror;
+            return codeMirror = CodeMirror.fromTextArea(elem[0], opts);
           };
           return $timeout(deferCodeMirror);
         }
@@ -131,6 +255,13 @@
     '$scope', function($scope) {
       var stor;
       stor = new Stor("lessCode");
+      $scope.cmOpts = {
+        theme: "lesser-dark",
+        tabSize: 2,
+        lineNumbers: true,
+        matchBrackets: true
+      };
+      $scope.cssOutput = 'a.cool { display: none; }';
       $scope.lineNumberOpts = {
         'comments': "Comments",
         'mediaquery': "Media Query",

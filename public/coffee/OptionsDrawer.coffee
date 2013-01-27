@@ -1,190 +1,130 @@
-# jQuery ($) ->
-#   class OptionsDrawer extends EventEmitter
+# Simple open/close for drawer - no need to Angularize
+jQuery ($) ->
+  class OptionsDrawer
+    constructor: ->
+      @els =
+        lessOptions : $('#lessOptions')
+        optsDrawer  : $('#optionsDrawer')
+        optsWrap    : $('#optionsDrawerWrap')
+        optsBtn     : $('#optionsButton')
+        optsLnk     : $('#optionsLink')
+        nav         : $('#nav')
+      @fx =
+        'duration': 300
+      @text =
+        'optsOpen'    : 'Close'
+        'optsDefault' : 'Options'
 
-#     constructor: (options) ->
-#       # Call super to get instance variables of EE constructor
-#       # i.e. _callbacks object
-#       super()
+      @isOpen = false
 
-#       defaults =
-#         selectors:
-#           lessOptions : "#lessOptions"
-#           optsDrawer  : "#optionsDrawer"
-#           toggleBtns  : ".toggleBtn"
-#           toggleChks  : ".toggleChk"
-#           optsForm    : "form#optionsDrawerWrap"
-#           optsBtn     : "#optionsButton"
-#           optsLnk     : "#optionsLink"
-#           nav         : "#nav"
+      @closeDrawer(true)
+      @setupEvents()
 
-#         fx:
-#           'duration': 300
+    setupEvents: ->
+      self = @
+      els = self.els
 
-#         text:
-#           'optsOpen'    : 'Close'
-#           'optsDefault' : 'Options'
+      els.optsBtn.on 'click', (e) ->
+        e.preventDefault()
 
-#       @opts = $.extend defaults, options
-#       @isOpen = false
+        if self.isOpen
+          self.closeDrawer.call(self)
+        else
+          self.openDrawer.call(self)
 
-#       @setupEls()
-#       @closeDrawer(true)
-#       @setupEvents()
-#       @updateModel()
-#       return
+        return
 
-#     setupEls: ->
-#       classes = {}
-#       @els = {}
-#       for name, selector of @opts.selectors
-#         if /^\.\w/i.test selector
-#           classes[name] = selector
-#         else
-#           @els[name] = $(selector)
+      els.optsLnk.on 'click', (e) ->
+        e.preventDefault()
+        els.optsBtn.trigger 'click'
 
-#       for name, selector of classes
-#         @els[name] = @els.optsDrawer.find(selector)
+        return
 
-#       @els.optsDrawer
-#         .find('.hide')
-#         .hide()
-#         .removeClass('hide')
+      return
 
-#       return
+    openDrawer: ->
+      @els.lessOptions.addClass 'open'
 
-#     setupEvents: ->
-#       self = @
-#       els = self.els
+      props =
+        'top'     : @els.nav.height()
+        'opacity' : 1
+      opts =
+        'duration': @fx.duration
 
-#       els.optsBtn.on 'click', (e) ->
-#         e.preventDefault()
+      @detach()
+      @animateDrawer 'open', props, opts
 
-#         if self.isOpen
-#           self.closeDrawer.call(self)
-#         else
-#           self.openDrawer.call(self, e)
+      return
 
-#       els.optsLnk.on 'click', (e) ->
-#         e.preventDefault()
-#         self.els.optsBtn.trigger 'click'
+    closeDrawer: (start) ->
+      els = @els
 
-#       els.optsForm.on 'change paste keydown keyup', (e) ->
-#         self.updateModel.call(self, e)
+      els.lessOptions.removeClass 'open'
+      props =
+        'top'     : -(@getDrawerTop())
+        'opacity' : 0
 
-#       els.optsForm.on 'submit', (e) ->
-#         e.preventDefault()
+      opts =
+        'duration' : if start then 0 else @fx.duration
 
-#       return
+      opts.complete = if start then -> els.optsDrawer.fadeIn() else `undefined`
 
-#     updateModel: (e = {}) ->
-#       prev = @model or {}
-#       values = @els.optsForm.serialize()
-#       curr = @toModel @els.optsForm[0].elements
+      @animateDrawer 'close', props, opts
+      return
 
-#       @emit('change', e, curr, prev) unless _.isEqual prev, curr
+    animateDrawer: (action, props, opts) ->
+      self = @
+      optsDrawer = @els.optsDrawer
+      defer = new $.Deferred()
+      cb = opts.complete or ->
 
-#       @model = curr
+      opts.complete = ->
+        defer.resolve()
+        cb.apply(self, arguments)
 
-#     # Creates a model object for all name/value pairs
-#     # Normalizes radio/checkboxes to booleans
-#     toModel: (els) ->
-#       model = {}
+      optsDrawer.animate props, opts
 
-#       for el in els
-#         name = el.name
-#         val = el.value
+      defer.done ->
+        if action is 'close'
+          self.onClose.call(self)
+        else
+          self.onOpen.call(self)
 
-#         # Skip unnamed or disabled elements
-#         continue if not name or el.disabled
+      return
 
-#         type = el.type
-#         # Cast checkboxes as booleans instead of "on/off"
-#         val = if type is "radio" or type is "checkbox" then el.checked else val
-#         model[name] = val
+    onOpen: ->
+      @isOpen = true
+      return
 
-#       model
+    onClose: ->
+      @attach()
+      @isOpen = false
+      return
 
-#     openDrawer: (e) ->
-#       @els.lessOptions.addClass 'open'
-#       props =
-#         'top'     : @els.nav.height()
-#         'opacity' : 1
+    getDrawerTop: ->
+      @els.optsDrawer.outerHeight() - @els.nav.height()
 
-#       opts =
-#         'duration' : @opts.fx.duration
+    getBtnLeft: ->
+      btn = @els.optsBtn[0]
+      btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft
 
-#       @detach()
-#       @animateDrawer 'open', props, opts
-#       return
+    attach: ->
+      @els.optsBtn.insertAfter @els.optsLnk
+      @els.optsBtn.removeClass('active')[0].style.cssText = ""
+      return
 
-#     closeDrawer: (start) ->
-#       self = @
-#       @els.lessOptions.removeClass 'open'
-#       props =
-#         'top'     : -(@getDrawerTop())
-#         'opacity' : 0
+    detach: ->
+      els = @els
+      optsBtn = els.optsBtn
+      wid = optsBtn.width()
+      left = @getBtnLeft()
 
-#       opts =
-#         'duration' : if start then 0 else @opts.fx.duration
+      els.optsBtn.css
+        'left': left
+        'width': wid
+      .addClass 'active'
 
-#       opts.complete = if start then -> self.els.optsDrawer.fadeIn() else `undefined`
+      @els.optsBtn.appendTo @els.optsWrap
+      return
 
-#       @animateDrawer 'close', props, opts
-#       return
-
-#     animateDrawer: (action, props, opts) ->
-#       self = @
-#       optsDrawer = @els.optsDrawer
-#       defer = new $.Deferred()
-#       cb = opts.complete or ->
-
-#       opts.complete = ->
-#         defer.resolve()
-#         cb.apply(self, arguments)
-
-#       optsDrawer.animate props, opts
-
-#       defer.done ->
-#         if action is 'close'
-#           self.onClose.call(self)
-#         else
-#           self.onOpen.call(self)
-
-#       return
-
-#     onOpen: ->
-#       @isOpen = true
-#       return
-
-#     onClose: ->
-#       @attach()
-#       @isOpen = false
-#       return
-
-#     getDrawerTop: ->
-#       @els.optsDrawer.outerHeight() - @els.nav.height()
-
-#     getBtnLeft: ->
-#       btn = @els.optsBtn[0]
-#       btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft
-
-#     attach: ->
-#       @els.optsBtn.insertAfter @els.optsLnk
-#       @els.optsBtn.removeClass('active')[0].style.cssText = ""
-#       return
-
-#     detach: ->
-#       els = @els
-#       optsBtn = els.optsBtn
-#       wid = optsBtn.width()
-#       left = @getBtnLeft()
-
-#       els.optsBtn.css
-#         'left': left
-#         'width': wid
-#       .addClass 'active'
-
-#       @els.optsBtn.appendTo @els.optsForm
-#       return
-
-#   $.fn.OptionsDrawer = OptionsDrawer
+  optsDrawer = new OptionsDrawer()

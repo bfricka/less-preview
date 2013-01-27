@@ -36,6 +36,7 @@ module.exports = (grunt) ->
       less2css:
         src: [
           "<%= paths.coffee %>Stor.coffee"
+          "<%= paths.coffee %>OptionsDrawer.coffee"
           "<%= paths.coffee %>app.coffee"
           "<%= paths.coffee %>less2css/directives.coffee"
           "<%= paths.coffee %>less2css/services.coffee"
