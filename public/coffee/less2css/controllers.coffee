@@ -1,15 +1,26 @@
 l2c.controller 'Less2CssCtrl', [
-  '$scope', '$http'
-  ($scope, $http) ->
-    stor = new Stor "lessCode"
-    # Setup code mirror opts
+  '$scope', '$http', 'LessCompiler'
+  ($scope, $http, LessCompiler) ->
+    # Set-up default options
+    $http.get('/less-options').success (options) ->
+      setOptions(options)
+      setLessOptions(options)
+      # Let our directive know we've loaded
+      $scope.$emit 'optionsLoaded'
+      $scope.updateOptions()
+      LessCompiler.setup()
+      return
+
+    $scope.cssOutput = 'a.cool { display: none; }'
+
+    $scope.$watch 'lessInput', (val) ->
 
     $scope.updateOptions = ->
-      console.log @
       $scope.lessOptions.dumpLineNumbers =
         if $scope.lineNumbersEnabled then $scope.dumpLineNumbers else false
       $scope.lessOptions.rootpath =
         if $scope.rootPathEnabled then $scope.rootpath else false
+      LessCompiler.updateOptions($scope.lessOptions)
 
     $scope.toggleLineNumbers = ->
       $scope.lineNumbersEnabled = not $scope.lineNumbersEnabled
@@ -20,18 +31,6 @@ l2c.controller 'Less2CssCtrl', [
       $scope.rootPathEnabled = !$scope.rootPathEnabled
       $scope.updateOptions()
       return
-
-    # Set-up default options
-    $http.get('/less-options').success (options) ->
-      setOptions(options)
-      setLessOptions(options)
-      # Let our directive know we've loaded
-      $scope.$emit 'optionsLoaded'
-      return
-
-    $scope.cssOutput = 'a.cool { display: none; }'
-
-    $scope.$watch 'lessInput', (val) ->
 
     $scope.toggleTxt = (model) ->
       if $scope[model]
@@ -51,10 +50,13 @@ l2c.controller 'Less2CssCtrl', [
     # Set defaults for lessOptions selects
     setLessOptions = (opts) ->
       # Select current version as default less version
-      $scope.lessOptions.lessVersion = do ->
-        ver = _.find opts.lessVersions, (version) ->
-          version.type is 'current'
-        ver.number
+      # And identify pre-release
+      _.each opts.lessVersions, (version) ->
+        if version.type is 'current'
+          $scope.lessOptions.lessVersion = version.number
+
+        if version.type is 'pre'
+          $scope.lessOptions.preRelease = version.number
 
       $scope.dumpLineNumbers = do ->
         sel = _.find opts.lineNumberOptions, (opt) ->
