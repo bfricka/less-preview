@@ -41,7 +41,6 @@ module.exports = (grunt) ->
           "<%= paths.coffee %>less2css/directives.coffee"
           "<%= paths.coffee %>less2css/services.coffee"
           "<%= paths.coffee %>less2css/controllers.coffee"
-          "<%= paths.coffee %>less2css.coffee"
         ]
         dest: "<%= paths.tmp %>less2css.coffee"
 

@@ -2,24 +2,14 @@ extends layout
 
 block optionsDrawer
   section#optionsDrawer.optionsDrawer
-    form#optionsDrawerWrap.optionsDrawerWrap
+    form#optionsDrawerWrap.optionsDrawerWrap(name='opts')
       div.row-fluid
         div.span3
           label(for='lessVersion') LESS Version
-          select#lessVersion.lessVersion(name='lessVersion')
-            for version in lessVersions
-              if version.type === 'current'
-                option(
-                  selected='selected'
-                  value='#{version.number}') #{version.number} (current)
-
-              else if version.type === 'pre'
-                option(
-                  data-prerelease="true"
-                  value='#{version.number}') #{version.number} (pre-release)
-
-              else
-                option(value='#{version.number}') #{version.number}
+          select#lessVersion.lessVersion(
+            ng-model='lessOptions.lessVersion'
+            ng-options='version.number as version.label for version in lessVersions'
+          )
 
         div.span3
           code dumpLineNumbers

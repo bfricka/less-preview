@@ -5,7 +5,7 @@ http     = require 'http'
 less     = require 'less-middleware'
 
 app = express()
-app.locals.lessVersions = require('./public/javascripts/lessVersions')['lessVersions']
+lessVersions = require('./public/javascripts/lessVersions')['lessVersions']
 app.locals.env = app.get('env')
 
 # Perform canonicalization
@@ -68,6 +68,9 @@ app.get '/', (req, res) ->
     app: 'Less2Css'
 
   res.render 'less2css', opts
+
+app.get '/less-versions', (req, res) ->
+  res.json lessVersions
 
 ###
 Init

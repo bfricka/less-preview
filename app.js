@@ -1,5 +1,5 @@
 (function() {
-  var app, express, http, less, mongoose;
+  var app, express, http, less, lessVersions, mongoose;
 
   express = require('express');
 
@@ -11,7 +11,7 @@
 
   app = express();
 
-  app.locals.lessVersions = require('./public/javascripts/lessVersions')['lessVersions'];
+  lessVersions = require('./public/javascripts/lessVersions')['lessVersions'];
 
   app.locals.env = app.get('env');
 
@@ -74,6 +74,10 @@
       app: 'Less2Css'
     };
     return res.render('less2css', opts);
+  });
+
+  app.get('/less-versions', function(req, res) {
+    return res.json(lessVersions);
   });
 
   /*
