@@ -32,7 +32,13 @@ exports.lessOpts = {
   cssEditorOptions:
     theme         : "lesser-dark"
     tabSize       : 2
+    readOnly      : true
     lineNumbers   : true
     matchBrackets : true
-    readOnly      : true
+
+  lineNumberOptions: [
+    {label: "Comments", value: "comments", default: true}
+    {label: "Media Query", value: 'mediaquery'}
+    {label: "All", value: 'all'}
+  ]
 }

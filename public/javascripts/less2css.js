@@ -388,29 +388,28 @@
 
   l2c.controller('Less2CssCtrl', [
     '$scope', '$http', function($scope, $http) {
-      var setOptions, stor;
+      var setLessOptions, setOptions, stor;
       stor = new Stor("lessCode");
       $scope.updateOptions = function() {
-        return console.log(this);
+        console.log(this);
+        $scope.lessOptions.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
+        return $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : false;
+      };
+      $scope.toggleLineNumbers = function() {
+        $scope.lineNumbersEnabled = !$scope.lineNumbersEnabled;
+        $scope.updateOptions();
+      };
+      $scope.toggleRootPath = function() {
+        $scope.rootPathEnabled = !$scope.rootPathEnabled;
+        $scope.updateOptions();
       };
       $http.get('/less-options').success(function(options) {
         setOptions(options);
+        setLessOptions(options);
         $scope.$emit('optionsLoaded');
-        $scope.lessOptions.lessVersion = (function() {
-          var ver;
-          ver = _.find($scope.lessVersions, function(version) {
-            return version.type === 'current';
-          });
-          return ver.number;
-        })();
       });
       $scope.cssOutput = 'a.cool { display: none; }';
       $scope.$watch('lessInput', function(val) {});
-      $scope.lineNumberOpts = {
-        'comments': "Comments",
-        'mediaquery': "Media Query",
-        'all': "All"
-      };
       $scope.toggleTxt = function(model) {
         if ($scope[model]) {
           return "Enabled";
@@ -419,12 +418,28 @@
         }
       };
       $scope.lessInput = document.getElementById('lessInput').value;
-      return setOptions = function(opts) {
+      setOptions = function(opts) {
         var k, v;
         for (k in opts) {
           v = opts[k];
           $scope[k] = v;
         }
+      };
+      return setLessOptions = function(opts) {
+        $scope.lessOptions.lessVersion = (function() {
+          var ver;
+          ver = _.find(opts.lessVersions, function(version) {
+            return version.type === 'current';
+          });
+          return ver.number;
+        })();
+        $scope.dumpLineNumbers = (function() {
+          var sel;
+          sel = _.find(opts.lineNumberOptions, function(opt) {
+            return !!opt["default"];
+          });
+          return sel.value;
+        })();
       };
     }
   ]);

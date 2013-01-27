@@ -16,16 +16,16 @@ block optionsDrawer
           code dumpLineNumbers
           //- i.icon-info-sign
           button.btn.toggleBtn(
-            ng-class="{'btn-primary': toggleLineNumbers == true}"
-            ng-click="toggleLineNumbers = !toggleLineNumbers"
-            ng-bind="toggleTxt('toggleLineNumbers')"
+            ng-class="{'btn-primary': lineNumbersEnabled == true}"
+            ng-click="toggleLineNumbers()"
+            ng-bind="toggleTxt('lineNumbersEnabled')"
           ) Disabled
 
           select.ng-cloak(
-            ng-show="toggleLineNumbers == true"
-            ng-disabled="toggleLineNumbers == false"
-            ng-model="lessOptions.dumpLineNumbers"
-            ng-options="key as value for (key , value) in lineNumberOpts"
+            ng-show="lineNumbersEnabled == true"
+            ng-disabled="lineNumbersEnabled == false"
+            ng-model="dumpLineNumbers"
+            ng-options="opt.value as opt.label for opt in lineNumberOptions"
             ng-change='updateOptions()'
           )
 
@@ -42,14 +42,14 @@ block optionsDrawer
           code rootpath
           //- i.icon-info-sign
           button.btn.toggleBtn(
-            ng-class="{'btn-primary': toggleRootpath == true}"
-            ng-click="toggleRootpath = !toggleRootpath"
-            ng-bind="toggleTxt('toggleRootpath')"
+            ng-class="{'btn-primary': rootPathEnabled == true}"
+            ng-click="toggleRootPath()"
+            ng-bind="toggleTxt('rootPathEnabled')"
           ) Disabled
 
           input.ng-cloak(
-            ng-show='toggleRootpath == true'
-            ng-disabled='toggleRootpath == false'
+            ng-show='rootPathEnabled == true'
+            ng-disabled='rootPathEnabled == false'
             ng-change='updateOptions()'
             ng-model='rootpath'
             placeholder='Enter rootpath'
