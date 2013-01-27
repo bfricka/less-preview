@@ -254,10 +254,12 @@
           return this.lessOptions = options;
         };
 
-        LessCompiler.prototype.setup = function() {
-          var getScript, opts, scriptUrl, version;
+        LessCompiler.prototype.loadLess = function() {
+          var getScript, lessOptions, opts, scriptUrl, version;
           opts = this.options;
-          version = this.lessOptions.lessVersion;
+          lessOptions = this.lessOptions;
+          version = lessOptions.lessVersion;
+          version = version === lessOptions.preRelease ? "" + version + "-alpha" : version;
           scriptUrl = opts.lessPath.replace("{version}", version);
           window.less = undefined;
           getScript = $.ajax({
@@ -265,10 +267,39 @@
             cache: true,
             url: scriptUrl
           });
-          getScript.done(function() {
-            console.log("Done");
+          return getScript;
+        };
+
+        LessCompiler.prototype.initLess = function() {
+          return this.parser = new less.Parser(this.lessOptions);
+        };
+
+        LessCompiler.prototype.compileLess = function(lessCode) {
+          var compiledCSS;
+          try {
+            compiledCSS = this.parseLess(lessCode, this.lessOptions);
+            return compiledCSS;
+          } catch (lessEx) {
+            return this.updateError(lessEx);
+          }
+        };
+
+        LessCompiler.prototype.updateError = function(lessEx) {
+          var errorText;
+          errorText = ("" + lessEx.type + " error: " + lessEx.message) + "\n" + (lessEx.extract && lessEx.extract.join && lessEx.extract.join(""));
+          return errorText;
+        };
+
+        LessCompiler.prototype.parseLess = function(lessCode) {
+          var resultCss;
+          resultCss = "";
+          this.parser.parse(lessCode, function(lessEx, result) {
+            if (lessEx) {
+              throw lessEx;
+            }
+            return resultCss = result.toCSS();
           });
-          return this;
+          return resultCss;
         };
 
         return LessCompiler;
@@ -282,14 +313,27 @@
     '$scope', '$http', 'LessCompiler', function($scope, $http, LessCompiler) {
       var setLessOptions, setOptions;
       $http.get('/less-options').success(function(options) {
+        var loading;
         setOptions(options);
         setLessOptions(options);
         $scope.$emit('optionsLoaded');
         $scope.updateOptions();
-        LessCompiler.setup();
+        loading = LessCompiler.loadLess();
+        loading.done(function() {
+          var css;
+          console.log("Done");
+          LessCompiler.initLess();
+          css = LessCompiler.compileLess($scope.lessInput);
+          $scope.cssOutput = css;
+          $scope.$apply();
+          console.log(css);
+        });
       });
       $scope.cssOutput = 'a.cool { display: none; }';
-      $scope.$watch('lessInput', function(val) {});
+      $scope.$watch('lessInput', function(val) {
+        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
+        return $scope.$safeApply();
+      });
       $scope.updateOptions = function() {
         $scope.lessOptions.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
         $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : false;

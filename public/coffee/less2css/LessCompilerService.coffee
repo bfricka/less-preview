@@ -14,10 +14,12 @@ l2c.factory 'LessCompiler', [
       updateOptions: (options) ->
         @lessOptions = options
 
-      setup: ->
+      loadLess: ->
         opts = @options
+        lessOptions = @lessOptions
 
-        version = @lessOptions.lessVersion
+        version = lessOptions.lessVersion
+        version = if version is lessOptions.preRelease then "#{version}-alpha" else version
         scriptUrl = opts.lessPath.replace "{version}", version
         window.less = `undefined`
 
@@ -26,19 +28,35 @@ l2c.factory 'LessCompiler', [
           cache    : true
           url      : scriptUrl
 
-        getScript.done ->
-          # self.loadComplete.call self
-          console.log "Done"
-          return
-        @
+        getScript
 
-      # updateOptions: (model) ->
-      #   opts = @options.lessOptions
+      initLess: ->
+        @parser = new less.Parser @lessOptions
 
-      #   for prop, val of opts
-      #     opts[prop] = if model.hasOwnProperty(prop) then model[prop] else @defaults.lessOptions[prop]
+      compileLess: (lessCode) ->
+        try
+          compiledCSS = @parseLess lessCode, @lessOptions
+          return compiledCSS
+        catch lessEx
+          @updateError lessEx
 
-      #   return
+      updateError: (lessEx) ->
+        errorText =
+        "#{lessEx.type} error: #{lessEx.message}" +
+        "\n" +
+        (lessEx.extract and lessEx.extract.join and lessEx.extract.join(""))
+
+        errorText
+
+      parseLess: (lessCode) ->
+        resultCss = ""
+
+        @parser.parse lessCode, (lessEx, result) ->
+          throw lessEx if lessEx
+
+          resultCss = result.toCSS()
+
+        resultCss
 
       # setupEvents: ->
       #   self = this
@@ -83,22 +101,6 @@ l2c.factory 'LessCompiler', [
       #     return
       #   @
 
-      # loadLess: (preRelease) ->
-      #   self = this
-      #   opts = @options
-      #   els  = @elements
-
-      #   els.loadingGif.fadeIn()
-
-      #   @editor.options.readOnly = true
-
-      #   version     = els.lessVersion.val()
-      #   version     = if preRelease then "#{version}-alpha" else version
-      #   scriptUrl   = opts.lessPath.replace "{version}", version
-      #   window.less = `undefined`
-
-
-
       # loadComplete: ->
       #   @parser = new less.Parser(@options.lessOptions)
       #   @editor.options.readOnly = false
@@ -122,31 +124,7 @@ l2c.factory 'LessCompiler', [
 
       #   @
 
-      # updateCSS: (compiledCSS) ->
-      #   highlightedCSS = hljs.highlight("css", compiledCSS).value
-      #   @elements.cssCode.css("color", "").html highlightedCSS
 
-      #   @
-
-      # updateError: (lessEx) ->
-      #   errorText =
-      #   "#{lessEx.type} error: #{lessEx.message}" +
-      #   "\n" +
-      #   (lessEx.extract and lessEx.extract.join and lessEx.extract.join(""))
-
-      #   @elements.cssCode.css("color", "red").text errorText
-
-      #   @
-
-      # parseLess: (lessCode) ->
-      #   resultCss = ""
-
-      #   @parser.parse lessCode, (lessEx, result) ->
-      #     throw lessEx if lessEx
-
-      #     resultCss = result.toCSS()
-
-      #   resultCss
 
     new LessCompiler()
 ]
