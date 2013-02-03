@@ -340,31 +340,49 @@
 
   l2c.controller('Less2CssCtrl', [
     '$scope', '$http', 'LessCompiler', function($scope, $http, LessCompiler) {
-      var setLessOptions, setOptions;
-      $http.get('/less-options').success(function(options) {
+      var compileLess, getOptions, loadLess, setLessOptions, setOptions;
+      loadLess = function() {
         var loading;
+        $scope.loading = true;
+        loading = LessCompiler.loadLess();
+        return loading.done(function() {
+          $scope.$apply(function() {
+            LessCompiler.initLess();
+            compileLess();
+            $scope.loading = false;
+          });
+        });
+      };
+      compileLess = function() {
+        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
+        return $scope.$safeApply();
+      };
+      getOptions = $http.get('/less-options');
+      getOptions.success(function(options) {
         setOptions(options);
         setLessOptions(options);
         $scope.$emit('optionsLoaded');
         $scope.updateOptions();
-        loading = LessCompiler.loadLess();
-        loading.done(function() {
-          console.log("Done");
-          LessCompiler.initLess();
-          $scope.compileLess();
+        loadLess();
+      });
+      $scope.lessInput = document.getElementById('lessInput').value;
+      $scope.cssOutput = '';
+      $scope.loading = false;
+      getOptions.success(function() {
+        $scope.$watch('lessInput', function() {
+          compileLess();
+        });
+        $scope.$watch('lessOptions', function() {
+          compileLess();
+        }, true);
+        $scope.$watch('lessOptions.lessVersion', function() {
+          loadLess();
         });
       });
-      $scope.cssOutput = '';
-      $scope.$watch('lessInput', function() {
-        return $scope.compileLess();
-      });
-      $scope.$watch('lessOptions', function() {
-        return $scope.compileLess();
-      }, true);
       $scope.updateOptions = function() {
         $scope.lessOptions.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
         $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : false;
-        return LessCompiler.updateOptions($scope.lessOptions);
+        LessCompiler.updateOptions($scope.lessOptions);
       };
       $scope.toggleLineNumbers = function() {
         $scope.lineNumbersEnabled = !$scope.lineNumbersEnabled;
@@ -381,7 +399,6 @@
           return "Disabled";
         }
       };
-      $scope.lessInput = document.getElementById('lessInput').value;
       setOptions = function(opts) {
         var k, v;
         for (k in opts) {
@@ -389,7 +406,7 @@
           $scope[k] = v;
         }
       };
-      setLessOptions = function(opts) {
+      return setLessOptions = function(opts) {
         _.each(opts.lessVersions, function(version) {
           if (version.type === 'current') {
             $scope.lessOptions.lessVersion = version.number;
@@ -405,10 +422,6 @@
           });
           return sel.value;
         })();
-      };
-      return $scope.compileLess = function() {
-        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
-        return $scope.$safeApply();
       };
     }
   ]);
