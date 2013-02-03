@@ -36,9 +36,11 @@ l2c.factory 'LessCompiler', [
       compileLess: (lessCode) ->
         try
           compiledCSS = @parseLess lessCode, @lessOptions
+          @error = false
           return compiledCSS
         catch lessEx
-          @updateError lessEx
+          @error = true
+          return @updateError lessEx
 
       updateError: (lessEx) ->
         errorText =

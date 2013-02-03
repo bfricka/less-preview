@@ -635,3 +635,4 @@ pre .tag,pre .class,.cm-s-lesser-dark span.cm-tag{color:#669199;}
 .cm-s-lesser-dark span.cm-quote{color:#009900;}
 .cm-s-lesser-dark span.cm-hr{color:#999999;}
 .cm-s-lesser-dark span.cm-link{color:#0000cc;}
+.error .CodeMirror-lines pre{color:#c70038 !important;}.error .CodeMirror-lines pre div,.error .CodeMirror-lines pre span{color:#c70038 !important;}

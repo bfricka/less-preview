@@ -307,8 +307,10 @@
           var compiledCSS;
           try {
             compiledCSS = this.parseLess(lessCode, this.lessOptions);
+            this.error = false;
             return compiledCSS;
           } catch (lessEx) {
+            this.error = true;
             return this.updateError(lessEx);
           }
         };
@@ -339,24 +341,8 @@
   ]);
 
   l2c.controller('Less2CssCtrl', [
-    '$scope', '$http', 'LessCompiler', function($scope, $http, LessCompiler) {
+    '$scope', '$http', 'LessCompiler', 'LessCache', function($scope, $http, LessCompiler, LessCache) {
       var compileLess, getOptions, loadLess, setLessOptions, setOptions;
-      loadLess = function() {
-        var loading;
-        $scope.loading = true;
-        loading = LessCompiler.loadLess();
-        return loading.done(function() {
-          $scope.$apply(function() {
-            LessCompiler.initLess();
-            compileLess();
-            $scope.loading = false;
-          });
-        });
-      };
-      compileLess = function() {
-        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
-        return $scope.$safeApply();
-      };
       getOptions = $http.get('/less-options');
       getOptions.success(function(options) {
         setOptions(options);
@@ -365,12 +351,14 @@
         $scope.updateOptions();
         loadLess();
       });
-      $scope.lessInput = document.getElementById('lessInput').value;
+      $scope.lessInput = LessCache.get() || $('#lessInput').val();
       $scope.cssOutput = '';
       $scope.rootpath = '';
       $scope.loading = false;
+      $scope.compileError = false;
       getOptions.success(function() {
-        $scope.$watch('lessInput', function() {
+        $scope.$watch('lessInput', function(val) {
+          LessCache.set(val);
           compileLess();
         });
         $scope.$watch('lessOptions', function() {
@@ -399,6 +387,23 @@
         } else {
           return "Disabled";
         }
+      };
+      loadLess = function() {
+        var loading;
+        $scope.loading = true;
+        loading = LessCompiler.loadLess();
+        return loading.done(function() {
+          $scope.$apply(function() {
+            LessCompiler.initLess();
+            compileLess();
+            $scope.loading = false;
+          });
+        });
+      };
+      compileLess = function() {
+        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
+        $scope.compileError = LessCompiler.error;
+        $scope.$safeApply();
       };
       setOptions = function(opts) {
         var k, v;

@@ -103,7 +103,7 @@ block content
           }
     div.span6
       h2 CSS Output
-      div.codeWrap
+      div.codeWrap(ng-class="{error: compileError == true}")
         textarea.cssOutput.css(
           less-editor
           ng-model="cssOutput"

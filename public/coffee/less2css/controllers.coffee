@@ -1,26 +1,7 @@
 l2c.controller 'Less2CssCtrl', [
-  '$scope', '$http', 'LessCompiler'
-  ($scope, $http, LessCompiler) ->
-    loadLess = ->
-      $scope.loading = true
-      loading = LessCompiler.loadLess()
-
-      loading.done ->
-        $scope.$apply ->
-          LessCompiler.initLess()
-          compileLess()
-
-          $scope.loading = false
-
-          return
-
-        return
-
-    compileLess = ->
-      $scope.cssOutput = LessCompiler.compileLess($scope.lessInput)
-      $scope.$safeApply()
-
-    # Set-up default options
+  '$scope', '$http', 'LessCompiler', 'LessCache'
+  ($scope, $http, LessCompiler, LessCache) ->
+    # Setup default options
     getOptions = $http.get('/less-options')
 
     getOptions.success (options) ->
@@ -35,14 +16,16 @@ l2c.controller 'Less2CssCtrl', [
       return
 
     # Set defaults
-    $scope.lessInput = document.getElementById('lessInput').value
+    $scope.lessInput = LessCache.get() or $('#lessInput').val()
     $scope.cssOutput = ''
     $scope.rootpath = ''
     $scope.loading = false
+    $scope.compileError = false
 
     # Setup watchers
     getOptions.success ->
-      $scope.$watch 'lessInput', ->
+      $scope.$watch 'lessInput', (val) ->
+        LessCache.set(val)
         compileLess()
         return
 
@@ -61,20 +44,18 @@ l2c.controller 'Less2CssCtrl', [
         if $scope.lineNumbersEnabled then $scope.dumpLineNumbers else false
       $scope.lessOptions.rootpath =
         if $scope.rootPathEnabled then $scope.rootpath else ''
-      LessCompiler.updateOptions($scope.lessOptions)
 
+      LessCompiler.updateOptions($scope.lessOptions)
       return
 
     $scope.toggleLineNumbers = ->
-      $scope.lineNumbersEnabled = not $scope.lineNumbersEnabled
+      $scope.lineNumbersEnabled = !$scope.lineNumbersEnabled
       $scope.updateOptions()
-
       return
 
     $scope.toggleRootPath = ->
       $scope.rootPathEnabled = !$scope.rootPathEnabled
       $scope.updateOptions()
-
       return
 
     $scope.toggleTxt = (model) ->
@@ -82,6 +63,25 @@ l2c.controller 'Less2CssCtrl', [
         "Enabled"
       else
         "Disabled"
+
+    loadLess = ->
+      $scope.loading = true
+      loading = LessCompiler.loadLess()
+
+      loading.done ->
+        $scope.$apply ->
+          LessCompiler.initLess()
+          compileLess()
+
+          $scope.loading = false
+          return
+        return
+
+    compileLess = ->
+      $scope.cssOutput = LessCompiler.compileLess($scope.lessInput)
+      $scope.compileError = LessCompiler.error
+      $scope.$safeApply()
+      return
 
     # All standard mapping options
     setOptions = (opts) ->
