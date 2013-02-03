@@ -4,7 +4,7 @@ block optionsDrawer
   section#optionsDrawer.optionsDrawer
     form#optionsDrawerWrap.optionsDrawerWrap(name='opts')
       div.row-fluid
-        div.span3
+        div.span3.option-column
           label(for='lessVersion') LESS Version
           select#lessVersion.lessVersion(
             ng-model='lessOptions.lessVersion'
@@ -12,7 +12,7 @@ block optionsDrawer
             ng-change='updateOptions()'
           )
 
-        div.span3
+        div.span3.option-column
           code dumpLineNumbers
           //- i.icon-info-sign
           button.btn.toggleBtn(
@@ -29,7 +29,7 @@ block optionsDrawer
             ng-change='updateOptions()'
           )
 
-        div.span3
+        div.span3.option-column
           code relativeUrls
           //- i.icon-info-sign
           button.btn.toggleBtn(
@@ -38,7 +38,7 @@ block optionsDrawer
             ng-bind="toggleTxt('relativeUrls')"
           ) Disabled
 
-        div.span3
+        div.span3.option-column
           code rootpath
           //- i.icon-info-sign
           button.btn.toggleBtn(

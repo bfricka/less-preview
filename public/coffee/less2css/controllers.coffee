@@ -37,6 +37,7 @@ l2c.controller 'Less2CssCtrl', [
     # Set defaults
     $scope.lessInput = document.getElementById('lessInput').value
     $scope.cssOutput = ''
+    $scope.rootpath = ''
     $scope.loading = false
 
     # Setup watchers
@@ -59,7 +60,7 @@ l2c.controller 'Less2CssCtrl', [
       $scope.lessOptions.dumpLineNumbers =
         if $scope.lineNumbersEnabled then $scope.dumpLineNumbers else false
       $scope.lessOptions.rootpath =
-        if $scope.rootPathEnabled then $scope.rootpath else false
+        if $scope.rootPathEnabled then $scope.rootpath else ''
       LessCompiler.updateOptions($scope.lessOptions)
 
       return

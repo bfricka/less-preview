@@ -367,6 +367,7 @@
       });
       $scope.lessInput = document.getElementById('lessInput').value;
       $scope.cssOutput = '';
+      $scope.rootpath = '';
       $scope.loading = false;
       getOptions.success(function() {
         $scope.$watch('lessInput', function() {
@@ -381,7 +382,7 @@
       });
       $scope.updateOptions = function() {
         $scope.lessOptions.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
-        $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : false;
+        $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : '';
         LessCompiler.updateOptions($scope.lessOptions);
       };
       $scope.toggleLineNumbers = function() {

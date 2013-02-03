@@ -16,10 +16,11 @@ body {
 .code { #font > #family > .monospace }
 
 .optionsDrawer {
-  top: 40px;
   position: absolute;
-  display: none;
+  top: 40px;
+  left: 0;
   z-index: 1000;
+  display: none;
   width: 100%;
   border-bottom: 1px solid #ccc;
   #gradient > .vertical(@white, #eee);
@@ -34,8 +35,8 @@ body {
   }
   .toggleBtn {
     .box-sizing(border-box);
-    margin-top: 10px;
     display: block;
+    margin-top: 10px;
     width: 100%;
   }
 
@@ -44,16 +45,16 @@ body {
   select {
     .box-sizing(border-box);
     margin: 10px 0 0;
-    height: 30px;
     width: 100%;
+    height: 30px;
   }
   label { margin-bottom: 0 }
 }
 
 .optionsDrawerWrap {
   position: relative;
-  padding: 35px 20px 20px;
   margin: 0;
+  padding: 35px 20px 20px;
 }
 
 // Options nav item
@@ -62,8 +63,8 @@ body {
   z-index: 1;
   .transition(all 0.5s);
   &.open {
-  color: #555555;
     background-color: #e5e5e5;
+    color: #555555;
     .box-shadow(inset 0 3px 8px rgba(0,0,0,0.125));
   }
 }
@@ -73,13 +74,13 @@ body {
   bottom: -13px;
   left: 0;
   z-index: 9999;
-  cursor: pointer;
   padding: 2px 0;
   width: 100%;
   height: 12px;
   border: 1px solid @lightGray;
   border-top: none;
   background: url('/images/options-btn.png');
+  cursor: pointer;
 
   .box-shadow(0 1px 4px rgba(0,0,0,0.14));
   .border-radius(0 0 2px 2px);
@@ -115,16 +116,16 @@ body {
 }
 
 .preWrap {
-  padding: 8px;
   margin: 0;
-  background: @lighterGray;
+  padding: 8px;
   border: 1px solid @lightGray;
+  background: @lighterGray;
   .border-radius(4px);
 }
 
 .lessInput {
-  width: 100%;
   max-width: 100%;
+  width: 100%;
   height: 610px;
 }
 
@@ -138,13 +139,17 @@ body {
 
 .codeWrap {
   padding: 8px;
-  background: @lighterGray;
   border: 1px solid @lightGray;
+  background: @lighterGray;
   .border-radius(4px);
 }
 
 @media (max-width: 767px) {
   .navbar-inner .container-fluid { padding: 0 20px }
+  .option-column {
+    margin-top: 15px;
+    &:first-child { margin-top: 0; }
+  }
 }
 
 .CodeMirror {
@@ -161,7 +166,6 @@ body {
 
 .cssOutput,
 .cm-s-lesser-dark {
-  line-height: 1.4;
   font-size: 12px;
   line-height: 1.4;
   #font > #family > .monospace;
