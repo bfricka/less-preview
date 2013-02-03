@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.0.4
+  - Converted site to AngularJS for a better framework to manage future feature additions
+  - Removed highlight.js
+  - Both input and output use CodeMirror editors now for line-numbers and easily selectable CSS
+  - Some styling and performance tweaks
+
 ### 0.0.3
   - Added options drawer for better control
   - Cleaned up build process
