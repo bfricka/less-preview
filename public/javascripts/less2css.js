@@ -231,6 +231,35 @@
     }
   ]);
 
+  l2c.directive('fadeShow', function() {
+    return function(scope, elem, attrs) {
+      var $elem, duration, exp, fadeElem;
+      $elem = $(elem);
+      exp = attrs.fadeShow;
+      duration = 400;
+      fadeElem = function(toShow, init) {
+        if (init == null) {
+          init = false;
+        }
+        if (toShow) {
+          $elem.fadeIn(duration);
+        } else {
+          if (init) {
+            $elem.hide();
+          } else {
+            $elem.fadeOut(duration);
+          }
+        }
+      };
+      fadeElem(scope.$eval(exp), true);
+      return scope.$watch(function() {
+        return scope.$eval(exp);
+      }, function(toShow) {
+        return fadeElem(toShow);
+      });
+    };
+  });
+
   l2c.factory('LessCache', function() {
     return new Stor('lessCode');
   });
@@ -320,20 +349,18 @@
         $scope.updateOptions();
         loading = LessCompiler.loadLess();
         loading.done(function() {
-          var css;
           console.log("Done");
           LessCompiler.initLess();
-          css = LessCompiler.compileLess($scope.lessInput);
-          $scope.cssOutput = css;
-          $scope.$apply();
-          console.log(css);
+          $scope.compileLess();
         });
       });
-      $scope.cssOutput = 'a.cool { display: none; }';
-      $scope.$watch('lessInput', function(val) {
-        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
-        return $scope.$safeApply();
+      $scope.cssOutput = '';
+      $scope.$watch('lessInput', function() {
+        return $scope.compileLess();
       });
+      $scope.$watch('lessOptions', function() {
+        return $scope.compileLess();
+      }, true);
       $scope.updateOptions = function() {
         $scope.lessOptions.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
         $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : false;
@@ -362,7 +389,7 @@
           $scope[k] = v;
         }
       };
-      return setLessOptions = function(opts) {
+      setLessOptions = function(opts) {
         _.each(opts.lessVersions, function(version) {
           if (version.type === 'current') {
             $scope.lessOptions.lessVersion = version.number;
@@ -378,6 +405,10 @@
           });
           return sel.value;
         })();
+      };
+      return $scope.compileLess = function() {
+        $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
+        return $scope.$safeApply();
       };
     }
   ]);

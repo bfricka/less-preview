@@ -64,7 +64,12 @@ block header
     div#optionsButton.optionsButton
 
   li.divider-vertical
-  li: img#loadingGif.loadingGif(src='/images/loading.gif', alt='Loading...')
+  li: img#loadingGif.loadingGif(
+    ng-cloak
+    fade-show='loading == true'
+    src='/images/loading.gif'
+    alt='Loading...'
+  )
 
 block content
   div.row-fluid
@@ -99,4 +104,8 @@ block content
     div.span6
       h2 CSS Output
       div.codeWrap
-        textarea.cssOutput.css(less-editor, ng-model="cssOutput", opts='cssEditorOptions')
+        textarea.cssOutput.css(
+          less-editor
+          ng-model="cssOutput"
+          opts='cssEditorOptions'
+        )

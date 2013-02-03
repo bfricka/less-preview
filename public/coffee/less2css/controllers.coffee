@@ -14,18 +14,18 @@ l2c.controller 'Less2CssCtrl', [
       loading.done ->
         console.log "Done"
         LessCompiler.initLess()
-        css = LessCompiler.compileLess($scope.lessInput)
-        $scope.cssOutput = css
-        $scope.$apply()
-        console.log css
+        $scope.compileLess()
         return
       return
 
-    $scope.cssOutput = 'a.cool { display: none; }'
+    $scope.cssOutput = ''
 
-    $scope.$watch 'lessInput', (val) ->
-      $scope.cssOutput = LessCompiler.compileLess($scope.lessInput)
-      $scope.$safeApply()
+    $scope.$watch 'lessInput', ->
+      $scope.compileLess()
+
+    $scope.$watch 'lessOptions', ->
+      $scope.compileLess()
+    , true
 
     $scope.updateOptions = ->
       $scope.lessOptions.dumpLineNumbers =
@@ -75,4 +75,8 @@ l2c.controller 'Less2CssCtrl', [
           !!opt.default
         sel.value
       return
+
+    $scope.compileLess = ->
+      $scope.cssOutput = LessCompiler.compileLess($scope.lessInput)
+      $scope.$safeApply()
 ]
