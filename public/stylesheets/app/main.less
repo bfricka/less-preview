@@ -56,7 +56,24 @@ body {
 .options-drawer-wrap {
   position: relative;
   margin: 0;
-  padding: 35px 20px 20px;
+  padding: 20px;
+}
+
+.options-row {
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 15px;
+  padding-top: 10px;
+
+  &.first-row {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  &.last-row {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 }
 
 // Options nav item

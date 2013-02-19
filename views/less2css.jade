@@ -3,7 +3,7 @@ extends layout
 block optionsDrawer
   section#options-drawer.options-drawer
     form#options-drawer-wrap.options-drawer-wrap(name='opts')
-      div.row-fluid.options-row
+      div.row-fluid.options-row.first-row
         div.span3.option-column
           label(for='less-version') LESS Version
           select#less-version.less-version(
@@ -56,9 +56,9 @@ block optionsDrawer
             type='text'
           )
 
-      div.row-fluid.options-row
+      div.row-fluid.options-row.last-row
         div.span3.option-column
-          code Legacy Units
+          label Legacy Units
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': legacyUnits == true}"
