@@ -280,7 +280,10 @@
         }
 
         LessCompiler.prototype.updateOptions = function(options) {
-          return this.lessOptions = options;
+          this.lessOptions = options;
+          if (window.less) {
+            this.initLess();
+          }
         };
 
         LessCompiler.prototype.loadLess = function() {
@@ -355,6 +358,7 @@
       $scope.cssOutput = '';
       $scope.rootpath = '';
       $scope.loading = false;
+      $scope.legacyUnits = false;
       $scope.compileError = false;
       getOptions.success(function() {
         $scope.$watch('lessInput', function(val) {
@@ -369,9 +373,13 @@
         });
       });
       $scope.updateOptions = function() {
-        $scope.lessOptions.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
-        $scope.lessOptions.rootpath = $scope.rootPathEnabled ? $scope.rootpath : '';
-        LessCompiler.updateOptions($scope.lessOptions);
+        var lessOpts;
+        lessOpts = $scope.lessOptions;
+        lessOpts.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
+        lessOpts.rootpath = $scope.rootPathEnabled ? $scope.rootpath : '';
+        $scope.legacyUnits = !$scope.isLegacy() && $scope.legacyUnits ? true : false;
+        lessOpts.strictMaths = lessOpts.strictUnits = $scope.legacyUnits ? false : true;
+        LessCompiler.updateOptions(lessOpts);
       };
       $scope.toggleLineNumbers = function() {
         $scope.lineNumbersEnabled = !$scope.lineNumbersEnabled;
@@ -381,11 +389,22 @@
         $scope.rootPathEnabled = !$scope.rootPathEnabled;
         $scope.updateOptions();
       };
+      $scope.toggleLegacyUnits = function() {
+        $scope.legacyUnits = !$scope.legacyUnits;
+        $scope.updateOptions();
+      };
       $scope.toggleTxt = function(model) {
         if ($scope[model]) {
           return "Enabled";
         } else {
           return "Disabled";
+        }
+      };
+      $scope.isLegacy = function() {
+        if (!$scope.lessOptions) {
+          return false;
+        } else {
+          return parseFloat($scope.lessOptions.lessVersion, 10) < 1.4;
         }
       };
       loadLess = function() {

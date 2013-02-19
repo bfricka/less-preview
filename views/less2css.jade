@@ -58,12 +58,13 @@ block optionsDrawer
 
       div.row-fluid.options-row.last-row
         div.span3.option-column
-          label Legacy Units
+          label Legacy Math/Units
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': legacyUnits == true}"
             ng-click="toggleLegacyUnits()"
             ng-bind="toggleTxt('legacyUnits')"
+            ng-disabled="isLegacy()"
           ) Disabled
 
 block header

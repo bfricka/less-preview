@@ -20,6 +20,7 @@ l2c.controller 'Less2CssCtrl', [
     $scope.cssOutput = ''
     $scope.rootpath = ''
     $scope.loading = false
+    $scope.legacyUnits = false
     $scope.compileError = false
 
     # Setup watchers
@@ -40,12 +41,21 @@ l2c.controller 'Less2CssCtrl', [
       return
 
     $scope.updateOptions = ->
-      $scope.lessOptions.dumpLineNumbers =
+      lessOpts = $scope.lessOptions
+
+      lessOpts.dumpLineNumbers =
         if $scope.lineNumbersEnabled then $scope.dumpLineNumbers else false
-      $scope.lessOptions.rootpath =
+      lessOpts.rootpath =
         if $scope.rootPathEnabled then $scope.rootpath else ''
 
-      LessCompiler.updateOptions($scope.lessOptions)
+      # Validate legacy units in case we switch to a version that doesn't support it
+      $scope.legacyUnits =
+        if !$scope.isLegacy() and $scope.legacyUnits then true else false
+
+      lessOpts.strictMaths =
+      lessOpts.strictUnits = if $scope.legacyUnits then false else true
+
+      LessCompiler.updateOptions(lessOpts)
       return
 
     $scope.toggleLineNumbers = ->
@@ -58,11 +68,23 @@ l2c.controller 'Less2CssCtrl', [
       $scope.updateOptions()
       return
 
+    $scope.toggleLegacyUnits = ->
+      $scope.legacyUnits = !$scope.legacyUnits
+      $scope.updateOptions()
+      return
+
     $scope.toggleTxt = (model) ->
       if $scope[model]
         "Enabled"
       else
         "Disabled"
+
+    # See if we're at least 1.4 for these options
+    $scope.isLegacy = ->
+      if (!$scope.lessOptions)
+        false
+      else
+        parseFloat($scope.lessOptions.lessVersion, 10) < 1.4
 
     loadLess = ->
       $scope.loading = true

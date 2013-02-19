@@ -13,6 +13,8 @@ l2c.factory 'LessCompiler', [
 
       updateOptions: (options) ->
         @lessOptions = options
+        @initLess() if window.less
+        return
 
       loadLess: ->
         opts = @options

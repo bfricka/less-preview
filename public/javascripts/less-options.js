@@ -67,6 +67,8 @@
     lessOptions: {
       dumpLineNumbers: false,
       relativeUrls: false,
+      strictMaths: true,
+      strictUnits: true,
       rootpath: false,
       filename: "less2css.org.less"
     },
