@@ -19,17 +19,16 @@
     "express": ">=3.0",
     "jade": "*",
     "less-middleware": "*",
-    "lodash": ">=0.9",
-    "mongoose": "*"
+    "lodash": ">=0.9"
   },
   "devDependencies": {
-    "grunt": ">=0.4.0rc6",
+    "grunt": "0.4.x",
     "testacular": "0.5.x",
-    "grunt-contrib-uglify": ">=0.1.1rc6",
-    "grunt-contrib-concat": ">=0.1.2rc6",
-    "grunt-contrib-watch": ">=0.2.0rc5",
-    "grunt-contrib-jshint": ">=0.1.1rc6",
-    "grunt-contrib-coffee": "git://github.com/gruntjs/grunt-contrib-coffee.git",
+    "grunt-contrib-uglify": "0.1.x",
+    "grunt-contrib-concat": "0.1.x",
+    "grunt-contrib-watch": "0.2.x",
+    "grunt-contrib-jshint": "0.1.x",
+    "grunt-contrib-coffee": "0.4.x",
     "async": "0.1.x",
     "nodemon": "*"
   },

@@ -1,12 +1,12 @@
 extends layout
 
 block optionsDrawer
-  section#optionsDrawer.optionsDrawer
-    form#optionsDrawerWrap.optionsDrawerWrap(name='opts')
-      div.row-fluid
+  section#options-drawer.options-drawer
+    form#options-drawer-wrap.options-drawer-wrap(name='opts')
+      div.row-fluid.options-row
         div.span3.option-column
-          label(for='lessVersion') LESS Version
-          select#lessVersion.lessVersion(
+          label(for='less-version') LESS Version
+          select#less-version.less-version(
             ng-model='lessOptions.lessVersion'
             ng-options='version.number as version.label for version in lessVersions'
             ng-change='updateOptions()'
@@ -15,7 +15,7 @@ block optionsDrawer
         div.span3.option-column
           code dumpLineNumbers
           //- i.icon-info-sign
-          button.btn.toggleBtn(
+          button.btn.toggle-btn(
             ng-class="{'btn-primary': lineNumbersEnabled == true}"
             ng-click="toggleLineNumbers()"
             ng-bind="toggleTxt('lineNumbersEnabled')"
@@ -32,7 +32,7 @@ block optionsDrawer
         div.span3.option-column
           code relativeUrls
           //- i.icon-info-sign
-          button.btn.toggleBtn(
+          button.btn.toggle-btn(
             ng-class="{'btn-primary': relativeUrls == true}"
             ng-click="relativeUrls = !relativeUrls; updateOptions()"
             ng-bind="toggleTxt('relativeUrls')"
@@ -41,7 +41,7 @@ block optionsDrawer
         div.span3.option-column
           code rootpath
           //- i.icon-info-sign
-          button.btn.toggleBtn(
+          button.btn.toggle-btn(
             ng-class="{'btn-primary': rootPathEnabled == true}"
             ng-click="toggleRootPath()"
             ng-bind="toggleTxt('rootPathEnabled')"
@@ -56,15 +56,25 @@ block optionsDrawer
             type='text'
           )
 
+      div.row-fluid.options-row
+        div.span3.option-column
+          code Legacy Units
+          //- i.icon-info-sign
+          button.btn.toggle-btn(
+            ng-class="{'btn-primary': legacyUnits == true}"
+            ng-click="toggleLegacyUnits()"
+            ng-bind="toggleTxt('legacyUnits')"
+          ) Disabled
+
 block header
   li.brand: a(href='/') LESS2CSS
   li.divider-vertical
-  li#lessOptions.lessOptions
-    a#optionsLink(href="#") Options
-    div#optionsButton.optionsButton
+  li#less-options.less-options
+    a#options-link(href="#") Options
+    div#options-button.options-button
 
   li.divider-vertical
-  li: img#loadingGif.loadingGif(
+  li: img#loading-gif.loading-gif(
     ng-cloak
     fade-show='loading == true'
     src='/images/loading.gif'
@@ -75,8 +85,8 @@ block content
   div.row-fluid
     div.span6
       h2 LESS Input
-      div.codeWrap
-        textarea#lessInput.lessInput(placeholder="Input your LESS here.", less-editor, opts='lessEditorOptions', ng-model="lessInput").
+      div.code-wrap
+        textarea#less-input.less-input(placeholder="Input your LESS here.", less-editor, opts='lessEditorOptions', ng-model="lessInput").
           .transition(@transition) {
             -webkit-transition: @transition;
                -moz-transition: @transition;
@@ -103,8 +113,8 @@ block content
           }
     div.span6
       h2 CSS Output
-      div.codeWrap(ng-class="{error: compileError == true}")
-        textarea.cssOutput.css(
+      div.code-wrap(ng-class="{error: compileError == true}")
+        textarea.css-output(
           less-editor
           ng-model="cssOutput"
           opts='cssEditorOptions'

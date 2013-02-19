@@ -145,10 +145,10 @@ class LessCompiler
 
 jQuery ($) ->
   elements =
-    lessVersion : $("#lessVersion")
-    loadingGif  : $("#loadingGif")
-    lessInput   : $("#lessInput")
-    cssCode     : $("#cssOutput")
+    lessVersion : $("#less-version")
+    loadingGif  : $("#loading-gif")
+    lessInput   : $("#less-input")
+    cssCode     : $("#css-output")
 
   compiler = window.comp =  new LessCompiler(elements)
 

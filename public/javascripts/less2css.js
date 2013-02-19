@@ -52,11 +52,11 @@
 
       function OptionsDrawer() {
         this.els = {
-          lessOptions: $('#lessOptions'),
-          optsDrawer: $('#optionsDrawer'),
-          optsWrap: $('#optionsDrawerWrap'),
-          optsBtn: $('#optionsButton'),
-          optsLnk: $('#optionsLink'),
+          lessOptions: $('#less-options'),
+          optsDrawer: $('#options-drawer'),
+          optsWrap: $('#options-drawer-wrap'),
+          optsBtn: $('#options-button'),
+          optsLnk: $('#options-link'),
           nav: $('#nav')
         };
         this.fx = {

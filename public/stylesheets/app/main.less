@@ -15,7 +15,7 @@ body {
 
 .code { #font > #family > .monospace }
 
-.optionsDrawer {
+.options-drawer {
   position: absolute;
   top: 40px;
   left: 0;
@@ -23,6 +23,7 @@ body {
   display: none;
   width: 100%;
   border-bottom: 1px solid #ccc;
+
   #gradient > .vertical(@white, #eee);
   .box-shadow(0 10px 14px rgba(0, 0, 0, 0.15));
 
@@ -33,7 +34,8 @@ body {
     margin-left: 3px;
     &:hover { .opacity(80); }
   }
-  .toggleBtn {
+
+  .toggle-btn {
     .box-sizing(border-box);
     display: block;
     margin-top: 10px;
@@ -51,17 +53,19 @@ body {
   label { margin-bottom: 0 }
 }
 
-.optionsDrawerWrap {
+.options-drawer-wrap {
   position: relative;
   margin: 0;
   padding: 35px 20px 20px;
 }
 
 // Options nav item
-.lessOptions {
+.less-options {
   position: relative;
   z-index: 1;
+
   .transition(all 0.5s);
+
   &.open {
     background-color: #e5e5e5;
     color: #555555;
@@ -69,7 +73,7 @@ body {
   }
 }
 
-.optionsButton {
+.options-button {
   position: absolute;
   bottom: -13px;
   left: 0;
@@ -88,59 +92,51 @@ body {
   .box-sizing(border-box);
   .transition(all 0.2s);
   .opacity(50);
+
   &.active { .opacity(100); }
 }
 
-.lessOptions:hover {
-  .optionsButton { .opacity(100); }
-}
+.less-options:hover .options-button { .opacity(100); }
+
 
 // Hack b/c IE9 still sucks and I don't feel like
 // dealing with it.
 .no-cssanimations {
   .github-fork-ribbon,
-  .optionsButton {
+  .options-button {
     display: none;
   }
 }
 
-.lessVersion {
+.less-version {
   width: 100%;
   margin: 5px 0 0 0;
 }
 
-.loadingGif { margin: 10px 0 0 10px; }
+.loading-gif { margin: 10px 0 0 10px; }
 
-.navbar .nav {
-  width: 100%;
-}
+.navbar .nav { width: 100%; }
 
-.preWrap {
-  margin: 0;
-  padding: 8px;
-  border: 1px solid @lightGray;
-  background: @lighterGray;
-  .border-radius(4px);
-}
-
-.lessInput {
+.less-input {
   max-width: 100%;
   width: 100%;
   height: 610px;
 }
 
-.cssOutput {
+.css-output {
   display: none;
   overflow: auto;
   padding: 8px;
   height: 586px;
+
   .border-radius(4px);
 }
 
-.codeWrap {
+.code-wrap {
   padding: 8px;
   border: 1px solid @lightGray;
   background: @lighterGray;
+
   .border-radius(4px);
 }
 
@@ -155,27 +151,23 @@ body {
 }
 
 .CodeMirror {
-  .border-radius(5px);
   height: 602px;
+  .border-radius(5px);
 }
 
 .CodeMirror-gutters,
-.CodeMirror-gutter {
-  .border-radius(5px 0 0 5px);
-}
+.CodeMirror-gutter { .border-radius(5px 0 0 5px); }
 
 /* Highlight.js and CodeMirror */
-
-.cssOutput,
+.css-output,
 .cm-s-lesser-dark {
   font-size: 12px;
   line-height: 1.4;
+
   #font > #family > .monospace;
 }
 
-.cm-s-lesser-dark.CodeMirror,
-pre code,
-pre .value {
+.cm-s-lesser-dark.CodeMirror {
   background: #262626;
   color: #EBEFE7;
   text-shadow: 0 -1px 1px #262626;
@@ -185,39 +177,25 @@ pre .value {
 
 div.CodeMirror span.CodeMirror-matchingbracket { color: #7EFC7E; }
 
-pre .keyword,
 .cm-s-lesser-dark span.cm-keyword { color: #599eff; }
-
-pre .number,
-pre .value .number,
 .cm-s-lesser-dark span.cm-number { color: #B35E4D; }
-
-pre .attribute,
 .cm-s-lesser-dark span.cm-variable { color:#D9BF8C; }
-
-pre .comment,
 .cm-s-lesser-dark span.cm-comment { color: #666; }
-
-pre .string,
 .cm-s-lesser-dark span.cm-string { color: #BCD279; }
-
-pre .pseudo,
 .cm-s-lesser-dark span.cm-meta { color: #738C73; }
-
-pre .tag,
-pre .class,
 .cm-s-lesser-dark span.cm-tag { color: #669199; }
 
 .cm-s-lesser-dark {
   div.CodeMirror-selected { background: #45443B !important; }
   pre { padding: 0 8px; } /*editable code holder*/
-
   .CodeMirror-cursor { border-left: 1px solid white !important; }
+
   .CodeMirror-gutters {
     background: #262626;
     border-right: 1px solid #333;
     padding-right: 1px;
   }
+
   .CodeMirror-linenumber { color: #777; }
 
   span {
@@ -242,5 +220,7 @@ pre .class,
 
 .error .CodeMirror-lines pre {
   color: rgb(199, 0, 56) !important;
-  div, span { color: rgb(199, 0, 56) !important; }
+
+  div,
+  span { color: rgb(199, 0, 56) !important; }
 }

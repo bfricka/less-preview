@@ -3,11 +3,11 @@ jQuery ($) ->
   class OptionsDrawer
     constructor: ->
       @els =
-        lessOptions : $('#lessOptions')
-        optsDrawer  : $('#optionsDrawer')
-        optsWrap    : $('#optionsDrawerWrap')
-        optsBtn     : $('#optionsButton')
-        optsLnk     : $('#optionsLink')
+        lessOptions : $('#less-options')
+        optsDrawer  : $('#options-drawer')
+        optsWrap    : $('#options-drawer-wrap')
+        optsBtn     : $('#options-button')
+        optsLnk     : $('#options-link')
         nav         : $('#nav')
       @fx =
         'duration': 300

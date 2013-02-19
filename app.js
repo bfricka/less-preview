@@ -1,9 +1,7 @@
 (function() {
-  var app, express, http, less, lessOpts, mongoose;
+  var app, express, http, less, lessOpts;
 
   express = require('express');
-
-  mongoose = require('mongoose');
 
   http = require('http');
 
