@@ -16,7 +16,7 @@ l2c.controller 'Less2CssCtrl', [
       return
 
     # Set defaults
-    $scope.lessInput = LessCache.get() or $('#lessInput').val()
+    $scope.lessInput = LessCache.get() or $('#less-input').val()
     $scope.cssOutput = ''
     $scope.rootpath = ''
     $scope.loading = false

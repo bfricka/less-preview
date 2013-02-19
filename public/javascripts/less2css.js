@@ -355,7 +355,7 @@
         $scope.updateOptions();
         loadLess();
       });
-      $scope.lessInput = LessCache.get() || $('#lessInput').val();
+      $scope.lessInput = LessCache.get() || $('#less-input').val();
       $scope.cssOutput = '';
       $scope.rootpath = '';
       $scope.loading = false;
