@@ -325,13 +325,14 @@
         };
 
         LessCompiler.prototype.parseLess = function(lessCode) {
-          var resultCss;
+          var lessOptions, resultCss;
+          lessOptions = this.lessOptions;
           resultCss = "";
           this.parser.parse(lessCode, function(lessEx, result) {
             if (lessEx) {
               throw lessEx;
             }
-            return resultCss = result.toCSS();
+            return resultCss = result.toCSS(lessOptions);
           });
           return resultCss;
         };
@@ -381,16 +382,8 @@
         lessOpts.strictMaths = lessOpts.strictUnits = $scope.legacyUnits ? false : true;
         LessCompiler.updateOptions(lessOpts);
       };
-      $scope.toggleLineNumbers = function() {
-        $scope.lineNumbersEnabled = !$scope.lineNumbersEnabled;
-        $scope.updateOptions();
-      };
-      $scope.toggleRootPath = function() {
-        $scope.rootPathEnabled = !$scope.rootPathEnabled;
-        $scope.updateOptions();
-      };
-      $scope.toggleLegacyUnits = function() {
-        $scope.legacyUnits = !$scope.legacyUnits;
+      $scope.toggleModel = function(model) {
+        $scope[model] = !$scope[model];
         $scope.updateOptions();
       };
       $scope.toggleTxt = function(model) {

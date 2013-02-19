@@ -53,12 +53,13 @@ l2c.factory 'LessCompiler', [
         errorText
 
       parseLess: (lessCode) ->
+        lessOptions = @lessOptions
         resultCss = ""
 
         @parser.parse lessCode, (lessEx, result) ->
           throw lessEx if lessEx
 
-          resultCss = result.toCSS()
+          resultCss = result.toCSS(lessOptions)
 
         resultCss
 

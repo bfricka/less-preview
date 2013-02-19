@@ -52,24 +52,16 @@ l2c.controller 'Less2CssCtrl', [
       $scope.legacyUnits =
         if !$scope.isLegacy() and $scope.legacyUnits then true else false
 
+      # Strict maths/units comprise legacy so set them both
       lessOpts.strictMaths =
       lessOpts.strictUnits = if $scope.legacyUnits then false else true
 
       LessCompiler.updateOptions(lessOpts)
       return
 
-    $scope.toggleLineNumbers = ->
-      $scope.lineNumbersEnabled = !$scope.lineNumbersEnabled
-      $scope.updateOptions()
-      return
-
-    $scope.toggleRootPath = ->
-      $scope.rootPathEnabled = !$scope.rootPathEnabled
-      $scope.updateOptions()
-      return
-
-    $scope.toggleLegacyUnits = ->
-      $scope.legacyUnits = !$scope.legacyUnits
+    # Toggle any model
+    $scope.toggleModel = (model) ->
+      $scope[model] = !$scope[model]
       $scope.updateOptions()
       return
 

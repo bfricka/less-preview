@@ -17,7 +17,7 @@ block optionsDrawer
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': lineNumbersEnabled == true}"
-            ng-click="toggleLineNumbers()"
+            ng-click="toggleModel('lineNumbersEnabled')"
             ng-bind="toggleTxt('lineNumbersEnabled')"
           ) Disabled
 
@@ -34,7 +34,7 @@ block optionsDrawer
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': relativeUrls == true}"
-            ng-click="relativeUrls = !relativeUrls; updateOptions()"
+            ng-click="toggleModel('relativeUrls')"
             ng-bind="toggleTxt('relativeUrls')"
           ) Disabled
 
@@ -43,7 +43,7 @@ block optionsDrawer
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': rootPathEnabled == true}"
-            ng-click="toggleRootPath()"
+            ng-click="toggleModel('rootPathEnabled')"
             ng-bind="toggleTxt('rootPathEnabled')"
           ) Disabled
 
@@ -62,7 +62,7 @@ block optionsDrawer
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': legacyUnits == true}"
-            ng-click="toggleLegacyUnits()"
+            ng-click="toggleModel('legacyUnits')"
             ng-bind="toggleTxt('legacyUnits')"
             ng-disabled="isLegacy()"
           ) Disabled
