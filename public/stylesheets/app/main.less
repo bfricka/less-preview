@@ -1,7 +1,4 @@
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
+body { padding-top: 60px; }
 
 @lighterGray: #f5f5f5;
 @lightGray: #ccc;
@@ -11,6 +8,18 @@ body {
   &.right-text {
     padding: 45px 0;
   }
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  padding: 15px 20px;
+  width: 100%;
+  border-top: 1px solid #efefef;
+  background: @white;
+  .box-sizing(border-box);
 }
 
 .code { #font > #family > .monospace }
@@ -150,16 +159,46 @@ body {
 }
 
 .code-wrap {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  bottom: 100px;
+  left: 20px;
   padding: 8px;
   border: 1px solid @lightGray;
   background: @lighterGray;
+  width: 47.5%;
 
   .border-radius(4px);
+  .box-sizing(border-box);
+
+  &.left {}
+  &.right {
+    left: auto;
+    right: 20px;
+  }
 }
 
-.small { font-size: 0.8em; }
+.small { font-size: 0.8em; margin: 0; }
+
+@media (max-width: 979px) and (min-width: 768px) {
+  .code-wrap { width: 46%; }
+}
 
 @media (max-width: 767px) {
+  body { padding-bottom: 20px; }
+
+  .code-wrap {
+    position: static;
+    width: auto;
+  }
+
+  .page-footer {
+    position: static;
+    margin-top: 15px;
+    padding: 15px 0 0;
+  }
+
   .navbar-inner .container-fluid { padding: 0 20px }
   .option-column {
     margin-top: 15px;
@@ -168,7 +207,7 @@ body {
 }
 
 .CodeMirror {
-  height: 602px;
+  height: 100%;
   .border-radius(5px);
 }
 
