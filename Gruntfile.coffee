@@ -109,13 +109,11 @@ module.exports = (grunt) ->
           mangle:
             except: [
               "OptionsDrawer"
-              "EventEmitter"
               "CodeMirror"
               "angular"
               "amplify"
               "jQuery"
               "Stor"
-              "hljs"
               "less"
               "$"
               "_"
@@ -150,7 +148,6 @@ module.exports = (grunt) ->
           "angular"    : true
           "amplify"    : true
           "jQuery"     : true
-          "hljs"       : true
           "less"       : true
           "$"          : true
           "_"          : true

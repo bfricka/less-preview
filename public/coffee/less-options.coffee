@@ -1,6 +1,6 @@
 exports.lessOpts = {
   lessVersions: [
-    {label: "1.4.0 (pre-release)", number: "1.4.0", type: "pre"}
+    {label: "1.4.0 (beta)", number: "1.4.0", type: "pre"}
     {label: "1.3.3 (current)", number: "1.3.3", type: "current"}
     {label: "1.3.2", number: "1.3.2", type: "old"}
     {label: "1.3.1", number: "1.3.1", type: "old"}

@@ -3,7 +3,7 @@
   exports.lessOpts = {
     lessVersions: [
       {
-        label: "1.4.0 (pre-release)",
+        label: "1.4.0 (beta)",
         number: "1.4.0",
         type: "pre"
       }, {
