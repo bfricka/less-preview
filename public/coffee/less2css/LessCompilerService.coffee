@@ -21,7 +21,7 @@ l2c.factory 'LessCompiler', [
         lessOptions = @lessOptions
 
         version = lessOptions.lessVersion
-        version = if version is lessOptions.preRelease then "#{version}-alpha" else version
+        version = if version is lessOptions.preRelease then "#{version}-beta" else version
         scriptUrl = opts.lessPath.replace "{version}", version
         window.less = `undefined`
 

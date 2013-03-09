@@ -291,7 +291,7 @@
           opts = this.options;
           lessOptions = this.lessOptions;
           version = lessOptions.lessVersion;
-          version = version === lessOptions.preRelease ? "" + version + "-alpha" : version;
+          version = version === lessOptions.preRelease ? "" + version + "-beta" : version;
           scriptUrl = opts.lessPath.replace("{version}", version);
           window.less = undefined;
           getScript = $.ajax({
