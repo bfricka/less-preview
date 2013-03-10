@@ -27,6 +27,7 @@ module.exports = (grunt) ->
     paths:
       # Ref common paths so we can use built-in lodash templating.
       coffee : "./public/coffee/"
+      routes : "./routes/"
       tmp    : "./tmp/"
       js     : "./public/javascripts/"
 
@@ -62,13 +63,17 @@ module.exports = (grunt) ->
         files:
           "<%= paths.js %>less2css.js": "<%= paths.tmp %>less2css.coffee"
           "<%= paths.js %>less-options.js": "<%= paths.coffee %>less-options.coffee"
+          "<%= paths.routes %>index.js": "<%= paths.routes %>index.coffee"
           "app.js": "app.coffee"
+          "shortener.js": "shortener.coffee"
 
     watch:
       coffee:
         files: [
           "<%= paths.coffee %>**/*.coffee"
+          "<%= paths.routes %>**/*.coffee"
           "app.coffee"
+          "shortener.coffee"
         ]
         tasks: ["concat:less2css", "coffee"]
 

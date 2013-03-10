@@ -1,15 +1,19 @@
 (function() {
-  var app, express, http, less, lessOpts;
+  var app, express, http, less, mongo, routes, shortener;
 
   express = require('express');
+
+  mongo = require('mongodb');
 
   http = require('http');
 
   less = require('less-middleware');
 
-  app = express();
+  routes = require('./routes');
 
-  lessOpts = require('./public/javascripts/less-options')['lessOpts'];
+  shortener = require('./shortener');
+
+  app = express();
 
   app.locals.env = app.get('env');
 
@@ -44,21 +48,7 @@
     }));
     app.use(express.staticCache());
     app.use(express["static"]("" + __dirname + "/public"));
-    app.use(function(req, res) {
-      res.status(404);
-      if (req.accepts('html')) {
-        return res.render("404", {
-          title: 'LESS2CSS | 404',
-          app: ''
-        });
-      } else if (req.accepts('json')) {
-        return res.send({
-          error: 'Not Found'
-        });
-      } else {
-        return res.type('txt').send('404 Not Found');
-      }
-    });
+    app.use(routes.fourOhfour);
   });
 
   /*
@@ -66,18 +56,11 @@
   */
 
 
-  app.get('/', function(req, res) {
-    var opts;
-    opts = {
-      title: 'LESS2CSS | LESS Live Preview',
-      app: 'Less2Css'
-    };
-    return res.render('less2css', opts);
-  });
+  app.get('/', routes.index);
 
-  app.get('/less-options', function(req, res) {
-    return res.json(lessOpts);
-  });
+  app.get('/less-options', routes.lessOptions);
+
+  app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
 
   /*
   Init

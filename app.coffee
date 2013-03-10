@@ -1,11 +1,11 @@
-express  = require 'express'
-# mongoose = require 'mongoose'
-http     = require 'http'
-# path   = require 'path'
-less     = require 'less-middleware'
+express   = require 'express'
+mongo     = require 'mongodb'
+http      = require 'http'
+less      = require 'less-middleware'
+routes    = require './routes'
+shortener = require './shortener'
 
 app = express()
-lessOpts = require('./public/javascripts/less-options')['lessOpts']
 app.locals.env = app.get('env')
 
 # Perform canonicalization
@@ -44,33 +44,17 @@ app.configure ->
   app.use express.static("#{__dirname}/public")
 
   # Fall-through 404
-  app.use (req, res) ->
-    res.status(404)
-
-    if req.accepts('html')
-      res.render "404", { title: 'LESS2CSS | 404', app: '' }
-    else if req.accepts('json')
-      res.send { error: 'Not Found' }
-    else
-      res.type('txt').send '404 Not Found'
+  app.use routes.fourOhfour
 
   return
-
-# mongoose.connect "mongodb://localhost/less2css"
 
 ###
 Begin Routes
 ###
 
-app.get '/', (req, res) ->
-  opts =
-    title: 'LESS2CSS | LESS Live Preview'
-    app: 'Less2Css'
-
-  res.render 'less2css', opts
-
-app.get '/less-options', (req, res) ->
-  res.json lessOpts
+app.get '/', routes.index
+app.get '/less-options', routes.lessOptions
+app.get '/share/:id([A-Za-z0-9]{1,6})', routes.share
 
 ###
 Init

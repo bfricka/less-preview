@@ -36,3 +36,4 @@ tmp
 .idea
 node_modules
 dist
+db
