@@ -35,7 +35,7 @@
   exports.share = function(req, res) {
     var id;
     id = req.params.id;
-    return res.render('404');
+    return res.json({});
   };
 
 }).call(this);

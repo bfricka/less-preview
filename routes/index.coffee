@@ -22,4 +22,4 @@ exports.lessOptions = (req, res) ->
 
 exports.share = (req, res) ->
   id = req.params.id
-  res.render '404'
+  res.json {}

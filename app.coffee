@@ -34,24 +34,27 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
+  app.use( less src: "#{__dirname}/public", compress: true )
+  return
 
-  app.use less
-    src: "#{__dirname}/public"
-    compress: true
+app.configure 'development', ->
+  app.use express.static("#{__dirname}/public")
+  app.use( express.errorHandler dumpExceptions: true, showStack: true )
+  return
 
+app.configure 'production', ->
   # Use static cache for now until I find something better
   app.use express.staticCache()
   app.use express.static("#{__dirname}/public")
-
-  # Fall-through 404
-  app.use routes.fourOhfour
-
+  app.use( express.errorHandler dumpExceptions: true )
   return
+
+# Fall-through 404
+app.use routes.fourOhfour
 
 ###
 Begin Routes
 ###
-
 app.get '/', routes.index
 app.get '/less-options', routes.lessOptions
 app.get '/share/:id([A-Za-z0-9]{1,6})', routes.share
@@ -60,6 +63,6 @@ app.get '/share/:id([A-Za-z0-9]{1,6})', routes.share
 Init
 ###
 http
-.createServer(app)
-.listen app.get('port'), ->
-  console.log "Server started on port #{app.get('port')} in #{app.get('env')} mode."
+  .createServer(app)
+  .listen app.get('port'), ->
+    console.log "Server started on port #{app.get('port')} in #{app.get('env')} mode."

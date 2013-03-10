@@ -46,10 +46,25 @@
       src: "" + __dirname + "/public",
       compress: true
     }));
+  });
+
+  app.configure('development', function() {
+    app.use(express["static"]("" + __dirname + "/public"));
+    app.use(express.errorHandler({
+      dumpExceptions: true,
+      showStack: true
+    }));
+  });
+
+  app.configure('production', function() {
     app.use(express.staticCache());
     app.use(express["static"]("" + __dirname + "/public"));
-    app.use(routes.fourOhfour);
+    app.use(express.errorHandler({
+      dumpExceptions: true
+    }));
   });
+
+  app.use(routes.fourOhfour);
 
   /*
   Begin Routes
