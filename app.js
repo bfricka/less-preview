@@ -11,7 +11,7 @@
 
   routes = require('./routes');
 
-  shortener = require('./shortener');
+  shortener = require('./express/shortener');
 
   app = express();
 
@@ -76,6 +76,8 @@
   app.get('/less-options', routes.lessOptions);
 
   app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
+
+  app.post('/compile', routes.compile);
 
   /*
   Init

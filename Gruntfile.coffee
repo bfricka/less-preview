@@ -26,33 +26,34 @@ module.exports = (grunt) ->
 
     paths:
       # Ref common paths so we can use built-in lodash templating.
-      coffee : "./public/coffee/"
-      routes : "./routes/"
-      tmp    : "./tmp/"
-      js     : "./public/javascripts/"
+      express : "./express"
+      coffee  : "./public/coffee"
+      routes  : "./routes"
+      tmp     : "./tmp"
+      js      : "./public/javascripts"
 
     concat:
       # Concat less2css into temp dir. So it can be wrapped in a single
       # SEAF, since coffee-contrib doesn't have this option.
       less2css:
         src: [
-          "<%= paths.coffee %>Stor.coffee"
-          "<%= paths.coffee %>OptionsDrawer.coffee"
-          "<%= paths.coffee %>app.coffee"
-          "<%= paths.coffee %>less2css/directives.coffee"
-          "<%= paths.coffee %>less2css/LessCacheService.coffee"
-          "<%= paths.coffee %>less2css/LessCompilerService.coffee"
-          "<%= paths.coffee %>less2css/controllers.coffee"
+          "<%= paths.coffee %>/Stor.coffee"
+          "<%= paths.coffee %>/OptionsDrawer.coffee"
+          "<%= paths.coffee %>/app.coffee"
+          "<%= paths.coffee %>/less2css/directives.coffee"
+          "<%= paths.coffee %>/less2css/LessCacheService.coffee"
+          "<%= paths.coffee %>/less2css/LessCompilerService.coffee"
+          "<%= paths.coffee %>/less2css/controllers.coffee"
         ]
-        dest: "<%= paths.tmp %>less2css.coffee"
+        dest: "<%= paths.tmp %>/less2css.coffee"
 
       # Build to add banners to JS
       build:
         options:
           banner: "<%= meta.banner %>"
         files:
-          "<%= paths.js %>less2css.js": ["<%= paths.js %>less2css.js"]
-          "<%= paths.js %>less2css.min.js": ["<%= paths.js %>less2css.min.js"]
+          "<%= paths.js %>/less2css.js": ["<%= paths.js %>/less2css.js"]
+          "<%= paths.js %>/less2css.min.js": ["<%= paths.js %>/less2css.min.js"]
 
     coffee:
       # Note: concat needs to be run in order to gen tmp directory and file
@@ -61,25 +62,32 @@ module.exports = (grunt) ->
         options:
           bare: false
         files:
-          "<%= paths.js %>less2css.js": "<%= paths.tmp %>less2css.coffee"
-          "<%= paths.js %>less-options.js": "<%= paths.coffee %>less-options.coffee"
-          "<%= paths.routes %>index.js": "<%= paths.routes %>index.coffee"
-          "app.js": "app.coffee"
-          "shortener.js": "shortener.coffee"
+          # Front-end
+          "<%= paths.js %>/less2css.js": "<%= paths.tmp %>/less2css.coffee"
+          # Routes
+          "<%= paths.routes %>/index.js": "<%= paths.routes %>/index.coffee"
+          # Express requires
+          "<%= paths.express %>/less-options.js": "<%= paths.express %>/less-options.coffee"
+          "<%= paths.express %>/shortener.js": "<%= paths.express %>/shortener.coffee"
+          "<%= paths.express %>/less-express-compiler.js": "<%= paths.express %>/less-express-compiler.coffee"
+          # Main express app
+          "app.js": "<%= paths.express %>/app.coffee"
 
     watch:
       coffee:
         files: [
-          "<%= paths.coffee %>**/*.coffee"
-          "<%= paths.routes %>**/*.coffee"
-          "app.coffee"
-          "shortener.coffee"
+          "<%= paths.coffee %>/**/*.coffee"
+          "<%= paths.routes %>/**/*.coffee"
+          "<%= paths.express %>/app.coffee"
+          "<%= paths.express %>/shortener.coffee"
+          "<%= paths.express %>/less-options.coffee"
+          "<%= paths.express %>/less-express-compiler.coffee"
         ]
         tasks: ["concat:less2css", "coffee"]
 
       js:
         files: [
-          "<%= paths.js %>less2css.js"
+          "<%= paths.js %>/less2css.js"
         ]
         tasks: ["jshint", "uglify", "test"]
 
@@ -125,8 +133,8 @@ module.exports = (grunt) ->
             ]
 
         files:
-          "<%= paths.js %>less2css.min.js": [
-            "<%= paths.js %>less2css.js"
+          "<%= paths.js %>/less2css.min.js": [
+            "<%= paths.js %>/less2css.js"
             "<banner:meta.banner>"
           ]
 
@@ -157,7 +165,7 @@ module.exports = (grunt) ->
           "$"          : true
           "_"          : true
 
-      all: ["<%= paths.js %>less2css.js"]
+      all: ["<%= paths.js %>/less2css.js"]
 
   # Default task.
 

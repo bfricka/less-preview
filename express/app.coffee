@@ -3,7 +3,7 @@ mongo     = require 'mongodb'
 http      = require 'http'
 less      = require 'less-middleware'
 routes    = require './routes'
-shortener = require './shortener'
+shortener = require './express/shortener'
 
 app = express()
 app.locals.env = app.get('env')
@@ -58,6 +58,8 @@ Begin Routes
 app.get '/', routes.index
 app.get '/less-options', routes.lessOptions
 app.get '/share/:id([A-Za-z0-9]{1,6})', routes.share
+
+app.post '/compile', routes.compile
 
 ###
 Init

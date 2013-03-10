@@ -1,4 +1,5 @@
-lessOpts = require('../public/javascripts/less-options')['lessOpts']
+lessOpts = require('../express/less-options')['lessOpts']
+lessCompiler = require('../express/less-express-compiler')
 
 exports.fourOhfour = (req, res) ->
     res.status(404)
@@ -23,3 +24,8 @@ exports.lessOptions = (req, res) ->
 exports.share = (req, res) ->
   id = req.params.id
   res.json {}
+
+exports.compile = (req, res) ->
+  res.json
+    options: req.query
+    content: req.body.content

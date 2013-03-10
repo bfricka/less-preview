@@ -1,7 +1,9 @@
 (function() {
-  var lessOpts;
+  var lessCompiler, lessOpts;
 
-  lessOpts = require('../public/javascripts/less-options')['lessOpts'];
+  lessOpts = require('../express/less-options')['lessOpts'];
+
+  lessCompiler = require('../express/less-express-compiler');
 
   exports.fourOhfour = function(req, res) {
     res.status(404);
@@ -36,6 +38,13 @@
     var id;
     id = req.params.id;
     return res.json({});
+  };
+
+  exports.compile = function(req, res) {
+    return res.json({
+      options: req.query,
+      content: req.body.content
+    });
   };
 
 }).call(this);
