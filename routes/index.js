@@ -1,9 +1,7 @@
 (function() {
-  var lessCompiler, lessOpts;
+  var lessOpts;
 
   lessOpts = require('../express/less-options')['lessOpts'];
-
-  lessCompiler = require('../express/less-express-compiler');
 
   exports.fourOhfour = function(req, res) {
     res.status(404);

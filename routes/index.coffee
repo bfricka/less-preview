@@ -1,5 +1,6 @@
 lessOpts = require('../express/less-options')['lessOpts']
-lessCompiler = require('../express/less-express-compiler')
+# LessCompiler = require('../express/less-express-compiler')['LessCompiler']
+# compiler = new LessCompiler()
 
 exports.fourOhfour = (req, res) ->
     res.status(404)
