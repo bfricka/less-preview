@@ -11,13 +11,10 @@ app.locals.env = app.get('env')
 # Perform canonicalization
 app.use (req, res, next) ->
   host = req.headers.host
-  if host is "less2css.org"
+  if host is "less2css.org" # Quick next for canonical
     next()
-  else if host is "www.less2css.com" or
-  host is "www.less2css.org" or
-  host is "less2css.com" or
-  host is "www.preprocessors.net" or
-  host is "preprocessors.net"
+  else if host is "www.less2css.org" or
+  /(www\.)?(less2css\.com|preprocessors\.net)/i.test(host)
     res.redirect 301, "http://less2css.org#{req.url}"
   else # For localhost
     next()
