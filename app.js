@@ -22,7 +22,7 @@
     host = req.headers.host;
     if (host === "less2css.org") {
       return next();
-    } else if (host === "www.less2css.org" || /(www\.)?(less2css\.com|preprocessors\.net)/i.test(host)) {
+    } else if (host === "www.less2css.com" || host === "www.less2css.org" || host === "less2css.com" || host === "www.preprocessors.net" || host === "preprocessors.net") {
       return res.redirect(301, "http://less2css.org" + req.url);
     } else {
       return next();

@@ -1,3 +1,6 @@
+/* less2css - v0.0.4 - http://less2css.org/
+* Copyright (c) 2013 Brian Frichette. All rights reserved.
+* Licensed MIT - http://opensource.org/licenses/MIT */
 (function() {
   var Stor, l2c;
 
