@@ -1,0 +1,28 @@
+{
+    "sub"      : true
+  , "boss"     : true
+  , "expr"     : true
+  , "node"     : true
+  , "devel"    : true
+  , "curly"    : false
+  , "immed"    : true
+  , "noarg"    : true
+  , "undef"    : true
+  , "newcap"   : true
+  , "shadow"   : true
+  , "newcap"   : false
+  , "eqnull"   : true
+  , "jquery"   : true
+  , "eqeqeq"   : true
+  , "browser"  : true
+  , "latedef"  : true
+  , "mootools" : true
+  , "supernew" : true
+  , "laxcomma" : true
+  , "laxbreak" : true
+
+  , "globals"  : {
+      "angular": true
+    , "amplify": true
+  }
+}
