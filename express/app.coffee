@@ -1,9 +1,34 @@
-express   = require 'express'
-mongo     = require 'mongodb'
-http      = require 'http'
-less      = require 'less-middleware'
-routes    = require './routes'
-shortener = require './express/shortener'
+fs             = require 'fs'
+http           = require 'http'
+less           = require 'less-middleware'
+mongo          = require 'mongodb'
+routes         = require './routes'
+express        = require 'express'
+passport       = require 'passport'
+shortener      = require './express/shortener'
+GitHubStrategy = require('passport-github').Strategy
+
+github = JSON.parse fs.readFileSync('./github.json')
+
+passport.serializeUser (user, done) ->
+  done null, user
+  return
+
+passport.deserializeUser (obj, done) ->
+  done null, obj
+  return
+
+passport.use(
+  new GitHubStrategy(
+    clientID     : github.clientID
+    callbackURL  : github.callbackURL
+    clientSecret : github.clientSecret
+  )
+  , (accessToken, refreshToken, profile, done) ->
+    process.nextTick ->
+      done null, profile
+    return
+)
 
 app = express()
 app.locals.env = app.get('env')
@@ -30,8 +55,13 @@ app.configure ->
   # Enable Gzip
   app.use express.compress()
   # Enable utility middleware
+  app.use express.logger()
+  app.use express.cookieParser()
   app.use express.bodyParser()
   app.use express.methodOverride()
+  app.use express.session { secret: 'wtfyo' }
+  app.use passport.initialize()
+  app.use passport.session()
   app.use app.router
   app.use( less src: "#{__dirname}/public", compress: true )
   return
@@ -56,6 +86,24 @@ Begin Routes
 ###
 app.get '/', routes.index
 app.get '/less-options', routes.lessOptions
+
+app.get(
+  '/auth/github',
+  passport.authenticate('github'),
+  (req, res) ->
+)
+
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login'}),
+  (req, res) ->
+    res.redirect('/')
+)
+
+app.get '/logout', (req, res) ->
+  req.logout()
+  res.redirect('/')
+
 app.get '/share/:id([A-Za-z0-9]{1,6})', routes.share
 
 app.post '/compile', routes.compile

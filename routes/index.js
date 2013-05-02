@@ -21,6 +21,7 @@
 
   exports.index = function(req, res) {
     var opts;
+
     opts = {
       title: 'LESS2CSS | LESS Live Preview',
       app: 'Less2Css'
@@ -34,6 +35,7 @@
 
   exports.share = function(req, res) {
     var id;
+
     id = req.params.id;
     return res.json({});
   };

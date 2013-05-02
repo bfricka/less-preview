@@ -8,7 +8,6 @@
   lessPath = "../public/javascripts/less";
 
   exports.LessCompiler = LessCompiler = (function() {
-
     function LessCompiler(version, options) {
       this.version = version || __.find(lessOpts.lessVersions, function(version) {
         return version.type === 'current';
@@ -21,6 +20,7 @@
 
     LessCompiler.prototype.setupVersions = function(versions) {
       var fileName, obj, sub, version, window, _i, _len, _results;
+
       this.versions = [];
       _results = [];
       for (_i = 0, _len = versions.length; _i < _len; _i++) {

@@ -1,44 +1,51 @@
 {
-  "name": "less2css",
-  "description": "Converts LESS to CSS and does other awesome stuff",
-  "version": "0.0.4",
-  "private": true,
-  "author": "Brian Frichette",
-  "homepage": "http://less2css.org/",
-  "contributors": [
+    "name": "less2css"
+  , "description": "Converts LESS to CSS and does other awesome stuff"
+  , "version": "0.0.4"
+  , "private": true
+  , "author": "Brian Frichette"
+  , "homepage": "http://less2css.org/"
+  , "contributors": [
     "Brian Frichette <brian.frichette@gmail.com> (https://github.com/brian-frichette)",
     "Scott Rippey (https://github.com/scottrippey)"
-  ],
-  "bugs": { "url": "https://github.com/brian-frichette/less-preview/issues" },
-  "scripts": {
-    "start": "nodemon app.js",
-    "prod": "forever start app.js -l"
-  },
-  "dependencies": {
-    "forever": "*",
-    "express": ">=3.0",
-    "jade": "*",
-    "less-middleware": "*",
-    "lodash": "1.0.x",
-    "mongodb": "*"
-  },
-  "devDependencies": {
-    "grunt": "0.4.x",
-    "testacular": "0.6.x",
-    "grunt-contrib-uglify": "0.1.x",
-    "grunt-contrib-concat": "0.1.x",
-    "grunt-contrib-watch": "0.2.x",
-    "grunt-contrib-jshint": "0.1.x",
-    "grunt-contrib-coffee": "0.4.x",
-    "async": "0.1.x",
-    "nodemon": "*"
-  },
-  "keywords": ["less", "lesscss"],
-  "repository": "git://github.com/brian-frichette/less-preview.git",
-  "licenses": [
+  ]
+
+  , "bugs": { "url": "https://github.com/brian-frichette/less-preview/issues" }
+
+  , "scripts": {
+      "start": "nodemon app.js"
+    , "prod": "forever start app.js -l"
+  }
+
+  , "dependencies": {
+      "forever": "*"
+    , "express": ">=3.0"
+    , "jade": "*"
+    , "less-middleware": "*"
+    , "lodash": "1.0.x"
+    , "passport": ">=0.1"
+    , "passport-github": ">=0.1"
+    , "mongodb": "*"
+  }
+
+  , "devDependencies": {
+      "grunt": "0.4.x"
+    , "karma": ">=0.8"
+    , "grunt-contrib-uglify": ">=0.2"
+    , "grunt-contrib-concat": ">=0.2"
+    , "grunt-contrib-watch": ">=0.3"
+    , "grunt-contrib-jshint": ">=0.4"
+    , "grunt-contrib-coffee": ">=0.7"
+    , "async": "0.1.x"
+    , "nodemon": "*"
+  }
+
+  , "keywords": ["less", "lesscss"]
+  , "repository": "git://github.com/brian-frichette/less-preview.git"
+  , "licenses": [
     {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
+        "type": "MIT"
+      , "url": "http://opensource.org/licenses/MIT"
     }
   ]
 }

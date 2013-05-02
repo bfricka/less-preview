@@ -1,5 +1,5 @@
 #global module:false
-testacular = require 'testacular'
+karma = require 'karma'
 
 module.exports = (grunt) ->
 
@@ -178,26 +178,26 @@ module.exports = (grunt) ->
     "test"
   ]
 
-  grunt.registerTask "testserver", "start testacular server", ->
+  grunt.registerTask "testserver", "start karma server", ->
     #Mark the task as async but never call done, so the server stays up
     done = @async()
-    testacular.server.start configFile: "test/testacular.conf.js"
+    karma.server.start configFile: "test/karma.conf.js"
 
-  # Invoke tests on testacular server.
+  # Invoke tests on karma server.
   grunt.registerTask "test", "run tests (make sure server task is run first)", ->
     done = @async()
 
     grunt.util.spawn
-      cmd: (if process.platform is "win32" then "testacular.cmd" else "testacular")
+      cmd: (if process.platform is "win32" then "karma.cmd" else "karma")
       args: ["run"]
     , (error, result, code) ->
       if error
         grunt.warn
-        "Make sure the testacular server is online: run `grunt server`.\n" +
+        "Make sure the karma server is online: run `grunt server`.\n" +
         "Also make sure you have a browser open to http://localhost:8080/.\n" +
         error.stdout + error.stderr
 
-        #the testacular runner somehow modifies the files if it errors(??).
+        #the karma runner somehow modifies the files if it errors(??).
         #this causes grunt's watch task to re-fire itself constantly,
         #unless we wait for a sec
         setTimeout done, 1000

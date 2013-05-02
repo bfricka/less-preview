@@ -1,17 +1,43 @@
 (function() {
-  var app, express, http, less, mongo, routes, shortener;
+  var GitHubStrategy, app, express, fs, github, http, less, mongo, passport, routes, shortener;
 
-  express = require('express');
-
-  mongo = require('mongodb');
+  fs = require('fs');
 
   http = require('http');
 
   less = require('less-middleware');
 
+  mongo = require('mongodb');
+
   routes = require('./routes');
 
+  express = require('express');
+
+  passport = require('passport');
+
   shortener = require('./express/shortener');
+
+  GitHubStrategy = require('passport-github').Strategy;
+
+  github = JSON.parse(fs.readFileSync('./github.json'));
+
+  passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+
+  passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+  });
+
+  passport.use(new GitHubStrategy({
+    clientID: github.clientID,
+    callbackURL: github.callbackURL,
+    clientSecret: github.clientSecret
+  }), function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+      return done(null, profile);
+    });
+  });
 
   app = express();
 
@@ -19,6 +45,7 @@
 
   app.use(function(req, res, next) {
     var host;
+
     host = req.headers.host;
     if (host === "less2css.org") {
       return next();
@@ -39,8 +66,15 @@
     app.set('views', "" + __dirname + "/views");
     app.set('view engine', 'jade');
     app.use(express.compress());
+    app.use(express.logger());
+    app.use(express.cookieParser());
     app.use(express.bodyParser());
     app.use(express.methodOverride());
+    app.use(express.session({
+      secret: 'wtfyo'
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(app.router);
     app.use(less({
       src: "" + __dirname + "/public",
@@ -74,6 +108,19 @@
   app.get('/', routes.index);
 
   app.get('/less-options', routes.lessOptions);
+
+  app.get('/auth/github', passport.authenticate('github'), function(req, res) {});
+
+  app.get('/auth/github/callback', passport.authenticate('github', {
+    failureRedirect: '/login'
+  }), function(req, res) {
+    return res.redirect('/');
+  });
+
+  app.get('/logout', function(req, res) {
+    req.logout();
+    return res.redirect('/');
+  });
 
   app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
 

@@ -7,6 +7,7 @@
 
   exports.encode = function(i) {
     var s;
+
     if (i === 0) {
       return alphabet[0];
     }
@@ -20,6 +21,7 @@
 
   exports.decode = function(s) {
     var c, i, _i, _len;
+
     i = 0;
     for (_i = 0, _len = s.length; _i < _len; _i++) {
       c = s[_i];

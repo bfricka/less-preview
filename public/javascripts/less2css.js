@@ -2,7 +2,6 @@
   var Stor, l2c;
 
   Stor = (function() {
-
     function Stor(key, exp) {
       this.key = (key != null ? key : void 0);
       this.exp = (exp != null ? exp : null);
@@ -35,6 +34,7 @@
 
     Stor.prototype.empty = function() {
       var self, storage;
+
       self = this;
       storage = self.amp();
       return $.each(storage, function(itm, key) {
@@ -48,8 +48,8 @@
 
   jQuery(function($) {
     var OptionsDrawer, optsDrawer;
-    OptionsDrawer = (function() {
 
+    OptionsDrawer = (function() {
       function OptionsDrawer() {
         this.els = {
           lessOptions: $('#less-options'),
@@ -73,6 +73,7 @@
 
       OptionsDrawer.prototype.setupEvents = function() {
         var els, self;
+
         self = this;
         els = self.els;
         els.optsBtn.on('click', function(e) {
@@ -91,6 +92,7 @@
 
       OptionsDrawer.prototype.openDrawer = function() {
         var opts, props;
+
         this.els.lessOptions.addClass('open');
         props = {
           'top': this.els.nav.height(),
@@ -105,6 +107,7 @@
 
       OptionsDrawer.prototype.closeDrawer = function(start) {
         var els, opts, props;
+
         els = this.els;
         els.lessOptions.removeClass('open');
         props = {
@@ -122,6 +125,7 @@
 
       OptionsDrawer.prototype.animateDrawer = function(action, props, opts) {
         var cb, defer, optsDrawer, self;
+
         self = this;
         optsDrawer = this.els.optsDrawer;
         defer = new $.Deferred();
@@ -155,6 +159,7 @@
 
       OptionsDrawer.prototype.getBtnLeft = function() {
         var btn;
+
         btn = this.els.optsBtn[0];
         return btn.parentElement.offsetLeft + btn.parentElement.parentElement.offsetLeft;
       };
@@ -166,6 +171,7 @@
 
       OptionsDrawer.prototype.detach = function() {
         var els, left, optsBtn, wid;
+
         els = this.els;
         optsBtn = els.optsBtn;
         wid = optsBtn.width();
@@ -206,9 +212,11 @@
         require: 'ngModel',
         link: function(scope, elem, attrs, ngModel) {
           var deferCodeMirror, onChange;
+
           onChange = function() {
             return function(instance, changeObj) {
               var newValue;
+
               newValue = instance.getValue();
               if (newValue !== ngModel.$viewValue) {
                 ngModel.$setViewValue(newValue);
@@ -218,6 +226,7 @@
           };
           deferCodeMirror = function() {
             var codeMirror, opts;
+
             opts = scope[attrs.opts];
             codeMirror = CodeMirror.fromTextArea(elem[0], opts);
             codeMirror.on('change', onChange(opts.onChange));
@@ -234,6 +243,7 @@
   l2c.directive('fadeShow', function() {
     return function(scope, elem, attrs) {
       var $elem, duration, exp, fadeElem;
+
       $elem = $(elem);
       exp = attrs.fadeShow;
       duration = 400;
@@ -267,8 +277,8 @@
   l2c.factory('LessCompiler', [
     '$http', 'LessCache', function($http, LessCache) {
       var LessCompiler;
-      LessCompiler = (function() {
 
+      LessCompiler = (function() {
         function LessCompiler() {
           this.options = {
             saveLess: true,
@@ -288,6 +298,7 @@
 
         LessCompiler.prototype.loadLess = function() {
           var getScript, lessOptions, opts, scriptUrl, version;
+
           opts = this.options;
           lessOptions = this.lessOptions;
           version = lessOptions.lessVersion;
@@ -307,12 +318,14 @@
         };
 
         LessCompiler.prototype.compileLess = function(lessCode) {
-          var compiledCSS;
+          var compiledCSS, lessEx;
+
           try {
             compiledCSS = this.parseLess(lessCode, this.lessOptions);
             this.error = false;
             return compiledCSS;
-          } catch (lessEx) {
+          } catch (_error) {
+            lessEx = _error;
             this.error = true;
             return this.updateError(lessEx);
           }
@@ -320,12 +333,14 @@
 
         LessCompiler.prototype.updateError = function(lessEx) {
           var errorText;
+
           errorText = ("" + lessEx.type + " error: " + lessEx.message) + "\n" + (lessEx.extract && lessEx.extract.join && lessEx.extract.join(""));
           return errorText;
         };
 
         LessCompiler.prototype.parseLess = function(lessCode) {
           var lessOptions, resultCss;
+
           lessOptions = this.lessOptions;
           resultCss = "";
           this.parser.parse(lessCode, function(lessEx, result) {
@@ -347,6 +362,7 @@
   l2c.controller('Less2CssCtrl', [
     '$scope', '$http', 'LessCompiler', 'LessCache', function($scope, $http, LessCompiler, LessCache) {
       var compileLess, getOptions, loadLess, setLessOptions, setOptions;
+
       getOptions = $http.get('/less-options');
       getOptions.success(function(options) {
         setOptions(options);
@@ -375,6 +391,7 @@
       });
       $scope.updateOptions = function() {
         var lessOpts;
+
         lessOpts = $scope.lessOptions;
         lessOpts.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
         lessOpts.rootpath = $scope.rootPathEnabled ? $scope.rootpath : '';
@@ -402,6 +419,7 @@
       };
       loadLess = function() {
         var loading;
+
         $scope.loading = true;
         loading = LessCompiler.loadLess();
         return loading.done(function() {
@@ -419,6 +437,7 @@
       };
       setOptions = function(opts) {
         var k, v;
+
         for (k in opts) {
           v = opts[k];
           $scope[k] = v;
@@ -435,6 +454,7 @@
         });
         $scope.dumpLineNumbers = (function() {
           var sel;
+
           sel = _.find(opts.lineNumberOptions, function(opt) {
             return !!opt["default"];
           });
