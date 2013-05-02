@@ -15,14 +15,17 @@
   , "jquery"   : true
   , "eqeqeq"   : true
   , "browser"  : true
-  , "latedef"  : true
-  , "mootools" : true
+  , "latedef"  : false
   , "supernew" : true
   , "laxcomma" : true
   , "laxbreak" : true
-
   , "globals"  : {
-      "angular": true
-    , "amplify": true
+      "_"          : true
+    , "$"          : true
+    , "less"       : true
+    , "jQuery"     : true
+    , "amplify"    : true
+    , "angular"    : true
+    , "CodeMirror" : true
   }
 }

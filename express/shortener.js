@@ -1,33 +1,28 @@
-(function() {
-  var alphabet, base;
+var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('')
+  , base = alphabet.length;
 
-  alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+module.exports = {
+  encode: function(i) {
+    if (i === 0) return alphabet[0];
+    var s = '';
 
-  base = alphabet.length;
-
-  exports.encode = function(i) {
-    var s;
-
-    if (i === 0) {
-      return alphabet[0];
-    }
-    s = "";
     while (i > 0) {
       s += alphabet[i % base];
       i = parseInt(i / base, 10);
     }
-    return s.split("").reverse().join("");
-  };
 
-  exports.decode = function(s) {
-    var c, i, _i, _len;
+    return s.split('').reverse().join('');
+  }
 
-    i = 0;
-    for (_i = 0, _len = s.length; _i < _len; _i++) {
-      c = s[_i];
-      i = i * base + alphabet.indexOf(c);
+  , decode: function(s) {
+    var len = s.length
+      , i = 0;
+
+    while (i < len) {
+      var c = s[i]
+        , i = i * base + alphabet.indexOf(c);
     }
-    return i;
-  };
 
-}).call(this);
+    return i;
+  }
+};

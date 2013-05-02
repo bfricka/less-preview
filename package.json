@@ -35,7 +35,6 @@
     , "grunt-contrib-concat": ">=0.2"
     , "grunt-contrib-watch": ">=0.3"
     , "grunt-contrib-jshint": ">=0.4"
-    , "grunt-contrib-coffee": ">=0.7"
     , "async": "0.1.x"
     , "nodemon": "*"
   }

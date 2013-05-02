@@ -11,8 +11,7 @@
 *~
 *.sass-cache
 
-github.json
-private.json
+private.js
 
 # OS or Editor folders
 .DS_Store
