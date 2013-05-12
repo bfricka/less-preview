@@ -12,6 +12,7 @@
 *.sass-cache
 
 private.js
+*.tern-port
 
 # OS or Editor folders
 .DS_Store

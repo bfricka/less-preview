@@ -1,12 +1,13 @@
 l2c.controller('Less2CssCtrl', [
     '$http'
   , '$scope'
-  , 'LessCache'
+  , 'Stor'
   , 'LessCompiler'
 
-  , function($http, $scope, LessCache, LessCompiler) {
+  , function($http, $scope, Stor, LessCompiler) {
     // Start req for options
     var getOptions = $http.get('/less-options'); // @todo Create service
+    var LessCache = new Stor('LessCache');
 
     // Set model
     getOptions.success(function(options) {
@@ -86,7 +87,7 @@ l2c.controller('Less2CssCtrl', [
     function compileLess() {
       $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
       $scope.compileError = LessCompiler.error;
-      $scope.$safeApply();
+      $scope.safeApply();
     }
 
     function setOptions(opts) {

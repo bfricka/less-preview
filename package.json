@@ -1,7 +1,7 @@
 {
     "name": "less2css"
   , "description": "Converts LESS to CSS and does other awesome stuff"
-  , "version": "0.0.4"
+  , "version": "0.0.5"
   , "private": true
   , "author": "Brian Frichette"
   , "homepage": "http://less2css.org/"
@@ -30,7 +30,7 @@
 
   , "devDependencies": {
       "grunt": "0.4.x"
-    , "karma": ">=0.8"
+    , "grunt-karma": ">=0.4"
     , "grunt-contrib-uglify": ">=0.2"
     , "grunt-contrib-concat": ">=0.2"
     , "grunt-contrib-watch": ">=0.3"

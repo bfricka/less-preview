@@ -4,7 +4,7 @@ var http = require('http')
   , routes = require('./routes')
   , express = require('express')
   , passport = require('passport')
-  , shortener = require('shortener')
+  , shortener = require('./express/shortener')
   , appConfig = require('./private').app
   , GitHubStrategy = require('passport-github').Strategy
   , githubConfig = require('./private').github;
@@ -90,7 +90,7 @@ app.use(routes.fourOhfour);
 // Begin Routes
 
 
-app.get('/', routes.index);
+app.get('/', routes.home);
 app.get('/less-options', routes.lessOptions);
 app.get('/auth/github', passport.authenticate('github'), function(req, res) {});
 app.get('/auth/github/callback'

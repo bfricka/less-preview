@@ -1,50 +1,45 @@
-(function() {
-  var lessOpts;
+var lessOpts = require('../express/less-options');
 
-  lessOpts = require('../express/less-options')['lessOpts'];
-
-  exports.fourOhfour = function(req, res) {
+module.exports = {
+  fourOhfour: function(req, res) {
     res.status(404);
+
     if (req.accepts('html')) {
-      return res.render("404", {
-        title: 'LESS2CSS | 404',
-        app: ''
+      res.render("404", {
+          app   : ''
+        , title : 'LESS2CSS | 404'
       });
     } else if (req.accepts('json')) {
-      return res.send({
-        error: 'Not Found'
-      });
+      res.send({ error: 'Not Found' });
     } else {
-      return res.type('txt').send('404 Not Found');
+      res
+        .type('txt')
+        .send('404 Not Found');
     }
-  };
+  }
 
-  exports.index = function(req, res) {
-    var opts;
-
-    opts = {
-      title: 'LESS2CSS | LESS Live Preview',
-      app: 'Less2Css'
+  , home: function(req, res) {
+    var opts = {
+        app   : 'Less2Css'
+      , title : 'LESS2CSS | LESS Live Preview'
     };
-    return res.render('less2css', opts);
-  };
 
-  exports.lessOptions = function(req, res) {
-    return res.json(lessOpts);
-  };
+    res.render('less2css', opts);
+  }
 
-  exports.share = function(req, res) {
-    var id;
+  , lessOptions: function(req, res) {
+    res.json(lessOpts);
+  }
 
-    id = req.params.id;
-    return res.json({});
-  };
+  , share: function(req, res) {
+    var id = req.params.id;
+    res.json({});
+  }
 
-  exports.compile = function(req, res) {
-    return res.json({
-      options: req.query,
-      content: req.body.content
+  , compile: function(req, res) {
+    res.json({
+        options: req.query
+      , content: req.body.content
     });
-  };
-
-}).call(this);
+  }
+};

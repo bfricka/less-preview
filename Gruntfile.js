@@ -1,18 +1,18 @@
-var karma = require('karma');
-
 module.exports = function(grunt) {
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
+
   grunt.initConfig({
       pkg: grunt.file.readJSON('package.json')
     , meta: {
       banner: [
           '/* <%= pkg.name %> - v<%= pkg.version %> - <%= pkg.homepage %>\n'
-        , '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>. All rights reserved.\n'
-        , '* Licensed <%= _.pluck(pkg.licenses, "type")[0] %> - <%= _.pluck(pkg.licenses, "url")[0] %> */\n'
+        , ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>. All rights reserved.\n'
+        , ' * Licensed <%= _.pluck(pkg.licenses, "type")[0] %> - <%= _.pluck(pkg.licenses, "url")[0] %>\n'
+        , ' */\n'
       ].join('')
     }
 
@@ -24,17 +24,17 @@ module.exports = function(grunt) {
     }
 
     , concat: {
-      less2css: {
+      app: {
         src: [
-            '<%= paths.js %>/Stor.js'
-          , '<%= paths.js %>/OptionsDrawer.js'
-          , '<%= paths.js %>/app.js'
-          , '<%= paths.js %>/less2css/directives.js'
-          , '<%= paths.js %>/less2css/LessCacheService.js'
-          , '<%= paths.js %>/less2css/LessCompilerService.js'
-          , '<%= paths.js %>/less2css/controllers.js'
+            '<%= paths.js %>/options-drawer.js'
+          , '<%= paths.js %>/app/app.js'
+          , '<%= paths.js %>/app/services/Stor.js'
+          , '<%= paths.js %>/app/services/LessCompiler.js'
+          , '<%= paths.js %>/app/directives/fadeShow.js'
+          , '<%= paths.js %>/app/directives/lessEditor.js'
+          , '<%= paths.js %>/app/controllers/Less2CssCtrl.js'
         ]
-        , dest: '<%= paths.tmp %>/less2css.js'
+        , dest: '<%= paths.js %>/less2css.js'
       }
 
       , build: {
@@ -49,11 +49,11 @@ module.exports = function(grunt) {
     , watch: {
       js: {
           files: ['<%= paths.js %>/less2css.js']
-        , tasks: ['jshint', 'uglify', 'test']
+        , tasks: ['jshint', 'uglify', 'karma:unit:run']
       }
       , tests: {
-          files: ['./test/**/*.spec.coffee']
-        , tasks: ['test']
+          files: ['./test/**/*.spec.js']
+        , tasks: ['karma:unit:run']
       }
     }
 
@@ -84,38 +84,16 @@ module.exports = function(grunt) {
       }
     }
     , jshint: {
-      options: {
-        jshintrc: './.jshintrc'
-      }
+      options: { jshintrc: './.jshintrc' }
       , all: ['<%= paths.js %>/less2css.js']
     }
   });
 
-  grunt.registerTask('default', ['concat:less2css', 'jshint', 'uglify', 'concat:build', 'test']);
-
-  grunt.registerTask('testserver', 'start karma server', function() {
-    var done = this.async();
-    karma.server.start({
-      configFile: 'test/karma.conf.js'
-    });
-  });
-
-  grunt.registerTask('test', 'run tests (make sure server task is run first)', function() {
-    var done = this.async();
-    return grunt.util.spawn({
-      cmd: (process.platform === 'win32' ? 'karma.cmd' : 'karma'),
-      args: ['run']
-    }, function(error, result, code) {
-      if (error) {
-        grunt.warn(
-          'Make sure the karma server is online: run `grunt server`.\n' +
-          'Also make sure you have a browser open to http://localhost:8080/.\n' +
-          error.stdout + error.stderr);
-        setTimeout(done, 1000);
-      } else {
-        grunt.log.write(result.stdout);
-        done();
-      }
-    });
-  });
+  grunt.registerTask('default', [
+    'concat:app'
+    , 'jshint'
+    , 'uglify'
+    , 'concat:build'
+    , 'karma'
+  ]);
 };
