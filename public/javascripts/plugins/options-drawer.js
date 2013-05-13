@@ -5,13 +5,14 @@ jQuery(function($) {
 
     function OptionsDrawer() {
       this.els = {
-        lessOptions: $('#less-options'),
-        optsDrawer: $('#options-drawer'),
-        optsWrap: $('#options-drawer-wrap'),
-        optsBtn: $('#options-button'),
-        optsLnk: $('#options-link'),
-        nav: $('#nav')
+          nav: $('#nav')
+        , optsLnk: $('#options-link')
+        , optsBtn: $('#options-button')
+        , optsWrap: $('#options-drawer-wrap')
+        , optsDrawer: $('#options-drawer')
+        , lessOptions: $('#less-options')
       };
+
       this.fx = { 'duration': 300 };
 
       this.text = {

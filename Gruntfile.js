@@ -1,3 +1,27 @@
+var scripts = require('./express/app-scripts')(process.cwd())
+  , src = scripts.development()
+  , uglify_options = {
+    compress: {
+        loops        : true
+      , unused       : true
+      , unsafe       : true
+      , cascade      : true
+      , warnings     : true
+      , booleans     : true
+      , evaluate     : true
+      , dead_code    : true
+      , join_vars    : true
+      , if_return    : true
+      , sequences    : true
+      , hoist_vars   : false
+      , hoist_funs   : true
+      , properties   : true
+      , comparisons  : true
+      , conditionals : true
+    }
+    , mangle: { except: ['OptionsDrawer', 'CodeMirror', 'angular', 'amplify', 'jQuery', 'Stor', 'less', '$', '_'] }
+  };
+
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -19,28 +43,25 @@ module.exports = function(grunt) {
     , paths: {
         js      : './public/javascripts'
       , tmp     : './tmp'
+      , test    : './test'
       , routes  : './routes'
       , express : './express'
     }
 
     , concat: {
       app: {
-        src: [
-            '<%= paths.js %>/options-drawer.js'
-          , '<%= paths.js %>/app/app.js'
-          , '<%= paths.js %>/app/services/Stor.js'
-          , '<%= paths.js %>/app/services/LessCompiler.js'
-          , '<%= paths.js %>/app/directives/fadeShow.js'
-          , '<%= paths.js %>/app/directives/lessEditor.js'
-          , '<%= paths.js %>/app/controllers/Less2CssCtrl.js'
-        ]
-        , dest: '<%= paths.js %>/less2css.js'
+        src: src.app
+        , dest: '<%= paths.tmp %>/less2css.js'
+      }
+
+      , vendor: {
+        src: src.vendor
+        , dest: '<%= paths.tmp %>/vendor.js'
       }
 
       , build: {
         options: { banner: '<%= meta.banner %>'}
         , files: {
-          '<%= paths.js %>/less2css.js': ['<%= paths.js %>/less2css.js'],
           '<%= paths.js %>/less2css.min.js': ['<%= paths.js %>/less2css.min.js']
         }
       }
@@ -48,52 +69,50 @@ module.exports = function(grunt) {
 
     , watch: {
       js: {
-          files: ['<%= paths.js %>/less2css.js']
-        , tasks: ['jshint', 'uglify', 'karma:unit:run']
+        files: [
+            '<%= paths.js %>/options-drawer.js'
+          , '<%= paths.js %>/app/**/*.js'
+        ]
+        , tasks: ['jshint', 'uglify:app', 'karma:unit:run']
       }
       , tests: {
-          files: ['./test/**/*.spec.js']
+          files: ['<%= paths.test %>/**/*.spec.js']
         , tasks: ['karma:unit:run']
       }
     }
 
     , uglify: {
-      less2css: {
-        options: {
-          compress: {
-              loops        : true
-            , unused       : true
-            , unsafe       : true
-            , cascade      : true
-            , warnings     : true
-            , booleans     : true
-            , evaluate     : true
-            , dead_code    : true
-            , join_vars    : true
-            , if_return    : true
-            , sequences    : true
-            , hoist_vars   : false
-            , hoist_funs   : true
-            , properties   : true
-            , comparisons  : true
-            , conditionals : true
-          }
-          , mangle: { except: ['OptionsDrawer', 'CodeMirror', 'angular', 'amplify', 'jQuery', 'Stor', 'less', '$', '_'] }
+      app: {
+        options: uglify_options
+        , files: {
+          '<%= paths.js %>/less2css.min.js': ['<%= paths.tmp %>/less2css.js']
         }
-        , files: { '<%= paths.js %>/less2css.min.js': ['<%= paths.js %>/less2css.js', '<banner:meta.banner>'] }
+      }
+      , vendor: {
+        options: uglify_options
+        , files: {
+          '<%= paths.js %>/vendor.min.js': ['<%= paths.tmp %>/vendor.js']
+        }
       }
     }
     , jshint: {
       options: { jshintrc: './.jshintrc' }
-      , all: ['<%= paths.js %>/less2css.js']
+      , all: ['<%= paths.tmp %>/less2css.js']
+    }
+
+    , karma: {
+      unit: {
+        configFile: '<%= paths.express %>/karma.conf.js'
+      }
     }
   });
 
   grunt.registerTask('default', [
     'concat:app'
+    , 'concat:vendor'
     , 'jshint'
     , 'uglify'
     , 'concat:build'
-    , 'karma'
+    , 'karma:unit:run'
   ]);
 };

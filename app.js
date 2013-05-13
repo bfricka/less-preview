@@ -9,6 +9,18 @@ var http = require('http')
   , GitHubStrategy = require('passport-github').Strategy
   , githubConfig = require('./private').github;
 
+var app = express();
+http.createServer(app);
+
+app.locals.env = app.get('env');
+
+app.locals.scripts = (function(){
+  var cwd = process.cwd()
+    , scripts = require('./express/app-scripts')(cwd);
+
+    return scripts.getScriptSrc(app.get('env'));
+}());
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -29,12 +41,6 @@ passport.use(
     });
   }
 );
-
-var app = express();
-
-http.createServer(app);
-
-app.locals.env = app.get('env');
 
 // Perform canonicalization
 app.use(function(req, res, next) {

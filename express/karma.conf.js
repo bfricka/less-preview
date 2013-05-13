@@ -7,14 +7,22 @@
 
 
 // base path, that will be used to resolve files and exclude
-basePath = '.';
+try {
+  basePath = process.cwd().match(/(^[\/\w\d-_]+)(less-preview)/)[0];
+} catch (err) {
+  throw new Error('Directory structure invalid');
+}
+
+jsPath = basePath + '/public/javascripts';
+var scripts = require(basePath + '/express/app-scripts.js')(process.cwd());
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'test/client/*.spec.coffee'
+    JASMINE
+  , JASMINE_ADAPTER
 ];
+
+files = files.concat(scripts.testUnit());
 
 // list of files to exclude
 // exclude = [

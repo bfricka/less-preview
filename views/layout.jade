@@ -23,17 +23,6 @@ html.no-js(lang='en')
     link(rel='stylesheet', href='/stylesheets/codemirror.css')
     link(rel='stylesheet', href="/stylesheets/style.css")
 
-    block topScripts
-      script(src='/javascripts/vendor/modernizr.js')
-
-      if env == 'production'
-        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
-        script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js")
-      else
-        script(src='/javascripts/vendor/jquery.js')
-        script(src='/javascripts/vendor/angular.js')
-
-      script(src='/javascripts/vendor/amplify.store.min.js')
   body
     //if lt IE 7
       p.chromeframe
@@ -81,12 +70,9 @@ html.no-js(lang='en')
               |.
 
     block bottomScripts
+      each script in scripts
+        script(src='#{script}')
       if env == 'production'
-        script(src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.1/lodash.min.js")
-        script(src="/javascripts/vendor/cm/codemirror.min.js")
-        script(src="/javascripts/vendor/cm/util/matchbrackets.min.js")
-        script(src="/javascripts/vendor/cm/mode/less/less.min.js")
-        script(src="/javascripts/less2css.min.js")
         script
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-37443347-1']);
@@ -97,9 +83,3 @@ html.no-js(lang='en')
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
           })();
-      else
-        script(src="/javascripts/vendor/lodash.js")
-        script(src="/javascripts/vendor/cm/codemirror.js")
-        script(src="/javascripts/vendor/cm/util/matchbrackets.js")
-        script(src="/javascripts/vendor/cm/mode/less/less.js")
-        script(src="/javascripts/less2css.js")
