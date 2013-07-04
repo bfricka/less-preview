@@ -20,8 +20,8 @@ module.exports = {
   , lessOptions: {
       filename        : "less2css.org.less"
     , rootpath        : false
-    , strictUnits     : true
-    , strictMaths     : true
+    , strictUnits     : false
+    , strictMath      : false
     , relativeUrls    : false
     , dumpLineNumbers : false
   }
