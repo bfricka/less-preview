@@ -31,12 +31,13 @@ Scripts.prototype = {
         , js + '/vendor/cm/mode/less/less.js'
       ]
       , app: [
-          js + '/plugins/options-drawer.js'
+          js + '/plugins/Element.js'
         , js + '/app/app.js'
         , js + '/app/services/Stor.js'
         , js + '/app/services/LessCompiler.js'
         , js + '/app/directives/fadeShow.js'
         , js + '/app/directives/lessEditor.js'
+        , js + '/app/directives/drawer.js'
         , js + '/app/controllers/Less2CssCtrl.js'
       ]
     };

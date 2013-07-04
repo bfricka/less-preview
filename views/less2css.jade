@@ -1,8 +1,8 @@
 extends layout
 
 block optionsDrawer
-  section#options-drawer.options-drawer
-    form#options-drawer-wrap.options-drawer-wrap(name='opts')
+  drawer
+    form(name='opts')
       div.row-fluid.options-row.first-row
         div.span3.option-column
           label(for='less-version') LESS Version
@@ -72,7 +72,6 @@ block header
   li.divider-vertical
   li#less-options.less-options
     a#options-link(href="#") Options
-    div#options-button.options-button
 
   li.divider-vertical
   li: img#loading-gif.loading-gif(
