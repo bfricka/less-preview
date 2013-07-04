@@ -1,13 +1,13 @@
-var http = require('http')
-  , less = require('less-middleware')
-  , mongo = require('mongodb')
-  , routes = require('./routes')
-  , express = require('express')
-  , passport = require('passport')
-  , shortener = require('./express/shortener')
-  , appConfig = require('./private').app
+var http           = require('http')
+  , less           = require('less-middleware')
+  , mongo          = require('mongodb')
+  , routes         = require('./routes')
+  , express        = require('express')
+  , passport       = require('passport')
+  , shortener      = require('./express/shortener')
+  , appConfig      = require('./private').app
   , GitHubStrategy = require('passport-github').Strategy
-  , githubConfig = require('./private').github;
+  , githubConfig   = require('./private').github;
 
 var app = express();
 http.createServer(app);

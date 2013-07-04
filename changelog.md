@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.0.6
+  - Major changes to build
+  - Converted to from Coffee to full JS
+  - Rename `strictMaths` to `strictMath` per LESS 1.4 beta
+
 ### 0.0.5
   - Added "Legacy Maths/Units" for LESS 1.4 compatibility.
   - Upgraded Grunt and all Grunt-contrib to 0.4.0 stable

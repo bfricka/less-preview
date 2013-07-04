@@ -73,7 +73,7 @@ html.no-js(lang='en')
       each script in scripts
         script(src='#{script}')
       if env == 'production'
-        script
+        script.
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-37443347-1']);
           _gaq.push(['_trackPageview']);
