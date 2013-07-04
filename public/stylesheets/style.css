@@ -439,6 +439,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini{*padding-top:1px;*padding-
 .navbar .nav>li.brand>a{padding:0}
 .navbar-inner{border-width:0 0 1px;padding-left:0;padding-right:0;-webkit-box-shadow:0 1px 10px rgba(0,0,0,.1);-moz-box-shadow:0 1px 10px rgba(0,0,0,.1);box-shadow:0 1px 10px rgba(0,0,0,.1)}
 .navbar .nav.pull-right{float:right;margin-right:0}
+*{outline:none !important}
 body{padding-top:60px}
 .four-oh-four{text-align:center}.four-oh-four.right-text{padding:45px 0}
 .page-footer{position:absolute;bottom:0;left:0;z-index:5;padding:15px 20px;width:100%;border-top:1px solid #efefef;background:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
