@@ -74,6 +74,16 @@ block header
     a(href="#", ng-click="toggleDrawer($event)") Options
 
   li.divider-vertical
+  li.option-info(ng-cloak)
+    span
+      | LESS Version:&nbsp;
+      code {{lessOptions.lessVersion}}
+    span
+      | Output Line Numbers:&nbsp;
+      code {{lessOptions.dumpLineNumbers}}
+    span(ng-hide="isLegacy()")
+      | Strict Math/Units:&nbsp;
+      code {{legacyUnits}}
   li: img#loading-gif.loading-gif(
     ng-cloak
     fade-show='loading == true'
@@ -84,8 +94,8 @@ block header
 block content
   div.row-fluid
     div.span6
-      h2 LESS Input
       div.code-wrap.left
+        h2.code-label LESS
         textarea#less-input.less-input(placeholder="Input your LESS here.", less-editor, opts='lessEditorOptions', ng-model="lessInput").
           .transition(@transition) {
             -webkit-transition: @transition;
@@ -112,8 +122,8 @@ block content
             font-weight: bold;
           }
     div.span6
-      h2 CSS Output
       div.code-wrap.right(ng-class="{error: compileError == true}")
+        h2.code-label CSS
         textarea.css-output(
           less-editor
           ng-model="cssOutput"

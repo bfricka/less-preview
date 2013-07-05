@@ -1,5 +1,14 @@
 * { outline: none !important; }
-body { padding-top: 60px; }
+html,
+body {
+  .box-sizing(border-box);
+  height: 100%;
+}
+
+body {
+  padding-top: 60px;
+  #gradient > .vertical(#eee, #bbb);
+}
 
 [ng-cloak],
 [data-ng-cloak],
@@ -21,10 +30,16 @@ body { padding-top: 60px; }
   z-index: 5;
   padding: 15px 20px;
   width: 100%;
-  border-top: 1px solid hsl(0, 0%, 94%);
-  background: @white;
-
+  border-top: 1px solid #999;
+  color: #555;
+  #gradient > .vertical(#eee, #aaa);
+  text-shadow: 0 1px @white;
+  .box-shadow(~"0 -5px 12px hsla(0, 0%, 0%, 0.15), inset 0 1px 0 hsla(0, 0%, 100%, 0.1)");
   .box-sizing(border-box);
+
+  a { color: black; }
+  > p { margin: 0; }
+  > p.small { text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.6);}
 }
 
 .code { #font > #family > .monospace }
@@ -170,7 +185,7 @@ body { padding-top: 60px; }
 
 .code-wrap {
   position: absolute;
-  top: 120px;
+  top: 65px;
   right: 0;
   bottom: 100px;
   left: 20px;
@@ -189,18 +204,25 @@ body { padding-top: 60px; }
   }
 }
 
-.small { font-size: 0.8em; margin: 0; }
-
-.navbar .nav > li {
-  padding: 0;
-  > a { padding: 10px 20px; }
+h2.code-label {
+  position: absolute;
+  margin: 0;
+  right: 25px;
+  top: 5px;
+  z-index: 1;
+  font-size: 20px;
+  color: @lightGray;
 }
+
+.small { font-size: 0.8em; margin: 0; }
 
 @media (max-width: 979px) {
   .navbar-fixed-top .navbar-inner,
   .navbar-fixed-bottom .navbar-inner {
     padding: 0 5px;
   }
+
+  .navbar .nav > li.option-info { display: none; }
 }
 
 @media (max-width: 979px) and (min-width: 768px) {
@@ -230,11 +252,11 @@ body { padding-top: 60px; }
 
 .CodeMirror {
   height: 100%;
-  .border-radius(5px);
+  .border-radius(3px);
 }
 
 .CodeMirror-gutters,
-.CodeMirror-gutter { .border-radius(5px 0 0 5px); }
+.CodeMirror-gutter { .border-radius(3px 0 0 3px); }
 
 /* Highlight.js and CodeMirror */
 .css-output,
