@@ -2,7 +2,7 @@
 html,
 body {
   .box-sizing(border-box);
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -233,14 +233,29 @@ h2.code-label {
   body { padding-bottom: 20px; }
 
   .code-wrap {
-    position: static;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: auto;
+    margin-bottom: 15px;
     width: auto;
+    .CodeMirror { height: 600px; }
+
+    &.right { right: auto; }
+  }
+
+  h2.code-label {
+    font-size: 16px;
+    right: 35px;
   }
 
   .page-footer {
+    background: none;
+    border-top: 1px solid #aaa;
+    .box-shadow(none);
     position: static;
     margin-top: 15px;
-    padding: 15px 0 0;
+    padding: 15px 0;
   }
 
   .navbar-inner .container-fluid { padding: 0 20px }
