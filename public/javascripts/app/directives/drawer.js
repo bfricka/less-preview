@@ -1,37 +1,23 @@
-l2c
-
-.controller('DrawerCtrl', [
-  '$scope'
-  , function($scope) {
-    $scope.toggleDrawer = this.toggleDrawer = function() {
-      $scope.isOpen = !$scope.isOpen;
-    };
-
-    function toggle() { $scope.isOpen = $scope.open; }
-    this.isOpen = function() { return $scope.isOpen; };
-
-    $scope.$watch('open', toggle);
-  }
-])
-
-.directive('drawer', [
-  '$document', 'TransitionHelper'
-  , function(doc, transition) {
+l2c.directive('drawer', [
+  'TransitionHelper'
+  , function(transition) {
     return {
-      replace       : true
+        replace     : true
       , restrict    : 'E'
       , transclude  : true
-      , controller  : 'DrawerCtrl'
       , templateUrl : 'drawer.html'
       , scope: {
-        open       : '='
+          open     : '='
         , offset   : '='
         , position : '='
       }
 
-      , link: function(scope, elem, attrs, ctrl) {
-        var el = scope.el = elem[0];
+      , link: function(scope, elem, attrs) {
+        if (!scope.open) {
+          scope.visibile = scope.open = false;
+        }
 
+        var el = scope.el = elem[0];
         var translateAxis = scope.position === 'top' || scope.position === 'bottom'
           ? 'Y'
           : 'X';
@@ -40,8 +26,8 @@ l2c
           updateModelDimensions();
 
           var translateVal = isOpen
-            ? -scope.height + parseInt(scope.offset, 10)
-            : scope.offset;
+            ? scope.offset
+            : -scope.height + parseInt(scope.offset, 10);
 
           transition['translate' + translateAxis](scope.el, translateVal);
         }
@@ -51,12 +37,10 @@ l2c
           scope.width = scope.el.offsetWidth;
         }
 
-        doc.on('click', function(ev) {
-          if (!ctrl.isOpen()) return; // Quick return for common case
-          if (!ev.target.hasClosestEl(el)) ctrl.toggleDrawer();
-        });
+        // window.getComputedStyle(el, '')
+        // toggleDrawer();
 
-        scope.$watch('isOpen', toggleDrawer);
+        scope.$watch('open', toggleDrawer);
       }
     };
   }

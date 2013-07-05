@@ -63,6 +63,11 @@ l2c.controller('Less2CssCtrl', [
       return $scope[model] ? 'Enabled' : 'Disabled';
     };
 
+    $scope.toggleDrawer = function(ev) {
+      ev.preventDefault();
+      $scope.drawerOpen = !$scope.drawerOpen;
+    };
+
     $scope.isLegacy = function() {
       // Oh shit, hard-coded numbers!
       return $scope.lessOptions

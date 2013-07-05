@@ -1,7 +1,7 @@
 extends layout
 
 block optionsDrawer
-  drawer(offset="'40px'", position="'top'")
+  drawer(offset="'40px'", position="'top'", open="drawerOpen")
     form(name='opts')
       div.row-fluid.options-row.first-row
         div.span3.option-column
@@ -70,8 +70,8 @@ block optionsDrawer
 block header
   li.brand: a(href='/') LESS2CSS
   li.divider-vertical
-  li#less-options.less-options
-    a#options-link(href="#") Options
+  li.less-options(ng-class="{ 'active': drawerOpen }")
+    a(href="#", ng-click="toggleDrawer($event)") Options
 
   li.divider-vertical
   li: img#loading-gif.loading-gif(
