@@ -81,6 +81,12 @@ block header
     span
       | Output Line Numbers:&nbsp;
       code {{lessOptions.dumpLineNumbers}}
+    span
+      | Relative URLs:&nbsp;
+      code {{lessOptions.relativeUrls}}
+    span(ng-show="lessOptions.rootpath")
+      | Rootpath:&nbsp;
+      code {{lessOptions.rootpath}}
     span(ng-hide="isLegacy()")
       | Strict Math/Units:&nbsp;
       code {{legacyUnits}}

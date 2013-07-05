@@ -68,8 +68,10 @@ Stripped-down refactor of bootstrap navs
       color: hsl(0, 0%, 31%);
       cursor: pointer;
       display: inline-block;
-      padding: 10px 20px;
+      padding: 10px 0 0 15px;
       text-shadow: 0 1px 0 @white;
+
+      &:last-of-type { padding-right: 15px; }
     }
 
     &.option-info {

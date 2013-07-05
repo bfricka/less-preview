@@ -50,11 +50,11 @@ body {
   left: 0;
   z-index: 1000;
   width: 100%;
-  border-bottom: 1px solid @lightGray;
+  border-bottom: 1px solid #999;
   // visibility: hidden;
 
-  #gradient > .vertical(@white, hsl(0, 0%, 93%));
-  .box-shadow(0 10px 14px hsla(0, 0%, 0%, 0.15));
+  #gradient > .vertical(#efefef, #bbb);
+  .box-shadow(0 10px 14px hsla(0, 0%, 0%, 0.25));
   .translate3d(0, 0, 0);
   .transition(all 0.4s ease-out);
 
@@ -86,7 +86,8 @@ body {
     .box-sizing(border-box);
   }
 
-  label { margin-bottom: 0 }
+  label { cursor: default; }
+  label, form { margin-bottom: 0 }
 }
 
 .options-drawer-wrap {
@@ -98,8 +99,11 @@ body {
 .options-row {
   padding-top: 10px;
   padding-bottom: 15px;
-  border-top: 1px solid hsl(0, 0%, 92%);
-  border-bottom: 1px solid @white;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #eee;
+  text-shadow: 0 1px 1px @white;
+
+  .btn { text-shadow: none; }
 
   &.first-row {
     padding-top: 0;
