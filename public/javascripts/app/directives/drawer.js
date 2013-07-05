@@ -13,10 +13,6 @@ l2c.directive('drawer', [
       }
 
       , link: function(scope, elem, attrs) {
-        if (!scope.open) {
-          scope.visibile = scope.open = false;
-        }
-
         var el = scope.el = elem[0];
         var translateAxis = scope.position === 'top' || scope.position === 'bottom'
           ? 'Y'
@@ -30,15 +26,13 @@ l2c.directive('drawer', [
             : -scope.height + parseInt(scope.offset, 10);
 
           transition['translate' + translateAxis](scope.el, translateVal);
+          el.style.opacity = isOpen ? 1 : 0;
         }
 
         function updateModelDimensions() {
           scope.height = scope.el.offsetHeight;
           scope.width = scope.el.offsetWidth;
         }
-
-        // window.getComputedStyle(el, '')
-        // toggleDrawer();
 
         scope.$watch('open', toggleDrawer);
       }
