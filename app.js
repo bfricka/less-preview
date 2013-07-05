@@ -4,7 +4,7 @@ var http           = require('http')
   , routes         = require('./routes')
   , express        = require('express')
   , passport       = require('passport')
-  , shortener      = require('./express/shortener')
+//  , shortener      = require('./express/shortener')
   , appConfig      = require('./private').app
   , GitHubStrategy = require('passport-github').Strategy
   , githubConfig   = require('./private').github;
@@ -18,7 +18,7 @@ app.locals.scripts = (function(){
   var cwd = process.cwd()
     , scripts = require('./express/app-scripts')(cwd);
 
-    return scripts.getScriptSrc(app.get('env'));
+  return scripts.getScriptSrc(app.get('env'));
 }());
 
 passport.serializeUser(function(user, done) {
@@ -56,8 +56,8 @@ app.use(function(req, res, next) {
 });
 
 // Begin config
-app.configure(function() {
-  app.set('port', 3000);
+app.configure('all', function() {
+  app.set('port', '3000');
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.compress());
@@ -86,7 +86,6 @@ app.configure('development', function() {
 });
 
 app.configure('production', function() {
-  app.use(express.staticCache());
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({ dumpExceptions: true }));
 });

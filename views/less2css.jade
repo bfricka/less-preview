@@ -1,7 +1,7 @@
 extends layout
 
 block optionsDrawer
-  drawer
+  drawer(offset="'40px'", position="'top'")
     form(name='opts')
       div.row-fluid.options-row.first-row
         div.span3.option-column
@@ -21,7 +21,7 @@ block optionsDrawer
             ng-bind="toggleTxt('lineNumbersEnabled')"
           ) Disabled
 
-          select.ng-cloak(
+          select(
             ng-show="lineNumbersEnabled == true"
             ng-disabled="lineNumbersEnabled == false"
             ng-model="dumpLineNumbers"

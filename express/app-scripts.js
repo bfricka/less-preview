@@ -35,6 +35,7 @@ Scripts.prototype = {
         , js + '/app/app.js'
         , js + '/app/services/Stor.js'
         , js + '/app/services/LessCompiler.js'
+        , js + '/app/services/Animate.js'
         , js + '/app/directives/fadeShow.js'
         , js + '/app/directives/lessEditor.js'
         , js + '/app/directives/drawer.js'
