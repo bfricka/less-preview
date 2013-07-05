@@ -45,7 +45,7 @@ l2c.controller('Less2CssCtrl', [
       lessOpts.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
       lessOpts.rootpath = $scope.rootPathEnabled ? $scope.rootpath : '';
       $scope.legacyUnits = !$scope.isLegacy() && $scope.legacyUnits ? true : false;
-      lessOpts.strictMaths = lessOpts.strictUnits = $scope.legacyUnits ? false : true;
+      lessOpts.strictMath = lessOpts.strictUnits = $scope.legacyUnits;
       LessCompiler.updateOptions(lessOpts);
     };
 

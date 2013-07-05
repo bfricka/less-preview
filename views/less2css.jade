@@ -57,8 +57,8 @@ block optionsDrawer
           )
 
       div.row-fluid.options-row.last-row
-        div.span3.option-column
-          label Legacy Math/Units
+        div.span3.option-column(ng-hide='isLegacy()')
+          label Strict Math/Units
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': legacyUnits == true}"
