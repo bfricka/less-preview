@@ -464,6 +464,7 @@ body{padding-top:60px}
 .code-wrap{position:absolute;top:120px;right:0;bottom:100px;left:20px;padding:8px;width:47.5%;border:1px solid #ccc;background:#f5f5f5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .code-wrap.right{left:auto;right:20px}
 .small{font-size:0.8em;margin:0}
+.navbar .nav>li{padding:0}.navbar .nav>li>a{padding:10px 20px}
 @media (max-width:979px){.navbar-fixed-top .navbar-inner,.navbar-fixed-bottom .navbar-inner{padding:0 5px}}@media (max-width:979px) and (min-width:768px){.code-wrap{width:46%}}@media (max-width:767px){body{padding-bottom:20px} .code-wrap{position:static;width:auto} .page-footer{position:static;margin-top:15px;padding:15px 0 0} .navbar-inner .container-fluid{padding:0 20px} .option-column{margin-top:15px}.option-column:first-child{margin-top:0}}.CodeMirror{height:100%;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}
 .CodeMirror-gutters,.CodeMirror-gutter{-webkit-border-radius:5px 0 0 5px;-moz-border-radius:5px 0 0 5px;border-radius:5px 0 0 5px}
 .css-output,.cm-s-lesser-dark{font-size:12px;line-height:1.4;font-family:Monaco,Menlo,Consolas,"Courier New",monospace}

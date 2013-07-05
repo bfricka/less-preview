@@ -3,6 +3,12 @@ l2c.service('TransitionHelper', [
   , function TransitionHelper(win, doc) {
     doc = doc[0];
 
+    var props = this.props = {
+        transform: getPrefixedProp('transform')
+      , transition: getPrefixedProp('transition')
+      , transitionDuration: getPrefixedProp('transitionDuration')
+    };
+
     /**
      * Takes in a w3c CSS property and finds the correct prefix (or w3c)
      * @param  {String} prop w3c property
@@ -57,10 +63,6 @@ l2c.service('TransitionHelper', [
       return { X: parseFloat(transformX), Y: parseFloat(transformY) };
     }
 
-    var transform = getPrefixedProp('transform')
-      , transition = getPrefixedProp('transition')
-      , transitionDuration = getPrefixedProp('transitionDuration');
-
     // Adding "translateZ" forces the transform to be 3d
     /**
      * Takes an element and 3d translates it along a single axis while maintaining
@@ -72,11 +74,11 @@ l2c.service('TransitionHelper', [
      * @return {void}
      */
     this.translate = function(el, val, axis) {
-      var elTransform = win.getComputedStyle(el)[transform]
+      var elTransform = win.getComputedStyle(el)[props.transform]
         , xVal = normalizePx(axis === 'X' ? val : parseTransform(elTransform).X)
         , yVal = normalizePx(axis === 'Y' ? val : parseTransform(elTransform).Y);
 
-      el.style[transform] = 'translate3d('+xVal+','+yVal+',0)';
+      el.style[props.transform] = 'translate3d('+xVal+','+yVal+',0)';
     };
 
     this.translateX = function(el, val) {
@@ -88,11 +90,11 @@ l2c.service('TransitionHelper', [
     };
 
     this.transition = function(el, val) {
-      el.style[transition] = val;
+      el.style[props.transition] = val;
     };
 
     this.transitionDuration = function(el, val) {
-      el.style[transitionDuration] = val;
+      el.style[props.transitionDuration] = val;
     };
 
     /**
@@ -107,7 +109,7 @@ l2c.service('TransitionHelper', [
         , 'OTransition'      : 'oTransitionEnd'
       };
 
-      return transitions[transition];
+      return transitions[props.transition];
     }());
   }
 ]);
