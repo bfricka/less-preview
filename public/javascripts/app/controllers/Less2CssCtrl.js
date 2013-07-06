@@ -24,7 +24,7 @@ l2c.controller('Less2CssCtrl', [
         compileLess();
       });
 
-      $scope.$watch('opts.lessVersion', loadLess);
+      $scope.$watch('opts.selectedVersion', loadLess);
       $scope.$watch('opts', updateOptions, true);
     }
 
