@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.0.7
+  - Huge refactor / mess reduction
+  - Fixed LESS core stuff from 1.4
+  - Lots of styling improvements
+
 ### 0.0.6
   - Major changes to build
   - Converted to from Coffee to full JS

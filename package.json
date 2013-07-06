@@ -1,7 +1,7 @@
 {
     "name": "less2css"
   , "description": "Converts LESS to CSS and does other awesome stuff"
-  , "version": "0.0.5"
+  , "version": "0.0.7"
   , "private": true
   , "author": "Brian Frichette"
   , "homepage": "http://less2css.org/"
