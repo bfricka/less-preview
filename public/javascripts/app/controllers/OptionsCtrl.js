@@ -28,6 +28,10 @@ l2c.controller('OptionsCtrl', [
       opts.dumpLineNumbers = opts.lineNumbersEnabled && opts.lineNumbers ? opts.lineNumbers : false;
     }
 
+    function updateRootPath() {
+      opts.rootpath = opts.rootPathEnabled && opts.rootpathText ? opts.rootpathText : false;
+    }
+
     $scope.toggleOption = function(model) {
       opts[model] = !opts[model];
     };
@@ -37,5 +41,6 @@ l2c.controller('OptionsCtrl', [
     };
 
     $scope.$watch('opts.lineNumbers+opts.lineNumbersEnabled', updateLineNumbers);
+    $scope.$watch('opts.rootpathText', updateRootPath);
   }
 ]);

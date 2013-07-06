@@ -48,8 +48,7 @@ block optionsDrawer
           input.ng-cloak(
             ng-show='opts.rootPathEnabled'
             ng-disabled='!opts.rootPathEnabled'
-            ng-change='updateOptions()'
-            ng-model='opts.rootpath'
+            ng-model='opts.rootpathText'
             placeholder='Enter rootpath'
             type='text'
           )
@@ -86,19 +85,19 @@ block header
     span
       | LESS Version:&nbsp;
       code {{opts.selectedVersion}}
-    span
+    span(ng-if="opts.lineNumbersEnabled", ng-animate="{ enter: 'fade-in', leave: 'fade-out' }")
       | Output Line Numbers:&nbsp;
       code {{opts.dumpLineNumbers}}
-    span
+    span(ng-if="opts.relativeUrls", ng-animate="{ enter: 'fade-in', leave: 'fade-out' }")
       | Relative URLs:&nbsp;
       code {{opts.relativeUrls}}
-    span(ng-show="rootPathEnabled")
+    span(ng-if="opts.rootPathEnabled", ng-animate="{ enter: 'fade-in', leave: 'fade-out' }")
       | Rootpath:&nbsp;
-      code {{rootpath}}
-    span(ng-hide="isLegacy()")
+      code {{opts.rootpath}}
+    span(ng-if="opts.strictMath", ng-animate="{ enter: 'fade-in', leave: 'fade-out' }")
       | Strict Math:&nbsp;
       code {{opts.strictMath}}
-    span(ng-hide="isLegacy()")
+    span(ng-if="opts.strictUnits", ng-animate="{ enter: 'fade-in', leave: 'fade-out' }")
       | Strict Units:&nbsp;
       code {{opts.strictUnits}}
   li: img#loading-gif.loading-gif(

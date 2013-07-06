@@ -344,3 +344,20 @@ div.CodeMirror span.CodeMirror-matchingbracket { color: hsl(120, 95%, 74%); }
   div,
   span { color: rgb(199, 0, 56) !important; }
 }
+
+/* Animations */
+
+.fade-in,
+.fade-out {
+  .transition(all 0.2s);
+}
+
+.fade-in {
+  opacity: 0;
+  &.fade-in-active { opacity: 1; }
+}
+
+.fade-out {
+  opacity: 1;
+  &.fade-out-active { opacity: 0; }
+}
