@@ -1,8 +1,6 @@
 l2c.factory('LessCompiler', [
-    '$http'
-  , 'Stor'
-
-  , function($http, Stor) {
+    'Stor'
+  , function(Stor) {
     var LessCache = new Stor('LessCache');
 
     var LessCompiler = (function() {

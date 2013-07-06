@@ -1,17 +1,31 @@
 l2c.controller('OptionsCtrl', [
   '$scope', 'LessOptions'
-  , function($scope, opts) {
-    $scope.opts = opts;
+  , function($scope, LessOptions) {
+    var opts = $scope.opts = LessOptions.options;
+
+    LessOptions.request.then(setupOptions);
 
     function setupOptions() {
-      setVersions();
+      var defaults = opts.options;
+
+      opts.lineNumbers = opts.lineNumberOptions[0].value;
+
+      for (var k in defaults) {
+        opts[k] = defaults[k];
+      }
+
+      setupVersion();
     }
 
-    function setVersions() {
+    function setupVersion() {
       // Select current version
       opts.selectedVersion = _.find(opts.versions, function (version) {
         return version.type === 'current';
       }).number;
+    }
+
+    function updateLineNumbers() {
+      opts.dumpLineNumbers = opts.lineNumbersEnabled && opts.lineNumbers ? opts.lineNumbers : false;
     }
 
     $scope.toggleOption = function(model) {
@@ -22,6 +36,6 @@ l2c.controller('OptionsCtrl', [
       return opts[model] ? 'Enabled' : 'Disabled';
     };
 
-    $scope.$watch('opts', setupOptions);
+    $scope.$watch('opts.lineNumbers+opts.lineNumbersEnabled', updateLineNumbers);
   }
 ]);

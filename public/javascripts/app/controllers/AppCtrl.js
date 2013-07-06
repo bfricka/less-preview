@@ -1,7 +1,7 @@
 l2c.controller('AppCtrl', [
   '$scope', 'LessOptions'
-  , function($scope, opts) {
-    $scope.opts = opts;
+  , function($scope, LessOptions) {
+    $scope.opts = LessOptions.options;
 
     $scope.toggleDrawer = function(ev) {
       ev.preventDefault();

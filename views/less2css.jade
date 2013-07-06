@@ -9,11 +9,10 @@ block optionsDrawer
           select#less-version.less-version(
             ng-model='opts.selectedVersion'
             ng-options='version.number as version.label for version in opts.versions'
-            ng-change='updateOptions()'
           )
 
         div.span3.option-column
-          code dumpLineNumbers
+          label Output Line Numbers
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': opts.lineNumbersEnabled}"
@@ -24,13 +23,12 @@ block optionsDrawer
           select(
             ng-show="opts.lineNumbersEnabled"
             ng-disabled="!opts.lineNumbersEnabled"
-            ng-model="dumpLineNumbers"
+            ng-model="opts.lineNumbers"
             ng-options="opt.value as opt.label for opt in opts.lineNumberOptions"
-            ng-change='updateOptions()'
           )
 
         div.span3.option-column
-          code relativeUrls
+          label Relative URLs
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': opts.relativeUrls }"
@@ -39,7 +37,7 @@ block optionsDrawer
           ) Disabled
 
         div.span3.option-column
-          code rootpath
+          label Change Rootpath
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': opts.rootPathEnabled }"
@@ -58,12 +56,22 @@ block optionsDrawer
 
       div.row-fluid.options-row.last-row
         div.span3.option-column(ng-hide='isLegacy()')
-          label Strict Math/Units
+          label Strict Math
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': legacyUnits}"
-            ng-click="toggleOption('legacyUnits')"
-            ng-bind="toggleTxt('legacyUnits')"
+            ng-class="{'btn-primary': opts.strictMath}"
+            ng-click="toggleOption('strictMath')"
+            ng-bind="toggleTxt('strictMath')"
+            ng-disabled="isLegacy()"
+          ) Disabled
+
+        div.span3.option-column(ng-hide='isLegacy()')
+          label Strict Units
+          //- i.icon-info-sign
+          button.btn.toggle-btn(
+            ng-class="{'btn-primary': opts.strictUnits}"
+            ng-click="toggleOption('strictUnits')"
+            ng-bind="toggleTxt('strictUnits')"
             ng-disabled="isLegacy()"
           ) Disabled
 
@@ -80,16 +88,19 @@ block header
       code {{opts.selectedVersion}}
     span
       | Output Line Numbers:&nbsp;
-      code {{dumpLineNumbers}}
+      code {{opts.dumpLineNumbers}}
     span
       | Relative URLs:&nbsp;
-      code {{relativeUrls}}
+      code {{opts.relativeUrls}}
     span(ng-show="rootPathEnabled")
       | Rootpath:&nbsp;
       code {{rootpath}}
     span(ng-hide="isLegacy()")
-      | Strict Math/Units:&nbsp;
-      code {{legacyUnits}}
+      | Strict Math:&nbsp;
+      code {{opts.strictMath}}
+    span(ng-hide="isLegacy()")
+      | Strict Units:&nbsp;
+      code {{opts.strictUnits}}
   li: img#loading-gif.loading-gif(
     ng-cloak
     fade-show='loading == true'
