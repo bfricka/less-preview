@@ -457,7 +457,7 @@ body{padding-top:60px;background-color:#dadada;background-image:-moz-linear-grad
 .css-output{display:none;overflow:auto;padding:8px;height:586px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
 .code-wrap{position:absolute;top:65px;right:0;bottom:100px;left:20px;padding:8px;width:47.5%;border:1px solid #ccc;background:#f5f5f5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .code-wrap.right{left:auto;right:20px}
-h2.code-label{position:absolute;margin:0;right:25px;top:5px;z-index:1;font-size:20px;color:#ccc}
+h2.code-label{position:absolute;margin:0;right:25px;top:5px;z-index:1;font-size:20px;color:#ccc;text-shadow:-2px 2px 2px rgba(0,0,0,0.7),-1px 1px 7px rgba(0,0,0,0.2)}
 .small{font-size:0.8em;margin:0}
 @media (max-width:979px) and (min-width:768px){.code-wrap{width:46%}}@media (max-width:767px){body{padding-bottom:20px} .code-wrap{position:relative;top:0;bottom:0;left:auto;margin-bottom:15px;width:auto}.code-wrap .CodeMirror{height:600px} .code-wrap.right{right:auto} h2.code-label{font-size:16px;right:35px} .page-footer{background:none;border-top:1px solid #aaa;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;position:static;margin-top:15px;padding:15px 0} .option-column{margin-top:15px}.option-column:first-child{margin-top:0}}.CodeMirror{height:100%;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
 .CodeMirror-gutters,.CodeMirror-gutter{-webkit-border-radius:3px 0 0 3px;-moz-border-radius:3px 0 0 3px;border-radius:3px 0 0 3px}
