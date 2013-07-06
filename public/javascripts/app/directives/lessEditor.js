@@ -1,33 +1,38 @@
-// Inspired by Angular-UI
-l2c.directive('lessEditor', function() {
-  return {
-      restrict: 'A'
-    , require: 'ngModel'
+l2c.directive('lessEditor', [
+  'LessOptions'
 
-    , link: function(scope, elem, attrs, ngModel) {
-      function deferCodeMirror() {
-        var opts = scope[attrs.opts]
-          , codeMirror = CodeMirror.fromTextArea(elem[0], opts);
+  , function(LessOptions) {
+    return {
+        restrict: 'A'
+      , require: 'ngModel'
 
-        codeMirror.on('change', onChange(opts.onChange));
+      , link: function(scope, elem, attrs, ngModel) {
+        scope.opts = LessOptions.options;
 
-        ngModel.$render = function() {
-          codeMirror.setValue(ngModel.$viewValue);
-        };
+        function deferCodeMirror() {
+          var opts = scope.opts.lessEditorOptions
+            , codeMirror = CodeMirror.fromTextArea(elem[0], opts);
+
+          codeMirror.on('change', onChange(opts.onChange));
+
+          ngModel.$render = function() {
+            codeMirror.setValue(ngModel.$viewValue);
+          };
+        }
+
+        function onChange() {
+          return function(instance, changeObj) {
+            var newValue = instance.getValue();
+
+            if (newValue !== ngModel.$viewValue) {
+              ngModel.$setViewValue(newValue);
+              scope.$apply();
+            }
+          };
+        }
+
+        LessOptions.request.then(deferCodeMirror);
       }
-
-      function onChange() {
-        return function(instance, changeObj) {
-          var newValue = instance.getValue();
-
-          if (newValue !== ngModel.$viewValue) {
-            ngModel.$setViewValue(newValue);
-            scope.$apply();
-          }
-        };
-      }
-
-      scope.$on('optionsLoaded', deferCodeMirror);
-    }
-  };
-});
+    };
+  }
+]);

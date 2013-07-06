@@ -32,6 +32,10 @@ l2c.controller('OptionsCtrl', [
       opts.rootpath = opts.rootPathEnabled && opts.rootpathText ? opts.rootpathText : false;
     }
 
+    function updateVersion(version) {
+      opts.version = _.find(opts.versions, function(ver) { return ver.number === version; });
+    }
+
     $scope.toggleOption = function(model) {
       opts[model] = !opts[model];
     };
@@ -42,5 +46,6 @@ l2c.controller('OptionsCtrl', [
 
     $scope.$watch('opts.lineNumbers+opts.lineNumbersEnabled', updateLineNumbers);
     $scope.$watch('opts.rootpathText', updateRootPath);
+    $scope.$watch('opts.selectedVersion', updateVersion);
   }
 ]);
