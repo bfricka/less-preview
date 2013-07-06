@@ -8,6 +8,7 @@ l2c.directive('drawer', [
       , templateUrl : 'drawer.html'
       , scope: {
           open     : '='
+        , opts     : '='
         , offset   : '='
         , position : '='
       }

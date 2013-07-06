@@ -39,11 +39,63 @@ l2c.controller('Less2CssCtrl', [
     $scope.legacyUnits = false;
     $scope.compileError = false;
 
+    // B I G
+    // F U C K I N G
+    // T O D O !
+    //
+    // R E - W R I T E
+    // T H I S
+    // W H O L E
+    // F U C K I N G
+    // T H I N G
+    //
+    // U S E
+    // DATA.MODEL
+    // OR A
+    // F U C K I N G
+    // S E R V I C E
+    //
+    // S I N C E
+    // Y O U R
+    // S C O P E S
+    // A R E
+    // S O
+    // R E T A R D E D!
+    //
+    // D O N ' T
+    // U S E
+    // NG-CHANGE
+    // USE A
+    // W A T C H E R!
+    //
+    // T U R N
+    // T H I S
+    // W H O L E
+    // T H I N G
+    // I N T O
+    // A PROPER
+    // D I R E C T I V E
+    // C O N T R O L L E R
+    // A N D
+    // A N
+    // O P T I O N S
+    // C O N T R O L L E R
+    // A N D
+    // S H A R E
+    // T H E
+    // D A T A
+    // P R O P E R L Y!!
+
+
+    function updateOptions() {
+      var opts = $scope.lessOptions;
+    }
+
     $scope.updateOptions = function() {
       var lessOpts = $scope.lessOptions;
 
       lessOpts.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
-      lessOpts.rootpath = $scope.rootPathEnabled ? $scope.rootpath : '';
+      lessOpts.rootpath = $scope.rootPathEnabled ? this.rootpath : '';
       $scope.legacyUnits = !$scope.isLegacy() && $scope.legacyUnits ? true : false;
       lessOpts.strictMath = lessOpts.strictUnits = $scope.legacyUnits;
       LessCompiler.updateOptions(lessOpts);
@@ -56,11 +108,6 @@ l2c.controller('Less2CssCtrl', [
 
     $scope.toggleTxt = function(model) {
       return $scope[model] ? 'Enabled' : 'Disabled';
-    };
-
-    $scope.toggleDrawer = function(ev) {
-      ev.preventDefault();
-      $scope.drawerOpen = !$scope.drawerOpen;
     };
 
     $scope.isLegacy = function() {

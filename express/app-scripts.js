@@ -31,14 +31,17 @@ Scripts.prototype = {
         , js + '/vendor/cm/mode/less/less.js'
       ]
       , app: [
-        js + '/app/app.js'
-        , js + '/plugins/Element.js'
+        js + '/plugins/Element.js'
+        , js + '/app/app.js'
         , js + '/app/services/Stor.js'
+        , js + '/app/services/LessOptions.js'
         , js + '/app/services/LessCompiler.js'
         , js + '/app/services/Animate.js'
         , js + '/app/directives/fadeShow.js'
         , js + '/app/directives/lessEditor.js'
         , js + '/app/directives/drawer.js'
+        , js + '/app/controllers/AppCtrl.js'
+        , js + '/app/controllers/OptionsCtrl.js'
         , js + '/app/controllers/Less2CssCtrl.js'
       ]
     };

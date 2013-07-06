@@ -1,14 +1,14 @@
 extends layout
 
 block optionsDrawer
-  drawer(offset="'40px'", position="'top'", open="drawerOpen")
-    form(name='opts')
+  div(ng-controller='OptionsCtrl')
+    drawer(offset="'40px'", position="'top'", open="drawerOpen", opts="opts")
       div.row-fluid.options-row.first-row
         div.span3.option-column
           label(for='less-version') LESS Version
           select#less-version.less-version(
-            ng-model='lessOptions.lessVersion'
-            ng-options='version.number as version.label for version in lessVersions'
+            ng-model='opts.selectedVersion'
+            ng-options='version.number as version.label for version in opts.versions'
             ng-change='updateOptions()'
           )
 
@@ -16,14 +16,14 @@ block optionsDrawer
           code dumpLineNumbers
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': lineNumbersEnabled == true}"
+            ng-class="{'btn-primary': lineNumbersEnabled}"
             ng-click="toggleModel('lineNumbersEnabled')"
             ng-bind="toggleTxt('lineNumbersEnabled')"
           ) Disabled
 
           select(
-            ng-show="lineNumbersEnabled == true"
-            ng-disabled="lineNumbersEnabled == false"
+            ng-show="lineNumbersEnabled"
+            ng-disabled="!lineNumbersEnabled"
             ng-model="dumpLineNumbers"
             ng-options="opt.value as opt.label for opt in lineNumberOptions"
             ng-change='updateOptions()'
@@ -33,7 +33,7 @@ block optionsDrawer
           code relativeUrls
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': relativeUrls == true}"
+            ng-class="{'btn-primary': relativeUrls }"
             ng-click="toggleModel('relativeUrls')"
             ng-bind="toggleTxt('relativeUrls')"
           ) Disabled
@@ -42,14 +42,14 @@ block optionsDrawer
           code rootpath
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': rootPathEnabled == true}"
+            ng-class="{'btn-primary': rootPathEnabled }"
             ng-click="toggleModel('rootPathEnabled')"
             ng-bind="toggleTxt('rootPathEnabled')"
           ) Disabled
 
           input.ng-cloak(
-            ng-show='rootPathEnabled == true'
-            ng-disabled='rootPathEnabled == false'
+            ng-show='rootPathEnabled'
+            ng-disabled='!rootPathEnabled'
             ng-change='updateOptions()'
             ng-model='rootpath'
             placeholder='Enter rootpath'
@@ -61,7 +61,7 @@ block optionsDrawer
           label Strict Math/Units
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': legacyUnits == true}"
+            ng-class="{'btn-primary': legacyUnits}"
             ng-click="toggleModel('legacyUnits')"
             ng-bind="toggleTxt('legacyUnits')"
             ng-disabled="isLegacy()"
@@ -77,16 +77,16 @@ block header
   li.option-info(ng-cloak)
     span
       | LESS Version:&nbsp;
-      code {{lessOptions.lessVersion}}
+      code {{opts.selectedVersion}}
     span
       | Output Line Numbers:&nbsp;
-      code {{lessOptions.dumpLineNumbers}}
+      code {{dumpLineNumbers}}
     span
       | Relative URLs:&nbsp;
-      code {{lessOptions.relativeUrls}}
-    span(ng-show="lessOptions.rootpath")
+      code {{relativeUrls}}
+    span(ng-show="rootPathEnabled")
       | Rootpath:&nbsp;
-      code {{lessOptions.rootpath}}
+      code {{rootpath}}
     span(ng-hide="isLegacy()")
       | Strict Math/Units:&nbsp;
       code {{legacyUnits}}
@@ -98,7 +98,7 @@ block header
   )
 
 block content
-  div.row-fluid
+  div.row-fluid(ng-controller='Less2CssCtrl')
     div.span6
       div.code-wrap.left
         h2.code-label LESS
