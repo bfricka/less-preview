@@ -1,5 +1,5 @@
 module.exports = {
-    lessVersions: [
+    versions: [
       { label: "1.4.0 (current)", number: "1.4.0", type: "current" }
     , { label: "1.3.3", number: "1.3.3", type: "old"}
     , { label: "1.3.2", number: "1.3.2", type: "old" }
@@ -17,7 +17,7 @@ module.exports = {
     , { label: "1.1.0", number: "1.1.0", type: "old" }
   ]
 
-  , lessOptions: {
+  , options: {
       filename        : "less2css.org.less"
     , rootpath        : false
     , strictUnits     : false

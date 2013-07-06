@@ -88,11 +88,11 @@ l2c.controller('Less2CssCtrl', [
 
 
     function updateOptions() {
-      var opts = $scope.lessOptions;
+      var opts = $scope.options;
     }
 
     $scope.updateOptions = function() {
-      var lessOpts = $scope.lessOptions;
+      var lessOpts = $scope.options;
 
       lessOpts.dumpLineNumbers = $scope.lineNumbersEnabled ? $scope.dumpLineNumbers : false;
       lessOpts.rootpath = $scope.rootPathEnabled ? this.rootpath : '';
@@ -101,19 +101,10 @@ l2c.controller('Less2CssCtrl', [
       LessCompiler.updateOptions(lessOpts);
     };
 
-    $scope.toggleModel = function(model) {
-      $scope[model] = !$scope[model];
-      $scope.updateOptions();
-    };
-
-    $scope.toggleTxt = function(model) {
-      return $scope[model] ? 'Enabled' : 'Disabled';
-    };
-
     $scope.isLegacy = function() {
       // Oh shit, hard-coded numbers!
-      return $scope.lessOptions
-        ? parseFloat($scope.lessOptions.lessVersion, 10) < 1.4
+      return $scope.options
+        ? parseFloat($scope.options.lessVersion, 10) < 1.4
         : false;
     };
 
@@ -144,12 +135,12 @@ l2c.controller('Less2CssCtrl', [
     }
 
     function setLessOptions(opts) {
-      _.each(opts.lessVersions, function(version) {
+      _.each(opts.versions, function(version) {
         if (version.type === 'current')
-          $scope.lessOptions.lessVersion = version.number;
+          $scope.options.lessVersion = version.number;
 
         if (version.type === 'pre')
-          $scope.lessOptions.preRelease = version.number;
+          $scope.options.preRelease = version.number;
       });
 
       $scope.dumpLineNumbers = (function() {

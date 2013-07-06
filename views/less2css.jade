@@ -16,16 +16,16 @@ block optionsDrawer
           code dumpLineNumbers
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': lineNumbersEnabled}"
-            ng-click="toggleModel('lineNumbersEnabled')"
+            ng-class="{'btn-primary': opts.lineNumbersEnabled}"
+            ng-click="toggleOption('lineNumbersEnabled')"
             ng-bind="toggleTxt('lineNumbersEnabled')"
           ) Disabled
 
           select(
-            ng-show="lineNumbersEnabled"
-            ng-disabled="!lineNumbersEnabled"
+            ng-show="opts.lineNumbersEnabled"
+            ng-disabled="!opts.lineNumbersEnabled"
             ng-model="dumpLineNumbers"
-            ng-options="opt.value as opt.label for opt in lineNumberOptions"
+            ng-options="opt.value as opt.label for opt in opts.lineNumberOptions"
             ng-change='updateOptions()'
           )
 
@@ -33,8 +33,8 @@ block optionsDrawer
           code relativeUrls
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': relativeUrls }"
-            ng-click="toggleModel('relativeUrls')"
+            ng-class="{'btn-primary': opts.relativeUrls }"
+            ng-click="toggleOption('relativeUrls')"
             ng-bind="toggleTxt('relativeUrls')"
           ) Disabled
 
@@ -42,16 +42,16 @@ block optionsDrawer
           code rootpath
           //- i.icon-info-sign
           button.btn.toggle-btn(
-            ng-class="{'btn-primary': rootPathEnabled }"
-            ng-click="toggleModel('rootPathEnabled')"
+            ng-class="{'btn-primary': opts.rootPathEnabled }"
+            ng-click="toggleOption('rootPathEnabled')"
             ng-bind="toggleTxt('rootPathEnabled')"
           ) Disabled
 
           input.ng-cloak(
-            ng-show='rootPathEnabled'
-            ng-disabled='!rootPathEnabled'
+            ng-show='opts.rootPathEnabled'
+            ng-disabled='!opts.rootPathEnabled'
             ng-change='updateOptions()'
-            ng-model='rootpath'
+            ng-model='opts.rootpath'
             placeholder='Enter rootpath'
             type='text'
           )
@@ -62,7 +62,7 @@ block optionsDrawer
           //- i.icon-info-sign
           button.btn.toggle-btn(
             ng-class="{'btn-primary': legacyUnits}"
-            ng-click="toggleModel('legacyUnits')"
+            ng-click="toggleOption('legacyUnits')"
             ng-bind="toggleTxt('legacyUnits')"
             ng-disabled="isLegacy()"
           ) Disabled

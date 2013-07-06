@@ -1,24 +1,27 @@
 l2c.controller('OptionsCtrl', [
   '$scope', 'LessOptions'
-  , function($scope, LessOptions) {
-    var defaults, opts;
-
-    LessOptions.then(function(data) {
-      defaults = data.getDefaults();
-      $scope.opts = opts = data.opts;
-      setupOptions();
-    });
+  , function($scope, opts) {
+    $scope.opts = opts;
 
     function setupOptions() {
       setVersions();
     }
 
     function setVersions() {
-      opts.versions = defaults.lessVersions;
       // Select current version
-      opts.selectedVersion = _.find(defaults.lessVersions, function (version) {
+      opts.selectedVersion = _.find(opts.versions, function (version) {
         return version.type === 'current';
       }).number;
     }
+
+    $scope.toggleOption = function(model) {
+      opts[model] = !opts[model];
+    };
+
+    $scope.toggleTxt = function(model) {
+      return opts[model] ? 'Enabled' : 'Disabled';
+    };
+
+    $scope.$watch('opts', setupOptions);
   }
 ]);
