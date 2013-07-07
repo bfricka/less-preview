@@ -4,26 +4,13 @@ module.exports = {
   fourOhfour: function(req, res) {
     res.status(404);
 
-    if (req.accepts('html')) {
-      res.render("404", {
-          app   : ''
-        , title : 'LESS2CSS | 404'
-      });
-    } else if (req.accepts('json')) {
-      res.send({ error: 'Not Found' });
-    } else {
-      res
-        .type('txt')
-        .send('404 Not Found');
-    }
+    if (req.accepts('html')) return res.render("404", { app: '', title: 'LESS2CSS | 404' });
+    if (req.accepts('json')) return res.send({ error: 'Not Found' });
+    return res.type('txt').send('404 Not Found');
   }
 
   , home: function(req, res) {
-    var opts = {
-        app   : 'Less2Css'
-      , title : 'LESS2CSS | LESS Live Preview'
-    };
-
+    var opts = { app: 'Less2Css', title : 'LESS2CSS | LESS Live Preview' };
     res.render('less2css', opts);
   }
 
@@ -37,9 +24,6 @@ module.exports = {
   }
 
   , compile: function(req, res) {
-    res.json({
-        options: req.query
-      , content: req.body.content
-    });
+    res.json({ options: req.query, content: req.body.content });
   }
 };

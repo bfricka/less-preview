@@ -6,14 +6,9 @@ l2c.controller('OptionsCtrl', [
     LessOptions.request.then(setupOptions);
 
     function setupOptions() {
-      var defaults = opts.options;
-
+      // Copy defaults to opts
+      _.defaults(opts, opts.options);
       opts.lineNumbers = opts.lineNumberOptions[0].value;
-
-      for (var k in defaults) {
-        opts[k] = defaults[k];
-      }
-
       setupVersion();
     }
 
