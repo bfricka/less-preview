@@ -27,11 +27,12 @@ Scripts.prototype = {
         , js + '/vendor/amplify.store.js'
         , js + '/vendor/lodash.js'
         , js + '/vendor/cm/codemirror.js'
-        , js + '/vendor/cm/util/matchbrackets.js'
+        , js + '/vendor/cm/addon/edit/closebrackets.js'
+        , js + '/vendor/cm/addon/edit/matchbrackets.js'
         , js + '/vendor/cm/mode/less/less.js'
       ]
       , app: [
-        js + '/plugins/Element.js'
+          js + '/plugins/Element.js'
         , js + '/app/app.js'
         , js + '/app/services/Stor.js'
         , js + '/app/services/LessOptions.js'

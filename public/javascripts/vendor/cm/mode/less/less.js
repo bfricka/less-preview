@@ -7,12 +7,6 @@
 CodeMirror.defineMode("less", function(config) {
   var indentUnit = config.indentUnit, type;
   function ret(style, tp) {type = tp; return style;}
-  //html tags
-  var tags = "a abbr acronym address applet area article aside audio b base basefont bdi bdo big blockquote body br button canvas caption cite code col colgroup command datalist dd del details dfn dir div dl dt em embed fieldset figcaption figure font footer form frame frameset h1 h2 h3 h4 h5 h6 head header hgroup hr html i iframe img input ins keygen kbd label legend li link map mark menu meta meter nav noframes noscript object ol optgroup option output p param pre progress q rp rt ruby s samp script section select small source span strike strong style sub summary sup table tbody td textarea tfoot th thead time title tr track tt u ul var video wbr".split(' ');
-
-  function inTagsArray(val){
-    for(var i=0; i<tags.length; i++)if(val === tags[i])return true;
-  }
 
   var selectors = /(^\:root$|^\:nth\-child$|^\:nth\-last\-child$|^\:nth\-of\-type$|^\:nth\-last\-of\-type$|^\:first\-child$|^\:last\-child$|^\:first\-of\-type$|^\:last\-of\-type$|^\:only\-child$|^\:only\-of\-type$|^\:empty$|^\:link|^\:visited$|^\:active$|^\:hover$|^\:focus$|^\:target$|^\:lang$|^\:enabled^\:disabled$|^\:checked$|^\:first\-line$|^\:first\-letter$|^\:before$|^\:after$|^\:not$|^\:required$|^\:invalid$)/;
 
@@ -128,15 +122,13 @@ CodeMirror.defineMode("less", function(config) {
         return ret("tag", "tag");
       }else if( /\(/.test(stream.peek()) ){
         return ret(null, ch);
-      }else if(stream.peek() == "/" && state.stack[state.stack.length-1] != undefined){ // url(dir/center/image.png)
+      }else if (stream.peek() == "/" && state.stack[state.stack.length-1] != undefined){ // url(dir/center/image.png)
         return ret("string", "string");
       }else if( stream.current().match(/\-\d|\-.\d/) ){ // match e.g.: -5px -0.4 etc... only colorize the minus sign
         //commment out these 2 comment if you want the minus sign to be parsed as null -500px
         //stream.backUp(stream.current().length-1);
         //return ret(null, ch); //console.log( stream.current() );
         return ret("number", "unit");
-      }else if( inTagsArray(stream.current().toLowerCase()) ){ // match html tags
-        return ret("tag", "tag");
       }else if( /\/|[\s\)]/.test(stream.peek() || stream.eol() || (stream.eatSpace() && stream.peek() == "/")) && stream.current().indexOf(".") !== -1){
         if(stream.current().substring(stream.current().length-1,stream.current().length) == "{"){
           stream.backUp(1);

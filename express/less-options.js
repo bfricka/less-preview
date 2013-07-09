@@ -28,10 +28,11 @@ module.exports = {
   }
 
   , lessEditorOptions: {
-      theme         : "lesser-dark"
-    , tabSize       : 2
-    , lineNumbers   : true
-    , matchBrackets : true
+      theme             : "lesser-dark"
+    , tabSize           : 2
+    , lineNumbers       : true
+    , matchBrackets     : true
+    , autoCloseBrackets : true
   }
 
   , cssEditorOptions: {
