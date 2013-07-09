@@ -100,7 +100,7 @@ block header
     span(ng-if="opts.strictUnits", ng-animate="{ enter: 'fade-in', leave: 'fade-out' }")
       | Strict Units:&nbsp;
       code {{opts.strictUnits}}
-  li: img#loading-gif.loading-gif(
+  li: img.loading-gif(
     ng-cloak
     ng-show='loading == true'
     ng-animate="{ enter : 'fade-in', leave: 'fade-out' }"
@@ -113,7 +113,11 @@ block content
     div.span6
       div.code-wrap.left
         h2.code-label LESS
-        textarea#less-input.less-input(placeholder="Input your LESS here.", less-editor, ng-model="lessInput").
+        textarea.less-input(
+          less-editor
+          ng-model="lessInput"
+          placeholder="Input your LESS here."
+        ).
           .transition(@transition) {
             -webkit-transition: @transition;
                -moz-transition: @transition;

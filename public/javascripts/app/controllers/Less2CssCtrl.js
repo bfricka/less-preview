@@ -1,44 +1,33 @@
 l2c.controller('Less2CssCtrl', [
     '$http'
   , '$scope'
-  , 'Stor'
   , 'LessCompiler'
   , 'LessOptions'
 
-  , function($http, $scope, Stor, LessCompiler, LessOptions) {
+  , function($http, $scope, LessCompiler, LessOptions) {
     // Start req for options
-    var LessCache = new Stor('LessCache');
-
-    // Set model
     LessOptions.request.then(setupOptions);
 
     function setupOptions() {
-      var opts = $scope.opts = LessOptions.options;
-
-      updateOptions(opts);
-      loadLess();
+      $scope.opts = LessOptions.options;
+      updateOptions($scope.opts);
 
       // Setup watchers
-      $scope.$watch('lessInput', function(val) {
-        LessCache.set(val);
-        compileLess();
-      });
-
+      $scope.$watch('lessInput', compileLess);
       $scope.$watch('opts.selectedVersion', loadLess);
       $scope.$watch('opts', updateOptions, true);
     }
 
 
     // Set defaults
-    // @todo Work this value getter into directive or JSON.
-    // Boo on DOM query even if it's only initial
-    $scope.lessInput = LessCache.get() || $('#less-input').val();
+    $scope.lessInput = LessCompiler.getCache();
     $scope.cssOutput = '';
     $scope.loading = false;
     $scope.compileError = false;
 
     function updateOptions(opts) {
       LessCompiler.updateOptions(opts);
+      LessOptions.setCache(opts);
       compileLess();
     }
 

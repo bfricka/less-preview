@@ -8,6 +8,9 @@ l2c.directive('lessEditor', [
 
       , link: function(scope, elem, attrs, ngModel) {
         scope.opts = LessOptions.options;
+        // Parse and render initial viewValue for CodeMirror
+        ngModel.$setViewValue(scope.$eval(attrs.ngModel) || elem[0].value);
+        ngModel.$render();
 
         function deferCodeMirror() {
           var opts = scope.opts.lessEditorOptions
