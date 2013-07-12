@@ -40,7 +40,7 @@ l2c.controller('OptionsCtrl', [
     };
 
     $scope.$watch('opts.lineNumbers+opts.lineNumbersEnabled', updateLineNumbers);
-    $scope.$watch('opts.rootpathText', updateRootPath);
+    $scope.$watch('opts.rootpathText+opts.rootpath', updateRootPath);
     $scope.$watch('opts.selectedVersion', updateVersion);
   }
 ]);
