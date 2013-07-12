@@ -8,13 +8,13 @@ l2c.controller('OptionsCtrl', [
     function setupOptions() {
       // Copy defaults to opts
       _.defaults(opts, opts.options);
-      opts.lineNumbers = opts.lineNumberOptions[0].value;
+      opts.lineNumbers = opts.lineNumbers || opts.lineNumberOptions[0].value;
       setupVersion();
     }
 
     function setupVersion() {
       // Select current version
-      opts.selectedVersion = _.find(opts.versions, function (version) {
+      opts.selectedVersion = opts.selectedVersion || _.find(opts.versions, function (version) {
         return version.type === 'current';
       }).number;
     }
