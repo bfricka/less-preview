@@ -1,81 +1,109 @@
+(function(){
+  /**
+   * Local Storage wrapper
+   * @param {string} key optional localStorage key
+   * @param {Date|number} exp optional date object or timestamp
+   */
+  function Stor(key, exp) {
+    this._ls = window.localStorage;
+    this._key = key;
+    this._exp = exp || null;
+    this._update();
+  }
+
+  // @todo Implement expiration
+  // @todo Use "data:" like amplify and allow for plain strings / nums
+  // thus, check for type and only stringify objects.
+
+  Stor.prototype = {
+    get: function() {
+      return this._data;
+    }
+
+    , set: function(val) {
+      var stringified = JSON.stringify({ data: val, expires: this._exp });
+      this._ls.setItem(this._getkey(), stringified);
+      return this._update();
+    }
+
+    , remove: function() {
+      this._remove();
+      return this._update();
+    }
+
+    , _getkey: function (key) {
+      return key || '__stor__' + (this._key || '');
+    }
+
+    , _get: function() {
+      return JSON.parse(this._ls.getItem(this._getkey()));
+    }
+
+    , _update: function() {
+      var data = this._get();
+
+      if (!data) {
+        this._exp = this._exp || null;
+        return this.set(null);
+      }
+
+      if (data._exp !== null && data._exp <= this._exp) this.remove();
+
+      this._data = data.data;
+      this._exp = data.exp || this._exp;
+
+      return this._data;
+    }
+
+    , _remove: function(key) {
+      this._ls.removeItem(this._getkey(key));
+    }
+  };
+
+  l2c.constant('Storage', Stor);
+}());
+
+
 l2c.factory('Stor', [
     '$q'
   , '$rootScope'
   , '$timeout'
+  , 'Storage'
 
-  , function($q, $rootScope, $timeout) {
-    var Stor = (function() {
-      Stor.name = 'Stor';
+  , function($q, $rootScope, $timeout, Storage) {
+    _.extend(Storage.prototype, {
+      getAsync: function() {
+        var fn = arguments[0]
+          , args = [].slice.call(arguments, 1)
+          , deferred = $q.defer()
+          , self = this;
 
-      function Stor(key, exp) {
-        this.key = key != null ? key : void 0;
-        this.exp = exp != null ? exp : null;
-        this.amp = amplify.store;
-      }
+        $timeout(function() {
+          var data = self.get.call(self);
 
-      Stor.prototype = {
-        get: function(key) {
-          if (key == null) key = this.key;
-          return this.amp(key);
-        }
+          if (data) {
+            $rootScope.safeApply(function() {
+              deferred.resolve({ data: data, type: 'local' });
+            });
+          } else {
+            var req = fn()
+              , ret = { type: 'xhr' };
 
-        , set: function(val, key, exp) {
-          if (key == null) key = this.key;
-          if (exp == null) exp = this.exp;
+            req.then(function(res) {
+              return $rootScope.safeApply(function() {
+                ret.data = res.data;
+                ret.status = res.status;
 
-          return this.amp(key, val, {
-            expires: exp
-          });
-        }
-
-        , remove: function(key) {
-          if (key == null) key = this.key;
-          this.amp(key, null);
-        }
-
-        , empty: function() {
-          var storage = this.amp();
-
-          for (var key in storage) {
-            this.amp(key, null);
+                deferred.resolve(ret);
+              });
+            });
           }
-        }
+        }, 1);
 
-        , getAsync: function() {
-          var fn = arguments[0]
-            , args = [].slice.call(arguments, 1)
-            , q = $q.defer()
-            , self = this;
+        return deferred.promise;
+      }
+    });
 
-          $timeout(function() {
-            var data = self.get.apply(self, args);
-
-            if (data) {
-              $rootScope.safeApply($rootScope, function() {
-                q.resolve({ data: data, type: 'local' });
-              });
-            } else {
-              var req = fn()
-                , ret = { type: 'xhr' };
-
-              req.then(function(res) {
-                return $rootScope.safeApply($rootScope, function() {
-                  ret.data = res.data;
-                  ret.status = res.status;
-
-                  q.resolve(ret);
-                });
-              });
-            }
-          }, 1);
-
-          return q.promise;
-        }
-      };
-
-      return Stor;
-    })();
-
-    return Stor;
+    return Storage;
   }
 ]);

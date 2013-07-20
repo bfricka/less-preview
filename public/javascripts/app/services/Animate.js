@@ -74,7 +74,7 @@ l2c.service('TransitionHelper', [
      * @return {void}
      */
     this.translate = function(el, val, axis) {
-      var elTransform = win.getComputedStyle(el)[props.transform]
+      var elTransform = el.getComputedStyle(props.transform)
         , xVal = normalizePx(axis === 'X' ? val : parseTransform(elTransform).X)
         , yVal = normalizePx(axis === 'Y' ? val : parseTransform(elTransform).Y);
 
