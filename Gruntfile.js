@@ -1,29 +1,30 @@
 var scripts = require('./express/app-scripts')(process.cwd())
-  , src = scripts.development()
-  , uglify_options = {
-    compress: {
-        loops        : true
-      , unused       : true
-      , unsafe       : true
-      , cascade      : true
-      , warnings     : true
-      , booleans     : true
-      , evaluate     : true
-      , dead_code    : true
-      , join_vars    : true
-      , if_return    : true
-      , sequences    : true
-      , hoist_vars   : false
-      , hoist_funs   : true
-      , properties   : true
-      , comparisons  : true
-      , conditionals : true
-    }
-    , mangle: { except: ['OptionsDrawer', 'CodeMirror', 'angular', 'amplify', 'jQuery', 'Stor', 'less', '$', '_'] }
-  };
+  , src = scripts.development();
 
 module.exports = function(grunt) {
-  grunt.loadNpmTasks('grunt-karma');
+  var jsGlobals = Object.keys(grunt.file.readJSON('./.jshintrc').globals)
+    , uglify_options = {
+      compress: {
+          loops        : true
+        , unused       : true
+        , unsafe       : true
+        , cascade      : true
+        , warnings     : true
+        , booleans     : true
+        , evaluate     : true
+        , dead_code    : true
+        , join_vars    : true
+        , if_return    : true
+        , sequences    : true
+        , hoist_vars   : false
+        , hoist_funs   : true
+        , properties   : true
+        , comparisons  : true
+        , conditionals : true
+      }
+      , mangle: { except: jsGlobals }
+    };
+
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -33,11 +34,12 @@ module.exports = function(grunt) {
       pkg: grunt.file.readJSON('package.json')
     , meta: {
       banner: [
-          '/* <%= pkg.name %> - v<%= pkg.version %> - <%= pkg.homepage %>\n'
-        , ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>. All rights reserved.\n'
-        , ' * Licensed <%= _.pluck(pkg.licenses, "type")[0] %> - <%= _.pluck(pkg.licenses, "url")[0] %>\n'
-        , ' */\n'
-      ].join('')
+          '/* <%= pkg.name %> - v<%= pkg.version %> - <%= pkg.homepage %>'
+        , ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>. All rights reserved.'
+        , ' * Licensed <%= _.pluck(pkg.licenses, "type")[0] %> - <%= _.pluck(pkg.licenses, "url")[0] %>'
+        , ' */'
+        , ''
+      ].join('\n')
     }
 
     , paths: {
@@ -73,7 +75,7 @@ module.exports = function(grunt) {
             '<%= paths.js %>/options-drawer.js'
           , '<%= paths.js %>/app/**/*.js'
         ]
-        , tasks: ['jshint', 'uglify:app', 'karma:unit:run']
+        , tasks: ['jshint', 'uglify:app']
       }
       , tests: {
           files: ['<%= paths.test %>/**/*.spec.js']
@@ -99,12 +101,6 @@ module.exports = function(grunt) {
       options: { jshintrc: './.jshintrc' }
       , all: ['<%= paths.tmp %>/less2css.js']
     }
-
-    , karma: {
-      unit: {
-        configFile: '<%= paths.express %>/karma.conf.js'
-      }
-    }
   });
 
   grunt.registerTask('default', [
@@ -113,6 +109,5 @@ module.exports = function(grunt) {
     , 'jshint'
     , 'uglify'
     , 'concat:build'
-    , 'karma:unit:run'
   ]);
 };

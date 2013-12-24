@@ -1,4 +1,6 @@
-l2c.directive('lessEditor', [
+angular
+.module('Less2Css')
+.directive('lessEditor', [
   'LessOptions'
 
   , function(LessOptions) {

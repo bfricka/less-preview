@@ -1,6 +1,10 @@
-l2c.factory('LessOptions', [
-  '$http', '$q', 'Stor'
-  , function ($http, $q, Stor) {
+angular
+.module('Less2Css')
+.factory('LessOptions', [
+    '$q'
+  , '$http'
+  , 'Stor'
+  , function ($q, $http, Stor) {
     var deferred = $q.defer()
       , promise = deferred.promise
       , stor = new Stor('LessOptions', { expires: 31536000000 })

@@ -21,11 +21,7 @@
   , "laxbreak" : true
   , "globals"  : {
       "_"          : true
-    , "$"          : true
-    , "l2c"        : true
     , "less"       : true
-    , "jQuery"     : true
-    , "amplify"    : true
     , "angular"    : true
     , "CodeMirror" : true
   }

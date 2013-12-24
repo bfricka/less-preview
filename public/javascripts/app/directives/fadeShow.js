@@ -1,4 +1,6 @@
-l2c.directive('fadeShow', function() {
+angular
+.module('Less2Css')
+.directive('fadeShow', function() {
   function fadeShow(scope, elem, attrs) {
     var $elem = $(elem)
       , exp = attrs.fadeShow

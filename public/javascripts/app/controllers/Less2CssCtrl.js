@@ -1,4 +1,6 @@
-l2c.controller('Less2CssCtrl', [
+angular
+.module('Less2Css')
+.controller('Less2CssCtrl', [
     '$http'
   , '$scope'
   , 'LessCompiler'
@@ -18,12 +20,13 @@ l2c.controller('Less2CssCtrl', [
       $scope.$watch('opts', updateOptions, true);
     }
 
-
     // Set defaults
-    $scope.lessInput = LessCompiler.getCache();
-    $scope.cssOutput = '';
-    $scope.loading = false;
-    $scope.compileError = false;
+    _.extend($scope,  {
+        lessInput: LessCompiler.getCache()
+      , cssOutput: ''
+      , loading: false
+      , compileError: false
+    });
 
     function updateOptions(opts) {
       LessCompiler.updateOptions(opts);
@@ -46,9 +49,12 @@ l2c.controller('Less2CssCtrl', [
     }
 
     function compileLess() {
-      $scope.cssOutput = LessCompiler.compileLess($scope.lessInput);
-      $scope.compileError = LessCompiler.error;
-      $scope.safeApply();
+      $scope.$safeApply(function() {
+        _.extend($scope, {
+          cssOutput: LessCompiler.compileLess($scope.lessInput)
+          , compileError: LessCompiler.error
+        });
+      });
     }
   }
 ]);

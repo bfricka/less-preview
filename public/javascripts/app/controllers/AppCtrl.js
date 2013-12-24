@@ -1,5 +1,8 @@
-l2c.controller('AppCtrl', [
-  '$scope', 'LessOptions'
+angular
+.module('Less2Css')
+.controller('AppCtrl', [
+  '$scope'
+  , 'LessOptions'
   , function($scope, LessOptions) {
     $scope.opts = LessOptions.options;
 

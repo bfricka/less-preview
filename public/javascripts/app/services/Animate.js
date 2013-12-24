@@ -1,5 +1,8 @@
-l2c.service('TransitionHelper', [
-  '$window', '$document'
+angular
+.module('Less2Css')
+.service('TransitionHelper', [
+  '$window'
+  , '$document'
   , function TransitionHelper(win, doc) {
     doc = doc[0];
 

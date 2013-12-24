@@ -60,11 +60,13 @@
     }
   };
 
-  l2c.constant('Storage', Stor);
+  angular.module('Less2Css').constant('Storage', Stor);
 }());
 
 
-l2c.factory('Stor', [
+angular
+.module('Less2Css')
+.factory('Stor', [
     '$q'
   , '$rootScope'
   , '$timeout'

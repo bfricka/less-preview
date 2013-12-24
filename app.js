@@ -1,6 +1,5 @@
 var http           = require('http')
   , less           = require('less-middleware')
-  // , mongo          = require('mongodb')
   , routes         = require('./routes')
   , express        = require('express');
 
@@ -64,7 +63,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
-app.post('/compile', routes.compile);
+// app.post('/compile', routes.compile);
 
 // Init
 app.listen(app.get('port'), function(){

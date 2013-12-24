@@ -1,4 +1,6 @@
-l2c.directive('drawer', [
+angular
+.module('Less2Css')
+.directive('drawer', [
   'TransitionHelper'
   , function(transition) {
     return {

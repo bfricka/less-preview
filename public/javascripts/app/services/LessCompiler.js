@@ -1,4 +1,6 @@
-l2c.factory('LessCompiler', [
+angular
+.module('Less2Css')
+.factory('LessCompiler', [
     'Stor'
   , function(Stor) {
     var LessEditorCache = new Stor('LessEditorCache');
@@ -60,6 +62,7 @@ l2c.factory('LessCompiler', [
           return compiledCSS;
         } catch (lessEx) {
           this.error = true;
+          if (lessEx.type.toLowerCase() === 'file') this.initLess();
           return this.updateError(lessEx);
         }
       }
