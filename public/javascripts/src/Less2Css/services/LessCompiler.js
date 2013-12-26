@@ -1,16 +1,13 @@
 angular
 .module('Less2Css')
 .factory('LessCompiler', [
-    'Stor'
-  , function(Stor) {
+  'Stor'
+  , 'LessLoader'
+  , function(Stor, LessLoader) {
     var LessEditorCache = new Stor('LessEditorCache');
 
     function LessCompiler() {
-      this.options = {
-          saveLess : true
-        , lessPath : "/javascripts/less/less-{version}.js"
-      };
-
+      this.options = { saveLess : true };
       this.storage = LessEditorCache;
     }
 
@@ -21,30 +18,6 @@ angular
        */
       initLess: function() {
         this.parser = new less.Parser(this.lessOptions);
-      }
-
-      /**
-       * Loads script XHR
-       * @return {Object} XHR Promise
-       */
-      , loadLess: function() {
-        window.less = undefined;
-
-        var opts = this.options
-          , lessOptions = this.lessOptions
-          , version = lessOptions.selectedVersion;
-
-        version = (lessOptions.version === 'pre')
-          ? version + "-beta"
-          : version;
-
-        var scriptUrl = opts.lessPath.replace("{version}", version);
-
-        return $.ajax({
-            url      : scriptUrl
-          , cache    : true
-          , dataType : "script"
-        });
       }
 
       /**
@@ -73,8 +46,8 @@ angular
        * @return {String}          CSS Result
        */
       , parseLess: function(lessCode) {
-        var lessOptions = this.lessOptions
-          , resultCss = "";
+        var lessOptions = this.lessOptions;
+        var resultCss = "";
 
         this.parser.parse(lessCode, function(lessEx, result) {
           if (lessEx) throw lessEx;
@@ -91,7 +64,7 @@ angular
        */
       , updateOptions: function(options) {
         this.lessOptions = options;
-        if (window.less) this.initLess();
+        if (LessLoader.isLoaded()) this.initLess();
       }
 
       /**

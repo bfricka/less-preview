@@ -73,9 +73,9 @@ module.exports = function(grunt) {
       js: {
         files: [
             '<%= paths.js %>/options-drawer.js'
-          , '<%= paths.js %>/app/**/*.js'
+          , '<%= paths.js %>/src/**/*.js'
         ]
-        , tasks: ['jshint', 'uglify:app']
+        , tasks: ['concat:app', 'jshint']
       }
       , tests: {
           files: ['<%= paths.test %>/**/*.spec.js']

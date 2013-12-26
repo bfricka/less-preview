@@ -2,7 +2,7 @@ angular
 .module('Less2Css')
 .directive('drawer', [
   'TransitionHelper'
-  , function(transition) {
+  , function(TransitionHelper) {
     return {
         replace     : true
       , restrict    : 'E'
@@ -15,7 +15,7 @@ angular
         , position : '='
       }
 
-      , link: function(scope, elem, attrs) {
+      , link: function(scope, elem) {
         var el = scope.el = elem[0];
         var translateAxis = scope.position === 'top' || scope.position === 'bottom'
           ? 'Y'
@@ -26,15 +26,15 @@ angular
 
           var translateVal = isOpen
             ? scope.offset
-            : -scope.height + parseInt(scope.offset, 10);
+            : -scope.height + _.parseInt(scope.offset);
 
-          transition['translate' + translateAxis](scope.el, translateVal);
+          TransitionHelper['translate' + translateAxis](el, translateVal);
           el.style.opacity = isOpen ? 1 : 0;
         }
 
         function updateModelDimensions() {
-          scope.height = scope.el.offsetHeight;
-          scope.width = scope.el.offsetWidth;
+          scope.height = el.offsetHeight;
+          scope.width = el.offsetWidth;
         }
 
         scope.$watch('open', toggleDrawer);

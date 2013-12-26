@@ -1,7 +1,7 @@
-var http           = require('http')
-  , less           = require('less-middleware')
-  , routes         = require('./routes')
-  , express        = require('express');
+var http           = require('http');
+var less           = require('less-middleware');
+var routes         = require('./routes');
+var express        = require('express');
 
 var app = express();
 http.createServer(app);
@@ -48,7 +48,7 @@ app.configure('development', function() {
 });
 
 app.configure('production', function() {
-  app.use(express.errorHandler({ dumpExceptions: true }));
+  app.use(express.errorHandler());
 });
 
 app.use(routes.fourOhfour);

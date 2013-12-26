@@ -1,18 +1,18 @@
 angular
 .module('Less2Css')
 .controller('Less2CssCtrl', [
-    '$http'
-  , '$scope'
-  , 'LessCompiler'
+    '$scope'
+  , 'LessLoader'
   , 'LessOptions'
-
-  , function($http, $scope, LessCompiler, LessOptions) {
+  , 'LessCompiler'
+  , function($scope, LessLoader, LessOptions, LessCompiler) {
+    var _opts;
     // Start req for options
     LessOptions.request.then(setupOptions);
 
     function setupOptions() {
-      $scope.opts = LessOptions.options;
-      updateOptions($scope.opts);
+      _opts = $scope.opts = LessOptions.options;
+      updateOptions(_opts);
 
       // Setup watchers
       $scope.$watch('lessInput', compileLess);
@@ -37,21 +37,20 @@ angular
     // Private fns
     function loadLess() {
       $scope.loading = true;
-      var loading = LessCompiler.loadLess();
 
-      loading.done(function() {
-        $scope.$apply(function() {
+      LessLoader
+        .load(_opts.selectedVersion, _opts.version.type === 'pre')
+        .then(function() {
           LessCompiler.initLess();
           compileLess();
           $scope.loading = false;
         });
-      });
     }
 
     function compileLess() {
       $scope.$safeApply(function() {
         _.extend($scope, {
-          cssOutput: LessCompiler.compileLess($scope.lessInput)
+            cssOutput: LessCompiler.compileLess($scope.lessInput)
           , compileError: LessCompiler.error
         });
       });

@@ -2,21 +2,20 @@ angular
 .module('Less2Css')
 .directive('lessEditor', [
   'LessOptions'
-
   , function(LessOptions) {
     return {
         restrict: 'A'
       , require: 'ngModel'
-
       , link: function(scope, elem, attrs, ngModel) {
+        var el = elem[0];
         scope.opts = LessOptions.options;
         // Parse and render initial viewValue for CodeMirror
-        ngModel.$setViewValue(scope.$eval(attrs.ngModel) || elem[0].value);
+        ngModel.$setViewValue(scope.$eval(attrs.ngModel) || el.value);
         ngModel.$render();
 
         function deferCodeMirror() {
-          var opts = scope.opts.lessEditorOptions
-            , codeMirror = CodeMirror.fromTextArea(elem[0], opts);
+          var opts = scope.opts.lessEditorOptions;
+          var codeMirror = CodeMirror.fromTextArea(el, opts);
 
           codeMirror.on('change', onChange(opts.onChange));
 

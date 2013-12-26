@@ -22,9 +22,7 @@ Scripts.prototype = {
 
     return {
       vendor: [
-          js + '/vendor/jquery.js'
-        , js + '/vendor/angular.js'
-        , js + '/vendor/amplify.store.js'
+          js + '/vendor/angular.js'
         , js + '/vendor/lodash.js'
         , js + '/vendor/cm/codemirror.js'
         , js + '/vendor/cm/addon/edit/closebrackets.js'
@@ -32,18 +30,19 @@ Scripts.prototype = {
         , js + '/vendor/cm/mode/less/less.js'
       ]
       , app: [
-          js + '/plugins/Element.js'
-        , js + '/app/app.js'
-        , js + '/app/services/Stor.js'
-        , js + '/app/services/LessOptions.js'
-        , js + '/app/services/LessCompiler.js'
-        , js + '/app/services/Animate.js'
-        , js + '/app/directives/fadeShow.js'
-        , js + '/app/directives/lessEditor.js'
-        , js + '/app/directives/drawer.js'
-        , js + '/app/controllers/AppCtrl.js'
-        , js + '/app/controllers/OptionsCtrl.js'
-        , js + '/app/controllers/Less2CssCtrl.js'
+          js + '/src/base-extenders.js'
+        , js + '/src/Stor/Stor.js'
+        , js + '/src/TransitionHelper/TransitionHelper.js'
+        , js + '/src/Less2Css/less2css.js'
+        , js + '/src/Less2Css/services/LessLoader.js'
+        , js + '/src/Less2Css/services/LessOptions.js'
+        , js + '/src/Less2Css/services/LessCompiler.js'
+        , js + '/src/Less2Css/directives/fadeShow.js'
+        , js + '/src/Less2Css/directives/lessEditor.js'
+        , js + '/src/Less2Css/directives/drawer.js'
+        , js + '/src/Less2Css/controllers/AppCtrl.js'
+        , js + '/src/Less2Css/controllers/OptionsCtrl.js'
+        , js + '/src/Less2Css/controllers/Less2CssCtrl.js'
       ]
     };
   }
@@ -58,10 +57,10 @@ Scripts.prototype = {
   }
 
   , getScriptSrc: function(env) {
-    var scripts = this[env]()
-    , combined = scripts.vendor.concat(scripts.app)
-    , len = combined.length
-    , i = 0;
+    var scripts = this[env]();
+    var combined = scripts.vendor.concat(scripts.app);
+    var len = combined.length;
+    var i = 0;
 
     while (i < len) {
       combined[i] = combined[i].replace(this.jsPath, '/javascripts');

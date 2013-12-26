@@ -1,12 +1,12 @@
 angular
-.module('Less2Css')
+.module('TransitionHelper', [])
 .service('TransitionHelper', [
   '$window'
   , '$document'
-  , function TransitionHelper(win, doc) {
-    doc = doc[0];
-
-    var props = this.props = {
+  , function TransitionHelper($window, $document) {
+    var doc = $document[0];
+    var self = this;
+    var props = self.props = {
         transform: getPrefixedProp('transform')
       , transition: getPrefixedProp('transition')
       , transitionDuration: getPrefixedProp('transitionDuration')
@@ -22,12 +22,12 @@ angular
       var rootStyle = doc.documentElement.style;
       if (prop in rootStyle) return prop;
 
-      var prefixes = ['Webkit', 'Moz', 'O', 'ms']
-        , len = prefixes.length
-        , i = 0;
+      var prefixes = ['Webkit', 'Moz', 'O', 'ms'];
+      var len = prefixes.length;
+      var i = 0;
 
       // Capitalize prop
-      prop = prop.charAt(0).toUpperCase() + prop.slice(1);
+      prop = prop.capitalize();
 
       // Choose the correct prefix
       while (i < len) {
@@ -46,7 +46,7 @@ angular
      * @return {String}        px value (e.g. '10px')
      */
     function normalizePx(val) {
-      return typeof val === 'number' && !isNaN(val) ? val + 'px' : val;
+      return _.isNumber(val) && !_.isNaN(val) ? val + 'px' : val;
     }
 
     /**
@@ -66,6 +66,22 @@ angular
       return { X: parseFloat(transformX), Y: parseFloat(transformY) };
     }
 
+    this.parseTransform = parseTransform;
+
+    /**
+     * window.requestAnimationFrame bound to window
+     * @type {Function}
+     */
+    this.rAF =
+      ($window.requestAnimationFrame ||
+      $window.mozRequestAnimationFrame ||
+      $window.webkitRequestAnimationFrame ||
+      $window.msRequestAnimationFrame ||
+      function(callback) {
+        $window.setTimeout(callback, 1000 / 60);
+      }).bind($window);
+
+
     // Adding "translateZ" forces the transform to be 3d
     /**
      * Takes an element and 3d translates it along a single axis while maintaining
@@ -84,6 +100,13 @@ angular
       el.style[props.transform] = 'translate3d('+xVal+','+yVal+',0)';
     };
 
+    this.translate2d = function(el, posX, posY) {
+      var xVal = normalizePx(posX)
+        , yVal = normalizePx(posY);
+
+      el.style[props.transform] = 'translate(' + xVal + ',' + yVal + ') translateZ(0)';
+    };
+
     this.translateX = function(el, val) {
       this.translate(el, val, 'X');
     };
@@ -96,7 +119,21 @@ angular
       el.style[props.transition] = val;
     };
 
-    this.transitionDuration = function(el, val) {
+    this.duration = function(el, val) {
+      // As a getter, this returns the millisecond value of the element's transitionDuration
+      if (val == null) {
+        var duration = el.getComputedStyle(props.transitionDuration);
+        if (!duration.length) return 0;
+        // Try to split for cases of multiple values, for example: 0.3s, 0.9s
+        duration = _.reduce(duration.split(','), function(sum, dur) {
+          return sum + parseFloat(dur) || 0;
+        }, 0);
+
+        return duration * 1000;
+      }
+
+      if (typeof val === 'number' && !isNaN(val)) val = val + 'ms';
+
       el.style[props.transitionDuration] = val;
     };
 

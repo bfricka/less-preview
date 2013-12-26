@@ -1,5 +1,5 @@
 angular
-.module('Less2Css', [])
+.module('Less2Css', ['Stor', 'TransitionHelper'])
 .config([
   '$provide'
   , function($provide) {
@@ -10,7 +10,6 @@ angular
           var $scope;
           var fn;
           var args = arguments;
-          var totalArgs = args.length;
           var force = false;
 
           switch (args.length) {
