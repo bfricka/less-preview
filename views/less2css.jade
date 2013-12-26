@@ -14,7 +14,7 @@ block optionsDrawer
         div.span3.option-column
           label Output Line Numbers
           //- i.icon-info-sign
-          button.btn.toggle-btn(
+          button.btn.span12.toggle-btn(
             ng-class="{'btn-primary': opts.lineNumbersEnabled}"
             ng-click="toggleOption('lineNumbersEnabled')"
             ng-bind="toggleTxt('lineNumbersEnabled')"
@@ -30,7 +30,7 @@ block optionsDrawer
         div.span3.option-column
           label Relative URLs
           //- i.icon-info-sign
-          button.btn.toggle-btn(
+          button.btn.span12.toggle-btn(
             ng-class="{'btn-primary': opts.relativeUrls }"
             ng-click="toggleOption('relativeUrls')"
             ng-bind="toggleTxt('relativeUrls')"
@@ -39,7 +39,7 @@ block optionsDrawer
         div.span3.option-column
           label Change Rootpath
           //- i.icon-info-sign
-          button.btn.toggle-btn(
+          button.btn.span12.toggle-btn(
             ng-class="{'btn-primary': opts.rootPathEnabled }"
             ng-click="toggleOption('rootPathEnabled')"
             ng-bind="toggleTxt('rootPathEnabled')"
@@ -57,7 +57,7 @@ block optionsDrawer
         div.span3.option-column(ng-hide='isLegacy()')
           label Strict Math
           //- i.icon-info-sign
-          button.btn.toggle-btn(
+          button.btn.span12.toggle-btn(
             ng-class="{'btn-primary': opts.strictMath}"
             ng-click="toggleOption('strictMath')"
             ng-bind="toggleTxt('strictMath')"
@@ -67,12 +67,24 @@ block optionsDrawer
         div.span3.option-column(ng-hide='isLegacy()')
           label Strict Units
           //- i.icon-info-sign
-          button.btn.toggle-btn(
+          button.btn.span12.toggle-btn(
             ng-class="{'btn-primary': opts.strictUnits}"
             ng-click="toggleOption('strictUnits')"
             ng-bind="toggleTxt('strictUnits')"
             ng-disabled="isLegacy()"
           ) Disabled
+
+        //- div.span3.option-column(ng-hide='isLegacy()')
+          .row-fluid
+            label Reset
+            select.span6(ng-model="lessReset", ng-options="value for value in resetOptions")
+              option(value="options") Options
+              option(value="editor") Editor
+              option(value="all") Both
+
+            button.btn.span6.toggle-btn(
+              ng-click="reset(lessReset)"
+            ) Okay
 
 block header
   li.brand: a(href='/') LESS2CSS

@@ -68,10 +68,17 @@ body {
     &:hover { .opacity(80); }
   }
 
+  .option-column > [class*="span"]:first-of-type {
+    margin-left: 0;
+  }
+
+  select[class*="span"] {
+    float: left;
+  }
+
   .toggle-btn {
     display: block;
     margin-top: 10px;
-    width: 100%;
 
     .box-sizing(border-box);
   }

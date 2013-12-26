@@ -2,11 +2,30 @@ angular
 .module('Less2Css')
 .controller('OptionsCtrl', [
     '$scope'
+  , '$rootScope'
   , 'LessOptions'
-  , function($scope, LessOptions) {
+  , function($scope, $rootScope, LessOptions) {
     var opts = $scope.opts = LessOptions.options;
 
     LessOptions.request.then(setupOptions);
+
+    _.extend($scope, {
+      resetOptions: ['Options', 'Editor', 'Both']
+
+      , toggleOption: function(model) {
+        opts[model] = !opts[model];
+      }
+
+      , toggleTxt: function(model) {
+        return opts[model] ? 'Enabled' : 'Disabled';
+      }
+
+      , reset: function(val) {
+        $rootScope.$broadcast('Reset:' + val);
+      }
+    });
+
+    $scope.lessReset = $scope.resetOptions[0];
 
     function setupOptions() {
       // Copy defaults to opts
@@ -33,14 +52,6 @@ angular
     function updateVersion(version) {
       opts.version = _.find(opts.versions, function(ver) { return ver.number === version; });
     }
-
-    $scope.toggleOption = function(model) {
-      opts[model] = !opts[model];
-    };
-
-    $scope.toggleTxt = function(model) {
-      return opts[model] ? 'Enabled' : 'Disabled';
-    };
 
     $scope.$watch('opts.lineNumbers+opts.lineNumbersEnabled', updateLineNumbers);
     $scope.$watch('opts.rootpathText+opts.rootpath', updateRootPath);

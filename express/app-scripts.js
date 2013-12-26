@@ -32,12 +32,12 @@ Scripts.prototype = {
       , app: [
           js + '/src/base-extenders.js'
         , js + '/src/Stor/Stor.js'
+        , js + '/src/Stor/angular-stor.js'
         , js + '/src/TransitionHelper/TransitionHelper.js'
         , js + '/src/Less2Css/less2css.js'
         , js + '/src/Less2Css/services/LessLoader.js'
         , js + '/src/Less2Css/services/LessOptions.js'
         , js + '/src/Less2Css/services/LessCompiler.js'
-        , js + '/src/Less2Css/directives/fadeShow.js'
         , js + '/src/Less2Css/directives/lessEditor.js'
         , js + '/src/Less2Css/directives/drawer.js'
         , js + '/src/Less2Css/controllers/AppCtrl.js'
