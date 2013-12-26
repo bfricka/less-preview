@@ -2,7 +2,9 @@
 
 ### 0.0.8
   - Fix issue where error of type `File` (e.g. 404 on @import) kills the parser until refresh.
-  - Clean-up modules and upgrade AngularJS to 1.2.6 and Lodash to 2.4.1
+  - Fix bug in `Stor` where cache doesn't expire
+  - Added daily options check to keep versions up to date and allow additional options
+  - Clean-up modules and upgrade Lodash to 2.4.1
   - Update Less to 1.5.1
 
 ### 0.0.7
