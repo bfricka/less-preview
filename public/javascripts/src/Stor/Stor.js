@@ -1,31 +1,31 @@
 (function(win) {
+  var memoryStor = {
+    getItem: function(key) {
+      return this[key] || null;
+    }
+    , setItem: function(key, value) {
+      if (arguments.length < 2) throw new Error('localStorage.setItem requires (2) arguments');
+      this[key] = '' + value;
+    }
+    , removeItem: function(key) {
+      delete this[key];
+    }
+  };
+
+  win.memoryStor = memoryStor;
+
   // I guess give in-memory support for those who don't have localStorage
-  if (!('localStorage' in win)) {
-    win.localStorage = {
-      getItem: function(key) {
-        return this[key] || null;
-      }
-      , setItem: function(key, value) {
-        if (arguments.length < 2) throw new Error('localStorage.setItem requires (2) arguments');
-        this[key] = '' + value;
-      }
-      , removeItem: function(key) {
-        delete this[key];
-      }
-    };
-  }
+  if (!('localStorage' in win)) win['localStorage'] = memoryStor;
 
   var ls = win.localStorage;
   var keyPrefix = '__stor__';
+  var key, obj;
 
   // Purge old entries on page load
-  for (var key in ls) {
+  for (key in ls) {
     if (key.indexOf(keyPrefix) !== -1) {
-      var obj = JSON.parse(ls[key]);
-      if (isObjectExpired(obj)) {
-        ls.removeItem(key);
-        console.log("Expiring from page load");
-      }
+      obj = JSON.parse(ls[key]);
+      if (isObjectExpired(obj)) ls.removeItem(key);
     }
   }
 
@@ -49,13 +49,14 @@
    */
   function Stor(key, ttl) {
     if (key == null) throw new Error('Storage Key Required');
+    var self = this;
     // Allow creation w/out "new"
-    if (!(this instanceof Stor)) return new Stor(key, ttl);
+    if (!(self instanceof Stor)) return new Stor(key, ttl);
 
-    this._key = '__stor__' + key;
-    this._ttl = ttl ? (ttl instanceof Date ? ttl.getTime() : ttl) : null;
-    this._sessionData = null;
-    this._update();
+    self._key = '__stor__' + key;
+    self._ttl = ttl ? (ttl instanceof Date ? ttl.getTime() : ttl) : null;
+    self._sessionData = null;
+    self._update();
   }
 
   Stor.prototype = {

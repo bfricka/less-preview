@@ -1,22 +1,27 @@
 // Extend the prototype of Function w/ bind if it doesn't exist
 if (!Function.prototype.bind) {
+  var slice = function(obj, fromIndex, toIndex) {
+    return Array.prototype.slice.call(obj, fromIndex, toIndex);
+  };
+
   _.extend(Function.prototype, {
     bind: function (oThis) {
       if (typeof this !== 'function') {
         throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
       }
 
-      var aArgs = Array.prototype.slice.call(arguments, 1);
-      var fToBind = this;
-      var fNOP = function () {};
-      var fBound = function () {
-        return fToBind.apply(this instanceof fNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
-      };
+      var fnArgs = slice(arguments, 1);
+      var fnToBind = this;
 
-      fNOP.prototype = this.prototype;
-      fBound.prototype = new fNOP();
+      function fnNoop() {}
+      function fnBound() {
+        return fnToBind.apply(this instanceof fnNoop && oThis ? this : oThis, fnArgs);
+      }
 
-      return fBound;
+      fnNoop.prototype = this.prototype;
+      fnBound.prototype = new fnNoop();
+
+      return fnBound;
     }
   });
 }
@@ -70,9 +75,11 @@ _.extend(Element.prototype, {
     var childElements = [];
     var len = els.length;
     var i = 0;
+    var el;
 
     while (i < len) {
-      if (children.indexOf(els[i]) !== -1) childElements.push(els[i]);
+      el = els[i];
+      if (children.indexOf(el) !== -1) childElements.push(el);
       i++;
     }
 

@@ -31,6 +31,7 @@ Scripts.prototype = {
       ]
       , app: [
           js + '/src/base-extenders.js'
+        , js + '/src/lodash-extenders.js'
         , js + '/src/Stor/Stor.js'
         , js + '/src/Stor/angular-stor.js'
         , js + '/src/TransitionHelper/TransitionHelper.js'
