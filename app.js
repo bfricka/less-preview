@@ -1,7 +1,6 @@
-var http           = require('http');
-var less           = require('less-middleware');
-var routes         = require('./routes');
-var express        = require('express');
+var http    = require('http');
+var routes  = require('./routes');
+var express = require('express');
 
 var app = express();
 http.createServer(app);
@@ -57,12 +56,12 @@ app.use(routes.fourOhfour);
 app.get('/', routes.home);
 app.get('/less-options', routes.lessOptions);
 
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
+// app.get('/logout', function(req, res) {
+//   req.logout();
+//   res.redirect('/');
+// });
 
-app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
+// app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
 // app.post('/compile', routes.compile);
 
 // Init
