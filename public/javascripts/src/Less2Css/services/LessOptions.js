@@ -1,10 +1,10 @@
 angular
 .module('Less2Css')
 .service('LessOptions', [
-    '$q'
-  , '$http'
-  , 'Stor'
-  , function LessOptions($q, $http, Stor) {
+  '$q',
+  '$http',
+  'Stor',
+  function LessOptions($q, $http, Stor) {
     var self = this;
     var day = 86400000;
     var deferred = $q.defer();
@@ -38,9 +38,9 @@ angular
     }
 
     _.extend(self, {
-      options: {}
-      , request: promise
-      , setCache: function(data) {
+      options: {},
+      request: promise,
+      setCache: function(data) {
         var newOpts = stor.get();
         newOpts.options = data;
         stor.set(newOpts);

@@ -1,12 +1,12 @@
 angular
 .module('Less2Css')
 .directive('lessEditor', [
-  'LessOptions'
-  , function(LessOptions) {
+  'LessOptions',
+  function(LessOptions) {
     return {
-        restrict: 'A'
-      , require: 'ngModel'
-      , link: function(scope, elem, attrs, ngModel) {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, elem, attrs, ngModel) {
         var el = elem[0];
         scope.opts = LessOptions.options;
         // Parse and render initial viewValue for CodeMirror

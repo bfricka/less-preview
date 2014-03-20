@@ -1,11 +1,11 @@
 angular
 .module('Stor', [])
 .factory('Stor', [
-  '$q'
-  , '$window'
-  , '$timeout'
-  , '$rootScope'
-  , function($q, $window, $timeout, $rootScope) {
+  '$q',
+  '$window',
+  '$timeout',
+  '$rootScope',
+  function($q, $window, $timeout, $rootScope) {
     var StorageClass = $window.Stor;
 
     _.extend(StorageClass.prototype, {

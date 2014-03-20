@@ -1,21 +1,21 @@
 angular
 .module('Less2Css')
 .directive('drawer', [
-  'TransitionHelper'
-  , function(TransitionHelper) {
+  'TransitionHelper',
+  function(TransitionHelper) {
     return {
-        replace     : true
-      , restrict    : 'E'
-      , transclude  : true
-      , templateUrl : 'drawer.html'
-      , scope: {
-          open     : '='
-        , opts     : '='
-        , offset   : '='
-        , position : '='
-      }
+      replace     : true,
+      restrict    : 'E',
+      transclude  : true,
+      templateUrl : 'drawer.html',
+      scope: {
+        open     : '=',
+        opts     : '=',
+        offset   : '=',
+        position : '='
+      },
 
-      , link: function(scope, elem) {
+      link: function(scope, elem) {
         var el = scope.el = elem[0];
         var translateAxis = scope.position === 'top' || scope.position === 'bottom'
           ? 'Y'

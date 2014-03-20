@@ -1,14 +1,13 @@
 angular
 .module('Less2Css', ['Stor', 'TransitionHelper'])
 .config([
-  '$provide'
-  , function($provide) {
+  '$provide',
+  function($provide) {
     $provide.decorator('$rootScope', [
-      '$delegate'
-      , function($delegate) {
-        $delegate.$safeApply = function() {
-          var $scope;
-          var fn;
+      '$delegate',
+      function($rootScope) {
+        $rootScope.$safeApply = function() {
+          var $scope, fn;
           var args = arguments;
           var force = false;
 
@@ -27,7 +26,7 @@ angular
               break;
           }
 
-          $scope = $scope || $delegate;
+          $scope = $scope || $rootScope;
           fn = fn || _.noop;
 
           if(force || !$scope.$$phase) {
@@ -37,7 +36,7 @@ angular
           }
         };
 
-        return $delegate;
+        return $rootScope;
       }
     ]);
   }

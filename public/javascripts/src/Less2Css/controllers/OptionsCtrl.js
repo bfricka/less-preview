@@ -1,26 +1,26 @@
 angular
 .module('Less2Css')
 .controller('OptionsCtrl', [
-    '$scope'
-  , '$rootScope'
-  , 'LessOptions'
-  , function($scope, $rootScope, LessOptions) {
+  '$scope',
+  '$rootScope',
+  'LessOptions',
+  function($scope, $rootScope, LessOptions) {
     var opts = $scope.opts = LessOptions.options;
 
     LessOptions.request.then(setupOptions);
 
     _.extend($scope, {
-      resetOptions: ['Options', 'Editor', 'Both']
+      resetOptions: ['Options', 'Editor', 'Both'],
 
-      , toggleOption: function(model) {
+      toggleOption: function(model) {
         opts[model] = !opts[model];
-      }
+      },
 
-      , toggleTxt: function(model) {
+      toggleTxt: function(model) {
         return opts[model] ? 'Enabled' : 'Disabled';
-      }
+      },
 
-      , reset: function(val) {
+      reset: function(val) {
         $rootScope.$broadcast('Reset:' + val);
       }
     });

@@ -2,12 +2,14 @@
   var memoryStor = {
     getItem: function(key) {
       return this[key] || null;
-    }
-    , setItem: function(key, value) {
+    },
+
+    setItem: function(key, value) {
       if (arguments.length < 2) throw new Error('localStorage.setItem requires (2) arguments');
       this[key] = '' + value;
-    }
-    , removeItem: function(key) {
+    },
+
+    removeItem: function(key) {
       delete this[key];
     }
   };
@@ -39,13 +41,19 @@
   }
 
   /**
-   * localStorage wrapper - Each instance acts as in-memory storage, while managing expiration and persisting all setters to localStorage.
-   * @param {String}      key - Storage object key
-   * @param {Date|Number} [ttl] - Optional date object or timestamp indicating time to live for data, after which it will be purged (if it is called again)
+   * localStorage wrapper - Each instance acts as in-memory storage,
+   * while managing expiration and persisting all setters to localStorage.
+   * @param {string}      key   - Storage object key
+   * @param {Date|Number} [ttl] - Optional date object or timestamp indicating time
+   * to live for data, after which it will be purged (if it is called again)
    * @todo Solidify the separation before session and localStorage by:
    *       1. Public method for `isExpired` and internal reference
-   *       2. Separate (internal) get / set for expired and non-expired state. Always properly get / set internally, but only trigger localStorage update when `isExpired` is false. Possibly use the above localStorage dummy object for internal references.
-   *       3. The point is we always want `get` to return something if it has existed in the current session, even if it expires halfway through. Additionally, we want to be able to (optionally) not update expiration on each `set`. Right now this works but it's ugly.
+   *       2. Separate (internal) get / set for expired and non-expired state.
+   *       Always properly get / set internally, but only trigger localStorage update when
+   *       `isExpired` is false. Possibly use the above localStorage dummy object for internal references.
+   *       3. The point is we always want `get` to return something if it has existed in the current session,
+   *       even if it expires halfway through. Additionally, we want to be able to (optionally) not update
+   *       expiration on each `set`. Right now this works but it's ugly.
    */
   function Stor(key, ttl) {
     if (key == null) throw new Error('Storage Key Required');
@@ -62,9 +70,9 @@
   Stor.prototype = {
     get: function() {
       return this._data || this._sessionData;
-    }
+    },
 
-    , set: function(val, refreshExpires) {
+    set: function(val, refreshExpires) {
       // Refreshes on each `set` by default
       refreshExpires = refreshExpires || refreshExpires == null;
       var self = this;
@@ -75,29 +83,29 @@
 
       self._sessionData = null;
       self._update();
-    }
+    },
 
-    , remove: function() {
+    remove: function() {
       this._remove();
       this._update();
-    }
+    },
 
-    , _getExpires: function(refreshExpires) {
+    _getExpires: function(refreshExpires) {
       var self = this;
       return refreshExpires === false && self._previousExpires
         ? self._previousExpires
         : (self._ttl ? getNow() + self._ttl : null);
-    }
+    },
 
-    , _get: function() {
+    _get: function() {
       return JSON.parse(ls.getItem(this._key));
-    }
+    },
 
-    , _remove: function() {
+    _remove: function() {
       ls.removeItem(this._key);
-    }
+    },
 
-    , _update: function() {
+    _update: function() {
       var self = this;
       if (self._sessionData !== null) return;
 

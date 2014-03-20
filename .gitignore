@@ -49,3 +49,6 @@ $RECYCLE.BIN/
 
 # SublimeText project files
 *.sublime-workspace
+
+### Less2Css
+public/components

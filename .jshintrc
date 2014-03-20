@@ -17,11 +17,12 @@
   "browser"  : true,
   "latedef"  : false,
   "supernew" : true,
-  "laxcomma" : true,
+  "laxcomma" : false,
   "laxbreak" : true,
   "globals"  : {
-      "_"       : true,
-      "chrome"  : true,
-      "angular" : true
+      "_"          : true,
+      "less"       : true,
+      "angular"    : true,
+      "CodeMirror" : true
     }
 }

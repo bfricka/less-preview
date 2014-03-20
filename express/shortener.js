@@ -1,5 +1,5 @@
-var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('')
-  , base = alphabet.length;
+var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+var base = alphabet.length;
 
 module.exports = {
   encode: function(i) {
@@ -12,15 +12,15 @@ module.exports = {
     }
 
     return s.split('').reverse().join('');
-  }
+  },
 
-  , decode: function(s) {
-    var len = s.length
-      , i = 0;
+  decode: function(s) {
+    var len = s.length;
+    var i = 0;
 
     while (i < len) {
-      var c = s[i]
-        , i = i * base + alphabet.indexOf(c);
+      var c = s[i];
+      var i = i * base + alphabet.indexOf(c);
     }
 
     return i;

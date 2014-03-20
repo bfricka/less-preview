@@ -1,7 +1,6 @@
-var http           = require('http');
-var less           = require('less-middleware');
-var routes         = require('./routes');
-var express        = require('express');
+var http = require('http');
+var routes = require('./routes');
+var express = require('express');
 
 var app = express();
 http.createServer(app);
@@ -15,7 +14,7 @@ app.use(function(req, res, next) {
 
   if (host === 'less2css.org') {
     next(); // Quick next for canonical
-  } else if (host === 'www.less2css.org' || /(www\.)?(less2css\.com|preprocessors\.net)/i.test(host)) {
+  } else if (host === 'www.less2css.org') {
     res.redirect(301, 'http://less2css.org' + req.url);
   } else {
     next();
@@ -33,17 +32,13 @@ app.configure('all', function() {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(less({
-      src: __dirname + '/public'
-    , compress: true
-  }));
   app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('development', function() {
   app.use(express.errorHandler({
-      showStack: true
-    , dumpExceptions: true
+    showStack: true,
+    dumpExceptions: true
   }));
 });
 
@@ -51,18 +46,18 @@ app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
-app.use(routes.fourOhfour);
+app.use(routes.four_oh_four);
 
 // Begin Routes
 app.get('/', routes.home);
-app.get('/less-options', routes.lessOptions);
+app.get('/less-options', routes.less_options);
 
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
+// app.get('/logout', function(req, res) {
+//   req.logout();
+//   res.redirect('/');
+// });
 
-app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
+// app.get('/share/:id([A-Za-z0-9]{1,6})', routes.share);
 // app.post('/compile', routes.compile);
 
 // Init

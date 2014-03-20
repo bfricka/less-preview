@@ -1,11 +1,11 @@
 angular
 .module('Less2Css')
 .controller('Less2CssCtrl', [
-    '$scope'
-  , 'LessLoader'
-  , 'LessOptions'
-  , 'LessCompiler'
-  , function($scope, LessLoader, LessOptions, LessCompiler) {
+  '$scope',
+  'LessLoader',
+  'LessOptions',
+  'LessCompiler',
+  function($scope, LessLoader, LessOptions, LessCompiler) {
     var _opts;
     // Start req for options
     LessOptions.request.then(setupOptions);
@@ -22,10 +22,10 @@ angular
 
     // Set defaults
     _.extend($scope,  {
-        lessInput: LessCompiler.getCache()
-      , cssOutput: ''
-      , loading: false
-      , compileError: false
+      lessInput: LessCompiler.getCache(),
+      cssOutput: '',
+      loading: false,
+      compileError: false
     });
 
     function updateOptions(opts) {
@@ -50,8 +50,8 @@ angular
     function compileLess() {
       $scope.$safeApply(function() {
         _.extend($scope, {
-            cssOutput: LessCompiler.compileLess($scope.lessInput)
-          , compileError: LessCompiler.error
+          cssOutput: LessCompiler.compileLess($scope.lessInput),
+          compileError: LessCompiler.error
         });
       });
     }

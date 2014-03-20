@@ -1,11 +1,11 @@
 angular
 .module('Less2Css')
 .service('LessLoader', [
-    '$q'
-  , '$http'
-  , '$window'
-  , '$timeout'
-  , function($q, $http, $window, $timeout) {
+  '$q',
+  '$http',
+  '$window',
+  '$timeout',
+  function($q, $http, $window, $timeout) {
     var _loadedVersionsCache = {};
     var _lessBasePath = "/javascripts/less/less-{version}.js";
 
@@ -27,7 +27,6 @@ angular
         if (version in _loadedVersionsCache) {
           _eval(_loadedVersionsCache[version]);
           $timeout(function() { deferred.resolve(); }, 1, false);
-          console.log('From cache loaded');
           return deferred.promise;
         }
 
@@ -43,9 +42,9 @@ angular
           });
 
         return deferred.promise;
-      }
+      },
 
-      , isLoaded: function() {
+      isLoaded: function() {
         return !!$window.less;
       }
     });

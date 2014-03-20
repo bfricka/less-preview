@@ -1,15 +1,15 @@
 angular
 .module('TransitionHelper', [])
 .service('TransitionHelper', [
-  '$window'
-  , '$document'
-  , function TransitionHelper($window, $document) {
+  '$window',
+  '$document',
+  function TransitionHelper($window, $document) {
     var doc = $document[0];
     var self = this;
     var props = self.props = {
-        transform: getPrefixedProp('transform')
-      , transition: getPrefixedProp('transition')
-      , transitionDuration: getPrefixedProp('transitionDuration')
+      transform: getPrefixedProp('transform'),
+      transition: getPrefixedProp('transition'),
+      transitionDuration: getPrefixedProp('transitionDuration')
     };
 
     /**
@@ -57,11 +57,11 @@ angular
      * @return {Object}     Object literal with X / Y properties as floats
      */
     function parseTransform(str) {
-      var matrixMatcher = /[\d\.\-]+/g
-        , matches = str.match(matrixMatcher)
-        , is3D = matches.length > 6
-        , transformY = is3D ? matches[14] : matches[5]
-        , transformX = is3D ? matches[13] : matches[4];
+      var matrixMatcher = /[\d\.\-]+/g;
+      var matches = str.match(matrixMatcher);
+      var is3D = matches.length > 6;
+      var transformY = is3D ? matches[14] : matches[5];
+      var transformX = is3D ? matches[13] : matches[4];
 
       return { X: parseFloat(transformX), Y: parseFloat(transformY) };
     }
@@ -72,14 +72,15 @@ angular
      * window.requestAnimationFrame bound to window
      * @type {Function}
      */
-    this.rAF =
-      ($window.requestAnimationFrame ||
+    this.rAF = (
+      $window.requestAnimationFrame ||
       $window.mozRequestAnimationFrame ||
       $window.webkitRequestAnimationFrame ||
       $window.msRequestAnimationFrame ||
       function(callback) {
         $window.setTimeout(callback, 1000 / 60);
-      }).bind($window);
+      }
+    ).bind($window);
 
 
     // Adding "translateZ" forces the transform to be 3d
@@ -93,16 +94,16 @@ angular
      * @return {void}
      */
     this.translate = function(el, val, axis) {
-      var elTransform = el.getComputedStyle(props.transform)
-        , xVal = normalizePx(axis === 'X' ? val : parseTransform(elTransform).X)
-        , yVal = normalizePx(axis === 'Y' ? val : parseTransform(elTransform).Y);
+      var elTransform = el.getComputedStyle(props.transform);
+      var xVal = normalizePx(axis === 'X' ? val : parseTransform(elTransform).X);
+      var yVal = normalizePx(axis === 'Y' ? val : parseTransform(elTransform).Y);
 
       el.style[props.transform] = 'translate3d('+xVal+','+yVal+',0)';
     };
 
     this.translate2d = function(el, posX, posY) {
-      var xVal = normalizePx(posX)
-        , yVal = normalizePx(posY);
+      var xVal = normalizePx(posX);
+      var yVal = normalizePx(posY);
 
       el.style[props.transform] = 'translate(' + xVal + ',' + yVal + ') translateZ(0)';
     };
@@ -143,10 +144,10 @@ angular
      */
     this.transitionEnd = (function() {
       var transitions = {
-        'transition'         : 'transitionend'
-        , 'WebkitTransition' : 'webkitTransitionEnd'
-        , 'MozTransition'    : 'transitionend'
-        , 'OTransition'      : 'oTransitionEnd'
+        'transition'       : 'transitionend',
+        'WebkitTransition' : 'webkitTransitionEnd',
+        'MozTransition'    : 'transitionend',
+        'OTransition'      : 'oTransitionEnd'
       };
 
       return transitions[props.transition];

@@ -31,9 +31,9 @@ _.extend(Element.prototype, {
   getComputedStyle: function(style) {
     var styles = window.getComputedStyle(this);
     return styles[style];
-  }
+  },
 
-  , hasClosestEl: function(el) {
+  hasClosestEl: function(el) {
     var currentEl = this;
 
     while (currentEl.parentElement) {
@@ -42,9 +42,9 @@ _.extend(Element.prototype, {
     }
 
     return false;
-  }
+  },
 
-  , getClosest: function(classname) {
+  getClosest: function(classname) {
     var el = this;
 
     while(el.parentElement) {
@@ -55,9 +55,9 @@ _.extend(Element.prototype, {
     }
 
     return null;
-  }
+  },
 
-  , getTop: function() {
+  getTop: function() {
     var top = this.offsetTop;
     var parent = this.offsetParent;
 
@@ -67,9 +67,9 @@ _.extend(Element.prototype, {
     }
 
     return top;
-  }
+  },
 
-  , childElements: function(selector) {
+  childElements: function(selector) {
     var els = this.querySelectorAll(selector);
     var children = _.toArray(this.children);
     var childElements = [];
