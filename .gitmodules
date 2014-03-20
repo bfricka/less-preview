@@ -1,3 +1,6 @@
 [submodule "less"]
 	path = less
 	url = https://github.com/less/less.js
+[submodule "CodeMirror"]
+	path = CodeMirror
+	url = https://github.com/marijnh/CodeMirror.git
