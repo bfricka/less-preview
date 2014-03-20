@@ -1,45 +1,46 @@
 {
-    "name": "less2css"
-  , "description": "Converts LESS to CSS and does other awesome stuff"
-  , "version": "0.0.8"
-  , "private": true
-  , "author": "Brian Frichette"
-  , "homepage": "http://less2css.org/"
-  , "contributors": [
+  "name": "less2css",
+  "description": "Converts LESS to CSS and does other awesome stuff",
+  "version": "0.0.8",
+  "private": true,
+  "author": "Brian Frichette",
+  "homepage": "http://less2css.org/",
+  "contributors": [
     "Brian Frichette <brian.frichette@gmail.com> (https://github.com/brian-frichette)",
     "Scott Rippey (https://github.com/scottrippey)"
-  ]
-
-  , "bugs": { "url": "https://github.com/brian-frichette/less-preview/issues" }
-
-  , "scripts": {
-      "start": "nodemon app.js"
-    , "prod": "forever start app.js -l"
-  }
-
-  , "dependencies": {
-      "forever": "*"
-    , "express": "~3.0"
-    , "jade": "*"
-    , "less-middleware": "*"
-    , "lodash": "~2.4"
-  }
-
-  , "devDependencies": {
-      "grunt": "0.4.x"
-    , "grunt-contrib-uglify": "~0.2.7"
-    , "grunt-contrib-concat": "~0.3.0"
-    , "grunt-contrib-watch": "~0.5.3"
-    , "grunt-contrib-jshint": "~0.7.2"
-    , "nodemon": "*"
-  }
-
-  , "keywords": ["less", "lesscss"]
-  , "repository": "git://github.com/brian-frichette/less-preview.git"
-  , "licenses": [
+  ],
+  "bugs": {
+    "url": "https://github.com/brian-frichette/less-preview/issues"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "prod": "forever start app.js -l"
+  },
+  "dependencies": {
+    "forever": "*",
+    "express": "~3.0",
+    "jade": "*",
+    "less-middleware": "*",
+    "lodash": "~2.4",
+    "q": "^1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.7.2",
+    "nodemon": "*"
+  },
+  "keywords": [
+    "less",
+    "lesscss"
+  ],
+  "repository": "git://github.com/brian-frichette/less-preview.git",
+  "licenses": [
     {
-        "type": "MIT"
-      , "url": "http://opensource.org/licenses/MIT"
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
     }
   ]
 }
