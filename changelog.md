@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.0.9
+  - Test
+
 ### 0.0.8
   - Fix issue where error of type `File` (e.g. 404 on @import) kills the parser until refresh.
   - Fix bug in `Stor` where cache doesn't expire
