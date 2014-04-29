@@ -2,8 +2,8 @@
   "name": "less2css",
   "private": true,
   "dependencies": {
-    "angular": "~1.2.14",
-    "angular-animate": "~1.2.14",
+    "angular": "~1.2.15",
+    "angular-animate": "~1.2.15",
     "bootstrap": "~3.1.1",
     "lodash": "~2.4.1"
   }

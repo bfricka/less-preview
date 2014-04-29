@@ -2,6 +2,7 @@
   "libs": [
     "ecma5",
     "browser",
+    "jquery",
     "underscore"
   ],
   "plugins": {
