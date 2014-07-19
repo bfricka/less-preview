@@ -50,7 +50,7 @@
     {
       "follow_symlinks": true,
       "name": "Components",
-      "path": "public/components"
+      "path": "src/components"
     }
 	]
 }
