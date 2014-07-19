@@ -13,8 +13,7 @@
     "url": "https://github.com/brian-frichette/less-preview/issues"
   },
   "scripts": {
-    "start": "nodemon app.js",
-    "prod": "forever start app.js -l"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "forever": "~0.11.1",

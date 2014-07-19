@@ -1,5 +1,5 @@
 [submodule "less"]
-	path = less
+	path = less2css
 	url = https://github.com/less/less.js
 [submodule "CodeMirror"]
 	path = CodeMirror

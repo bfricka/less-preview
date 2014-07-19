@@ -49,8 +49,8 @@
     },
     {
       "follow_symlinks": true,
-      "name": "Components",
-      "path": "src/components"
+      "name": "Vendor",
+      "path": "src/vendor"
     }
 	]
 }
