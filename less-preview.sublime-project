@@ -8,34 +8,47 @@
       "folder_exclude_patterns": ["*"]
 		},
     {
+      "follow_symlinks": true,
+      "name": "Build",
+      "path": "build"
+    },
+    {
+      "follow_symlinks": true,
       "name": "CodeMirror",
       "path": "CodeMirror"
     },
     {
+      "follow_symlinks": true,
       "name": "Express",
       "path": "express"
     },
     {
+      "follow_symlinks": true,
       "name": "LESS",
       "path": "less"
     },
     {
+      "follow_symlinks": true,
       "name": "Routes",
       "path": "routes"
     },
     {
+      "follow_symlinks": true,
       "name": "Views",
       "path": "views"
     },
     {
+      "follow_symlinks": true,
       "name": "Stylesheets",
-      "path": "public/stylesheets"
+      "path": "src/stylesheets"
     },
     {
+      "follow_symlinks": true,
       "name": "JavaScripts",
-      "path": "public/javascripts"
+      "path": "src/javascripts"
     },
     {
+      "follow_symlinks": true,
       "name": "Components",
       "path": "public/components"
     }

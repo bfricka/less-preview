@@ -1,10 +1,28 @@
 {
   "name": "less2css",
+  "version": "0.1.0",
+  "authors": [
+    "Brian Frichette <brian.frichette@gmail.com>"
+  ],
+  "description": "Makes LESS -> CSS",
+  "main": "index.js",
+  "license": "MIT",
   "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-    "angular": "~1.2.15",
-    "angular-animate": "~1.2.15",
+    "lesshat": "~3.0.2",
     "bootstrap": "~3.1.1",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "angular": "~1.2.20",
+    "angular-cookies": "~1.2.20",
+    "angular-animate": "~1.2.20",
+    "angular-ui-router": "~0.2.10",
+    "angular-bootstrap": "~0.11.0"
   }
 }
