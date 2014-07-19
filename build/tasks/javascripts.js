@@ -24,33 +24,33 @@ var uglifyjs_opts_vendor = _.defaults({
 module.exports = {
   app: function() {
     return gulp
-      .src(d('{src.javascripts}/**/*.js'))
+      .src(d('{{src.modules}}/**/*.js'))
       .pipe(plugins.jshint())
       .pipe(plugins.jshint.reporter('jshint-stylish'))
       .pipe(plugins.angularFilesort())
-      .pipe(gulp.dest(d.output.javascripts))
+      .pipe(gulp.dest(d.dest.javascripts))
       .pipe(plugins.uglifyjs('app.min.js', uglifyjs_opts))
-      .pipe(gulp.dest(d.output.javascripts));
+      .pipe(gulp.dest(d.dest.javascripts));
   },
 
   vendor: function() {
     return gulp
       .src([
-        d('{src.vendor}/lodash/dist/lodash.js'),
-        d('{src.vendor}/angular/angular.js'),
-        d('{src.vendor}/angular-animate/angular-animate.js'),
-        d('{src.vendor}/angular-cookies/angular-cookies.js'),
-        d('{src.vendor}/angular-ui-router/release/angular-ui-router.js'),
-        d('{src.vendor}/angular-bootstrap/ui-bootstrap.js'),
-        d('{src.vendor}/codemirror/lib/codemirror.js'),
-        d('{src.vendor}/codemirror/addon/edit/closebrackets.js'),
-        d('{src.vendor}/codemirror/addon/edit/matchbrackets.js'),
-        // d('{src.vendor}/codemirror/addon/fold/foldgutter.js'),
-        // d('{src.vendor}/codemirror/addon/fold/brace-fold.js'),
-        // d('{src.vendor}/codemirror/addon/fold/indent-fold.js'),
+        d('{{src.vendor}}/lodash/dist/lodash.js'),
+        d('{{src.vendor}}/angular/angular.js'),
+        d('{{src.vendor}}/angular-animate/angular-animate.js'),
+        d('{{src.vendor}}/angular-cookies/angular-cookies.js'),
+        d('{{src.vendor}}/angular-ui-router/release/angular-ui-router.js'),
+        d('{{src.vendor}}/angular-bootstrap/ui-bootstrap.js'),
+        d('{{src.vendor}}/codemirror/lib/codemirror.js'),
+        d('{{src.vendor}}/codemirror/addon/edit/closebrackets.js'),
+        d('{{src.vendor}}/codemirror/addon/edit/matchbrackets.js'),
+        // d('{{src.vendor}}/codemirror/addon/fold/foldgutter.js'),
+        // d('{{src.vendor}}/codemirror/addon/fold/brace-fold.js'),
+        // d('{{src.vendor}}/codemirror/addon/fold/indent-fold.js'),
       ])
-      .pipe(gulp.dest(d.output.javascripts))
+      .pipe(gulp.dest(d.dest.javascripts))
       .pipe(plugins.uglifyjs('vendor.min.js', uglifyjs_opts_vendor))
-      .pipe(gulp.dest(d.output.javascripts));
+      .pipe(gulp.dest(d.dest.javascripts));
   }
 };

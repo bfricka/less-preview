@@ -26,22 +26,22 @@ module.exports = function() {
   var d2 = q.defer();
 
   gulp
-      .src(d('{modules}/**/*.tpl.html'))
+      .src(d('{{src.modules}}/**/*.tpl.html'))
       .pipe(plugins.htmlmin(htmlmin_opts))
       .pipe(plugins.angularTemplatecache('ng-templates.js', {
-        module: 'sexyImages.tpls',
+        module: 'less2css.tpls',
         standalone: true,
-        base: function(file) { return '/templates/' + file.relative }
+        base: function(file) { return '/tpls/' + file.relative }
       }))
       .pipe(plugins.uglifyjs(uglifyjs_opts))
-      .pipe(gulp.dest(d.output.javascripts))
+      .pipe(gulp.dest(d.dest.javascripts))
       .on('end', d1.resolve);
 
-  gulp
-    .src(process.cwd() + '/index.html')
-    .pipe(plugins.htmlmin(htmlmin_opts))
-    .pipe(gulp.dest(d.output.base))
-    .on('end', d2.resolve);
+  // gulp
+  //   .src(process.cwd() + '/index.html')
+  //   .pipe(plugins.htmlmin(htmlmin_opts))
+  //   .pipe(gulp.dest(d.dest.base))
+  //   .on('end', d2.resolve);
 
   return q.all([d1.promise, d2.promise]);
 };

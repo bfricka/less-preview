@@ -1,13 +1,13 @@
 var _ = require('lodash');
-var slugRegex = /\{(.+)\}/;
+var slugRegex = /\{\{(.+)\}\}/;
 
 var dirs = {
   src: {
-    less        : './less',
+    less        : './less.js',
     images      : './src/images',
     styles      : './src/stylesheets',
     vendor      : './src/vendor',
-    javascripts : './src/javascripts'
+    modules     : './src/modules'
   },
 
   dest: {
