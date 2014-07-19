@@ -6,29 +6,27 @@ module.exports = function() {
   var d1 = q.defer();
   var d2 = q.defer();
   var d3 = q.defer();
-  var d4 = q.defer();
 
   gulp
-    .src(d('{vendor}/bootstrap/less/*.less'))
-    .pipe(gulp.dest(d('{styles}/libs/bootstrap')))
-    .on('end', d1.resolve);
+    .src([
+      d('{src.vendor}/bootstrap/less/**/*.less'),
+      d('{src.vendor}/lesshat/build/lesshat-prefixed.less')
+    ], { cwd: d('{src.vendor}/**') })
+    .pipe(gulp.dest(d('{src.styles}/libs')))
+    .on('end', d1.resolve.bind(d1));
 
   gulp
-    .src(d('{vendor}/lesshat/build/lesshat.less'))
-    .pipe(gulp.dest(d('{styles}/libs/lesshat')))
-    .on('end', d2.resolve);
+    .src(d('{src.vendor}/bootstrap/fonts/*'))
+    .pipe(gulp.dest(d('{dest.images}/fonts')))
+    .on('end', d2.resolve.bind(d2));
 
   gulp
-    .src(d('{vendor}/bootstrap/fonts/*'))
-    .pipe(gulp.dest(d('{images}/fonts')))
-    .on('end', d3.resolve);
+    .src([
+      d('{src.less}/dist/*.js'),
+      d('!{src.less}/dist/less-rhino*.js')
+    ])
+    .pipe(gulp.dest(d('{dest.base}/less')))
+    .on('end', d3.resolve.bind(d3));
 
-  d3.promise.then(function() {
-    return gulp
-      .src(d('{images}/**/*'))
-      .pipe(gulp.dest(d.output.images))
-      .on('end', d4.resolve);
-  });
-
-  return q.all([d1.promise, d2.promise, d3.promise, d4.promise]);
+  return q.all([ d1.promise, d2.promise, d3.promise ]);
 };

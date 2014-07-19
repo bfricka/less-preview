@@ -3,10 +3,11 @@ var slugRegex = /\{(.+)\}/;
 
 var dirs = {
   src: {
+    less        : './less',
     images      : './src/images',
     styles      : './src/stylesheets',
     vendor      : './src/vendor',
-    modules     : './src/modules'
+    javascripts : './src/javascripts'
   },
 
   dest: {

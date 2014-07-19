@@ -75,3 +75,5 @@ node_modules
 
 ### Bower ###
 src/vendor
+public
+src/stylesheets/libs

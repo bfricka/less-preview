@@ -14,8 +14,8 @@
     },
     {
       "follow_symlinks": true,
-      "name": "CodeMirror",
-      "path": "CodeMirror"
+      "name": "Public",
+      "path": "public/"
     },
     {
       "follow_symlinks": true,
@@ -25,7 +25,7 @@
     {
       "follow_symlinks": true,
       "name": "LESS",
-      "path": "less"
+      "path": "less.js"
     },
     {
       "follow_symlinks": true,
