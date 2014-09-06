@@ -4,27 +4,38 @@ var gulp = require('gulp');
 var plugins = require('../gulp-plugins');
 
 var uglifyjs_opts = {
-  outSourceMap: true,
+  outSourceMap: 'app.js.map',
   warnings: true,
   compressor: { unsafe: true },
+  sourceRoot: '/javascripts',
   enclose: {
-    'window._': '_',
-    'window.angular': 'angular',
-    'window': 'window'
+    'window._'       : '_',
+    'window.angular' : 'angular',
+    'window'         : 'window'
   }
 };
 
 var uglifyjs_opts_vendor = _.defaults({
   enclose: {
-    'window': 'window',
-    'document': 'document'
+    'window'   : 'window',
+    'document' : 'document'
   }
 }, uglifyjs_opts);
 
 module.exports = {
+  copy: function() {
+    return gulp
+      .src([
+        d('{{src.less}}/dist/*.js'),
+        d('!{{src.less}}/dist/*.min.js'),
+        d('!{{src.less}}/dist/*rhino*.js')
+      ])
+      .pipe(gulp.dest(d('{{dest.base}}/less')));
+  },
+
   app: function() {
     return gulp
-      .src(d('{{src.modules}}/**/*.js'))
+      .src('**/*.js', { cwd: d('{{src.modules}}') })
       .pipe(plugins.jshint())
       .pipe(plugins.jshint.reporter('jshint-stylish'))
       .pipe(plugins.angularFilesort())

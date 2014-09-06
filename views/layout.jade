@@ -20,7 +20,7 @@ html(lang='en', ng-app='Less2Css', ng-controller='AppCtrl')
     meta(name='viewport', content='width=device-width')
     link(rel='shortcut icon', href='/images/favicon.ico')
 
-    link(rel='stylesheet', href="/stylesheets/style.css")
+    link(rel='stylesheet', href="/styles/styles.css")
 
   body
     //if lt IE 7
@@ -64,11 +64,11 @@ html(lang='en', ng-app='Less2Css', ng-controller='AppCtrl')
             a(href="http://expressjs.com/", target="_blank") Express
             |.
 
-    include partials/templates
-
     block bottomScripts
-      each script in scripts
-        script(src='#{script}')
+      script(src="/javascripts/vendor.min.js")
+      script(src="/javascripts/ng-templates.js")
+      script(src="/javascripts/app.min.js")
+
       if env == 'production'
         script.
           var _gaq = _gaq || [];

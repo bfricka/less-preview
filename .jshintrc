@@ -9,7 +9,7 @@
   "debug"         : null,
   "devel"         : true,
   "dojo"          : null,
-  "eqeqeq"        : true,
+  "eqeqeq"        : false,
   "eqnull"        : true,
   "es3"           : null,
   "esnext"        : null,

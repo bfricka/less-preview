@@ -17,7 +17,7 @@
   win.memoryStor = memoryStor;
 
   // I guess give in-memory support for those who don't have localStorage
-  if (!('localStorage' in win)) win['localStorage'] = memoryStor;
+  if (!('localStorage' in win)) win.localStorage = memoryStor;
 
   var ls = win.localStorage;
   var keyPrefix = '__stor__';
@@ -125,5 +125,5 @@
     }
   };
 
-  win['Stor'] = Stor;
+  win.Stor = Stor;
 }(window));

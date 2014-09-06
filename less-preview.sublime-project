@@ -44,13 +44,18 @@
     },
     {
       "follow_symlinks": true,
-      "name": "JavaScripts",
-      "path": "src/javascripts"
+      "name": "Modules",
+      "path": "src/modules"
     },
     {
       "follow_symlinks": true,
       "name": "Vendor",
       "path": "src/vendor"
+    },
+    {
+      "follow_symlinks": true,
+      "name": "Images",
+      "path": "src/images"
     }
 	]
 }

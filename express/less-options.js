@@ -1,26 +1,76 @@
+var _ = require('lodash');
+var bower = require('bower');
+var semver = require('semver');
+
+var versionsExports = [];
+
+bower.commands.info('less').on('end', function(results) {
+  if (results && _.isEmpty(results.versions)) {
+    return;
+  }
+
+  var versions = results.versions
+    .sort(semver.compare)
+    .reverse();
+
+  var latestVersion = results.latest.version;
+  var highestVersion = _.first(versions);
+  var hasBeta = semver.neq(latestVersion, highestVersion);
+
+  module.exports.versions = _.chain(results.versions)
+    .filter(filterExraneousBetas)
+    .map(createVersionModels)
+    .value();
+
+  function filterExraneousBetas(version, i, arr) {
+    var p = semver.parse(version);
+
+    if (semver.lt(version, '1.3.0')) {
+      return false;
+    }
+
+    var mainVersion = [p.major, p.minor, p.patch].join('.');
+
+    if (p.prerelease.length) {
+      return !_.contains(arr, mainVersion);
+    }
+
+    return version;
+  }
+
+  function labelSuffix(type) {
+    return type == 'current'
+      ? ' ('+ type +')'
+      : type == 'pre'
+      ? ' (beta)'
+      : '';
+  }
+
+  function createVersionModels(version) {
+    var type = getVersionType(version);
+
+    return {
+      type: type,
+      label: version + labelSuffix(type),
+      number: version
+    };
+  }
+
+  function getVersionType(version) {
+    if (version === latestVersion) {
+      return 'current';
+    }
+
+    if (hasBeta && version === highestVersion) {
+      return 'pre';
+    }
+
+    return 'old';
+  }
+});
+
 module.exports = {
-    versions: [
-    { label: "1.6.0 (current)", number: "1.6.0", type: "current" },
-    { label: "1.5.1", number: "1.5.1", type: "old" },
-    { label: "1.5.0", number: "1.5.0", type: "old" },
-    { label: "1.4.2", number: "1.4.2", type: "old" },
-    { label: "1.4.1", number: "1.4.1", type: "old" },
-    { label: "1.4.0", number: "1.4.0", type: "old" },
-    { label: "1.3.3", number: "1.3.3", type: "old" },
-    { label: "1.3.2", number: "1.3.2", type: "old" },
-    { label: "1.3.1", number: "1.3.1", type: "old" },
-    { label: "1.3.0", number: "1.3.0", type: "old" },
-    { label: "1.2.2", number: "1.2.2", type: "old" },
-    { label: "1.2.1", number: "1.2.1", type: "old" },
-    { label: "1.2.0", number: "1.2.0", type: "old" },
-    { label: "1.1.6", number: "1.1.6", type: "old" },
-    { label: "1.1.5", number: "1.1.5", type: "old" },
-    { label: "1.1.4", number: "1.1.4", type: "old" },
-    { label: "1.1.3", number: "1.1.3", type: "old" },
-    { label: "1.1.2", number: "1.1.2", type: "old" },
-    { label: "1.1.1", number: "1.1.1", type: "old" },
-    { label: "1.1.0", number: "1.1.0", type: "old" }
-  ],
+  versions: [],
 
   options: {
     filename        : "less2css.org.less",
