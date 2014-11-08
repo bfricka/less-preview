@@ -1,6 +1,15 @@
 module.exports = {
     versions: [
-    { label: "1.6.0 (current)", number: "1.6.0", type: "current" },
+    { label: "1.7.5", number: "1.7.5", type: "current" },
+    { label: "1.7.4", number: "1.7.4", type: "old" },
+    { label: "1.7.3", number: "1.7.3", type: "old" },
+    { label: "1.7.2", number: "1.7.2", type: "old" },
+    { label: "1.7.1", number: "1.7.1", type: "old" },
+    { label: "1.7.0", number: "1.7.0", type: "old" },
+    { label: "1.6.3", number: "1.6.3", type: "old" },
+    { label: "1.6.2", number: "1.6.2", type: "old" },
+    { label: "1.6.1", number: "1.6.1", type: "old" },
+    { label: "1.6.0", number: "1.6.0", type: "old" },
     { label: "1.5.1", number: "1.5.1", type: "old" },
     { label: "1.5.0", number: "1.5.0", type: "old" },
     { label: "1.4.2", number: "1.4.2", type: "old" },
